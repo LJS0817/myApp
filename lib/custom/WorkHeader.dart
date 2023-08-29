@@ -4,15 +4,17 @@ import 'package:isma/config/define.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 
+import '../mng/DataMng.dart';
+
 class Header extends StatelessWidget {
   const Header({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Mng mngProvider = Provider.of<Mng>(context);
+    DataMng dataMngProvider = Provider.of<DataMng>(context);
     return Container(
       decoration: BoxDecoration(
-        color: getThemeColor(mngProvider.getDataType(), 0),
+        color: getThemeColor(dataMngProvider.data.type.index, 0),
         borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
       ),
       child: SafeArea(
@@ -23,10 +25,10 @@ class Header extends StatelessWidget {
             children: [
               Center(
                 child: SvgPicture.asset(
-                  getIcon(mngProvider.getData().type),
+                  getIcon(dataMngProvider.data.type),
                   width: 128,
                   height: 128,
-                  color: getThemeColor(mngProvider.getDataType(), 2).withOpacity(0.3),
+                  color: getThemeColor(dataMngProvider.data.type.index, 2).withOpacity(0.3),
                 ),
               ),
               Positioned(
@@ -38,11 +40,11 @@ class Header extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "가나다라마사아자차카타파하카나12edasf",
+                          dataMngProvider.data.name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                              color: getThemeColor(mngProvider.getDataType(), 1),
+                              color: getThemeColor(dataMngProvider.data.type.index, 1),
                               fontWeight: FontWeight.bold,
                               fontSize: 16
                           ),
@@ -53,7 +55,7 @@ class Header extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                              color: getThemeColor(mngProvider.getDataType(), 1),
+                              color: getThemeColor(dataMngProvider.data.type.index, 1),
                               fontWeight: FontWeight.bold,
                               fontSize: 16
                           ),
@@ -64,7 +66,7 @@ class Header extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                              color: getThemeColor(mngProvider.getDataType(), 2),
+                              color: getThemeColor(dataMngProvider.data.type.index, 2),
                               fontWeight: FontWeight.bold,
                               fontSize: 16
                           ),
@@ -90,7 +92,7 @@ class Header extends StatelessWidget {
                             Text(
                               "오일",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),
@@ -100,7 +102,7 @@ class Header extends StatelessWidget {
                             Text(
                               "슈퍼펫",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),
@@ -110,7 +112,7 @@ class Header extends StatelessWidget {
                             Text(
                               "첨가물",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),
@@ -120,7 +122,7 @@ class Header extends StatelessWidget {
                             Text(
                               "총량",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),
@@ -136,7 +138,7 @@ class Header extends StatelessWidget {
                             Text(
                               "1245667",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),
@@ -146,7 +148,7 @@ class Header extends StatelessWidget {
                             Text(
                               "125125",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),
@@ -156,7 +158,7 @@ class Header extends StatelessWidget {
                             Text(
                               "51234213",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),
@@ -166,7 +168,7 @@ class Header extends StatelessWidget {
                             Text(
                               "124128912",
                               style: TextStyle(
-                                  color: getThemeColor(mngProvider.getDataType(), 1),
+                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 13
                               ),

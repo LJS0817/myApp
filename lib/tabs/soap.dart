@@ -6,9 +6,10 @@ import 'package:isma/custom/WorkHeader.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
+import 'package:isma/mng/DataMng.dart';
 
 class SoapWorkspace extends StatelessWidget {
-  const SoapWorkspace({super.key});
+  SoapWorkspace({super.key});
 
   @override
   Widget build(BuildContext context) {

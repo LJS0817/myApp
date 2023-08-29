@@ -7,6 +7,8 @@ import 'package:isma/config/define.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 
+import '../mng/DataMng.dart';
+
 
 class DataContainer extends StatelessWidget {
 

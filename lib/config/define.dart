@@ -6,44 +6,23 @@ import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 
+import '../mng/DataMng.dart';
+
 enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_LOTION, E_ESSENCE, E_CREAM, E_ETC }
 
-class Data {
-  List<int> oil_index = [];
-  List<int> super_index = [];
-  List<int> add_index = [];
-  String memo = "";
-  String name = "";
-  String date = "";
-  int weight = 1000;
-  TYPE type = TYPE.E_COLD;
-
-  Data({String nameStr="", String dateStr="", TYPE t=TYPE.E_COLD, int w=1000}) {
-    type = t;
-    name = nameStr;
-    date = dateStr;
-    weight = w;
-  }
-
-  void setOilList(List<int> list) {
-    oil_index = list;
-  }
-
-  void setSuperList(List<int> list) {
-    super_index = list;
-  }
-
-  void setMemo(String str) {
-    memo = str;
-  }
-}
-
-
+final DataMng dataMng = DataMng();
 final FileMng fileMng = FileMng();
 final MenuMng menuMng = MenuMng();
 final PageMng pageMng = PageMng();
 final Mng mng = Mng();
 
+///0 - COLD
+///1  - HOT
+///2 - PASTE
+///3 - SKIN
+///4 - LOTION
+///5 - ESSENCE
+///6 - CREAM
 TYPE parseTYPE(String str) {
   switch(str) {
     case '0':
@@ -144,14 +123,3 @@ Color getThemeColor(int idx, int colorIdx) {
   }
 }
 
-///[0] - 이름,
-///[1] - 타입,
-///[2] - 날짜,
-///[3] - 무게,
-Data parseData(String str) {
-  List<String> strList = str.split(',');
-
-  Data result = Data(nameStr: strList[0], dateStr: strList[2], t: parseTYPE(strList[1]), w: int.parse(strList[3]));
-
-  return result;
-}

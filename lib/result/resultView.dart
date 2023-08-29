@@ -19,6 +19,7 @@ class ResultView extends StatelessWidget {
   bool showChart = false;
 
   ResultView(int idx, {super.key}) {
+    log(idx.toString());
     themeIndex = idx;
   }
 
@@ -144,9 +145,12 @@ class ResultView extends StatelessWidget {
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                ResultOilBox("오일\n${data.selectData.oil_index.length}개", themeIndex),
-                                                ResultOilBox("슈퍼팻\n${data.selectData.super_index.length}개", themeIndex),
-                                                ResultOilBox("첨가물\n${data.selectData.add_index.length}개", themeIndex),
+                                                ResultOilBox("오일\n10개", themeIndex),
+                                                ResultOilBox("오일\n10개", themeIndex),
+                                                ResultOilBox("오일\n10}개", themeIndex),
+                                                //ResultOilBox("오일\n${data.selectData.data[0].length}개", themeIndex),
+                                                //ResultOilBox("슈퍼팻\n${data.selectData.data[1].length}개", themeIndex),
+                                                //ResultOilBox("첨가물\n${data.selectData.data[2].length}개", themeIndex),
                                               ],
                                             ),
                                           )
@@ -186,7 +190,7 @@ class ResultView extends StatelessWidget {
                                             Positioned(
                                                 child: Container(
                                                   height: 210,
-                                                  width: 138,
+                                                  width: MediaQuery.of(context).size.width * 0.365,
                                                   decoration: BoxDecoration(
                                                     borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
                                                     color: getThemeColor(themeIndex, 1).withOpacity(0.6),
@@ -255,7 +259,7 @@ class ResultView extends StatelessWidget {
                               ),
 
                               //메모
-                              CustomTextField(index: themeIndex, str: "메모\n메모\n메모\n메모\n메모\n메모\n메모", maxLines: 3, height: 80, radius: 15,),
+                              CustomTextField(() {}, index: themeIndex, str: "메모\n메모\n메모\n메모\n메모\n메모\n메모", maxLines: 3, height: 80, radius: 15,),
                             ],
                           ),
                         )

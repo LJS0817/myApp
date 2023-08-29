@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:isma/config/define.dart';
+
+import 'DataMng.dart';
 
 class Mng with ChangeNotifier {
   bool popUpActive = false;

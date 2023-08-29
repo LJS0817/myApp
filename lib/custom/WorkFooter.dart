@@ -4,12 +4,14 @@ import 'package:isma/config/define.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 
+import '../mng/DataMng.dart';
+
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Mng mngProvider = Provider.of<Mng>(context);
+    DataMng dataMngProvider = Provider.of<DataMng>(context);
     return Container(
       height: 70,
       child: Row(
@@ -21,8 +23,8 @@ class Footer extends StatelessWidget {
                 onTap: () {
 
                 },
-                splashColor: getThemeColor(mngProvider.getDataType(), 0).withOpacity(0.4),
-                highlightColor: getThemeColor(mngProvider.getDataType(), 0).withOpacity(0.4),
+                splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
+                highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
                 child: Container(
                   height: double.maxFinite,
                   color: Colors.transparent,
@@ -33,7 +35,7 @@ class Footer extends StatelessWidget {
                         pageMng.index > 0 ? 'assets/icon/arrow_left.svg' : 'assets/icon/exit.svg',
                         width: pageMng.index > 0 ? 20: 15,
                         height: pageMng.index > 0 ? 20 : 15,
-                        color: getThemeColor(mngProvider.getDataType(), 0),
+                        color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                       ),
                       Padding(padding: EdgeInsets.symmetric(horizontal: pageMng.index > 0 ? 2 : 5)),
                       Text(
@@ -41,7 +43,7 @@ class Footer extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: getThemeColor(mngProvider.getDataType(), 0)
+                          color: getThemeColor(dataMngProvider.getTypeIndex(), 0)
                         ),
                       ),
                     ],
@@ -60,14 +62,14 @@ class Footer extends StatelessWidget {
           ),
           Expanded(
               child: Material(
-                color: getThemeColor(mngProvider.getDataType(), 0),
+                color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
                 child: InkWell(
                   onTap: () {
 
                   },
-                  splashColor: getThemeColor(mngProvider.getDataType(), 1).withOpacity(0.4),
-                  highlightColor: getThemeColor(mngProvider.getDataType(), 1).withOpacity(0.4),
+                  splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.4),
+                  highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.4),
                   child: Container(
                       height: double.maxFinite,
                       color: Colors.transparent,
@@ -80,7 +82,7 @@ class Footer extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
-                                color: getThemeColor(mngProvider.getDataType(), 1)
+                                color: getThemeColor(dataMngProvider.getTypeIndex(), 1)
                             ),
                           ),
                           Padding(padding: EdgeInsets.symmetric(horizontal: pageMng.index < pageMng.MAX_INDEX ? 2 : 5)),
@@ -88,7 +90,7 @@ class Footer extends StatelessWidget {
                             pageMng.index < pageMng.MAX_INDEX ? 'assets/icon/arrow_right.svg' : 'assets/icon/save.svg',
                             width: pageMng.index < pageMng.MAX_INDEX ? 20 : 15,
                             height: pageMng.index < pageMng.MAX_INDEX ? 20 : 15,
-                            color: getThemeColor(mngProvider.getDataType(), 1),
+                            color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
                           ),
                         ],
                       )

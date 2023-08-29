@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/Mng.dart';
@@ -14,26 +16,31 @@ class CustomTextField extends StatelessWidget {
   int _maxLines = 1;
   double _radius = 100;
 
-  CustomTextField({int index=0, bool active=false, String str="", double height=55, int maxLines=1, double radius=100, super.key}) {
+  bool needBackground = true;
+
+  late Function onChange;
+
+  CustomTextField(Function func, {bool needBg = true, int index=0, bool active=false, String str="", double height=50, int maxLines=1, double radius=100, super.key}) {
     isActive = active;
+    needBackground = needBg;
     _height = height;
     _maxLines = maxLines;
     _radius = radius;
     themeIndex = index;
     controller = TextEditingController();
     controller.text = str;
+    onChange = func;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: _height,
-      margin: const EdgeInsets.only(left: 15, right: 15),
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(_radius),
-          color: getThemeColor(themeIndex, 1),
-          border: Border.all(color: getThemeColor(themeIndex, 0), width: 4)
+        borderRadius: BorderRadius.circular(_radius),
+        color: getThemeColor(themeIndex, needBackground ? 1 : 0),
+        border: Border.all(color: getThemeColor(themeIndex, 0), width: 4)
       ),
       child: TextField(
         readOnly: !isActive,
@@ -41,14 +48,18 @@ class CustomTextField extends StatelessWidget {
         maxLines: _maxLines,
         textInputAction: TextInputAction.done,
         onSubmitted: (_) => {
+          onChange(_.toString()),
           FocusScope.of(context).unfocus(),
         },
         decoration: const InputDecoration(
           border: InputBorder.none,
-        ),
+          labelText: "TEST",
+          labelStyle: TextStyle(
 
+          )
+        ),
         style: TextStyle(
-          color: getThemeColor(themeIndex, 0),
+          color: getThemeColor(themeIndex, needBackground ? 0 : 1),
           fontWeight: FontWeight.bold,
         ),
       ),
