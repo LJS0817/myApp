@@ -19,7 +19,6 @@ class ResultView extends StatelessWidget {
   bool showChart = false;
 
   ResultView(int idx, {super.key}) {
-    log(idx.toString());
     themeIndex = idx;
   }
 

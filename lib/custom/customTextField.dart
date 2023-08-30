@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
   double _radius = 100;
 
   bool needBackground = true;
+  String s = "";
 
   late Function onChange;
 
@@ -27,6 +28,8 @@ class CustomTextField extends StatelessWidget {
     _maxLines = maxLines;
     _radius = radius;
     themeIndex = index;
+    s = controller.text;
+    log(s);
     controller = TextEditingController();
     controller.text = str;
     onChange = func;
@@ -53,10 +56,6 @@ class CustomTextField extends StatelessWidget {
         },
         decoration: const InputDecoration(
           border: InputBorder.none,
-          labelText: "TEST",
-          labelStyle: TextStyle(
-
-          )
         ),
         style: TextStyle(
           color: getThemeColor(themeIndex, needBackground ? 0 : 1),

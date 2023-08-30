@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/custom/customTextField.dart';
-import 'package:isma/mng/Mng.dart';
-import 'package:isma/tabs/soap.dart';
 import 'package:provider/provider.dart';
 
 import '../custom/customRadioButton.dart';
@@ -72,22 +70,22 @@ class FirstView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(child: CustomTextField(() {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField(() {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField(() {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
               ],
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(child: CustomTextField(() {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField(() {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField(() {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
               ],
             ),
           ],
