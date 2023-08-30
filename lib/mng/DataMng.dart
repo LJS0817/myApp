@@ -71,11 +71,12 @@ class DataMng with ChangeNotifier {
     return data.type.index;
   }
 
-  void addValue(String str, int idx) {
+  void setValue(String str, int idx) {
     data.values[idx] = str;
+    log(this.toString());
   }
 
-  void addData(int idx, CardData d) {
+  void setData(int idx, CardData d) {
     data.data[idx].add(d);
   }
 
@@ -85,7 +86,7 @@ class DataMng with ChangeNotifier {
 
   @override
   String toString() {
-    return "${data.name},${data.name},${data.values},${data.data},${data.memo}";
+    return "${data.name},${getTypeIndex()},${data.values},${data.data},${data.memo}";
   }
 }
 

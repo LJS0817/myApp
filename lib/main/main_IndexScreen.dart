@@ -173,7 +173,7 @@ Widget BottomBar(BuildContext context) {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(500.0),
                         border: Border.all(
-                            strokeAlign: StrokeAlign.outside,
+                            strokeAlign: BorderSide.strokeAlignOutside,
                             width: 4,
                             color: getMainColor(context).withOpacity(0.36)
                         )
@@ -225,13 +225,13 @@ class _IndexScreenState extends State<IndexScreen> {
             child: getIndex(context),
           ),
           BottomBar(context),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: ResultView(Provider.of<Mng>(context).selectData.type.index),
-          ),
+          // Positioned(
+          //   left: 0,
+          //   right: 0,
+          //   top: 0,
+          //   bottom: 0,
+          //   child: ResultView(Provider.of<Mng>(context).selectData.type.index),
+          // ),
         ],
       ),
     );

@@ -9,7 +9,11 @@ import '../custom/customRadioButton.dart';
 import '../mng/DataMng.dart';
 
 class FirstView extends StatelessWidget {
-  const FirstView({super.key});
+  FirstView({super.key});
+
+  List<Widget> widgets = [
+
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,22 +74,39 @@ class FirstView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 0); }, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
-                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 1); }, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                //여기
+                Visibility(
+                  visible: true,
+                  child: Expanded(
+                    child: Row(
+                      children: [
+                        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                        Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 2); }, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      ],
+                    ),
+                  )
+                ),
               ],
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 3); }, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 4); }, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+              ],
+            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 5); }, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField((String str) {}, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 6); }, active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
               ],
             ),
           ],

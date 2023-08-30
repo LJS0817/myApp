@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 class CustomTextField extends StatelessWidget {
   bool isActive = false;
-  TextEditingController controller = TextEditingController();
   String value = "";
   int themeIndex = 0;
 
@@ -17,7 +16,6 @@ class CustomTextField extends StatelessWidget {
   double _radius = 100;
 
   bool needBackground = true;
-  String s = "";
 
   late Function onChange;
 
@@ -28,10 +26,6 @@ class CustomTextField extends StatelessWidget {
     _maxLines = maxLines;
     _radius = radius;
     themeIndex = index;
-    s = controller.text;
-    log(s);
-    controller = TextEditingController();
-    controller.text = str;
     onChange = func;
   }
 
@@ -47,11 +41,11 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextField(
         readOnly: !isActive,
-        controller: controller,
         maxLines: _maxLines,
         textInputAction: TextInputAction.done,
         onSubmitted: (_) => {
           onChange(_.toString()),
+          value = _.toString(),
           FocusScope.of(context).unfocus(),
         },
         decoration: const InputDecoration(
