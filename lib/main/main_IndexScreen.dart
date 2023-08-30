@@ -73,44 +73,54 @@ Widget BottomBar(BuildContext context) {
     child: Container(
       height: 100,
       width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.zero,
+      margin: EdgeInsets.zero,
       child: Stack(
         alignment: Alignment.center,
         children: [
           Positioned(
-              bottom: 0,
-              left: 0,
+            bottom: 0,
+            child: SizedBox(
+              height: 70,
+              width: MediaQuery.of(context).size.width,
               child: Row(
                 children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: menuMng.aniTime),
-                    width: MediaQuery.of(context).size.width * 0.421,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: getMainColor(context),
-                      borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(47),
+                  Expanded(
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: menu.aniTime),
+                      width: 100,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: getMainColor(context),
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(47),
+                        ),
                       ),
                     ),
                   ),
+
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 31)),
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: menuMng.aniTime),
-                    width: MediaQuery.of(context).size.width * 0.42,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: getMainColor(context),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(47),
+                  Expanded(
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: menu.aniTime),
+                      width: 100,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: getMainColor(context),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(47),
+                        ),
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
+            ),
           ),
           Positioned(
             bottom: 0,
             child: AnimatedContainer(
-              duration: Duration(milliseconds: menuMng.aniTime),
+              duration: Duration(milliseconds: menu.aniTime),
               width: 90,
               height: 41,
               color: getMainColor(context),
@@ -138,7 +148,7 @@ Widget BottomBar(BuildContext context) {
           Positioned(
             bottom: 21,
             child: AnimatedContainer(
-              duration: Duration(milliseconds: menuMng.aniTime),
+              duration: Duration(milliseconds: menu.aniTime),
               width: 80,
               height: 50,
               decoration: BoxDecoration(
@@ -161,10 +171,6 @@ Widget BottomBar(BuildContext context) {
                   highlightColor: getSecondColor(context).withOpacity(0.5),
                   onTap: () {
                     pageMng.changeScene(context, menu.index);
-                    //context.read<Mng>().changeSpace(true);
-                    //context.read<soapMng>().init();
-                    //theme.init(menu.index);
-                    //menu.changeScene(context);
                   },
                   child: AnimatedContainer(
                     duration: Duration(milliseconds: menuMng.aniTime),
@@ -225,13 +231,13 @@ class _IndexScreenState extends State<IndexScreen> {
             child: getIndex(context),
           ),
           BottomBar(context),
-          // Positioned(
-          //   left: 0,
-          //   right: 0,
-          //   top: 0,
-          //   bottom: 0,
-          //   child: ResultView(Provider.of<Mng>(context).selectData.type.index),
-          // ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: ResultView(Provider.of<Mng>(context).selectData.type.index),
+          ),
         ],
       ),
     );

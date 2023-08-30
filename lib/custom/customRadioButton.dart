@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:isma/tabs/soap.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +21,8 @@ class customRadioButton extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     return Container(
-      width: 100,
-      height: 60,
+      height: 120,
+      padding: EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 0 : 3),
@@ -36,15 +37,33 @@ class customRadioButton extends StatelessWidget {
           onTap: () {
             onSelected();
           },
-          child: Center(
-            child: Text(
-              typeToString(data),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 1 : 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                  color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 1 : 0),
+                ),
+                child: SvgPicture.asset(
+                  getIcon(data),
+                  color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 0 : 1),
+                ),
               ),
-            ),
+              Center(
+                child: Text(
+                  typeToString(data),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 1 : 0),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

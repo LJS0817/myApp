@@ -258,7 +258,10 @@ class ResultView extends StatelessWidget {
                               ),
 
                               //메모
-                              CustomTextField((String str) {}, index: themeIndex, str: "메모\n메모\n메모\n메모\n메모\n메모\n메모", maxLines: 3, height: 80, radius: 15,),
+                              Container(
+                                margin: const EdgeInsets.only(left: leftPadding, right: 15),
+                                child: CustomTextField((String str) {}, index: themeIndex, str: "메모\n메모\n메모\n메모\n메모\n메모\n메모", maxLines: 3, height: 80, radius: 15,),
+                              ),
                             ],
                           ),
                         )

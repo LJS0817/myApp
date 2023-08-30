@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:isma/soap/first.dart';
+import 'package:isma/soap/second.dart';
 
 class PageMng with ChangeNotifier {
   final List<String> Workspaces = [
@@ -17,9 +18,28 @@ class PageMng with ChangeNotifier {
     Navigator.pushNamed(context, Workspaces[idx]);
   }
 
+  void nextPage() {
+    index++;
+    if(index >= MAX_INDEX) {
+      index = MAX_INDEX;
+      return;
+    }
+    notifyListeners();
+  }
+
+  void prevPage() {
+    index--;
+    if(index < 0) {
+      index = 0;
+      return;
+    }
+    notifyListeners();
+  }
+
   Widget getCurPage() {
     switch(index) {
       case 0: return FirstView();
+      case 1: return SecondView();
       default: return FirstView();
     }
   }
