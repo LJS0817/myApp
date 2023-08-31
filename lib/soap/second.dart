@@ -1,14 +1,33 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:isma/custom/EditableOilContainer.dart';
+import 'package:isma/custom/OilMng.dart';
+import 'package:isma/mng/DataMng.dart';
+import 'package:provider/provider.dart';
+
+import '../config/define.dart';
+import '../mng/PageMng.dart';
 
 class SecondView extends StatelessWidget {
   const SecondView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Expanded(
-        child: Container(
-
+    DataMng dataMngProvider = Provider.of<DataMng>(context);
+    PageMng pageMngProvider = Provider.of<PageMng>(context);
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.zero,
+        padding: EdgeInsets.zero,
+        child:  ScrollConfiguration(
+          behavior: const ScrollBehavior().copyWith(overscroll: false),
+          child: ListView.builder(
+            itemCount: dataMngProvider.data.data[pageMngProvider.index - 1].length,
+            itemBuilder: (BuildContext con, int idx) {
+              return EditableOilContainer(dataMngProvider.data.data[pageMngProvider.index - 1].keys.elementAt(idx));
+            },
+          ),
         ),
       ),
     );

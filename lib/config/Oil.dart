@@ -2,7 +2,6 @@ enum FAT_TYPE { Lauric, Myristic, Palmitic, Stearic, Palmitoleic,
   Ricinoleic, Oleic, Linoleic, Linolenic, LENGTH }
 
 class Oil {
-  late int index;
   String korean = "";
   String english = "";
   double NaOH = 0.0;
@@ -11,7 +10,6 @@ class Oil {
   bool marked = false;
 
   Oil({
-    required this.index,
     required this.korean,
     required this.english,
     required this.NaOH,
@@ -21,7 +19,7 @@ class Oil {
 
   @override
   String toString() {
-    return "$index, $korean, $english, $NaOH,$KOH, ${fat[0]}, ${fat[1]}, ${fat[2]}, ${fat[3]}, ${fat[4]}, "
+    return "$korean, $english, $NaOH,$KOH, ${fat[0]}, ${fat[1]}, ${fat[2]}, ${fat[3]}, ${fat[4]}, "
         "${fat[5]}, ${fat[6]}, ${fat[7]}, ${fat[8]}";
   }
 

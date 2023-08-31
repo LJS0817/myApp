@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:isma/custom/OilMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/result/resultView.dart';
@@ -29,19 +30,19 @@ void loadAsset(BuildContext context) async {
   for(int i = 0; i < list.length; i++) {
     try{
       data = list[i].split(',');
-      oil = Oil(index: int.parse(data[0]), korean: data[1], english: data[2], NaOH: double.parse(data[3]),
+      oil = Oil(korean: data[1], english: data[2], NaOH: double.parse(data[3]),
           KOH: double.parse(data[4]), fat: List.generate(FAT_TYPE.LENGTH.index,
                   (index) => double.tryParse(data[index + 5]) ?? 0.0));
       list = s.split('\n');
       //data added
       //오일 데이터 = oil
-      log(oil.toString());
+      oilMng.oils[int.parse(data[0])] = oil;
     } catch(ex) {
       log("ERROR : $ex");
     }
   }
-  //index,korean,english,NaOH,KOH,Lauric,Myristic,
-  //Palmitic,Stearic,Palmitoleic,Ricinoleic,Oleic,Linoleic,Linolenic
+  //key : index
+  //korean,english,NaOH,KOH,Lauric,Myristic,Palmitic,Stearic,Palmitoleic,Ricinoleic,Oleic,Linoleic,Linolenic
 }
 
 Widget getIndex(BuildContext context) {
@@ -179,7 +180,7 @@ Widget BottomBar(BuildContext context) {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(500.0),
                         border: Border.all(
-                            strokeAlign: BorderSide.strokeAlignOutside,
+                           strokeAlign: StrokeAlign.inside,
                             width: 4,
                             color: getMainColor(context).withOpacity(0.36)
                         )

@@ -74,13 +74,16 @@ class FirstView extends StatelessWidget {
                 Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 0); }, str:"100", needLb: true, labelTxt: "Lye Purity", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 1); }, str:"100", needLb: true, labelTxt: "Lye Count", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Visibility(
+                  visible: dataMngProvider.data.type == TYPE.E_COLD,
+                  child: const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                ),
                 //여기
                 Visibility(
                   visible: dataMngProvider.data.type == TYPE.E_COLD,
                   child: Expanded(
                     child: Row(
                       children: [
-                        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                         Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 2); }, str:"100", needLb: true, labelTxt: "Water", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       ],
                     ),

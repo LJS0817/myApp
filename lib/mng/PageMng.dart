@@ -12,6 +12,7 @@ class PageMng with ChangeNotifier {
   final int MAX_INDEX = 5;
 
   int index = 0;
+  bool enableDialog = false;
 
   ///0 : 비누, 1 : 화장품, 2 : 오일, 3 : 설정
   void changeScene(BuildContext context, int idx) {
@@ -33,6 +34,11 @@ class PageMng with ChangeNotifier {
       index = 0;
       return;
     }
+    notifyListeners();
+  }
+
+  void setDialog() {
+    enableDialog = !enableDialog;
     notifyListeners();
   }
 

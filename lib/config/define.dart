@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:isma/config/colors.dart';
+import 'package:isma/custom/OilMng.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
@@ -14,6 +15,7 @@ final DataMng dataMng = DataMng();
 final FileMng fileMng = FileMng();
 final MenuMng menuMng = MenuMng();
 final PageMng pageMng = PageMng();
+final OilMng oilMng = OilMng();
 final Mng mng = Mng();
 
 ///0 - COLD

@@ -3,30 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:isma/config/define.dart';
 
-class CardData {
-  CardData(int idx, double wei) {
-    index = idx;
-    weight = wei;
-  }
-
-  ///0 ~ 3까지,
-  ///```
-  ///0 - 오일(비누) or 수상층(화장품),
-  ///1 - 슈퍼팻(비누) or 유상층(화장품),
-  ///2 - 첨가물(비누) or 유화제(화장품),
-  ///3(화장품만) - EO
-  int type = 0;
-
-  int index = -1;
-  double weight = 0;
-
-  @override
-  String toString() {
-    return "$index,$weight,$type";
-  }
-}
-
-
 class Data {
   Data({String nameStr="", String dateStr="", TYPE t=TYPE.E_COLD, int w=1000}) {
     type = t;
@@ -42,8 +18,21 @@ class Data {
 
   Map<int, String> values = {};
 
-  ///type으로 페이지 위치
-  List<List<CardData>> data = [];
+
+
+  ///0 ~ 3까지,
+  ///```
+  ///0 - 오일(비누) or 수상층(화장품),
+  ///1 - 슈퍼팻(비누) or 유상층(화장품),
+  ///2 - 첨가물(비누) or 유화제(화장품),
+  ///3(화장품만) - EO
+  ///index, weight
+  List<Map<int, int>> data = [
+    {},
+    {},
+    {},
+    {}
+  ];
 
   String memo = "";
 
@@ -73,11 +62,22 @@ class DataMng with ChangeNotifier {
 
   void setValue(String str, int idx) {
     data.values[idx] = str;
-    log(this.toString());
   }
 
-  void setData(int idx, CardData d) {
-    data.data[idx].add(d);
+
+  ///page : 0 ~ 3까지,
+  ///```
+  ///0 - 오일(비누) or 수상층(화장품),
+  ///1 - 슈퍼팻(비누) or 유상층(화장품),
+  ///2 - 첨가물(비누) or 유화제(화장품),
+  ///3(화장품만) - EO
+  void setData(int page, int idx, int weight) {
+    if(weight < 0) {
+      data.data[page].remove(idx);
+    } else {
+      data.data[page][idx] = weight;
+    }
+    notifyListeners();
   }
 
   void setMemo(String str) {
