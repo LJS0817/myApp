@@ -88,7 +88,7 @@ class DataContainer extends StatelessWidget {
                     right: 25,
                     bottom: 14,
                     child: Text(
-                      "${data.weight}G",
+                      "${data.weight[0]}G",
                       style: TextStyle(
                         color: getThemeColor(data.type.index, 2).withOpacity(0.8),
                         fontSize: 24,

@@ -11,12 +11,12 @@ import '../mng/DataMng.dart';
 
 enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_LOTION, E_ESSENCE, E_CREAM, E_ETC }
 
-final DataMng dataMng = DataMng();
 final FileMng fileMng = FileMng();
-final MenuMng menuMng = MenuMng();
-final PageMng pageMng = PageMng();
+// final MenuMng menuMng = MenuMng();
 final OilMng oilMng = OilMng();
-final Mng mng = Mng();
+// final Mng mng = Mng();
+
+const int aniTime = 240;
 
 ///0 - COLD
 ///1  - HOT

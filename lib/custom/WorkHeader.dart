@@ -136,7 +136,7 @@ class Header extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "1245667",
+                              dataMngProvider.data.weight[1].toString(),
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class Header extends StatelessWidget {
                             const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
 
                             Text(
-                              "125125",
+                              dataMngProvider.data.weight[2].toString(),
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
@@ -156,7 +156,7 @@ class Header extends StatelessWidget {
                             const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
 
                             Text(
-                              "51234213",
+                              dataMngProvider.data.weight[3].toString(),
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
@@ -166,7 +166,7 @@ class Header extends StatelessWidget {
                             const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
 
                             Text(
-                              "124128912",
+                              dataMngProvider.data.weight[0].toString(),
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,

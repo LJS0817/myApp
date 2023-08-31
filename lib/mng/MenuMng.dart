@@ -5,12 +5,10 @@ import 'package:flutter/cupertino.dart';
 
 class MenuMng with ChangeNotifier {
   int index = 0;
-  int aniTime = 240;
   bool isConfig = false;
 
   void init() {
     index = 0;
-    aniTime = 240;
     isConfig = false;
   }
 

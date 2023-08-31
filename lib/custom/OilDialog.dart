@@ -42,7 +42,6 @@ class OilDialog extends StatelessWidget {
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     onTap: () {
-                      log("message111");
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -86,17 +85,73 @@ class OilDialog extends StatelessWidget {
                                       behavior: const ScrollBehavior().copyWith(overscroll: false),
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: dataMngProvider.data.data[pageMngProvider.index - 1].length,
+                                        itemCount: dataMngProvider.data.data[pageMngProvider.getIndexSub1()].length,
                                         itemBuilder: (BuildContext con, int idx) {
-                                          return OilShortContainer(dataMngProvider.data.data[pageMngProvider.index - 1].keys.elementAt(idx));
+                                          return OilShortContainer(dataMngProvider.data.data[pageMngProvider.getIndexSub1()].keys.elementAt(idx));
                                         },
                                       ),
                                     ),
                                   ),
                                   Container(
-                                    color: Colors.black,
                                     height: 50,
                                     alignment: Alignment.bottomRight,
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            borderRadius: BorderRadius.circular(100),
+                                            splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.3),
+                                            highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.3),
+                                            onTap: () {
+
+                                            },
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              color: Colors.transparent,
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "전환",
+                                                style: TextStyle(
+                                                  color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                                        Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            borderRadius: BorderRadius.circular(100),
+                                            splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.3),
+                                            highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.3),
+                                            onTap: () {
+                                              pageMngProvider.setDialog();
+                                            },
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              color: Colors.transparent,
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "확인",
+                                                style: TextStyle(
+                                                  color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   )
                                 ],
                               ),

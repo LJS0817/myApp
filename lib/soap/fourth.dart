@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 import '../config/define.dart';
 import '../mng/PageMng.dart';
 
-class SecondView extends StatelessWidget {
-  const SecondView({super.key});
+class FourthView extends StatelessWidget {
+  const FourthView({super.key});
 
   @override
   Widget build(BuildContext context) {

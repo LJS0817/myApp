@@ -24,6 +24,6 @@ class Oil {
   }
 
   String getName() {
-    return "$korean ( ${english} )";
+    return "$korean ( $english )";
   }
 }

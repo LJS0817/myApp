@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:isma/soap/first.dart';
+import 'package:isma/soap/fourth.dart';
 import 'package:isma/soap/second.dart';
+import 'package:isma/soap/third.dart';
 
 class PageMng with ChangeNotifier {
   final List<String> Workspaces = [
@@ -37,6 +39,14 @@ class PageMng with ChangeNotifier {
     notifyListeners();
   }
 
+  int getIndexSub1() {
+    if(index - 1 >= 0) {
+      return index - 1;
+    } else {
+      return index;
+    }
+  }
+
   void setDialog() {
     enableDialog = !enableDialog;
     notifyListeners();
@@ -46,6 +56,8 @@ class PageMng with ChangeNotifier {
     switch(index) {
       case 0: return FirstView();
       case 1: return SecondView();
+      case 2: return ThirdView();
+      case 3: return FourthView();
       default: return FirstView();
     }
   }

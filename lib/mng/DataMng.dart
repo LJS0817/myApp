@@ -4,17 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 
 class Data {
-  Data({String nameStr="", String dateStr="", TYPE t=TYPE.E_COLD, int w=1000}) {
+  Data({String nameStr="", String dateStr="", TYPE t=TYPE.E_COLD, int w=0}) {
     type = t;
     name = nameStr;
     date = dateStr;
-    weight = w;
+    weight[0] = w;
   }
 
   String name = "";
   String date = "";
-  int weight = 1000;
   TYPE type = TYPE.E_COLD;
+
+  ///0 - 총량
+  ///1 - 오일
+  ///2 - 슈퍼팻
+  ///3 - 첨가물
+  List<int> weight = [0, 0, 0, 0];
 
   Map<int, String> values = {};
 
@@ -56,6 +61,11 @@ class DataMng with ChangeNotifier {
     notifyListeners();
   }
 
+  void setWeight(int index, int weight) {
+    data.weight[index] += weight;
+    data.weight[0] += weight;
+  }
+
   int getTypeIndex() {
     return data.type.index;
   }
@@ -86,7 +96,7 @@ class DataMng with ChangeNotifier {
 
   @override
   String toString() {
-    return "${data.name},${getTypeIndex()},${data.values},${data.data},${data.memo}";
+    return "${data.name},${getTypeIndex()},${data.weight},${data.values},${data.data},${data.memo}";
   }
 }
 

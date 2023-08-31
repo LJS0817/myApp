@@ -24,7 +24,7 @@ class iconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     MenuMng menu = Provider.of<MenuMng>(context);
     return AnimatedContainer(
-        duration: Duration(milliseconds: menuMng.aniTime),
+        duration: const Duration(milliseconds: aniTime),
         width: 60,
         height: 60,
         decoration: BoxDecoration(

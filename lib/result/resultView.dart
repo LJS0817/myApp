@@ -128,7 +128,7 @@ class ResultView extends StatelessWidget {
                                         top: 35,
                                         left: 56,
                                         child: Text(
-                                          "${data.selectData.weight} g",
+                                          "${data.selectData.weight[0]} g",
                                           style: TextStyle(
                                             color: getThemeColor(themeIndex, 1),
                                             fontSize: 24,

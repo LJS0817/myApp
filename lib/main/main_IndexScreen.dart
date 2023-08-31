@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/custom/OilMng.dart';
+import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
+import 'package:isma/mng/PageMng.dart';
 import 'package:isma/result/resultView.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +38,7 @@ void loadAsset(BuildContext context) async {
       list = s.split('\n');
       //data added
       //오일 데이터 = oil
-      oilMng.oils[int.parse(data[0])] = oil;
+      oilMng.oils[int.parse(data[0]) - 1] = oil;
     } catch(ex) {
       log("ERROR : $ex");
     }
@@ -67,7 +69,9 @@ Color getSecondColor(BuildContext context) {
 
 Widget BottomBar(BuildContext context) {
 
-  MenuMng menu = Provider.of<MenuMng>(context);
+  MenuMng menuMng = Provider.of<MenuMng>(context);
+  PageMng pageMng = Provider.of<PageMng>(context);
+  DataMng dataMng = Provider.of<DataMng>(context);
 
   return Positioned(
     bottom: 0,
@@ -88,7 +92,7 @@ Widget BottomBar(BuildContext context) {
                 children: [
                   Expanded(
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: menu.aniTime),
+                      duration: const Duration(milliseconds: aniTime),
                       width: 100,
                       height: 70,
                       decoration: BoxDecoration(
@@ -103,7 +107,7 @@ Widget BottomBar(BuildContext context) {
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 31)),
                   Expanded(
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: menu.aniTime),
+                      duration: const Duration(milliseconds: aniTime),
                       width: 100,
                       height: 70,
                       decoration: BoxDecoration(
@@ -121,7 +125,7 @@ Widget BottomBar(BuildContext context) {
           Positioned(
             bottom: 0,
             child: AnimatedContainer(
-              duration: Duration(milliseconds: menu.aniTime),
+              duration: const Duration(milliseconds: aniTime),
               width: 90,
               height: 41,
               color: getMainColor(context),
@@ -137,11 +141,11 @@ Widget BottomBar(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  iconButton('assets/icon/soap.svg', 0, () { menu.setIndex(0); }),
-                  iconButton('assets/icon/beauty.svg', 1, () { menu.setIndex(1); }),
+                  iconButton('assets/icon/soap.svg', 0, () { menuMng.setIndex(0); }),
+                  iconButton('assets/icon/beauty.svg', 1, () { menuMng.setIndex(1); }),
                   const SizedBox(width: 82, height: 80, ),
-                  iconButton('assets/icon/oil.svg', 2, () { menu.setIndex(2); }, size: 16),
-                  iconButton('assets/icon/settings.svg', 3, () { menu.setIndex(3); }),
+                  iconButton('assets/icon/oil.svg', 2, () { menuMng.setIndex(2); }, size: 16),
+                  iconButton('assets/icon/settings.svg', 3, () { menuMng.setIndex(3); }),
                 ],
               ),
             ),
@@ -149,7 +153,7 @@ Widget BottomBar(BuildContext context) {
           Positioned(
             bottom: 21,
             child: AnimatedContainer(
-              duration: Duration(milliseconds: menu.aniTime),
+              duration: const Duration(milliseconds: aniTime),
               width: 80,
               height: 50,
               decoration: BoxDecoration(
@@ -165,22 +169,26 @@ Widget BottomBar(BuildContext context) {
               bottom: 35,
               child: Material(
                 borderRadius: BorderRadius.circular(500),
-                color: mainTheme[menu.getIndex()],
+                color: mainTheme[menuMng.getIndex()],
                 child: InkWell(
                   borderRadius: BorderRadius.circular(500),
                   splashColor: getSecondColor(context).withOpacity(0.2),
                   highlightColor: getSecondColor(context).withOpacity(0.5),
                   onTap: () {
-                    pageMng.changeScene(context, menu.index);
+
+                    pageMng.index = 0;
+                    dataMng.initData();
+
+                    pageMng.changeScene(context, menuMng.index);
                   },
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: menuMng.aniTime),
+                    duration: const Duration(milliseconds: aniTime),
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(500.0),
                         border: Border.all(
-                           strokeAlign: StrokeAlign.inside,
+                           strokeAlign: BorderSide.strokeAlignInside,
                             width: 4,
                             color: getMainColor(context).withOpacity(0.36)
                         )
@@ -189,11 +197,11 @@ Widget BottomBar(BuildContext context) {
                       'assets/icon/save.svg',
                       width: 29,
                       height: 29,
-                      color: themeIconColors[menu.getIndex()],
+                      color: themeIconColors[menuMng.getIndex()],
                       fit: BoxFit.none,) : Icon(
                       Icons.add_rounded,
                       size: 30,
-                      color: themeIconColors[menu.getIndex()],
+                      color: themeIconColors[menuMng.getIndex()],
                     ),
                   ),
                 ),
