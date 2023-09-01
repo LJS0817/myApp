@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 import '../custom/step.dart';
 import '../mng/DataMng.dart';
 
-class SoapWorkspace extends StatelessWidget {
-  const SoapWorkspace({super.key});
+class BeautyWorkspace extends StatelessWidget {
+  const BeautyWorkspace({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class SoapWorkspace extends StatelessWidget {
             Column(
               children: [
                 Header(),
-                context.watch<PageMng>().getCurPage(true),
-                StepView(context.watch<DataMng>().getTypeIndex(), context.watch<PageMng>().index + 1),
+                pageMng.getCurPage(false),
+                StepView(context.watch<DataMng>().getTypeIndex(), pageMng.index + 1),
                 Footer(),
               ],
             ),

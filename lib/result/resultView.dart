@@ -12,11 +12,23 @@ import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 import 'package:isma/custom/graph.dart';
 
+import '../mng/DataMng.dart';
+
 class ResultView extends StatelessWidget {
 
   static const double leftPadding = 15;
   int themeIndex = 0;
   bool showChart = false;
+  int totalLye = 0;
+
+  void calculateLye(Data data) {
+    int lye = 0;
+    for(int i = 0; i < data.data[0].length; i++) {
+      int index = data.data[0].keys.elementAt(i);
+      lye += (int.parse(data.data[0][i]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oilMng.oils[index]!.KOH : oilMng.oils[index]!.NaOH)) as int;
+    }
+    //totalLye = data.values[1] * lye;
+  }
 
   ResultView(int idx, {super.key}) {
     themeIndex = idx;

@@ -36,7 +36,7 @@ const List<Color> themeIconColors = [
 ///[0] - 테마,
 ///[1] - 텍스트,
 ///[2] - 강조, 활성화(버튼),
-///[4] - 비활성화 버튼
+///[3] - 비활성화 버튼
 const List<List<Color>> soapThemeColor = [
   [ Color(0xFF20567A), Color(0xFFE9F6FF), Color(0xFF98D6FF), Color(0xFFA3B8C9) ],
   [ Color(0xFF007EA3), Color(0xFFD5F5FE), Color(0xFF3DD3FF), Color(0xFF99C0CC) ],
@@ -46,11 +46,12 @@ const List<List<Color>> soapThemeColor = [
 ///[0] - 테마,
 ///[1] - 텍스트,
 ///[2] - 강조, 활성화(버튼),
+///[3] - 비활성화 버튼
 const List<List<Color>> beautyThemeColor = [
-  [ Color(0xFFC5B3A6), Color(0xFFFDF9F5), Color(0xFF463A2E) ],
-  [ Color(0xFFB7DA9B), Color(0xFF4B9411), Color(0xFF1B6C46) ],
-  [ Color(0xFF7FCBAE), Color(0xFF2D936C), Color(0xFF085236) ],
-  [ Color(0xFF00A356), Color(0xFFCAF3DD), Color(0xFF003D20) ],
+  [ Color(0xFF247365), Color(0xFFE9FFFB), Color(0xFFB5CBC7), Color(0xFF77FFE7) ],
+  [ Color(0xFF4F8F61), Color(0xFFEAFFF0), Color(0xFF4DEC7A), Color(0xFFB6CEBD) ],
+  [ Color(0xFF92A863), Color(0xFFF6FFE3), Color(0xFFEAEE1A), Color(0xFFD7E7B5)],
+  [ Color(0xFFA18D5A), Color(0xFFFFF7E2), Color(0xFFD1C7AF), Color(0xFFFFD66E) ],
 ];
 
 

@@ -52,7 +52,7 @@ class Header extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                         Text(
-                          "2023-12-12",
+                          DateTime.now().toString().split(' ')[0],
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
@@ -63,13 +63,26 @@ class Header extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                         Text(
-                          "C.P 형 비누",
+                          typeToString(dataMngProvider.data.type),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
                               color: getThemeColor(dataMngProvider.data.type.index, 2),
                               fontWeight: FontWeight.bold,
                               fontSize: 16
+                          ),
+                        ),
+                        Visibility(
+                          visible: dataMngProvider.getTypeIndex() > 2,
+                          child: Text(
+                            "[ ${skinTypeToString(dataMngProvider.data.skinType)} 피부 ]",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: getThemeColor(dataMngProvider.data.type.index, 2),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16
+                            ),
                           ),
                         ),
                       ],

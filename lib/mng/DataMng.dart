@@ -15,6 +15,7 @@ class Data {
   String name = "";
   String date = "";
   TYPE type = TYPE.E_COLD;
+  SKINTYPE skinType = SKINTYPE.E_MINGAM;
 
   ///index
   ///```
@@ -35,6 +36,10 @@ class Data {
   ///5 - SUGAR
   ///6 - SOLVENT
   ///7 - ETHANOL
+  ///8 ~ 11 - 수상층
+  ///12 ~ 15 - 유상층
+  ///16 ~ 19 - 유화제
+  ///20 - 총용량
   final Map<int, String> default_values = {
     0 : "100",
     1 : "100",
@@ -44,6 +49,23 @@ class Data {
     5 : "8",
     6 : "45",
     7 : "30",
+
+    8 : "100",
+    9 : "70",
+    10 : "85",
+    11 : "80",
+
+    12 : "0",
+    13 : "30",
+    14 : "15",
+    15 : "40",
+
+    16 : "0",
+    17 : "3",
+    18 : "2",
+    19 : "5",
+
+    20 : "0",
   };
 
   ///index
@@ -56,6 +78,10 @@ class Data {
   ///5 - SUGAR
   ///6 - SOLVENT
   ///7 - ETHANOL
+  ///8 ~ 11 - 수상층
+  ///12 ~ 15 - 유상층
+  ///16 ~ 19 - 유화제
+  ///20 - 총용량
   Map<int, String> values = {};
 
 
@@ -82,8 +108,9 @@ class DataMng with ChangeNotifier {
 
   Data data = Data();
 
-  void initData() {
+  void initData(bool isBeauty) {
     data = Data();
+    data.type = isBeauty ? TYPE.E_SKIN : TYPE.E_COLD;
   }
 
   void setName(String str) {
@@ -100,6 +127,11 @@ class DataMng with ChangeNotifier {
     notifyListeners();
   }
 
+  void setSkinType(SKINTYPE t) {
+    data.skinType = t;
+    notifyListeners();
+  }
+
   void setWeight(int index, int weight) {
     data.weight[index] += weight;
     data.weight[0] += weight;
@@ -108,11 +140,37 @@ class DataMng with ChangeNotifier {
   int getTypeIndex() {
     return data.type.index;
   }
-
+  ///index
+  ///```
+  ///0 - LYE PURITY
+  ///1 - LYE COUNT
+  ///2 - WATER
+  ///3 - PURE SOAP
+  ///4 - GLYCERINE
+  ///5 - SUGAR
+  ///6 - SOLVENT
+  ///7 - ETHANOL
+  ///8 ~ 11 - 수상층
+  ///12 ~ 15 - 유상층
+  ///20 - 총용량
   void setValue(String str, int idx) {
     data.values[idx] = str;
   }
 
+  ///index
+  ///```
+  ///0 - LYE PURITY
+  ///1 - LYE COUNT
+  ///2 - WATER
+  ///3 - PURE SOAP
+  ///4 - GLYCERINE
+  ///5 - SUGAR
+  ///6 - SOLVENT
+  ///7 - ETHANOL
+  ///8 ~ 11 - 수상층
+  ///12 ~ 15 - 유상층
+  ///16 ~ 19 - 유화제
+  ///20 - 총용량
   String? getValue(int idx) {
     return (data.values[idx] == null || data.values[idx] == "") ? data.default_values[idx] : data.values[idx];
   }
@@ -164,7 +222,7 @@ class DataMng with ChangeNotifier {
   @override
   String toString() {
     saveData();
-    return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo}";
+    return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo}${data.skinType}";
   }
 }
 
@@ -196,6 +254,7 @@ Data parseData(String str) {
   log(strList.toString());
 
   Data result = Data(nameStr: strList[0], t: parseTYPE(strList[1]), dateStr: strList[2]);
+  result.skinType = parseSKINTYPE(strList[7]);
   result.weight = json.decode(strList[3]).cast<int>().toList();
   result.values = parseString(strList[4]);
 

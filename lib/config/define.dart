@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:isma/config/colors.dart';
@@ -10,6 +11,8 @@ import 'package:isma/mng/PageMng.dart';
 import '../mng/DataMng.dart';
 
 enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_LOTION, E_ESSENCE, E_CREAM, E_ETC }
+
+enum SKINTYPE { E_MINGAM, E_GUN, E_ATOPI, E_JOONG, E_JI, E_YEO }
 
 final FileMng fileMng = FileMng();
 // final MenuMng menuMng = MenuMng();
@@ -46,6 +49,31 @@ TYPE parseTYPE(String str) {
   }
 }
 
+///0 - 민감성
+///1  - 건성
+///2 - 아토피
+///3 - 중성
+///4 - 지성
+///5 - 여드름
+SKINTYPE parseSKINTYPE(String str) {
+  switch(str) {
+    case '0':
+      return SKINTYPE.E_MINGAM;
+    case '1':
+      return SKINTYPE.E_GUN;
+    case '2':
+      return SKINTYPE.E_ATOPI;
+    case '3':
+      return SKINTYPE.E_JOONG;
+    case '4':
+      return SKINTYPE.E_JI;
+    case '5':
+      return SKINTYPE.E_YEO;
+    default:
+      return SKINTYPE.E_MINGAM;
+  }
+}
+
 String typeToString(TYPE t) {
   switch(t) {
     case TYPE.E_COLD:
@@ -62,6 +90,25 @@ String typeToString(TYPE t) {
       return "Essence";
     case TYPE.E_CREAM:
       return "Cream";
+    default:
+      return "ETC";
+  }
+}
+
+String skinTypeToString(SKINTYPE t) {
+  switch(t) {
+    case SKINTYPE.E_MINGAM:
+      return "민감성";
+    case SKINTYPE.E_GUN:
+      return "건성";
+    case SKINTYPE.E_ATOPI:
+      return "아토피";
+    case SKINTYPE.E_JOONG:
+      return "중복합성";
+    case SKINTYPE.E_JI:
+      return "지성";
+    case SKINTYPE.E_YEO:
+      return "여드름";
     default:
       return "ETC";
   }

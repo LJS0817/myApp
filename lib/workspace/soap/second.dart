@@ -2,15 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/custom/EditableOilContainer.dart';
-import 'package:isma/custom/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
+import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
-import '../config/define.dart';
-import '../mng/PageMng.dart';
 
-class ThirdView extends StatelessWidget {
-  const ThirdView({super.key});
+class SecondView extends StatelessWidget {
+  const SecondView({super.key});
 
   @override
   Widget build(BuildContext context) {

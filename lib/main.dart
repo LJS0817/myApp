@@ -5,6 +5,7 @@ import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
+import 'package:isma/tabs/beauty.dart';
 import 'package:provider/provider.dart';
 
 import 'package:isma/main/main_IndexScreen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/index': (context) => IndexScreen(),
           '/tabs/soap': (context) => SoapWorkspace(),
+          '/tabs/beauty': (context) => BeautyWorkspace(),
         },
         initialRoute: '/index',
       ),

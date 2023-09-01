@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/custom/customRadioButton.dart';
 import 'package:isma/custom/customTextField.dart';
+import 'package:isma/mng/DataMng.dart';
 import 'package:provider/provider.dart';
 
-import '../custom/customRadioButton.dart';
-import '../mng/DataMng.dart';
 
 class FirstView extends StatelessWidget {
   FirstView({super.key});

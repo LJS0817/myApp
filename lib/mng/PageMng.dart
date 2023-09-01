@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:isma/soap/first.dart';
-import 'package:isma/soap/fourth.dart';
-import 'package:isma/soap/second.dart';
-import 'package:isma/soap/third.dart';
+import 'package:isma/workspace/beauty/bFirstView.dart';
+import 'package:isma/workspace/soap/first.dart';
+import 'package:isma/workspace/soap/fourth.dart';
+import 'package:isma/workspace/soap/second.dart';
+import 'package:isma/workspace/soap/third.dart';
 
 
 class PageMng with ChangeNotifier {
@@ -52,13 +53,24 @@ class PageMng with ChangeNotifier {
     notifyListeners();
   }
 
-  Widget getCurPage() {
-    switch(index) {
-      case 0: return FirstView();
-      case 1: return SecondView();
-      case 2: return ThirdView();
-      case 3: return FourthView();
-      default: return FirstView();
+  Widget getCurPage(bool isSoap) {
+    if(isSoap) {
+      switch(index) {
+        case 0: return FirstView();
+        case 1: return SecondView();
+        case 2: return ThirdView();
+        case 3: return FourthView();
+        default: return FirstView();
+      }
+    } else {
+      switch(index) {
+        case 0: return bFirstView();
+        case 1: return SecondView();
+        case 2: return ThirdView();
+        case 3: return FourthView();
+        default: return FirstView();
+      }
     }
+
   }
 }

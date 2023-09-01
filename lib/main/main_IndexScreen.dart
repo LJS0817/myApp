@@ -177,7 +177,7 @@ Widget BottomBar(BuildContext context) {
                   onTap: () {
 
                     pageMng.index = 0;
-                    dataMng.initData();
+                    dataMng.initData(menuMng.index == 1);
 
                     pageMng.changeScene(context, menuMng.index);
                   },
