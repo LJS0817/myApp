@@ -4,6 +4,7 @@ import 'package:isma/soap/fourth.dart';
 import 'package:isma/soap/second.dart';
 import 'package:isma/soap/third.dart';
 
+
 class PageMng with ChangeNotifier {
   final List<String> Workspaces = [
     '/tabs/soap',
@@ -11,7 +12,7 @@ class PageMng with ChangeNotifier {
     '/tabs/oil',
     '/tabs/config'
   ];
-  final int MAX_INDEX = 5;
+  final int MAX_INDEX = 3;
 
   int index = 0;
   bool enableDialog = false;
@@ -25,7 +26,6 @@ class PageMng with ChangeNotifier {
     index++;
     if(index >= MAX_INDEX) {
       index = MAX_INDEX;
-      return;
     }
     notifyListeners();
   }

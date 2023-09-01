@@ -31,7 +31,7 @@ class FirstView extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
-            CustomTextField((String data) { dataMngProvider.setName(data); }, active: true, index: dataMngProvider.getTypeIndex(),),
+            CustomTextField((String data) { dataMngProvider.setName(data); }, str: dataMngProvider.getName(), active: true, index: dataMngProvider.getTypeIndex(),),
 
             const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
             Text(
@@ -71,9 +71,9 @@ class FirstView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 0); }, str:"100", needLb: true, labelTxt: "Lye Purity", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 0); }, str: dataMngProvider.getValue(0)!, needLb: true, labelTxt: "Lye Purity", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 1); }, str:"100", needLb: true, labelTxt: "Lye Count", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 1); }, str: dataMngProvider.getValue(1)!, needLb: true, labelTxt: "Lye Count", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 Visibility(
                   visible: dataMngProvider.data.type == TYPE.E_COLD,
                   child: const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
@@ -84,7 +84,7 @@ class FirstView extends StatelessWidget {
                   child: Expanded(
                     child: Row(
                       children: [
-                        Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 2); }, str:"100", needLb: true, labelTxt: "Water", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                        Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 2); }, str: dataMngProvider.getValue(2)!, needLb: true, labelTxt: "Water", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       ],
                     ),
                   )
@@ -100,20 +100,20 @@ class FirstView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 3); }, str:"55", needLb: true, labelTxt: "Pure Soap", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 3); }, str:dataMngProvider.getValue(3)!, needLb: true, labelTxt: "Pure Soap", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 6); }, str:"10", needLb: true, labelTxt: "Glycerine", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 4); }, str:dataMngProvider.getValue(4)!, needLb: true, labelTxt: "Glycerine", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                     ],
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 5); }, str:"8", needLb: true, labelTxt: "Sugar", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 5); }, str:dataMngProvider.getValue(5)!, needLb: true, labelTxt: "Sugar", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 4); }, str:"45", needLb: true, labelTxt: "Solvent", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 6); }, str:dataMngProvider.getValue(6)!, needLb: true, labelTxt: "Solvent", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 5); }, str:"30", needLb: true, labelTxt: "Ethanol", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 7); }, str:dataMngProvider.getValue(7)!, needLb: true, labelTxt: "Ethanol", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                     ],
                   ),
                 ],

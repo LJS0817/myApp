@@ -144,12 +144,9 @@ class ResultView extends StatelessWidget {
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                ResultOilBox("오일\n10개", themeIndex),
-                                                ResultOilBox("오일\n10개", themeIndex),
-                                                ResultOilBox("오일\n10}개", themeIndex),
-                                                //ResultOilBox("오일\n${data.selectData.data[0].length}개", themeIndex),
-                                                //ResultOilBox("슈퍼팻\n${data.selectData.data[1].length}개", themeIndex),
-                                                //ResultOilBox("첨가물\n${data.selectData.data[2].length}개", themeIndex),
+                                                ResultOilBox("오일\n${data.selectData.data[0].length}", themeIndex),
+                                                ResultOilBox("슈퍼팻\n${data.selectData.data[1].length}", themeIndex),
+                                                ResultOilBox("첨가물\n${data.selectData.data[2].length}", themeIndex),
                                               ],
                                             ),
                                           )
@@ -250,7 +247,7 @@ class ResultView extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    ResultValueBox(themeIndex, "오일양", "1,000,000g"),
+                                    ResultValueBox(themeIndex, "오일양", "${data.selectData.weight[1] + data.selectData.weight[2]}g"),
                                     ResultValueBox(themeIndex, "Lye 양", "10,000g"),
                                     ResultValueBox(themeIndex, "정제수 양", "100%\n(10,000g)"),
                                   ],
@@ -260,7 +257,7 @@ class ResultView extends StatelessWidget {
                               //메모
                               Container(
                                 margin: const EdgeInsets.only(left: leftPadding, right: 15),
-                                child: CustomTextField((String str) {}, index: themeIndex, str: "메모\n메모\n메모\n메모\n메모\n메모\n메모", maxLines: 3, height: 80, radius: 15,),
+                                child: CustomTextField((String str) {}, index: themeIndex, str: data.selectData.memo, maxLines: 3, height: 80, radius: 15,),
                               ),
                             ],
                           ),

@@ -13,7 +13,9 @@ class EditableOilContainer extends StatelessWidget {
   int index = 0;
 
   TextEditingController controller = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   String data = "";
+  String name = "";
 
 
   EditableOilContainer(int id, {super.key}) {
@@ -24,7 +26,10 @@ class EditableOilContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
-    controller.text = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString() == "0" ? "" : dataMngProvider.data.data[pageMngProvider.index - 1][index].toString();
+    List<String> list = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`');
+    controller.text = list[0] == "0" || list[0] == 'null' ? "" : list[0];
+    //log(list.toString());
+    nameController.text = index > -1 ? oilMng.oils[index]!.korean : (list.length > 1 ? list[1] : "");
     return Container(
       height: 75,
       width: double.maxFinite,
@@ -48,8 +53,10 @@ class EditableOilContainer extends StatelessWidget {
               child: InkWell(
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
                 onTap: () {
-                  dataMngProvider.setWeight(pageMngProvider.index, -dataMngProvider.data.data[pageMngProvider.index - 1][index]!);
-                  dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, -1);
+                  String str = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0];
+                  int weight = str == 'null' ? 0 : int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
+                  dataMngProvider.setWeight(pageMngProvider.index, -weight!);
+                  dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, '-1');
                   FocusScope.of(context).requestFocus(FocusNode());
                 },
                 splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
@@ -87,9 +94,11 @@ class EditableOilContainer extends StatelessWidget {
                         log(pageMngProvider.index.toString());
                         log(index.toString());
                         if(data.isNotEmpty) {
-                          dataMngProvider.setWeight(pageMngProvider.index, -dataMngProvider.data.data[pageMngProvider.index - 1][index]!);
-                          dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, int.parse(data));
-                          dataMngProvider.setWeight(pageMngProvider.index, dataMngProvider.data.data[pageMngProvider.index - 1][index]!);
+                          int weight = int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
+                          dataMngProvider.setWeight(pageMngProvider.index, -weight!);
+                          dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, '$data`${nameController.text}');
+                          weight = int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
+                          dataMngProvider.setWeight(pageMngProvider.index, weight!);
                         }
                       }
                     },
@@ -141,16 +150,50 @@ class EditableOilContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  oilMng.oils[index]!.korean,
-                  style: TextStyle(
-                    color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                Container(
+                  width: 150,
+                  height: 20,
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
+                  child: Focus(
+                    onFocusChange: (hasFocus) {
+                      if(!hasFocus) {
+                        String str = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString();
+                        if(!str.contains('`')) {
+                          str += '`0';
+                        }
+                        str = str.replaceRange(str.indexOf('`') + 1, null, name);
+                        dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, str);
+                      }
+                    },
+                    child: TextField(
+                      controller: nameController,
+                      readOnly: index > -1,
+                      textAlignVertical: TextAlignVertical.top,
+                      onChanged: (_) {
+                        name = _;
+                      },
+                      decoration: InputDecoration(
+                        isDense: true,
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.zero,
+                        hintText: "첨가물명",
+                        hintStyle: TextStyle(
+                            color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  )
                 ),
                 Text(
-                  oilMng.oils[index]!.english,
+                  index < -1 ? "첨가물" : oilMng.oils[index]!.english,
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.6),
                     fontSize: 14,

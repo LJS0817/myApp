@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/define.dart';
-import 'package:isma/custom/OilContainer.dart';
-import 'package:isma/custom/OilContainerShort.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +10,16 @@ import '../mng/DataMng.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
+
+  String addText(int page) {
+    if(page == 1) {
+      return "오일";
+    } else if(page == 2) {
+      return "슈퍼팻";
+    } else {
+      return "첨가물";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +72,17 @@ class Footer extends StatelessWidget {
             )
           ),
           Visibility(
-            visible: pageMngProvider.index > 0 && pageMngProvider.index < pageMngProvider.MAX_INDEX,
+            visible: pageMngProvider.index > 0,
             child: Expanded(
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
-                      pageMngProvider.setDialog();
+                      if(pageMngProvider.index < 3) {
+                        pageMngProvider.setDialog();
+                      } else {
+                        dataMngProvider.setData(2, -dataMngProvider.data.data[2].length - 2, '-2');
+                      }
                       /*log("message");
                       pageMngProvider.setDialog();*/
                     },
@@ -91,7 +103,7 @@ class Footer extends StatelessWidget {
                             ),
                             const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                             Text(
-                              "추가",
+                              addText(pageMngProvider.index),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -108,12 +120,16 @@ class Footer extends StatelessWidget {
           Expanded(
               child: Material(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(30)),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
                 child: InkWell(
                   onTap: () {
-                    pageMngProvider.nextPage();
+                    if(pageMngProvider.index >= pageMngProvider.MAX_INDEX) {
+                      log(dataMngProvider.toString());
+                    } else {
+                      pageMngProvider.nextPage();
+                    }
                   },
-                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(30)),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(pageMngProvider.index < pageMngProvider.MAX_INDEX ? 30 : 0)),
                   splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.4),
                   highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.4),
                   child: Container(
@@ -124,7 +140,7 @@ class Footer extends StatelessWidget {
                         children: [
                           const Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
                           Text(
-                            "다음",
+                            pageMngProvider.index < pageMngProvider.MAX_INDEX ? "다음" : "저장",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

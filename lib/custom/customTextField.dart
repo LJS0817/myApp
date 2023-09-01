@@ -21,8 +21,11 @@ class CustomTextField extends StatelessWidget {
   bool needLabel = false;
 
   late Function onChange;
+  bool isMultipleLine = false;
 
-  CustomTextField(Function func, {bool needLb = false, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String str="", double height=50, int maxLines=1, double radius=100, super.key}) {
+  TextEditingController controller = TextEditingController();
+
+  CustomTextField(Function func, {bool multipleLine = false, bool needLb = false, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String str="", double height=50, int maxLines=1, double radius=100, super.key}) {
     isActive = active;
     needBackground = needBg;
     _height = height;
@@ -31,6 +34,8 @@ class CustomTextField extends StatelessWidget {
     themeIndex = index;
     onChange = func;
     defaultValue = str;
+    isMultipleLine = multipleLine;
+    controller.text = str;
 
     needLabel = needLb;
     labelText = labelTxt;
@@ -71,11 +76,11 @@ class CustomTextField extends StatelessWidget {
               border: Border.all(color: getThemeColor(themeIndex, 0), width: 4)
           ),
           child: TextField(
-            controller: _maxLines == 3 ? TextEditingController(text: defaultValue) : null,
+            controller: controller,
             readOnly: !isActive,
             maxLines: _maxLines,
-            keyboardType: needLabel ? const TextInputType.numberWithOptions(decimal: true) : TextInputType.text,
-            textInputAction: TextInputAction.done,
+            keyboardType: needLabel ? const TextInputType.numberWithOptions(decimal: true) : TextInputType.multiline,
+            textInputAction: _maxLines > 10 ? TextInputAction.newline : TextInputAction.done,
             onSubmitted: (_) => {
               if(_.toString().split('.').length > 1) {
                 log("ERROR"),
@@ -84,20 +89,19 @@ class CustomTextField extends StatelessWidget {
                 FocusScope.of(context).unfocus(),
               }
             },
+            onChanged: (_) {
+              if(isMultipleLine) {
+                onChange(_.toString());
+              }
+            },
             inputFormatters: needLabel ? [
               FilteringTextInputFormatter.deny(RegExp('[,A-Za-z]'))
             ] : [],
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: defaultValue,
-              hintStyle: TextStyle(
-                color: getThemeColor(themeIndex, needBackground ? 0 : 1)
-              )
-            ),
+            decoration: const InputDecoration(border: InputBorder.none, ),
             style: TextStyle(
               color: getThemeColor(themeIndex, needBackground ? 0 : 1),
               fontWeight: FontWeight.bold,
-              height: _maxLines == 3 ? 1 : 0,
+              height: _maxLines == 3 || _maxLines > 10 ? 1 : 0,
             ),
           ),
         ),

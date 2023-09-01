@@ -29,7 +29,7 @@ class OilShortContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         child: InkWell(
           onTap: () {
-            dataMngProvider.setData(pageMngProvider.index - 1, index, -1);
+            dataMngProvider.setData(pageMngProvider.index - 1, index, '-1');
           },
           splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.5),
           highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.5),
