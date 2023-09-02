@@ -48,10 +48,10 @@ const List<List<Color>> soapThemeColor = [
 ///[2] - 강조, 활성화(버튼),
 ///[3] - 비활성화 버튼
 const List<List<Color>> beautyThemeColor = [
-  [ Color(0xFF247365), Color(0xFFE9FFFB), Color(0xFFB5CBC7), Color(0xFF77FFE7) ],
+  [ Color(0xFF247365), Color(0xFFE9FFFB), Color(0xFF77FFE7), Color(0xFFB5CBC7) ],
+  [ Color(0xFF92A863), Color(0xFFF6FFE3), Color(0xFFEAEE1A), Color(0xFFD7E7B5) ],
   [ Color(0xFF4F8F61), Color(0xFFEAFFF0), Color(0xFF4DEC7A), Color(0xFFB6CEBD) ],
-  [ Color(0xFF92A863), Color(0xFFF6FFE3), Color(0xFFEAEE1A), Color(0xFFD7E7B5)],
-  [ Color(0xFFA18D5A), Color(0xFFFFF7E2), Color(0xFFD1C7AF), Color(0xFFFFD66E) ],
+  [ Color(0xFFA18D5A), Color(0xFFFFF7E2), Color(0xFFFFD66E), Color(0xFFD1C7AF) ],
 ];
 
 

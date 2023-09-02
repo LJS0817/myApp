@@ -19,10 +19,12 @@ class CustomChartBar extends StatelessWidget {
     return Container(
       width: 24,
       height: 175,
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.165,
+            height: value * 0.01 * MediaQuery.of(context).size.height * 0.120 + 40,
             padding: const EdgeInsets.only(top: 8),
             alignment: Alignment.topCenter,
             decoration: BoxDecoration(

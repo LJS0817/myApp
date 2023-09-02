@@ -120,11 +120,13 @@ class Footer extends StatelessWidget {
           Expanded(
               child: Material(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(30)),
                 child: InkWell(
                   onTap: () {
                     if(pageMngProvider.index >= pageMngProvider.MAX_INDEX) {
-                      log(dataMngProvider.toString());
+                      fileMng.writeFile(DateTime.now().toString(), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
+                      fileMng.data[pageMngProvider.typeToInt(dataMngProvider.data.type)].add(dataMngProvider.toString());
+                      Navigator.of(context).pop();
                     } else {
                       pageMngProvider.nextPage();
                     }

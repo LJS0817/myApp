@@ -199,7 +199,7 @@ class DataMng with ChangeNotifier {
 
   void saveData() {
     DateTime date = DateTime.now();
-    data.date = "${date.year}-${date.month}-${date.day}";
+    data.date = date.toString().split(' ')[0];
 
     if(data.type == TYPE.E_COLD) {
       data.values[0] = (data.values[0] ?? data.default_values[0])!;
@@ -222,7 +222,7 @@ class DataMng with ChangeNotifier {
   @override
   String toString() {
     saveData();
-    return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo}${data.skinType}";
+    return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo}?${data.skinType.index}";
   }
 }
 
@@ -251,14 +251,14 @@ Map<int, String> parseString(String str) {
 ///[3] - 무게,
 Data parseData(String str) {
   List<String> strList = str.split('?');
-  log(strList.toString());
 
   Data result = Data(nameStr: strList[0], t: parseTYPE(strList[1]), dateStr: strList[2]);
   result.skinType = parseSKINTYPE(strList[7]);
   result.weight = json.decode(strList[3]).cast<int>().toList();
   result.values = parseString(strList[4]);
 
-  List<String> dataList = strList[5].replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '').split('@');
+  log(strList[5]);
+  List<String> dataList = strList[5].replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '').replaceAll('},', '}@').split('@');
   result.data[0] = parseString(dataList[0]);
   result.data[1] = parseString(dataList[1]);
   result.data[2] = parseString(dataList[2]);

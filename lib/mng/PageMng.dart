@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/workspace/beauty/bFirstView.dart';
 import 'package:isma/workspace/soap/first.dart';
 import 'package:isma/workspace/soap/fourth.dart';
@@ -45,6 +46,22 @@ class PageMng with ChangeNotifier {
       return index - 1;
     } else {
       return index;
+    }
+  }
+
+  String typeToString(TYPE type) {
+    if(type.index < 3) {
+      return 'soap';
+    } else {
+      return 'beauty';
+    }
+  }
+
+  int typeToInt(TYPE type) {
+    if(type.index < 3) {
+      return 0;
+    } else {
+      return 1;
     }
   }
 

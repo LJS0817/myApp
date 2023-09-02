@@ -29,7 +29,7 @@ class Header extends StatelessWidget {
                   getIcon(dataMngProvider.data.type),
                   width: 128,
                   height: 128,
-                  color: getThemeColor(dataMngProvider.data.type.index, 2).withOpacity(0.3),
+                  color: getThemeColor(dataMngProvider.data.type.index, 2).withOpacity(0.15),
                 ),
               ),
               Positioned(

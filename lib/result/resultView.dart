@@ -9,6 +9,7 @@ import 'package:isma/custom/resultValueBox.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
+import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 import 'package:isma/custom/graph.dart';
 
@@ -19,16 +20,6 @@ class ResultView extends StatelessWidget {
   static const double leftPadding = 15;
   int themeIndex = 0;
   bool showChart = false;
-  int totalLye = 0;
-
-  void calculateLye(Data data) {
-    int lye = 0;
-    for(int i = 0; i < data.data[0].length; i++) {
-      int index = data.data[0].keys.elementAt(i);
-      lye += (int.parse(data.data[0][i]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oilMng.oils[index]!.KOH : oilMng.oils[index]!.NaOH)) as int;
-    }
-    //totalLye = data.values[1] * lye;
-  }
 
   ResultView(int idx, {super.key}) {
     themeIndex = idx;
@@ -37,6 +28,10 @@ class ResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Mng data = Provider.of<Mng>(context);
+    PageMng pageMng = Provider.of<PageMng>(context);
+    DataMng dataMng = Provider.of<DataMng>(context);
+    MenuMng menuMng = Provider.of<MenuMng>(context);
+
     return Visibility(
       visible: data.popUpActive,
       child: Stack(
@@ -140,7 +135,7 @@ class ResultView extends StatelessWidget {
                                         top: 35,
                                         left: 56,
                                         child: Text(
-                                          "${data.selectData.weight[0]} g",
+                                          "${data.selectData.weight[0] + data.resultLye.round() + data.resultWater.round()} g",
                                           style: TextStyle(
                                             color: getThemeColor(themeIndex, 1),
                                             fontSize: 24,
@@ -183,7 +178,7 @@ class ResultView extends StatelessWidget {
 
                               AnimatedContainer(
                                   duration: Duration(milliseconds: 130),
-                                  margin: EdgeInsets.only(top: (data.showChart ? 15 : 0), left: leftPadding + 5, right: leftPadding),
+                                  margin: EdgeInsets.only(top: (data.showChart ? 14 : 0), left: leftPadding + 5, right: leftPadding),
                                   height: data.showChart ? 210 : 0,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
@@ -196,56 +191,57 @@ class ResultView extends StatelessWidget {
                                         Stack(
                                           children: [
                                             Positioned(
-                                                child: Container(
-                                                  height: 210,
-                                                  width: MediaQuery.of(context).size.width * 0.365,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
-                                                    color: getThemeColor(themeIndex, 1).withOpacity(0.6),
-                                                  ),
-                                                )
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 0,
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width * 0.365,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                                                  color: getThemeColor(themeIndex, 1).withOpacity(0.6),
+                                                ),
+                                              ),
                                             ),
-                                            Container(
-                                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                                child:
-                                                Column(
+                                            Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children: [
-                                                        CustomChartBar(themeIndex, 100, 0, false),
-                                                        CustomChartBar(themeIndex, 100, 1, false),
-                                                        CustomChartBar(themeIndex, 100, 2, false),
-                                                        CustomChartBar(themeIndex, 100, 3, false),
+                                                    // CustomChartBar(themeIndex, data.resultFat[0], 0, false),
+                                                    CustomChartBar(themeIndex, data.resultFat[0], 0, false),
+                                                    CustomChartBar(themeIndex, data.resultFat[1], 1, false),
+                                                    CustomChartBar(themeIndex, data.resultFat[2], 2, false),
+                                                    CustomChartBar(themeIndex, data.resultFat[3], 3, false),
 
-                                                        CustomChartBar(themeIndex, 100, 4, true),
-                                                        CustomChartBar(themeIndex, 100, 5, true),
-                                                        CustomChartBar(themeIndex, 100, 6, true),
-                                                        CustomChartBar(themeIndex, 100, 7, true),
-                                                        CustomChartBar(themeIndex, 100, 8, true),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                      children: [
-                                                        Text(
-                                                          "포화",
-                                                          style: TextStyle(
-                                                            color: getThemeColor(themeIndex, 0),
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "불포화",
-                                                          style: TextStyle(
-                                                            color: getThemeColor(themeIndex, 1),
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
+                                                    CustomChartBar(themeIndex, data.resultFat[6], 4, true),
+                                                    CustomChartBar(themeIndex, data.resultFat[7], 5, true),
+                                                    CustomChartBar(themeIndex, data.resultFat[4], 6, true),
+                                                    CustomChartBar(themeIndex, data.resultFat[5], 7, true),
+                                                    CustomChartBar(themeIndex, data.resultFat[8], 8, true),
                                                   ],
-                                                )
+                                                ),
+                                                const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                  children: [
+                                                    Text(
+                                                      "포화",
+                                                      style: TextStyle(
+                                                        color: getThemeColor(themeIndex, 0),
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "불포화",
+                                                      style: TextStyle(
+                                                        color: getThemeColor(themeIndex, 1),
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const Padding(padding: EdgeInsets.symmetric(vertical: 100)),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -260,8 +256,8 @@ class ResultView extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     ResultValueBox(themeIndex, "오일양", "${data.selectData.weight[1] + data.selectData.weight[2]}g"),
-                                    ResultValueBox(themeIndex, "Lye 양", "10,000g"),
-                                    ResultValueBox(themeIndex, "정제수 양", "100%\n(10,000g)"),
+                                    ResultValueBox(themeIndex, "Lye 양", "${data.resultLye.round()}g"),
+                                    ResultValueBox(themeIndex, "정제수 양", "${data.getValue(2)}%\n(${data.resultWater.round()}g)"),
                                   ],
                                 ),
                               ),
@@ -289,7 +285,11 @@ class ResultView extends StatelessWidget {
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(100),
                                   onTap: () {
-
+                                    pageMng.index = 0;
+                                    dataMng.initData(menuMng.index == 1);
+                                    dataMng.data = data.selectData;
+                                    data.init();
+                                    pageMng.changeScene(context, menuMng.index);
                                   },
                                   splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                                   highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),

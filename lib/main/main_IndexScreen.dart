@@ -188,9 +188,9 @@ Widget BottomBar(BuildContext context) {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(500.0),
                         border: Border.all(
-                           strokeAlign: BorderSide.strokeAlignInside,
+                           strokeAlign: BorderSide.strokeAlignOutside,
                             width: 4,
-                            color: getMainColor(context).withOpacity(0.36)
+                            color: getMainColor(context).withOpacity(0.5)
                         )
                     ),
                     child: menuMng.isConfig ? SvgPicture.asset(
@@ -219,6 +219,21 @@ class _IndexScreenState extends State<IndexScreen> {
   void initState() {
     super.initState();
     loadAsset(context);
+    fileMng.load();
+    fileMng.readDirectory('soap').then((value) => fileMng.readDirectory('beauty'));
+    // fileMng.writeFile('test', 'soap', "test?0?2023-9-1?[300, 300, 0, 128]?"
+    //     "{0: 100, 1: 100, 3: 55, 4: 10, 5: 8, 6: 45, 7: 30, 2: 100}?"
+    //     "[{0: 100`녹차씨, 2: 200`달맞이 꽃}@ {}@ {-2: 128`test}@ {}]?"
+    //     "test\ntest?0");
+    // fileMng.writeFile('test2', 'soap', "test11243?1?2023-9-2?[300, 300, 0, 128]?"
+    //     "{0: 100, 1: 100, 3: 55, 4: 10, 5: 8, 6: 45, 7: 30, 2: 100}?"
+    //     "[{0: 100`녹차씨, 2: 200`달맞이 꽃}@ {}@ {-2: 128`test}@ {}]?"
+    //     "test\ntest?0");
+    // fileMng.writeFile('test3', 'soap', "asdfkljzx?2?2023-9-3?[300, 300, 0, 128]?"
+    //     "{0: 100, 1: 100, 3: 55, 4: 10, 5: 8, 6: 45, 7: 30, 2: 100}?"
+    //     "[{0: 100`녹차씨, 2: 200`달맞이 꽃}@ {}@ {-2: 128`test}@ {}]?"
+    //     "test\ntest?0");
+    //fileMng.readFile('test', 'soap').then((value) => setState(() {log("결과 : " +  value.toString());}));
   }
 
   @override

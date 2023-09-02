@@ -55,7 +55,7 @@ class FourthView extends StatelessWidget {
                     maxLines: 12,
                     height: 150,
                     radius: 20,
-                    str: "메모 입력",
+                    str: dataMngProvider.data.memo.isEmpty ? "메모 입력" : dataMngProvider.data.memo,
                   ),
                 )
               )
