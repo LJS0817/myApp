@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/custom/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
+import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
@@ -25,7 +26,7 @@ class IndexScreen extends StatefulWidget {
 }
 
 void loadAsset(BuildContext context) async {
-  String s = await DefaultAssetBundle.of(context).loadString(fileMng.dataPath);
+  String s = await DefaultAssetBundle.of(context).loadString(Provider.of<FileMng>(context).dataPath);
   List<String> list = s.split('\n');
   List<String> data = [];
   late Oil oil;
@@ -178,6 +179,7 @@ Widget BottomBar(BuildContext context) {
 
                     pageMng.index = 0;
                     dataMng.initData(menuMng.index == 1);
+                    dataMng.setSelectedFileName("");
 
                     pageMng.changeScene(context, menuMng.index);
                   },
@@ -218,22 +220,21 @@ class _IndexScreenState extends State<IndexScreen> {
   @override
   void initState() {
     super.initState();
-    loadAsset(context);
-    fileMng.load();
-    fileMng.readDirectory('soap').then((value) => fileMng.readDirectory('beauty'));
-    // fileMng.writeFile('test', 'soap', "test?0?2023-9-1?[300, 300, 0, 128]?"
-    //     "{0: 100, 1: 100, 3: 55, 4: 10, 5: 8, 6: 45, 7: 30, 2: 100}?"
-    //     "[{0: 100`녹차씨, 2: 200`달맞이 꽃}@ {}@ {-2: 128`test}@ {}]?"
-    //     "test\ntest?0");
-    // fileMng.writeFile('test2', 'soap', "test11243?1?2023-9-2?[300, 300, 0, 128]?"
-    //     "{0: 100, 1: 100, 3: 55, 4: 10, 5: 8, 6: 45, 7: 30, 2: 100}?"
-    //     "[{0: 100`녹차씨, 2: 200`달맞이 꽃}@ {}@ {-2: 128`test}@ {}]?"
-    //     "test\ntest?0");
-    // fileMng.writeFile('test3', 'soap', "asdfkljzx?2?2023-9-3?[300, 300, 0, 128]?"
-    //     "{0: 100, 1: 100, 3: 55, 4: 10, 5: 8, 6: 45, 7: 30, 2: 100}?"
-    //     "[{0: 100`녹차씨, 2: 200`달맞이 꽃}@ {}@ {-2: 128`test}@ {}]?"
-    //     "test\ntest?0");
-    //fileMng.readFile('test', 'soap').then((value) => setState(() {log("결과 : " +  value.toString());}));
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    if(!Mng.isLoad) {
+      log("실패");
+      loadAsset(context);
+      FileMng fileMng =  Provider.of<FileMng>(context, listen: false);
+      fileMng.load();
+      fileMng.readDirectory('soap', 0).then((value) => fileMng.readDirectory('beauty', 1));
+      Mng.isLoad = true;
+    }
   }
 
   @override
@@ -251,7 +252,7 @@ class _IndexScreenState extends State<IndexScreen> {
             left: 0,
             right: 0,
             top: 0,
-            bottom: 0,
+            bottom: 100,
             child: getIndex(context),
           ),
           BottomBar(context),

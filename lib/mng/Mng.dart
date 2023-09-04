@@ -15,6 +15,8 @@ class Mng with ChangeNotifier {
   double resultWater = 0;
   List<double> resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
 
+  static bool isLoad = false;
+
   void setData(Data data) {
     selectData = data;
   }
@@ -46,6 +48,7 @@ class Mng with ChangeNotifier {
     resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
     for(int i = 0; i < resultFat.length; i++) {
       resultFat[i] = ((start[i] / data.weight[1]) * 100).roundToDouble();
+      resultFat[i] = resultFat[i].toString() == "NaN" ? 0 : resultFat[i];
     }
   }
 

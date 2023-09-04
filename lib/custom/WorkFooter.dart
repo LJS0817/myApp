@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
+    FileMng fileMngProvider = Provider.of<FileMng>(context);
     return SizedBox(
       height: 70,
       child: Row(
@@ -38,6 +40,7 @@ class Footer extends StatelessWidget {
                   if(pageMngProvider.index > 0) {
                     pageMngProvider.prevPage();
                   } else {
+                    dataMngProvider.setSelectedFileName("");
                     Navigator.of(context).pop();
                   }
                 },
@@ -124,8 +127,14 @@ class Footer extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if(pageMngProvider.index >= pageMngProvider.MAX_INDEX) {
-                      fileMng.writeFile(DateTime.now().toString(), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
-                      fileMng.data[pageMngProvider.typeToInt(dataMngProvider.data.type)].add(dataMngProvider.toString());
+                      String fileName = "";
+                      if(dataMngProvider.getSelectedFileName().isNotEmpty) {
+                        fileName = dataMngProvider.getSelectedFileName();
+                      } else {
+                        fileName = DateTime.now().toString();
+                      }
+                      fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
+                      fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();
                     } else {
                       pageMngProvider.nextPage();

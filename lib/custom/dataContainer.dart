@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/colors.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 
@@ -13,9 +14,11 @@ import '../mng/DataMng.dart';
 class DataContainer extends StatelessWidget {
 
   late Data data;
+  String _path = "";
 
-  DataContainer(String str, {super.key}) {
+  DataContainer(String str, String path, {super.key}) {
     data = parseData(str);
+    _path = path;
   }
 
   @override
@@ -34,6 +37,7 @@ class DataContainer extends StatelessWidget {
               splashColor: getThemeColor(data.type.index, 2).withOpacity(0.3),
               highlightColor: getThemeColor(data.type.index, 2).withOpacity(0.2),
               onTap: () {
+                Provider.of<DataMng>(context, listen: false).setSelectedFileName(_path);
                 Provider.of<Mng>(context, listen: false).showResultView(data);
               },
               child: Stack(

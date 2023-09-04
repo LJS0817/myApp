@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/custom/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
+import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => Mng()),
         ChangeNotifierProvider(create: (_) => DataMng()),
         ChangeNotifierProvider(create: (_) => OilMng()),
+        ChangeNotifierProvider(create: (_) => FileMng()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -14,7 +14,7 @@ enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_LOTION, E_ESSENCE, E_CREAM, E_ETC 
 
 enum SKINTYPE { E_MINGAM, E_GUN, E_ATOPI, E_JOONG, E_JI, E_YEO }
 
-final FileMng fileMng = FileMng();
+//final FileMng fileMng = FileMng();
 // final MenuMng menuMng = MenuMng();
 final OilMng oilMng = OilMng();
 // final Mng mng = Mng();

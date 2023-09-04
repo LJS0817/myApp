@@ -207,7 +207,6 @@ class ResultView extends StatelessWidget {
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [
-                                                    // CustomChartBar(themeIndex, data.resultFat[0], 0, false),
                                                     CustomChartBar(themeIndex, data.resultFat[0], 0, false),
                                                     CustomChartBar(themeIndex, data.resultFat[1], 1, false),
                                                     CustomChartBar(themeIndex, data.resultFat[2], 2, false),

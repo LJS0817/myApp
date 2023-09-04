@@ -107,10 +107,21 @@ class Data {
 class DataMng with ChangeNotifier {
 
   Data data = Data();
+  String selectFileName = "";
 
   void initData(bool isBeauty) {
     data = Data();
     data.type = isBeauty ? TYPE.E_SKIN : TYPE.E_COLD;
+  }
+
+  void setSelectedFileName(String str) {
+    selectFileName = str;
+    log("ASDXZC     " + selectFileName.isNotEmpty.toString());
+    notifyListeners();
+  }
+
+  String getSelectedFileName() {
+    return selectFileName;
   }
 
   void setName(String str) {
@@ -257,7 +268,6 @@ Data parseData(String str) {
   result.weight = json.decode(strList[3]).cast<int>().toList();
   result.values = parseString(strList[4]);
 
-  log(strList[5]);
   List<String> dataList = strList[5].replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '').replaceAll('},', '}@').split('@');
   result.data[0] = parseString(dataList[0]);
   result.data[1] = parseString(dataList[1]);

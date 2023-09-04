@@ -54,7 +54,6 @@ const List<List<Color>> beautyThemeColor = [
   [ Color(0xFFA18D5A), Color(0xFFFFF7E2), Color(0xFFFFD66E), Color(0xFFD1C7AF) ],
 ];
 
-
 int parseIndex(String type) {
   switch(type) {
     case "C.P" :
