@@ -179,7 +179,6 @@ Widget BottomBar(BuildContext context) {
 
                     pageMng.index = 0;
                     dataMng.initData(menuMng.index == 1);
-                    dataMng.setSelectedFileName("");
 
                     pageMng.changeScene(context, menuMng.index);
                   },
@@ -224,7 +223,6 @@ class _IndexScreenState extends State<IndexScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     if(!Mng.isLoad) {
@@ -252,7 +250,7 @@ class _IndexScreenState extends State<IndexScreen> {
             left: 0,
             right: 0,
             top: 0,
-            bottom: 100,
+            bottom: 0,
             child: getIndex(context),
           ),
           BottomBar(context),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
 import 'package:isma/custom/OilDialog.dart';
@@ -18,20 +20,25 @@ class SoapWorkspace extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
     return Scaffold(
-      body: Container(
-        color: mainTextColor[menuMng.index],
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Header(),
-                context.watch<PageMng>().getCurPage(true),
-                StepView(context.watch<DataMng>().getTypeIndex(), context.watch<PageMng>().index + 1),
-                Footer(),
-              ],
-            ),
-            OilDialog(),
-          ],
+      body: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: Container(
+          color: mainTextColor[menuMng.index],
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Header(),
+                  context.watch<PageMng>().getCurPage(true),
+                  StepView(context.watch<DataMng>().getTypeIndex(), context.watch<PageMng>().index + 1),
+                  Footer(),
+                ],
+              ),
+              OilDialog(),
+            ],
+          ),
         ),
       ),
     );

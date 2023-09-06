@@ -11,7 +11,6 @@ class CustomTextField extends StatelessWidget {
   bool isActive = false;
   String labelText = "";
   int themeIndex = 0;
-  String defaultValue = "";
 
   double _height = 55;
   int _maxLines = 1;
@@ -33,7 +32,6 @@ class CustomTextField extends StatelessWidget {
     _radius = radius;
     themeIndex = index;
     onChange = func;
-    defaultValue = str;
     isMultipleLine = multipleLine;
     controller.text = str;
 

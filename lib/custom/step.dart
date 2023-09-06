@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
+import 'package:provider/provider.dart';
+
+import '../mng/PageMng.dart';
 
 class StepView extends StatelessWidget {
   StepView(int idx, int page, {super.key}) {
@@ -31,17 +34,17 @@ class StepView extends StatelessWidget {
     return Container(
       height: 30,
       alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Dot(getChecked(0)),
-          Padding(padding: EdgeInsets.symmetric(horizontal: padding)),
-          Dot(getChecked(1)),
-          Padding(padding: EdgeInsets.symmetric(horizontal: padding)),
-          Dot(getChecked(2)),
-          Padding(padding: EdgeInsets.symmetric(horizontal: padding)),
-          Dot(getChecked(3))
-        ],
+      child: ScrollConfiguration(
+        behavior: const ScrollBehavior().copyWith(overscroll: false),
+        child: ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.zero,
+          itemCount: context.watch<PageMng>().MAX_INDEX(colorIndex) + 1,
+          itemBuilder: (BuildContext context, int index) {
+            return Center(child: Container(margin: const EdgeInsets.symmetric(horizontal: 12), child: Dot(getChecked(index)),));
+          },
+        ),
       ),
     );
   }

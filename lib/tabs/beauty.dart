@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
 import 'package:isma/custom/OilDialog.dart';
@@ -18,20 +20,28 @@ class BeautyWorkspace extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
     return Scaffold(
-      body: Container(
-        color: mainTextColor[menuMng.index],
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Header(),
-                pageMng.getCurPage(false),
-                StepView(context.watch<DataMng>().getTypeIndex(), pageMng.index + 1),
-                Footer(),
-              ],
-            ),
-            OilDialog(),
-          ],
+      body: GestureDetector(
+        onTap: () {
+          log('tapped');
+          pageMng.setFocusIndex(-1);
+          FocusManager.instance.primaryFocus?.unfocus();
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+          color: mainTextColor[menuMng.index],
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Header(),
+                  pageMng.getCurPage(false),
+                  StepView(context.watch<DataMng>().getTypeIndex(), pageMng.index + 1),
+                  Footer(),
+                ],
+              ),
+              OilDialog(),
+            ],
+          ),
         ),
       ),
     );

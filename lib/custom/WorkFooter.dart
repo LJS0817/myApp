@@ -126,7 +126,7 @@ class Footer extends StatelessWidget {
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(30)),
                 child: InkWell(
                   onTap: () {
-                    if(pageMngProvider.index >= pageMngProvider.MAX_INDEX) {
+                    if(pageMngProvider.index >= pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex())) {
                       String fileName = "";
                       if(dataMngProvider.getSelectedFileName().isNotEmpty) {
                         fileName = dataMngProvider.getSelectedFileName();
@@ -137,10 +137,10 @@ class Footer extends StatelessWidget {
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();
                     } else {
-                      pageMngProvider.nextPage();
+                      pageMngProvider.nextPage(dataMngProvider.getTypeIndex());
                     }
                   },
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(pageMngProvider.index < pageMngProvider.MAX_INDEX ? 30 : 0)),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? 30 : 0)),
                   splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.4),
                   highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.4),
                   child: Container(
@@ -151,18 +151,18 @@ class Footer extends StatelessWidget {
                         children: [
                           const Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
                           Text(
-                            pageMngProvider.index < pageMngProvider.MAX_INDEX ? "다음" : "저장",
+                            pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? "다음" : "저장",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: getThemeColor(dataMngProvider.getTypeIndex(), 1)
                             ),
                           ),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: pageMngProvider.index < pageMngProvider.MAX_INDEX ? 2 : 5)),
+                          Padding(padding: EdgeInsets.symmetric(horizontal: pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? 2 : 5)),
                           SvgPicture.asset(
-                            pageMngProvider.index < pageMngProvider.MAX_INDEX ? 'assets/icon/arrow_right.svg' : 'assets/icon/save.svg',
-                            width: pageMngProvider.index < pageMngProvider.MAX_INDEX ? 20 : 15,
-                            height: pageMngProvider.index < pageMngProvider.MAX_INDEX ? 20 : 15,
+                            pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? 'assets/icon/arrow_right.svg' : 'assets/icon/save.svg',
+                            width: pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? 20 : 15,
+                            height: pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? 20 : 15,
                             color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
                           ),
                         ],

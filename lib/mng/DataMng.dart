@@ -107,6 +107,7 @@ class Data {
 class DataMng with ChangeNotifier {
 
   Data data = Data();
+
   String selectFileName = "";
 
   void initData(bool isBeauty) {
@@ -116,7 +117,6 @@ class DataMng with ChangeNotifier {
 
   void setSelectedFileName(String str) {
     selectFileName = str;
-    log("ASDXZC     " + selectFileName.isNotEmpty.toString());
     notifyListeners();
   }
 
@@ -202,6 +202,17 @@ class DataMng with ChangeNotifier {
       data.data[page][idx] = str;
     }
     notifyListeners();
+  }
+
+  ///page : 0 ~ 3까지,
+  ///```
+  ///0 - 오일(비누) or 수상층(화장품),
+  ///1 - 슈퍼팻(비누) or 유상층(화장품),
+  ///2 - 첨가물(비누) or 유화제(화장품),
+  ///3(화장품만) - EO
+  String getData(int page, int idx) {
+    String result = data.data[page][idx] ?? "";
+    return result;
   }
 
   void setMemo(String str) {
