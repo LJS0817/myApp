@@ -92,7 +92,7 @@ class Data {
   ///1 - 슈퍼팻(비누) or 유상층(화장품),
   ///2 - 첨가물(비누) or 유화제(화장품),
   ///3(화장품만) - EO
-  ///index, weight
+  ///ㅁㄴindex, weight
   List<Map<int, String>> data = [
     {},
     {},

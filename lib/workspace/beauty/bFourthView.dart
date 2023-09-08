@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/custom/EditableOilContainer.dart';
 import 'package:isma/custom/customTextArea.dart';
+import 'package:isma/custom/customTextField.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
 
-class bSecondView extends StatelessWidget {
-  const bSecondView({super.key});
+class bFourthView extends StatelessWidget {
+  const bFourthView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class bSecondView extends StatelessWidget {
             children: [
               Center(
                 child: Text(
-                  "수상층",
+                  "EO",
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                     fontWeight: FontWeight.bold,
@@ -39,17 +40,17 @@ class bSecondView extends StatelessWidget {
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
               customTextArea(
                 dataMngProvider.getTypeIndex(),
-                (str) { dataMngProvider.data.data[0][0] = str; },
-                (str) { dataMngProvider.setData(0, 0, str); },
-                (data) { dataMngProvider.data.data[0][1] = data; return data; },
-                data: dataMngProvider.getData(0, 0),),
+                (str) { dataMngProvider.data.data[1][0] = str; },
+                (str) { dataMngProvider.setData(1, 0, str); },
+                (data) { dataMngProvider.data.data[1][1] = data; return data; },
+                data: dataMngProvider.getData(1, 0),),
 
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
 
 
               Center(
                 child: Text(
-                  "첨가물",
+                  "메모",
                   style: TextStyle(
                       color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                       fontWeight: FontWeight.bold,
@@ -58,12 +59,20 @@ class bSecondView extends StatelessWidget {
                 ),
               ),
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
-              customTextArea(
-                dataMngProvider.getTypeIndex(),
-                (str) { dataMngProvider.data.data[0][2] = str; },
-                (str) { dataMngProvider.setData(0, 2, str); },
-                (data) { dataMngProvider.data.data[0][3] = data; return data; },
-                data: dataMngProvider.getData(0, 2),),
+              CustomTextField(
+                    (_) {
+                  log(_);
+                  dataMngProvider.setMemo(_);
+                },
+                multipleLine: true,
+                index: dataMngProvider.getTypeIndex(),
+                needBg: true,
+                active: true,
+                maxLines: 12,
+                height: 150,
+                radius: 12,
+                str: dataMngProvider.data.memo.isEmpty ? "메모 입력" : dataMngProvider.data.memo,
+              ),
             ],
           ),
         )

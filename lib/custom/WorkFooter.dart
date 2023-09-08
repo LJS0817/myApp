@@ -33,7 +33,7 @@ class Footer extends StatelessWidget {
         children: [
           Expanded(
             child: Material(
-              color: pageMngProvider.index > 0 ? getThemeColor(dataMngProvider.getTypeIndex(), 0) : Colors.transparent,
+              color: (pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3) ? getThemeColor(dataMngProvider.getTypeIndex(), 0) : Colors.transparent,
               borderRadius: BorderRadius.only(topRight: Radius.circular(pageMngProvider.index > 0 ? 30 : 0)),
               child: InkWell(
                 onTap: () {
@@ -44,9 +44,9 @@ class Footer extends StatelessWidget {
                     Navigator.of(context).pop();
                   }
                 },
-                borderRadius: BorderRadius.only(topRight: Radius.circular(pageMngProvider.index > 0 ? 30 : 0)),
-                splashColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0).withOpacity(0.4),
-                highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0).withOpacity(0.4),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 30 : 0)),
+                splashColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0).withOpacity(0.4),
+                highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0).withOpacity(0.4),
                 child: Container(
                   height: double.maxFinite,
                   color: Colors.transparent,
@@ -57,15 +57,15 @@ class Footer extends StatelessWidget {
                         pageMngProvider.index > 0 ? 'assets/icon/arrow_left.svg' : 'assets/icon/exit.svg',
                         width: pageMngProvider.index > 0 ? 20: 15,
                         height: pageMngProvider.index > 0 ? 20 : 15,
-                        color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0),
+                        color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0),
                       ),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: pageMngProvider.index > 0 ? 2 : 5)),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 2 : 5)),
                       Text(
                         pageMngProvider.index > 0 ? "이전" : "나가기",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0)
+                          color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0)
                         ),
                       ),
                     ],
@@ -75,7 +75,7 @@ class Footer extends StatelessWidget {
             )
           ),
           Visibility(
-            visible: pageMngProvider.index > 0,
+            visible: pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3,
             child: Expanded(
                 child: Material(
                   color: Colors.transparent,

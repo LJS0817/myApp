@@ -7,153 +7,109 @@ import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
 class customTextArea extends StatelessWidget {
-  customTextArea(int theme, int idx, Function func, Function save, {String data="", super.key}) {
+  customTextArea(int theme, Function func, Function save, Function cal, {String data="", super.key}) {
+    FocusManager.instance.primaryFocus?.unfocus();
     themeIndex = theme;
     _data = data;
     onChanged = func;
     saveData = save;
-    _controller.text = _data;
-    index = idx;
+    calculateWeight = cal;
+    _controller.text = getResult(data);
   }
   int themeIndex = 0;
   final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
   String _data = "";
   late Function onChanged;
   late Function saveData;
-  int index = 0;
+  late Function calculateWeight;
+  int weight = 0;
 
-  Widget getResult(String str) {
-    try {
-      String name = str.substring(0, str.lastIndexOf(' '));
-      String gram = str.substring(str.lastIndexOf(' ') + 1);
-
-      return Container(
-        height: 40,
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              name,
-              style: TextStyle(
-                  color: getThemeColor(themeIndex, 1),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17
-              ),
-            ),
-            Text(
-              gram + ' G',
-              style: TextStyle(
-                  color: getThemeColor(themeIndex, 1),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17
-              ),
-            ),
-          ],
-        ),
-      );
-    } catch(e) {
-      return Center(
-        child: Text(
-          "Try like this\n[name] (space) [amount]",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: getThemeColor(themeIndex, 1),
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-          ),
-        )
-      );
+  String getResult(String str) {
+    if(str.isEmpty) return "";
+    List<String> data = str.split('\n');
+    String name = "";
+    String gram = "";
+    String result = "";
+    weight = 0;
+    for(int i = 0; i < data.length; i++) {
+      try {
+        name = data[i].substring(0, data[i].lastIndexOf(' '));
+        gram = data[i].substring(data[i].lastIndexOf(' ') + 1).replaceAll(RegExp('[a-zA-Z%]'), '');
+        result += '$name    -    ${gram}g\n';
+        weight += int.parse(calculateWeight(gram));
+      } catch(e) {
+        log(e.toString());
+        result += '[이름](공백)[용량] 순으로 입력해주세요.';
+      }
     }
+    return result;
   }
 
   @override
   Widget build(BuildContext context) {
-    PageMng pageMngProvider = Provider.of<PageMng>(context);
-    return SizedBox(
+    return Container(
       width: double.maxFinite,
-      height: 150,
-      child: Stack(
+      height: 210,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Positioned(
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(13),
-                  color: getThemeColor(themeIndex, 1),
-                  border: Border.all(color: getThemeColor(themeIndex, 0), width: 4)
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-              child: Focus(
-                onFocusChange: (hasFocus) {
-                  if(!hasFocus) {
-                    log("TEST");
-                    saveData(_data);
-                  } else {
-                    log("213ewadfasdf");
-                  }
+          Container(
+            height: 170,
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            margin: EdgeInsets.zero,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
+                color: getThemeColor(themeIndex, 1),
+                border: Border.all(color: getThemeColor(themeIndex, 0), width: 4, strokeAlign: BorderSide.strokeAlignInside)
+            ),
+            child: Focus(
+              onFocusChange: (hasFocus) {
+                if(!hasFocus) {
+                  saveData(_data);
+                  _controller.text = getResult(_data);
+                } else {
+                  _controller.text = _data;
+                }
+              },
+              child: TextField(
+                controller: _controller,
+                maxLines: 7,
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                decoration: const InputDecoration(border: InputBorder.none, ),
+                onChanged: (_) {
+                  _data = _.toString();
+                  onChanged(_data);
                 },
-                child: TextField(
-                  focusNode: _focusNode,
-                  controller: _controller,
-                  maxLines: 7,
-                  keyboardType: TextInputType.multiline,
-                  textInputAction: TextInputAction.newline,
-                  decoration: const InputDecoration(border: InputBorder.none, ),
-                  onChanged: (_) {
-                    _data = _.toString();
-                    onChanged(_data);
-                  },
-                  style: TextStyle(
+                style: TextStyle(
                     color: getThemeColor(themeIndex, 0),
                     fontWeight: FontWeight.bold,
-                  ),
+                    height: 1.3
                 ),
               ),
-            )
-          ),
-          Positioned(
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Visibility(
-              visible: pageMngProvider.focusIndex != index,
-              child: Material(
-                color: getThemeColor(themeIndex, 0),
-                borderRadius: BorderRadius.circular(13),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(13),
-                  splashColor: getThemeColor(themeIndex, 1).withOpacity(0.4),
-                  highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.4),
-                  onTap: () {
-                    pageMngProvider.setFocusIndex(index);
-                    FocusScope.of(context).requestFocus(_focusNode);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.zero,
-                    margin: EdgeInsets.zero,
-                    child: ScrollConfiguration(
-                      behavior: const ScrollBehavior().copyWith(overscroll: false),
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        itemCount: _data.split('\n').length,
-                        itemBuilder: (contxt, idx) {
-                          return getResult(_data.split('\n')[idx]);
-                        },
-                      ),
-                    )
-                  ),
-                ),
-              )
             ),
           ),
+          Container(
+            height: 30,
+            width: 200,
+            alignment: AlignmentDirectional.centerEnd,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            margin: EdgeInsets.zero,
+            decoration: BoxDecoration(
+              color: getThemeColor(themeIndex, 0),
+              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
+            ),
+            child: Text(
+              "총량  -  ${weight}g",
+              style: TextStyle(
+                color: getThemeColor(themeIndex, 1),
+                fontWeight: FontWeight.bold,
+                fontSize: 16
+              ),
+            ),
+          )
         ],
-      )
+      ),
     );
   }
 

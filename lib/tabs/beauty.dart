@@ -22,10 +22,7 @@ class BeautyWorkspace extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          log('tapped');
-          pageMng.setFocusIndex(-1);
           FocusManager.instance.primaryFocus?.unfocus();
-          FocusScope.of(context).unfocus();
         },
         child: Container(
           color: mainTextColor[menuMng.index],

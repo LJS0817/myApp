@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/workspace/beauty/bFirstView.dart';
+import 'package:isma/workspace/beauty/bFourthView.dart';
 import 'package:isma/workspace/beauty/bSecondView.dart';
+import 'package:isma/workspace/beauty/bThirdView.dart';
 import 'package:isma/workspace/soap/first.dart';
 import 'package:isma/workspace/soap/fourth.dart';
 import 'package:isma/workspace/soap/second.dart';
@@ -16,7 +18,7 @@ class PageMng with ChangeNotifier {
     '/tabs/config'
   ];
   final int SOAP_MAX_INDEX = 3;
-  final int BEAUTY_MAX_INDEX = 4;
+  final int BEAUTY_MAX_INDEX = 3;
   int MAX_INDEX(int type) {
     if(type < 3) {
       return SOAP_MAX_INDEX;
@@ -24,7 +26,6 @@ class PageMng with ChangeNotifier {
       return BEAUTY_MAX_INDEX;
     }
   }
-  int focusIndex = -1;
 
   int index = 0;
   bool enableDialog = false;
@@ -34,10 +35,6 @@ class PageMng with ChangeNotifier {
     Navigator.pushNamed(context, Workspaces[idx]);
   }
 
-  void setFocusIndex(int idx) {
-    focusIndex = idx;
-    notifyListeners();
-  }
 
   void nextPage(int type) {
     index++;
@@ -98,9 +95,9 @@ class PageMng with ChangeNotifier {
       switch(index) {
         case 0: return bFirstView();
         case 1: return bSecondView();
-        case 2: return ThirdView();
-        case 3: return FourthView();
-        default: return FirstView();
+        case 2: return bThirdView();
+        case 3: return bFourthView();
+        default: return bFirstView();
       }
     }
 
