@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/FileMng.dart';
+import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,7 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Mng mngProvider = Provider.of<Mng>(context);
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
     FileMng fileMngProvider = Provider.of<FileMng>(context);
@@ -133,6 +135,10 @@ class Footer extends StatelessWidget {
                       } else {
                         fileName = DateTime.now().toString();
                       }
+                      dataMngProvider.setDefaultData();
+                      mngProvider.calculateData(dataMngProvider.data);
+                      dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
+                          mngProvider.resultWater.round() + mngProvider.resultLye.round();
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();

@@ -219,7 +219,7 @@ class DataMng with ChangeNotifier {
     data.memo = str;
   }
 
-  void saveData() {
+  void setDefaultData() {
     DateTime date = DateTime.now();
     data.date = date.toString().split(' ')[0];
 
@@ -243,7 +243,6 @@ class DataMng with ChangeNotifier {
 
   @override
   String toString() {
-    saveData();
     return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo}?${data.skinType.index}";
   }
 }

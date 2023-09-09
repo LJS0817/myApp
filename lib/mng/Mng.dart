@@ -33,6 +33,7 @@ class Mng with ChangeNotifier {
       int index = data.data[0].keys.elementAt(i);
       resultLye += (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oilMng.oils[index]!.KOH : oilMng.oils[index]!.NaOH));
     }
+    resultLye = (resultLye * int.parse(data.values[1]!.replaceAll(' ', ''))) / int.parse(data.values[0]!.replaceAll(' ', ''));
   }
 
   void calculateFat(Data data) {
@@ -46,8 +47,9 @@ class Mng with ChangeNotifier {
       start = addDoubleList(start, mulDoubleList(oilMng.oils[index]!.fat, double.parse(data.data[1][index]!.split('`')[0]) * 0.01));
     }
     resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
+    int weight = data.weight[1] + data.weight[2];
     for(int i = 0; i < resultFat.length; i++) {
-      resultFat[i] = ((start[i] / data.weight[1]) * 100).roundToDouble();
+      resultFat[i] = ((start[i] / weight) * 100).roundToDouble();
       resultFat[i] = resultFat[i].toString() == "NaN" ? 0 : resultFat[i];
     }
   }
