@@ -189,7 +189,6 @@ class ResultView extends StatelessWidget {
                                                                               color: getThemeColor(themeIndex, 0),
                                                                               fontWeight: FontWeight.bold,
                                                                               fontSize: 15,
-
                                                                             ),
                                                                           ),
                                                                           Text(
