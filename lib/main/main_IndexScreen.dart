@@ -70,6 +70,7 @@ Color getSecondColor(BuildContext context) {
 
 Widget BottomBar(BuildContext context) {
 
+  Mng mng = Provider.of<Mng>(context);
   MenuMng menuMng = Provider.of<MenuMng>(context);
   PageMng pageMng = Provider.of<PageMng>(context);
   DataMng dataMng = Provider.of<DataMng>(context);
@@ -179,6 +180,7 @@ Widget BottomBar(BuildContext context) {
 
                     pageMng.index = 0;
                     dataMng.initData(menuMng.index == 1);
+                    mng.selectData = Data();
 
                     pageMng.changeScene(context, menuMng.index);
                   },
@@ -250,7 +252,7 @@ class _IndexScreenState extends State<IndexScreen> {
             left: 0,
             right: 0,
             top: 0,
-            bottom: 0,
+            bottom: 80,
             child: getIndex(context),
           ),
           BottomBar(context),

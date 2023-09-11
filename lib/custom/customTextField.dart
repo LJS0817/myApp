@@ -46,24 +46,28 @@ class CustomTextField extends StatelessWidget {
       children: [
         Visibility(
           visible: needLabel,
-          child: Container(
-            height: 30,
-            width: 95,
-            padding: const EdgeInsets.only(left: 5),
-            alignment: Alignment.bottomLeft,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(_radius - 5), topLeft: Radius.circular(_radius - 5)),
-              border: Border.all(color: getThemeColor(themeIndex, 0), width: 4),
-              color: getThemeColor(themeIndex, 1),
-            ),
-            child: Text(
-              labelText,
-              style: TextStyle(
-                color: getThemeColor(themeIndex, 0),
-                fontWeight: FontWeight.bold,
+          child: Transform.translate(
+            offset: const Offset(0, 1),
+            child: Container(
+              height: 27,
+              width: 90,
+              padding: const EdgeInsets.only(left: 5),
+              alignment: Alignment.bottomLeft,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(_radius - 5), topLeft: Radius.circular(_radius - 5)),
+                border: Border.all(color: getThemeColor(themeIndex, 0), width: 4),
+                color: getThemeColor(themeIndex, 1),
+              ),
+              child: Text(
+                labelText,
+                style: TextStyle(
+                  color: getThemeColor(themeIndex, 0),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
               ),
             ),
-          ),
+          )
         ),
         Container(
           height: _height,
@@ -71,7 +75,7 @@ class CustomTextField extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: needLabel ? BorderRadius.only(bottomLeft: Radius.circular(_radius), bottomRight: Radius.circular(_radius), topRight: Radius.circular(_radius)) : BorderRadius.circular(_radius),
               color: getThemeColor(themeIndex, needBackground ? 1 : 0),
-              border: Border.all(color: getThemeColor(themeIndex, 0), width: 4)
+              border: Border.all(color: getThemeColor(themeIndex, 0), width: 3)
           ),
           child: TextField(
             controller: controller,

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/colors.dart';
+import 'package:isma/custom/circleChart.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/custom/resultOilBox.dart';
 import 'package:isma/custom/resultValueBox.dart';
@@ -161,95 +162,98 @@ class ResultView extends StatelessWidget {
                                                     ),
                                                     Visibility(
                                                       visible: menuMng.showOilDetails > 0,
-                                                      child: Container(
-                                                        width: double.maxFinite,
-                                                        height: ((menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 70),
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
-                                                          color: getThemeColor(themeIndex, 1),
-                                                        ),
-                                                        child: Column(
-                                                          children: [
-                                                            Container(
-                                                                height: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 5,
-                                                                child: ListView.builder(
-                                                                  shrinkWrap: true,
-                                                                  padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
-                                                                  itemCount: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0),
-                                                                  itemBuilder: (con, index)  {
-                                                                    log(data.selectData.data.toString());
-                                                                    return SizedBox(
-                                                                      height: oilBoxSize,
-                                                                      child: Row(
-                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          Text(
-                                                                            oilMng.oils[data.selectData.data[menuMng.showOilDetails - 1].keys.elementAt(index)]!.korean,
-                                                                            style: TextStyle(
-                                                                              color: getThemeColor(themeIndex, 0),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 15,
+                                                      child: Transform.translate(
+                                                        offset: const Offset(0, -1),
+                                                        child: Container(
+                                                          width: double.maxFinite,
+                                                          height: ((menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 70),
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
+                                                            color: getThemeColor(themeIndex, 1),
+                                                          ),
+                                                          child: Column(
+                                                            children: [
+                                                              Container(
+                                                                  height: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 5,
+                                                                  child: ListView.builder(
+                                                                    shrinkWrap: true,
+                                                                    padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
+                                                                    itemCount: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0),
+                                                                    itemBuilder: (con, index)  {
+                                                                      log(data.selectData.data.toString());
+                                                                      return SizedBox(
+                                                                        height: oilBoxSize,
+                                                                        child: Row(
+                                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              oilMng.oils[data.selectData.data[menuMng.showOilDetails - 1].keys.elementAt(index)]!.korean,
+                                                                              style: TextStyle(
+                                                                                color: getThemeColor(themeIndex, 0),
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 15,
+                                                                              ),
                                                                             ),
-                                                                          ),
-                                                                          Text(
-                                                                            "${data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[0]}g",
-                                                                            style: TextStyle(
-                                                                              color: getThemeColor(themeIndex, 0),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 15,
+                                                                            Text(
+                                                                              "${data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[0]}g",
+                                                                              style: TextStyle(
+                                                                                color: getThemeColor(themeIndex, 0),
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 15,
 
+                                                                              ),
                                                                             ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                )
-                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                              ),
 
-                                                            Container(
-                                                              height: 30,
-                                                              alignment: Alignment.centerRight,
-                                                              padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
-                                                              child: Text(
-                                                                "총합    -    ${data.selectData.weight[menuMng.showOilDetails]}g",
-                                                                style: TextStyle(
-                                                                  color: getThemeColor(themeIndex, 0),
-                                                                  fontWeight: FontWeight.bold,
-                                                                  fontSize: 15,
+                                                              Container(
+                                                                height: 30,
+                                                                alignment: Alignment.centerRight,
+                                                                padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
+                                                                child: Text(
+                                                                  "총합    -    ${data.selectData.weight[menuMng.showOilDetails]}g",
+                                                                  style: TextStyle(
+                                                                    color: getThemeColor(themeIndex, 0),
+                                                                    fontWeight: FontWeight.bold,
+                                                                    fontSize: 15,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
 
-                                                            Material(
-                                                              color: getThemeColor(themeIndex, 2),
-                                                              borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
-                                                              child: InkWell(
-                                                                onTap: () {
-                                                                  menuMng.setOilDetails(0);
-                                                                },
+                                                              Material(
+                                                                color: getThemeColor(themeIndex, 2),
                                                                 borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
-                                                                splashColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
-                                                                highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
-                                                                child: Container(
-                                                                  color: Colors.transparent,
-                                                                  width: double.maxFinite,
-                                                                  alignment: Alignment.center,
-                                                                  height: 35,
-                                                                  child: Text(
-                                                                    "닫기        X",
-                                                                    style: TextStyle(
-                                                                      color: getThemeColor(themeIndex, 0),
-                                                                      fontWeight: FontWeight.bold,
-                                                                      fontSize: 15,
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    menuMng.setOilDetails(0);
+                                                                  },
+                                                                  borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
+                                                                  splashColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
+                                                                  highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
+                                                                  child: Container(
+                                                                    color: Colors.transparent,
+                                                                    width: double.maxFinite,
+                                                                    alignment: Alignment.center,
+                                                                    height: 35,
+                                                                    child: Text(
+                                                                      "닫기        X",
+                                                                      style: TextStyle(
+                                                                        color: getThemeColor(themeIndex, 0),
+                                                                        fontWeight: FontWeight.bold,
+                                                                        fontSize: 15,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
+                                                      )
                                                     )
                                                   ],
                                                 )
@@ -347,7 +351,7 @@ class ResultView extends StatelessWidget {
 
                                 //설정값
                                 Container(
-                                  margin: EdgeInsets.only(left: leftPadding, top: 15, bottom: 15, right: 15),
+                                  margin: const EdgeInsets.only(left: leftPadding, top: 15, bottom: 15, right: 15),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -355,6 +359,76 @@ class ResultView extends StatelessWidget {
                                       ResultValueBox(themeIndex, "Lye 양", "${data.resultLye.round()}g"),
                                       ResultValueBox(themeIndex, "정제수 양", "${data.getValue(2)}%\n(${data.resultWater.round()}g)"),
                                     ],
+                                  ),
+                                ),
+
+                                Visibility(
+                                  visible: data.selectData.type == TYPE.E_HOT,
+                                  child: Container(
+                                      height: 160,
+                                      margin: const EdgeInsets.only(left: leftPadding, bottom: 15, right: 15),
+                                      decoration: BoxDecoration(
+                                        color: getThemeColor(themeIndex, 1),
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(color: getThemeColor(themeIndex, 0), width: 3),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                  child: Transform.translate(
+                                                    offset: const Offset(-1 , -1),
+                                                    child: Container(
+                                                      height: 50,
+                                                      alignment: Alignment.center,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomRight: Radius.circular(15),),
+                                                        color: getThemeColor(themeIndex, 0),
+                                                      ),
+                                                      child: Text(
+                                                        "Pure Soap\n${data.selectData.values[3]}",
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: getThemeColor(themeIndex, 1),
+                                                            fontSize: 13,
+                                                            fontWeight: FontWeight.bold
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                              ),
+                                              Expanded(
+                                                child: Transform.translate(
+                                                  offset: const Offset(0, -1),
+                                                  child: Container(
+                                                    height: 50,
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      "Solvent\n${data.selectData.values[6]}",
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                          color: getThemeColor(themeIndex, 0),
+                                                          fontSize: 13,
+                                                          fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: [
+                                              CircleChart(themeIndex, "Ethanol", 100),
+                                              CircleChart(themeIndex, "Glycerine", 8),
+                                              CircleChart(themeIndex, "Sugar", 10),
+                                              CircleChart(themeIndex, "Water of\nsugar", 10),
+                                            ],
+                                          )
+                                        ],
+                                      )
                                   ),
                                 ),
 

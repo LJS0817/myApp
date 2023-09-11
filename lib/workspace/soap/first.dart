@@ -58,7 +58,7 @@ class FirstView extends StatelessWidget {
 
             const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
             Text(
-              "값 입력",
+              "값 입력 [기본 단위 %]",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 0),

@@ -19,7 +19,7 @@ class ResultOilBox extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     return Material(
       borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-      color: getThemeColor(themeIndex, 1).withOpacity((index == menuMng.showOilDetails || menuMng.showOilDetails < 1 ? 1 : 0.5)),
+      color: getThemeColor(themeIndex, (index == menuMng.showOilDetails || menuMng.showOilDetails < 1 ? 1 : 3)),
       child: InkWell(
         onTap: () {
           menuMng.setOilDetails(index);

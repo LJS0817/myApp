@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:isma/config/colors.dart';
 import 'package:isma/config/define.dart';
-import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 

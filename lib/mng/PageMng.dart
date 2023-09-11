@@ -38,14 +38,16 @@ class PageMng with ChangeNotifier {
 
   void nextPage(int type) {
     index++;
+    if(type == 1 && index == 2) index++;
     if(index >= MAX_INDEX(type)) {
       index = MAX_INDEX(type);
     }
     notifyListeners();
   }
 
-  void prevPage() {
+  void prevPage(int type) {
     index--;
+    if(type == 1 && index == 2) index--;
     if(index < 0) {
       index = 0;
       return;

@@ -113,6 +113,7 @@ class DataMng with ChangeNotifier {
   void initData(bool isBeauty) {
     data = Data();
     data.type = isBeauty ? TYPE.E_SKIN : TYPE.E_COLD;
+    selectFileName = "";
   }
 
   void setSelectedFileName(String str) {

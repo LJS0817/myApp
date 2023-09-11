@@ -13,10 +13,10 @@ import '../mng/DataMng.dart';
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
-  String addText(int page) {
+  String addText(int page, int type) {
     if(page == 1) {
       return "오일";
-    } else if(page == 2) {
+    } else if(page == 2 && type != 1) {
       return "슈퍼팻";
     } else {
       return "첨가물";
@@ -40,7 +40,7 @@ class Footer extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   if(pageMngProvider.index > 0) {
-                    pageMngProvider.prevPage();
+                    pageMngProvider.prevPage(dataMngProvider.getTypeIndex());
                   } else {
                     dataMngProvider.setSelectedFileName("");
                     Navigator.of(context).pop();
@@ -108,7 +108,7 @@ class Footer extends StatelessWidget {
                             ),
                             const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                             Text(
-                              addText(pageMngProvider.index),
+                              addText(pageMngProvider.index, dataMngProvider.getTypeIndex()),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -130,6 +130,7 @@ class Footer extends StatelessWidget {
                   onTap: () {
                     if(pageMngProvider.index >= pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex())) {
                       String fileName = "";
+                      log(dataMngProvider.getSelectedFileName());
                       if(dataMngProvider.getSelectedFileName().isNotEmpty) {
                         fileName = dataMngProvider.getSelectedFileName();
                       } else {
