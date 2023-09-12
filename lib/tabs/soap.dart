@@ -13,16 +13,24 @@ import '../custom/step.dart';
 import '../mng/DataMng.dart';
 
 class SoapWorkspace extends StatelessWidget {
-  const SoapWorkspace({super.key});
+  SoapWorkspace({super.key});
 
   @override
   Widget build(BuildContext context) {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
+    DataMng dataMng = Provider.of<DataMng>(context);
     return Scaffold(
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
+        },
+        onHorizontalDragEnd: (DragEndDetails _) {
+          if(_.primaryVelocity! > 0) {
+            pageMng.prevPage(dataMng.getTypeIndex());
+          } else if(_.primaryVelocity! < 0) {
+            pageMng.nextPage(dataMng.getTypeIndex());
+          }
         },
         child: Container(
           color: mainTextColor[menuMng.index],
@@ -32,7 +40,7 @@ class SoapWorkspace extends StatelessWidget {
                 children: [
                   Header(),
                   context.watch<PageMng>().getCurPage(true),
-                  StepView(context.watch<DataMng>().getTypeIndex(), context.watch<PageMng>().index + 1),
+                  StepView(dataMng.getTypeIndex(), context.watch<PageMng>().index + 1),
                   Footer(),
                 ],
               ),

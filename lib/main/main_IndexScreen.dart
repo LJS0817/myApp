@@ -180,6 +180,7 @@ Widget BottomBar(BuildContext context) {
 
                     pageMng.index = 0;
                     dataMng.initData(menuMng.index == 1);
+                    dataMng.selectFileName = "";
                     mng.selectData = Data();
 
                     pageMng.changeScene(context, menuMng.index);

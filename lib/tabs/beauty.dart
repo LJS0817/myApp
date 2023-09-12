@@ -18,11 +18,19 @@ class BeautyWorkspace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MenuMng menuMng = Provider.of<MenuMng>(context);
+    DataMng dataMng = Provider.of<DataMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
     return Scaffold(
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
+        },
+        onHorizontalDragEnd: (DragEndDetails _) {
+          if(_.primaryVelocity! > 0) {
+            pageMng.prevPage(dataMng.getTypeIndex());
+          } else if(_.primaryVelocity! < 0) {
+            pageMng.nextPage(dataMng.getTypeIndex());
+          }
         },
         child: Container(
           color: mainTextColor[menuMng.index],
@@ -32,7 +40,7 @@ class BeautyWorkspace extends StatelessWidget {
                 children: [
                   Header(),
                   pageMng.getCurPage(false),
-                  StepView(context.watch<DataMng>().getTypeIndex(), pageMng.index + 1),
+                  StepView(dataMng.getTypeIndex(), pageMng.index + 1),
                   Footer(),
                 ],
               ),

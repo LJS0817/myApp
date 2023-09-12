@@ -102,6 +102,10 @@ class Data {
 
   String memo = "";
 
+  @override
+  String toString() {
+    return "$name?${type.index}?$date?$weight?$values?$data?$memo?${skinType.index}";
+  }
 }
 
 class DataMng with ChangeNotifier {
@@ -113,7 +117,6 @@ class DataMng with ChangeNotifier {
   void initData(bool isBeauty) {
     data = Data();
     data.type = isBeauty ? TYPE.E_SKIN : TYPE.E_COLD;
-    selectFileName = "";
   }
 
   void setSelectedFileName(String str) {

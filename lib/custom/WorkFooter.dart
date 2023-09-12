@@ -130,7 +130,7 @@ class Footer extends StatelessWidget {
                   onTap: () {
                     if(pageMngProvider.index >= pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex())) {
                       String fileName = "";
-                      log(dataMngProvider.getSelectedFileName());
+                      log("NAME : ${dataMngProvider.getSelectedFileName()}");
                       if(dataMngProvider.getSelectedFileName().isNotEmpty) {
                         fileName = dataMngProvider.getSelectedFileName();
                       } else {
@@ -138,8 +138,13 @@ class Footer extends StatelessWidget {
                       }
                       dataMngProvider.setDefaultData();
                       mngProvider.calculateData(dataMngProvider.data);
-                      dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
-                          mngProvider.resultWater.round() + mngProvider.resultLye.round();
+                      if(dataMngProvider.getTypeIndex() == 1) {
+                        dataMngProvider.data.weight[0] = mngProvider.resultHot[0] + mngProvider.resultHot[1] + mngProvider.resultHot[4];
+                      } else {
+                        dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
+                            mngProvider.resultWater.round() + mngProvider.resultLye.round();
+                      }
+                      log(dataMngProvider.getName());
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();

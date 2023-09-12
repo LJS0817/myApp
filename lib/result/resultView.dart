@@ -365,7 +365,7 @@ class ResultView extends StatelessWidget {
                                 Visibility(
                                   visible: data.selectData.type == TYPE.E_HOT,
                                   child: Container(
-                                      height: 160,
+                                      height: 170,
                                       margin: const EdgeInsets.only(left: leftPadding, bottom: 15, right: 15),
                                       decoration: BoxDecoration(
                                         color: getThemeColor(themeIndex, 1),
@@ -387,7 +387,7 @@ class ResultView extends StatelessWidget {
                                                         color: getThemeColor(themeIndex, 0),
                                                       ),
                                                       child: Text(
-                                                        "Pure Soap\n${data.selectData.values[3]}",
+                                                        "Pure Soap\n${data.selectData.values[3]}%  -  ${data.resultHot[0]}g",
                                                         textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                             color: getThemeColor(themeIndex, 1),
@@ -405,7 +405,7 @@ class ResultView extends StatelessWidget {
                                                     height: 50,
                                                     alignment: Alignment.center,
                                                     child: Text(
-                                                      "Solvent\n${data.selectData.values[6]}",
+                                                      "Solvent\n${data.selectData.values[6]}%  -  ${data.resultHot[1]}g",
                                                       textAlign: TextAlign.center,
                                                       style: TextStyle(
                                                           color: getThemeColor(themeIndex, 0),
@@ -418,14 +418,25 @@ class ResultView extends StatelessWidget {
                                               )
                                             ],
                                           ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                            children: [
-                                              CircleChart(themeIndex, "Ethanol", 100),
-                                              CircleChart(themeIndex, "Glycerine", 8),
-                                              CircleChart(themeIndex, "Sugar", 10),
-                                              CircleChart(themeIndex, "Water of\nsugar", 10),
-                                            ],
+                                         Container(
+                                           padding: const EdgeInsets.only(left: 8),
+                                           child: Column(
+                                             mainAxisAlignment: MainAxisAlignment.center,
+                                             children: [
+                                               Row(
+                                                 children: [
+                                                   CircleChart("Ethanol", "${data.selectData.values[7]}", data.resultHot[2]),
+                                                   CircleChart("Glycerine", "${data.selectData.values[4]}", data.resultHot[3]),
+                                                 ],
+                                               ),
+                                               Row(
+                                                 children: [
+                                                   CircleChart("Sugar", "${data.selectData.values[5]}", data.resultHot[4]),
+                                                   CircleChart("Water of sugar", "", data.resultHot[5]),
+                                                 ],
+                                               ),
+                                             ],
+                                           ),
                                           )
                                         ],
                                       )
@@ -458,6 +469,7 @@ class ResultView extends StatelessWidget {
                                     pageMng.index = 0;
                                     dataMng.initData(menuMng.index == 1);
                                     dataMng.data = data.selectData;
+                                    dataMng.data.weight[0] = dataMng.data.weight[1] + dataMng.data.weight[2];
                                     data.init();
                                     pageMng.changeScene(context, menuMng.index);
                                   },

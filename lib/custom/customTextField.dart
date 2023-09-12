@@ -77,35 +77,42 @@ class CustomTextField extends StatelessWidget {
               color: getThemeColor(themeIndex, needBackground ? 1 : 0),
               border: Border.all(color: getThemeColor(themeIndex, 0), width: 3)
           ),
-          child: TextField(
-            controller: controller,
-            readOnly: !isActive,
-            maxLines: _maxLines,
-            keyboardType: needLabel ? const TextInputType.numberWithOptions(decimal: true) : TextInputType.multiline,
-            textInputAction: _maxLines > 10 ? TextInputAction.newline : TextInputAction.done,
-            onSubmitted: (_) => {
-              if(_.toString().split('.').length > 1) {
-                log("ERROR"),
-              } else {
-                onChange(_.toString()),
-                FocusScope.of(context).unfocus(),
+          child: Focus(
+            onFocusChange: (hasFocus) {
+              if(!hasFocus) {
+                onChange(controller.text);
               }
             },
-            onChanged: (_) {
-              if(isMultipleLine) {
-                onChange(_.toString());
-              }
-            },
-            inputFormatters: needLabel ? [
-              FilteringTextInputFormatter.deny(RegExp('[,A-Za-z]'))
-            ] : [],
-            decoration: const InputDecoration(border: InputBorder.none, ),
-            style: TextStyle(
-              color: getThemeColor(themeIndex, needBackground ? 0 : 1),
-              fontWeight: FontWeight.bold,
-              height: _maxLines == 3 || _maxLines > 10 ? 1 : 0,
+            child: TextField(
+              controller: controller,
+              readOnly: !isActive,
+              maxLines: _maxLines,
+              keyboardType: needLabel ? const TextInputType.numberWithOptions(decimal: true) : TextInputType.multiline,
+              textInputAction: _maxLines > 10 ? TextInputAction.newline : TextInputAction.done,
+              onSubmitted: (_) => {
+                if(_.toString().split('.').length > 1) {
+                  log("ERROR"),
+                } else {
+                  onChange(_.toString()),
+                  FocusScope.of(context).unfocus(),
+                }
+              },
+              onChanged: (_) {
+                if(isMultipleLine) {
+                  onChange(_.toString());
+                }
+              },
+              inputFormatters: needLabel ? [
+                FilteringTextInputFormatter.deny(RegExp('[,A-Za-z]'))
+              ] : [],
+              decoration: const InputDecoration(border: InputBorder.none, ),
+              style: TextStyle(
+                color: getThemeColor(themeIndex, needBackground ? 0 : 1),
+                fontWeight: FontWeight.bold,
+                height: _maxLines == 3 || _maxLines > 10 ? 1 : 0,
+              ),
             ),
-          ),
+          )
         ),
       ],
     );

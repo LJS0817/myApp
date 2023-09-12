@@ -15,6 +15,15 @@ class Mng with ChangeNotifier {
   double resultWater = 0;
   List<double> resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
 
+  ///```
+  ///0 - PURE SOAP
+  ///1 - SOLVENT
+  ///2 - ETHANOL
+  ///3 - GLYCERINE
+  ///4 - SUGAR
+  ///5 - SUGAR Water
+  List<int> resultHot = List.generate(6, (index) => 0);
+
   static bool isLoad = false;
 
   void setData(Data data) {
@@ -25,6 +34,32 @@ class Mng with ChangeNotifier {
     calculateLye(data);
     calculateFat(data);
     calculateWater(data);
+    if(data.type == TYPE.E_HOT) {
+      calculateHotData(data);
+    }
+  }
+
+  ///0 - PURE SOAP
+  ///1 - SOLVENT
+  ///2 - ETHANOL
+  ///3 - GLYCERINE
+  ///4 - SUGAR
+  ///5 - SUGAR Water
+  void calculateHotData(Data data) {
+    resultHot = List.generate(6, (index) => 0);
+
+    resultHot[0] = (resultLye + data.weight[1] + data.weight[2]).round();
+    resultHot[1] = ((resultHot[0] * int.parse(data.values[6]!)) / int.parse(data.values[3]!)).round();
+
+    resultHot[2] = (resultHot[0] * (int.parse(data.values[7]!) * 0.01)).round();
+
+    resultHot[4] = ((resultHot[0] + resultHot[1]) * int.parse(data.values[5]!) * 0.01).round();
+
+    //전체무게 = 비누무게 + 용제무게 + 설탕무게
+    int weight = resultHot[0] + resultHot[1] + resultHot[4];
+    resultHot[3] = ((int.parse(data.values[4]!) * 0.01) * weight).round();
+
+    resultHot[5] = (resultHot[1] - resultHot[2] - resultHot[3] - resultWater).round();
   }
 
   void calculateLye(Data data) {
