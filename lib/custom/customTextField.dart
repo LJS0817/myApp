@@ -80,7 +80,10 @@ class CustomTextField extends StatelessWidget {
           child: Focus(
             onFocusChange: (hasFocus) {
               if(!hasFocus) {
+                log("\n\n\n\n\n\n1234556");
                 onChange(controller.text);
+                FocusManager.instance.primaryFocus?.unfocus();
+              } else {
               }
             },
             child: TextField(

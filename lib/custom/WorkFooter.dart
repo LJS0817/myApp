@@ -83,13 +83,12 @@ class Footer extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       if(pageMngProvider.index < 3) {
                         pageMngProvider.setDialog();
                       } else {
                         dataMngProvider.setData(2, -dataMngProvider.data.data[2].length - 2, '-2');
                       }
-                      /*log("message");
-                      pageMngProvider.setDialog();*/
                     },
                     borderRadius: const BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
                     splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
@@ -137,7 +136,7 @@ class Footer extends StatelessWidget {
                         fileName = DateTime.now().toString();
                       }
                       dataMngProvider.setDefaultData();
-                      mngProvider.calculateData(dataMngProvider.data);
+                      mngProvider.calculateData(dataMngProvider.data, context: context);
                       if(dataMngProvider.getTypeIndex() == 1) {
                         dataMngProvider.data.weight[0] = mngProvider.resultHot[0] + mngProvider.resultHot[1] + mngProvider.resultHot[4];
                       } else {
@@ -149,6 +148,7 @@ class Footer extends StatelessWidget {
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();
                     } else {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       pageMngProvider.nextPage(dataMngProvider.getTypeIndex());
                     }
                   },

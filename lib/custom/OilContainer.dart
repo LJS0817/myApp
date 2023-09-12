@@ -14,7 +14,7 @@ class OilContainer extends StatelessWidget {
 
 
   OilContainer(int idx, {super.key}) {
-    title = oilMng.oils.values.elementAt(idx).getName();
+    title = oilMng.oils(idx).getName();
     index = idx;
   }
 
@@ -30,7 +30,9 @@ class OilContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           onTap: () {
-            dataMngProvider.setData(pageMngProvider.index - 1, index, '0');
+            if(dataMngProvider.getData(pageMngProvider.index - 1, index).isEmpty) {
+              dataMngProvider.setData(pageMngProvider.index - 1, index, '0');
+            }
           },
           splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.5),
           highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.5),

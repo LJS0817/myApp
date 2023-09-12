@@ -6,6 +6,7 @@ import 'package:isma/config/colors.dart';
 import 'package:isma/custom/circleChart.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/custom/resultOilBox.dart';
+import 'package:isma/custom/resultOilDetails.dart';
 import 'package:isma/custom/resultValueBox.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/MenuMng.dart';
@@ -21,7 +22,7 @@ class ResultView extends StatelessWidget {
   static const double leftPadding = 15;
   int themeIndex = 0;
   bool showChart = false;
-  double oilBoxSize = 23;
+  double oilBoxSize = 50;
 
   ResultView(int idx, {super.key}) {
     themeIndex = idx;
@@ -180,32 +181,7 @@ class ResultView extends StatelessWidget {
                                                                     padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
                                                                     itemCount: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0),
                                                                     itemBuilder: (con, index)  {
-                                                                      log(data.selectData.data.toString());
-                                                                      return SizedBox(
-                                                                        height: oilBoxSize,
-                                                                        child: Row(
-                                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            Text(
-                                                                              oilMng.oils[data.selectData.data[menuMng.showOilDetails - 1].keys.elementAt(index)]!.korean,
-                                                                              style: TextStyle(
-                                                                                color: getThemeColor(themeIndex, 0),
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontSize: 15,
-                                                                              ),
-                                                                            ),
-                                                                            Text(
-                                                                              "${data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[0]}g",
-                                                                              style: TextStyle(
-                                                                                color: getThemeColor(themeIndex, 0),
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontSize: 15,
-
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      );
+                                                                      return ResultOilDetailsContainer(oilBoxSize, themeIndex, index);
                                                                     },
                                                                   )
                                                               ),

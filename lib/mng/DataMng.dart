@@ -150,6 +150,7 @@ class DataMng with ChangeNotifier {
   void setWeight(int index, int weight) {
     data.weight[index] += weight;
     data.weight[0] += weight;
+    notifyListeners();
   }
 
   int getTypeIndex() {
@@ -198,6 +199,8 @@ class DataMng with ChangeNotifier {
   ///2 - 첨가물(비누) or 유화제(화장품),
   ///3(화장품만) - EO
   void setData(int page, int idx, String str) {
+    log(FocusManager.instance.primaryFocus.toString());
+
     if(str == '-2') {
       data.data[page][idx] = "0";
     } else if(str == '-1') {

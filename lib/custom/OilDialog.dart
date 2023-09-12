@@ -62,7 +62,7 @@ class OilDialog extends StatelessWidget {
                           ),
                           const Padding(padding: EdgeInsets.only(top: 10)),
                           Expanded(
-                            child: Container(
+                            child: SizedBox(
                               width: double.maxFinite,
                               child: Column(
                                 children: [
@@ -70,7 +70,7 @@ class OilDialog extends StatelessWidget {
                                     child:  ScrollConfiguration(
                                       behavior: const ScrollBehavior().copyWith(overscroll: false),
                                       child:ListView.builder(
-                                        itemCount: oilMng.oils.length + oilMng.userOils.length,
+                                        itemCount: oilMng.default_oils.length + oilMng.userOils.length,
                                         itemBuilder: (BuildContext con, int idx) {
                                           return OilContainer(idx);
                                         },
@@ -78,7 +78,7 @@ class OilDialog extends StatelessWidget {
                                     ),
                                   ),
                                   const Padding(padding: EdgeInsets.only(top: 7)),
-                                  Container(
+                                  SizedBox(
                                     height: 50,
                                     width: double.maxFinite,
                                     child: ScrollConfiguration(

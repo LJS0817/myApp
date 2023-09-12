@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/Oil.dart';
 import 'package:isma/config/define.dart';
+import 'package:provider/provider.dart';
 
 import 'DataMng.dart';
 
@@ -30,8 +31,8 @@ class Mng with ChangeNotifier {
     selectData = data;
   }
 
-  void calculateData(Data data) {
-    calculateLye(data);
+  void calculateData(Data data, {BuildContext? context}) {
+    calculateLye(data, context);
     calculateFat(data);
     calculateWater(data);
     if(data.type == TYPE.E_HOT) {
@@ -62,11 +63,22 @@ class Mng with ChangeNotifier {
     resultHot[5] = (resultHot[1] - resultHot[2] - resultHot[3] - resultWater).round();
   }
 
-  void calculateLye(Data data) {
+  void calculateLye(Data data, BuildContext? context) {
     resultLye = 0;
+    int lye = 0;
     for(int i = 0; i < data.data[0].length; i++) {
       int index = data.data[0].keys.elementAt(i);
-      resultLye += (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oilMng.oils[index]!.KOH : oilMng.oils[index]!.NaOH));
+      lye = (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oilMng.oils(index)!.KOH : oilMng.oils(index)!.NaOH)).round();
+      if(context != null) {
+        String str = Provider.of<DataMng>(context, listen: false).data.data[0][index].toString();
+        if(str.split('`').length < 3) {
+          Provider.of<DataMng>(context, listen: false).data.data[0][index] = "$str`$lye";
+        } else {
+          str = str.replaceAll(str.split('`')[2], lye.toString());
+          Provider.of<DataMng>(context, listen: false).data.data[0][index] = "$str`$lye";
+        }
+      }
+      resultLye += lye;
     }
     resultLye = (resultLye * int.parse(data.values[1]!.replaceAll(' ', ''))) / int.parse(data.values[0]!.replaceAll(' ', ''));
   }
@@ -75,11 +87,11 @@ class Mng with ChangeNotifier {
     List<double> start = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
     for(int i = 0; i < data.data[0].length; i++) {
       int index = data.data[0].keys.elementAt(i);
-      start = addDoubleList(start, mulDoubleList(oilMng.oils[index]!.fat, double.parse(data.data[0][index]!.split('`')[0]) * 0.01));
+      start = addDoubleList(start, mulDoubleList(oilMng.oils(index)!.fat, double.parse(data.data[0][index]!.split('`')[0]) * 0.01));
     }
     for(int i = 0; i < data.data[1].length; i++) {
       int index = data.data[1].keys.elementAt(i);
-      start = addDoubleList(start, mulDoubleList(oilMng.oils[index]!.fat, double.parse(data.data[1][index]!.split('`')[0]) * 0.01));
+      start = addDoubleList(start, mulDoubleList(oilMng.oils(index)!.fat, double.parse(data.data[1][index]!.split('`')[0]) * 0.01));
     }
     resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
     int weight = data.weight[1] + data.weight[2];

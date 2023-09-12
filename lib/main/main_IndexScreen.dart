@@ -39,7 +39,7 @@ void loadAsset(BuildContext context) async {
       list = s.split('\n');
       //data added
       //오일 데이터 = oil
-      oilMng.oils[int.parse(data[0]) - 1] = oil;
+      oilMng.default_oils[int.parse(data[0]) - 1] = oil;
     } catch(ex) {
       log("ERROR : $ex");
     }

@@ -29,7 +29,7 @@ class EditableOilContainer extends StatelessWidget {
     List<String> list = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`');
     controller.text = list[0] == "0" || list[0] == 'null' ? "" : list[0];
     //log(list.toString());
-    nameController.text = index > -1 ? oilMng.oils[index]!.korean : (list.length > 1 ? list[1] : "");
+    nameController.text = index > -1 ? oilMng.oils(index)!.korean : (list.length > 1 ? list[1] : "");
     return Container(
       height: 75,
       width: double.maxFinite,
@@ -57,7 +57,8 @@ class EditableOilContainer extends StatelessWidget {
                   int weight = str == 'null' ? 0 : int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
                   dataMngProvider.setWeight(pageMngProvider.index, -weight!);
                   dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, '-1');
-                  FocusScope.of(context).requestFocus(FocusNode());
+
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
                 splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
                 highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
@@ -91,14 +92,13 @@ class EditableOilContainer extends StatelessWidget {
                   child: Focus(
                     onFocusChange: (hasFocus) {
                       if(!hasFocus) {
-                        log(pageMngProvider.index.toString());
-                        log(index.toString());
                         if(data.isNotEmpty) {
                           int weight = int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
                           dataMngProvider.setWeight(pageMngProvider.index, -weight!);
                           dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, '$data`${nameController.text}');
                           weight = int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
                           dataMngProvider.setWeight(pageMngProvider.index, weight!);
+                          FocusManager.instance.primaryFocus?.unfocus();
                         }
                       }
                     },
@@ -193,7 +193,7 @@ class EditableOilContainer extends StatelessWidget {
                   )
                 ),
                 Text(
-                  index < -1 ? "첨가물" : oilMng.oils[index]!.english,
+                  index < -1 ? "첨가물" : oilMng.oils(index)!.english,
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.6),
                     fontSize: 14,
