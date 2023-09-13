@@ -28,7 +28,6 @@ class EditableOilContainer extends StatelessWidget {
     PageMng pageMngProvider = Provider.of<PageMng>(context);
     List<String> list = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`');
     controller.text = list[0] == "0" || list[0] == 'null' ? "" : list[0];
-    //log(list.toString());
     nameController.text = index > -1 ? oilMng.oils(index)!.korean : (list.length > 1 ? list[1] : "");
     return Container(
       height: 75,
@@ -38,7 +37,7 @@ class EditableOilContainer extends StatelessWidget {
         color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          width: 4,
+          width: 3,
           color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
         ),
       ),
@@ -98,8 +97,9 @@ class EditableOilContainer extends StatelessWidget {
                           dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, '$data`${nameController.text}');
                           weight = int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
                           dataMngProvider.setWeight(pageMngProvider.index, weight!);
-                          FocusManager.instance.primaryFocus?.unfocus();
+
                         }
+                        FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
                     child: TextField(
@@ -164,6 +164,8 @@ class EditableOilContainer extends StatelessWidget {
                         }
                         str = str.replaceRange(str.indexOf('`') + 1, null, name);
                         dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, str);
+
+                        FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
                     child: TextField(
@@ -177,7 +179,7 @@ class EditableOilContainer extends StatelessWidget {
                         isDense: true,
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
-                        hintText: "첨가물명",
+                        hintText: "${pageMngProvider.addButtonText(dataMngProvider.getTypeIndex())}명",
                         hintStyle: TextStyle(
                             color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                             fontWeight: FontWeight.bold,
@@ -193,7 +195,7 @@ class EditableOilContainer extends StatelessWidget {
                   )
                 ),
                 Text(
-                  index < -1 ? "첨가물" : oilMng.oils(index)!.english,
+                  index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex()) : oilMng.oils(index)!.english,
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.6),
                     fontSize: 14,

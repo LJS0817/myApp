@@ -1,16 +1,19 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/custom/EditableOilContainer.dart';
+import 'package:isma/custom/customTextArea.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/PageMng.dart';
-import 'package:isma/workspace/dataListView.dart';
 import 'package:provider/provider.dart';
 
+import '../dataListView.dart';
 
-class FourthView extends StatelessWidget {
-  const FourthView({super.key});
+
+class bFifthView extends StatelessWidget {
+  const bFifthView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,8 @@ class FourthView extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-         DataListView(pageMngProvider.index),
+          DataListView(pageMngProvider.index),
+
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Focus(
@@ -29,8 +33,8 @@ class FourthView extends StatelessWidget {
                 }
               },
               child: CustomTextField(
-                 (_) {
-                   log(_);
+                    (_) {
+                  log(_);
                   dataMngProvider.setMemo(_);
                 },
                 multipleLine: true,
@@ -42,8 +46,8 @@ class FourthView extends StatelessWidget {
                 radius: 20,
                 str: dataMngProvider.data.memo.isEmpty ? "메모 입력" : dataMngProvider.data.memo,
               ),
-            )
-          )
+            ),
+          ),
         ],
       ),
     );

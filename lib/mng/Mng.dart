@@ -71,12 +71,10 @@ class Mng with ChangeNotifier {
       lye = (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oilMng.oils(index)!.KOH : oilMng.oils(index)!.NaOH)).round();
       if(context != null) {
         String str = Provider.of<DataMng>(context, listen: false).data.data[0][index].toString();
-        if(str.split('`').length < 3) {
-          Provider.of<DataMng>(context, listen: false).data.data[0][index] = "$str`$lye";
-        } else {
+        if(str.split('`').length > 2) {
           str = str.replaceAll(str.split('`')[2], lye.toString());
-          Provider.of<DataMng>(context, listen: false).data.data[0][index] = "$str`$lye";
         }
+        Provider.of<DataMng>(context, listen: false).data.data[0][index] = "$str`$lye";
       }
       resultLye += lye;
     }

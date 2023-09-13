@@ -181,6 +181,7 @@ class ResultView extends StatelessWidget {
                                                                     padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
                                                                     itemCount: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0),
                                                                     itemBuilder: (con, index)  {
+                                                                      log(data.selectData.toString());
                                                                       return ResultOilDetailsContainer(oilBoxSize, themeIndex, index);
                                                                     },
                                                                   )

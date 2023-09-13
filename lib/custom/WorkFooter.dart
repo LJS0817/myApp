@@ -13,15 +13,6 @@ import '../mng/DataMng.dart';
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
-  String addText(int page, int type) {
-    if(page == 1) {
-      return "오일";
-    } else if(page == 2 && type != 1) {
-      return "슈퍼팻";
-    } else {
-      return "첨가물";
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +26,7 @@ class Footer extends StatelessWidget {
         children: [
           Expanded(
             child: Material(
-              color: (pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3) ? getThemeColor(dataMngProvider.getTypeIndex(), 0) : Colors.transparent,
+              color: (pageMngProvider.index > 0) ? getThemeColor(dataMngProvider.getTypeIndex(), 0) : Colors.transparent,
               borderRadius: BorderRadius.only(topRight: Radius.circular(pageMngProvider.index > 0 ? 30 : 0)),
               child: InkWell(
                 onTap: () {
@@ -46,9 +37,9 @@ class Footer extends StatelessWidget {
                     Navigator.of(context).pop();
                   }
                 },
-                borderRadius: BorderRadius.only(topRight: Radius.circular(pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 30 : 0)),
-                splashColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0).withOpacity(0.4),
-                highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0).withOpacity(0.4),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(pageMngProvider.index > 0 ? 30 : 0)),
+                splashColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0).withOpacity(0.4),
+                highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0).withOpacity(0.4),
                 child: Container(
                   height: double.maxFinite,
                   color: Colors.transparent,
@@ -59,15 +50,15 @@ class Footer extends StatelessWidget {
                         pageMngProvider.index > 0 ? 'assets/icon/arrow_left.svg' : 'assets/icon/exit.svg',
                         width: pageMngProvider.index > 0 ? 20: 15,
                         height: pageMngProvider.index > 0 ? 20 : 15,
-                        color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0),
+                        color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0),
                       ),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 2 : 5)),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: pageMngProvider.index > 0 ? 2 : 5)),
                       Text(
                         pageMngProvider.index > 0 ? "이전" : "나가기",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3 ? 1 : 0)
+                          color: getThemeColor(dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0)
                         ),
                       ),
                     ],
@@ -77,17 +68,18 @@ class Footer extends StatelessWidget {
             )
           ),
           Visibility(
-            visible: pageMngProvider.index > 0 && dataMngProvider.getTypeIndex() < 3,
+            visible: pageMngProvider.index > 0,
             child: Expanded(
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () {
                       FocusManager.instance.primaryFocus?.unfocus();
-                      if(pageMngProvider.index < 3) {
+                      if(dataMngProvider.getTypeIndex() < 3 && pageMngProvider.index < 3) {
                         pageMngProvider.setDialog();
                       } else {
-                        dataMngProvider.setData(2, -dataMngProvider.data.data[2].length - 2, '-2');
+                        dataMngProvider.setData(pageMngProvider.index - 1, -dataMngProvider.data.data[pageMngProvider.index - 1].length - 2, '-2');
+                        log(dataMngProvider.toString());
                       }
                     },
                     borderRadius: const BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
@@ -107,7 +99,7 @@ class Footer extends StatelessWidget {
                             ),
                             const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                             Text(
-                              addText(pageMngProvider.index, dataMngProvider.getTypeIndex()),
+                              pageMngProvider.addButtonText(dataMngProvider.getTypeIndex()),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -136,10 +128,12 @@ class Footer extends StatelessWidget {
                         fileName = DateTime.now().toString();
                       }
                       dataMngProvider.setDefaultData();
-                      mngProvider.calculateData(dataMngProvider.data, context: context);
+                      if(dataMngProvider.getTypeIndex() < 3) {
+                        mngProvider.calculateData(dataMngProvider.data, context: context);
+                      }
                       if(dataMngProvider.getTypeIndex() == 1) {
                         dataMngProvider.data.weight[0] = mngProvider.resultHot[0] + mngProvider.resultHot[1] + mngProvider.resultHot[4];
-                      } else {
+                      } else if(dataMngProvider.getTypeIndex() < 3) {
                         dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
                             mngProvider.resultWater.round() + mngProvider.resultLye.round();
                       }

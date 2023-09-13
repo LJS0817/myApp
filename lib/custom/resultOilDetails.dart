@@ -141,12 +141,14 @@ class ResultOilDetailsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MenuMng menuMng = Provider.of<MenuMng>(context);
+    Mng mng = Provider.of<Mng>(context);
+    if(menuMng.showOilDetails == 3 || mng.selectData.type.index > 2) {
+      return addDetails(context);
+    }
     if(menuMng.showOilDetails == 1) {
       return oilDetails(context);
-    } else if(menuMng.showOilDetails == 2) {
+    } else{
       return otherDetails(context);
-    } else {
-      return addDetails(context);
     }
   }
 

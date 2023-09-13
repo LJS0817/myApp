@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/workspace/beauty/bFifthView.dart';
 import 'package:isma/workspace/beauty/bFirstView.dart';
 import 'package:isma/workspace/beauty/bFourthView.dart';
 import 'package:isma/workspace/beauty/bSecondView.dart';
@@ -18,7 +19,7 @@ class PageMng with ChangeNotifier {
     '/tabs/config'
   ];
   final int SOAP_MAX_INDEX = 3;
-  final int BEAUTY_MAX_INDEX = 3;
+  final int BEAUTY_MAX_INDEX = 4;
   int MAX_INDEX(int type) {
     if(type < 3) {
       return SOAP_MAX_INDEX;
@@ -35,6 +36,17 @@ class PageMng with ChangeNotifier {
     Navigator.pushNamed(context, Workspaces[idx]);
   }
 
+  String addButtonText(int type) {
+    if(index == 1) {
+      return type > 2 ? "수상층" : "오일";
+    } else if(index == 2 && type != 1) {
+      return type > 2 ? "유상층" : "슈퍼팻";
+    } else if(index == 3) {
+      return type > 2 ? "유화제" : "첨가물";
+    } else {
+      return type > 2 ? "EO" : "첨가물";
+    }
+  }
 
   void nextPage(int type) {
     index++;
@@ -99,6 +111,7 @@ class PageMng with ChangeNotifier {
         case 1: return bSecondView();
         case 2: return bThirdView();
         case 3: return bFourthView();
+        case 4: return bFifthView();
         default: return bFirstView();
       }
     }

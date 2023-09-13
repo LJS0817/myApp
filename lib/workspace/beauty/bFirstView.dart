@@ -35,7 +35,7 @@ class bFirstView extends StatelessWidget {
 
               const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
               Text(
-                "비누 유형",
+                "화장품 유형",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
