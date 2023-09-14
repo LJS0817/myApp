@@ -9,8 +9,7 @@ class MenuMng with ChangeNotifier {
   int showOilDetails = 0;
 
   void init() {
-    index = 0;
-    isConfig = false;
+    showOilDetails = 0;
   }
 
   void setOilDetails(int b) {

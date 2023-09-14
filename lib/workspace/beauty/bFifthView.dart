@@ -1,9 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:isma/config/define.dart';
-import 'package:isma/custom/EditableOilContainer.dart';
-import 'package:isma/custom/customTextArea.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/PageMng.dart';
@@ -34,7 +31,6 @@ class bFifthView extends StatelessWidget {
               },
               child: CustomTextField(
                     (_) {
-                  log(_);
                   dataMngProvider.setMemo(_);
                 },
                 multipleLine: true,

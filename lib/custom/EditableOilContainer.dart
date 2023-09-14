@@ -11,6 +11,7 @@ import '../mng/PageMng.dart';
 
 class EditableOilContainer extends StatelessWidget {
   int index = 0;
+  int _page = 0;
 
   TextEditingController controller = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -18,17 +19,28 @@ class EditableOilContainer extends StatelessWidget {
   String name = "";
 
 
-  EditableOilContainer(int id, {super.key}) {
+  EditableOilContainer(int id, int page, {super.key}) {
     index = id;
+    _page = page;
+  }
+
+  int getIndexSub1() {
+    if(_page - 1 >= 0) {
+      return _page - 1;
+    } else {
+      return _page;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
-    List<String> list = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`');
+
+    List<String> list = dataMngProvider.data.data[_page - 1][index].toString().split('`');
     controller.text = list[0] == "0" || list[0] == 'null' ? "" : list[0];
     nameController.text = index > -1 ? oilMng.oils(index)!.korean : (list.length > 1 ? list[1] : "");
+
     return Container(
       height: 75,
       width: double.maxFinite,
@@ -52,10 +64,13 @@ class EditableOilContainer extends StatelessWidget {
               child: InkWell(
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
                 onTap: () {
-                  String str = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0];
-                  int weight = str == 'null' ? 0 : int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
-                  dataMngProvider.setWeight(pageMngProvider.index, -weight!);
-                  dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, '-1');
+                  String str = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0];
+                  int weight = str == 'null' ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
+                  log(_page.toString());
+                  if(dataMngProvider.getTypeIndex() < 3) {
+                    dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3);
+                  }
+                  dataMngProvider.setData(getIndexSub1(), index, '-1');
 
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
@@ -92,12 +107,15 @@ class EditableOilContainer extends StatelessWidget {
                     onFocusChange: (hasFocus) {
                       if(!hasFocus) {
                         if(data.isNotEmpty) {
-                          int weight = int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
-                          dataMngProvider.setWeight(pageMngProvider.index, -weight!);
-                          dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, '$data`${nameController.text}');
-                          weight = int.parse(dataMngProvider.data.data[pageMngProvider.index - 1][index].toString().split('`')[0]);
-                          dataMngProvider.setWeight(pageMngProvider.index, weight!);
-
+                          int weight = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0] == "null" ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
+                          if(dataMngProvider.getTypeIndex() < 3) {
+                            dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3);
+                          }
+                          dataMngProvider.setData(getIndexSub1(), index, '$data`${nameController.text}');
+                          if(dataMngProvider.getTypeIndex() < 3) {
+                            weight = int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
+                            dataMngProvider.setWeight(_page, weight!, needCal: _page < 3);
+                          }
                         }
                         FocusManager.instance.primaryFocus?.unfocus();
                       }
@@ -132,7 +150,7 @@ class EditableOilContainer extends StatelessWidget {
                   )
                 ),
                 Text(
-                  "G",
+                  _page == 4 ? "dr" : "G",
                   style: TextStyle(
                       color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                       fontWeight: FontWeight.bold,
@@ -158,12 +176,12 @@ class EditableOilContainer extends StatelessWidget {
                   child: Focus(
                     onFocusChange: (hasFocus) {
                       if(!hasFocus) {
-                        String str = dataMngProvider.data.data[pageMngProvider.index - 1][index].toString();
+                        String str = dataMngProvider.data.data[_page - 1][index].toString();
                         if(!str.contains('`')) {
                           str += '`0';
                         }
                         str = str.replaceRange(str.indexOf('`') + 1, null, name);
-                        dataMngProvider.setData(pageMngProvider.getIndexSub1(), index, str);
+                        dataMngProvider.setData(getIndexSub1(), index, str);
 
                         FocusManager.instance.primaryFocus?.unfocus();
                       }
@@ -179,7 +197,7 @@ class EditableOilContainer extends StatelessWidget {
                         isDense: true,
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
-                        hintText: "${pageMngProvider.addButtonText(dataMngProvider.getTypeIndex())}명",
+                        hintText: "${pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page)}명",
                         hintStyle: TextStyle(
                             color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                             fontWeight: FontWeight.bold,
@@ -195,7 +213,7 @@ class EditableOilContainer extends StatelessWidget {
                   )
                 ),
                 Text(
-                  index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex()) : oilMng.oils(index)!.english,
+                  index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : oilMng.oils(index)!.english,
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.6),
                     fontSize: 14,

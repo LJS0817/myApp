@@ -36,12 +36,12 @@ class PageMng with ChangeNotifier {
     Navigator.pushNamed(context, Workspaces[idx]);
   }
 
-  String addButtonText(int type) {
-    if(index == 1) {
+  String addButtonText(int type, int idx) {
+    if(idx == 1) {
       return type > 2 ? "수상층" : "오일";
-    } else if(index == 2 && type != 1) {
+    } else if(idx == 2 && type != 1) {
       return type > 2 ? "유상층" : "슈퍼팻";
-    } else if(index == 3) {
+    } else if(idx == 3) {
       return type > 2 ? "유화제" : "첨가물";
     } else {
       return type > 2 ? "EO" : "첨가물";

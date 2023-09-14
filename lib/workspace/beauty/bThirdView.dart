@@ -1,10 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:isma/config/define.dart';
-import 'package:isma/custom/EditableOilContainer.dart';
-import 'package:isma/custom/customTextArea.dart';
-import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 

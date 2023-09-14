@@ -79,7 +79,6 @@ class Footer extends StatelessWidget {
                         pageMngProvider.setDialog();
                       } else {
                         dataMngProvider.setData(pageMngProvider.index - 1, -dataMngProvider.data.data[pageMngProvider.index - 1].length - 2, '-2');
-                        log(dataMngProvider.toString());
                       }
                     },
                     borderRadius: const BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
@@ -99,7 +98,7 @@ class Footer extends StatelessWidget {
                             ),
                             const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                             Text(
-                              pageMngProvider.addButtonText(dataMngProvider.getTypeIndex()),
+                              pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), pageMngProvider.index),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -120,8 +119,8 @@ class Footer extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if(pageMngProvider.index >= pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex())) {
+                      log("IN");
                       String fileName = "";
-                      log("NAME : ${dataMngProvider.getSelectedFileName()}");
                       if(dataMngProvider.getSelectedFileName().isNotEmpty) {
                         fileName = dataMngProvider.getSelectedFileName();
                       } else {
@@ -130,14 +129,20 @@ class Footer extends StatelessWidget {
                       dataMngProvider.setDefaultData();
                       if(dataMngProvider.getTypeIndex() < 3) {
                         mngProvider.calculateData(dataMngProvider.data, context: context);
+                        if(dataMngProvider.getTypeIndex() == 1) {
+                          dataMngProvider.data.weight[0] = mngProvider.resultHot[0] + mngProvider.resultHot[1] + mngProvider.resultHot[4];
+                        } else {
+                          dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
+                              mngProvider.resultWater.round() + mngProvider.resultLye.round();
+                        }
+                      } else {
+                        String result = "";
+                        dataMngProvider.data.weight[4] = 0;
+                        for(int i = 0; i < dataMngProvider.data.data[3].values.length; i++) {
+                          result = dataMngProvider.data.data[3].values.elementAt(i).split('`')[0];
+                          dataMngProvider.data.weight[4] += int.parse(result);
+                        }
                       }
-                      if(dataMngProvider.getTypeIndex() == 1) {
-                        dataMngProvider.data.weight[0] = mngProvider.resultHot[0] + mngProvider.resultHot[1] + mngProvider.resultHot[4];
-                      } else if(dataMngProvider.getTypeIndex() < 3) {
-                        dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
-                            mngProvider.resultWater.round() + mngProvider.resultLye.round();
-                      }
-                      log(dataMngProvider.getName());
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();

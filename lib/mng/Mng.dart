@@ -162,7 +162,9 @@ class Mng with ChangeNotifier {
   void showResultView(Data data) {
     popUpActive = true;
     selectData = data;
-    calculateData(selectData);
+    if(data.type.index < 3) {
+      calculateData(selectData);
+    }
     notifyListeners();
   }
 

@@ -105,15 +105,26 @@ class bFirstView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8 + dataMngProvider.getTypeIndex() - 3); }, str: dataMngProvider.getValue(8 + dataMngProvider.getTypeIndex() - 3)!, needLb: true, labelTxt: "수상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8); dataMngProvider.calculateBeautyWeight(false, str); }, defaultValue: dataMngProvider.getValue(8)!, needLb: true, labelTxt: "수상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 12 + dataMngProvider.getTypeIndex() - 3); }, str: dataMngProvider.getValue(12 + dataMngProvider.getTypeIndex() - 3)!, needLb: true, labelTxt: "유상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 9); dataMngProvider.calculateBeautyWeight(false, str); }, defaultValue: dataMngProvider.getValue(9)!, needLb: true, labelTxt: "유상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 16 + dataMngProvider.getTypeIndex() - 3); }, str: dataMngProvider.getValue(16 + dataMngProvider.getTypeIndex() - 3)!, needLb: true, labelTxt: "유화제", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 10); dataMngProvider.calculateBeautyWeight(false, str); }, defaultValue: dataMngProvider.getValue(10)!, needLb: true, labelTxt: "유화제", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 ],
               ),
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
-              CustomTextField((String str) { dataMngProvider.setValue(str, 20); }, str: dataMngProvider.getValue(20)!, needLb: true, labelTxt: "총용량 [ G ]", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),),
+              CustomTextField(
+                (String str) {
+                  dataMngProvider.calculateBeautyWeight(true, str);
+                },
+                defaultValue: dataMngProvider.data.weight[0].toString(),
+                needLb: true,
+                labelTxt: "총용량 [ G ]",
+                active: true,
+                needBg: false,
+                radius: 15,
+                index: dataMngProvider.getTypeIndex(),
+              ),
 
             ],
           )

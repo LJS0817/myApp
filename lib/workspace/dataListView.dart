@@ -14,6 +14,8 @@ class DataListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
+    PageMng pageMngProvider = Provider.of<PageMng>(context);
+
     return Expanded(
       child: Container(
         margin: EdgeInsets.zero,
@@ -24,7 +26,7 @@ class DataListView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             itemCount: dataMngProvider.data.data[page].length,
             itemBuilder: (BuildContext con, int idx) {
-              return EditableOilContainer(dataMngProvider.data.data[page].keys.elementAt(idx));
+              return EditableOilContainer(dataMngProvider.data.data[page].keys.elementAt(idx), pageMngProvider.index);
             },
           ),
         ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/define.dart';
-import 'package:isma/custom/step.dart';
-import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 
 import '../mng/DataMng.dart';
@@ -104,7 +102,7 @@ class Header extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "오일",
+                              dataMngProvider.getTypeIndex() > 2 ? "수상층" : "오일",
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
@@ -114,7 +112,7 @@ class Header extends StatelessWidget {
                             const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
 
                             Text(
-                              "슈퍼펫",
+                              dataMngProvider.getTypeIndex() > 2 ? "유상층" : "슈퍼펫",
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,
@@ -124,7 +122,7 @@ class Header extends StatelessWidget {
                             const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
 
                             Text(
-                              "첨가물",
+                              dataMngProvider.getTypeIndex() > 2 ? "유화제" : "첨가물",
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 1),
                                   fontWeight: FontWeight.bold,

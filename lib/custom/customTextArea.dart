@@ -2,9 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
-import 'package:isma/mng/DataMng.dart';
-import 'package:isma/mng/PageMng.dart';
-import 'package:provider/provider.dart';
 
 class customTextArea extends StatelessWidget {
   customTextArea(int theme, Function func, Function save, Function cal, {String data="", super.key}) {

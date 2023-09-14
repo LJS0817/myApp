@@ -4,8 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:isma/config/define.dart';
-import 'package:isma/mng/Mng.dart';
-import 'package:provider/provider.dart';
 
 class CustomTextField extends StatelessWidget {
   bool isActive = false;
@@ -21,10 +19,11 @@ class CustomTextField extends StatelessWidget {
 
   late Function onChange;
   bool isMultipleLine = false;
+  String _default = "";
 
   TextEditingController controller = TextEditingController();
 
-  CustomTextField(Function func, {bool multipleLine = false, bool needLb = false, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String str="", double height=50, int maxLines=1, double radius=100, super.key}) {
+  CustomTextField(Function func, {bool multipleLine = false, bool needLb = false, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String defaultValue="", String str="", double height=50, int maxLines=1, double radius=100, super.key}) {
     isActive = active;
     needBackground = needBg;
     _height = height;
@@ -33,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     themeIndex = index;
     onChange = func;
     isMultipleLine = multipleLine;
+    _default = defaultValue;
     controller.text = str;
 
     needLabel = needLb;
@@ -80,7 +80,6 @@ class CustomTextField extends StatelessWidget {
           child: Focus(
             onFocusChange: (hasFocus) {
               if(!hasFocus) {
-                log("\n\n\n\n\n\n1234556");
                 onChange(controller.text);
                 FocusManager.instance.primaryFocus?.unfocus();
               } else {
@@ -108,12 +107,21 @@ class CustomTextField extends StatelessWidget {
               inputFormatters: needLabel ? [
                 FilteringTextInputFormatter.deny(RegExp('[,A-Za-z]'))
               ] : [],
-              decoration: const InputDecoration(border: InputBorder.none, ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: _default,
+                hintStyle: TextStyle(
+                  color: getThemeColor(themeIndex, needBackground ? 0 : 1),
+                  fontWeight: FontWeight.bold,
+                  height: _maxLines == 3 || _maxLines > 10 ? 1 : 0,
+                ),
+              ),
               style: TextStyle(
                 color: getThemeColor(themeIndex, needBackground ? 0 : 1),
                 fontWeight: FontWeight.bold,
                 height: _maxLines == 3 || _maxLines > 10 ? 1 : 0,
               ),
+
             ),
           )
         ),

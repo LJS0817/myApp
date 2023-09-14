@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:isma/config/define.dart';
 import 'package:isma/custom/dataContainer.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:provider/provider.dart';

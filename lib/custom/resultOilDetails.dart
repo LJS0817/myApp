@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/MenuMng.dart';
@@ -112,13 +114,16 @@ class ResultOilDetailsContainer extends StatelessWidget {
   Widget addDetails(BuildContext context) {
     Mng data = Provider.of<Mng>(context);
     MenuMng menuMng = Provider.of<MenuMng>(context);
+    List<String> dataList = data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`');
+    String name = dataList.length > 1 && dataList[1].isNotEmpty ? dataList[1] : "[이름없음]";
+    String gram = dataList[0].isEmpty || dataList[0] == "null" ? "0" : dataList[0];
     return SizedBox(
       height: _size,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[1],
+            name,
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
@@ -126,7 +131,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             ),
           ),
           Text(
-            "${data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[0]}g",
+            "$gram${menuMng.showOilDetails == 4 ? "dr" : "g"}",
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,

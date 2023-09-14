@@ -38,9 +38,8 @@ class iconButton extends StatelessWidget {
               splashColor: mainTextColor[menu.getIndex()].withOpacity(0.2),
               highlightColor: mainTextColor[menu.getIndex()].withOpacity(0.5),
               onTap: () {
+                menu.init();
                 _func();
-                log(menu.getIndex().toString());
-                //menu.Update();
               },
               child: Container(
                 padding: EdgeInsets.all(scale),

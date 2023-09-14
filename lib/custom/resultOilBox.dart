@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:isma/config/colors.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:provider/provider.dart';
@@ -8,10 +7,14 @@ class ResultOilBox extends StatelessWidget {
   String str = "";
   int themeIndex = 0;
   int index = 0;
-  ResultOilBox(String d, int themeIdx, int compare, {super.key}) {
+  double _width = 0;
+  double _height = 0;
+  ResultOilBox(String d, int themeIdx, int compare, {double w = 85,double h = 70, super.key}) {
     str = d;
     themeIndex = themeIdx;
     index = compare;
+    _width = w;
+    _height = h;
   }
 
   @override
@@ -28,8 +31,8 @@ class ResultOilBox extends StatelessWidget {
         splashColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
         highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
         child: Container(
-          width: 85,
-          height: 70,
+          width: _width,
+          height: _height,
           alignment: Alignment.center,
           color: Colors.transparent,
           child: Text(

@@ -23,6 +23,7 @@ class Data {
   ///1 - 오일
   ///2 - 슈퍼팻
   ///3 - 첨가물
+  ///4 - EO
   List<int> weight = [0, 0, 0, 0];
 
 
@@ -36,10 +37,9 @@ class Data {
   ///5 - SUGAR
   ///6 - SOLVENT
   ///7 - ETHANOL
-  ///8 ~ 11 - 수상층
-  ///12 ~ 15 - 유상층
-  ///16 ~ 19 - 유화제
-  ///20 - 총용량
+  ///8 - 수상층
+  ///9 - 유상층
+  ///10 - 유화제
   final Map<int, String> default_values = {
     0 : "100",
     1 : "100",
@@ -50,22 +50,9 @@ class Data {
     6 : "45",
     7 : "30",
 
-    8 : "100",
-    9 : "70",
-    10 : "85",
-    11 : "80",
-
-    12 : "0",
-    13 : "30",
-    14 : "15",
-    15 : "40",
-
-    16 : "0",
-    17 : "3",
-    18 : "2",
-    19 : "5",
-
-    20 : "0",
+    8 : "0",
+    9 : "0",
+    10 : "0",
   };
 
   ///index
@@ -78,10 +65,10 @@ class Data {
   ///5 - SUGAR
   ///6 - SOLVENT
   ///7 - ETHANOL
-  ///8 ~ 11 - 수상층
-  ///12 ~ 15 - 유상층
-  ///16 ~ 19 - 유화제
-  ///20 - 총용량
+  ///```
+  ///8 - 수상층
+  ///9 - 유상층
+  ///10 - 유화제
   Map<int, String> values = {};
 
 
@@ -92,7 +79,6 @@ class Data {
   ///1 - 슈퍼팻(비누) or 유상층(화장품),
   ///2 - 첨가물(비누) or 유화제(화장품),
   ///3(화장품만) - EO
-  ///ㅁㄴindex, weight
   List<Map<int, String>> data = [
     {},
     {},
@@ -117,6 +103,9 @@ class DataMng with ChangeNotifier {
   void initData(bool isBeauty) {
     data = Data();
     data.type = isBeauty ? TYPE.E_SKIN : TYPE.E_COLD;
+    if(isBeauty) {
+      data.weight.add(0);
+    }
   }
 
   void setSelectedFileName(String str) {
@@ -147,9 +136,25 @@ class DataMng with ChangeNotifier {
     notifyListeners();
   }
 
-  void setWeight(int index, int weight) {
+  void setWeight(int index, int weight, {bool needCal = true}) {
     data.weight[index] += weight;
-    data.weight[0] += weight;
+    if(needCal) {
+      data.weight[0] += weight;
+    }
+    notifyListeners();
+  }
+
+  /// 0 - 수상층
+  /// 1 - 유상층
+  /// 2 - 총용량
+  void calculateBeautyWeight(bool isTotal, String str) {
+    if(isTotal) {
+      data.weight[0] = int.parse(str);
+    }
+    data.weight[1] = (int.parse(getValue(8)!) * data.weight[0] * 0.01).round();
+    data.weight[2] = (int.parse(getValue(9)!) * data.weight[0] * 0.01).round();
+    data.weight[3] = (int.parse(getValue(10)!) * data.weight[0] * 0.01).round();
+
     notifyListeners();
   }
 
@@ -166,9 +171,11 @@ class DataMng with ChangeNotifier {
   ///5 - SUGAR
   ///6 - SOLVENT
   ///7 - ETHANOL
-  ///8 ~ 11 - 수상층
-  ///12 ~ 15 - 유상층
-  ///20 - 총용량
+  ///```
+  ///8 - 수상층
+  ///9 - 유상층
+  ///10 - 유화제
+  ///11 - 총용량
   void setValue(String str, int idx) {
     data.values[idx] = str;
   }

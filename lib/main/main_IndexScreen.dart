@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:isma/custom/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
@@ -182,6 +181,7 @@ Widget BottomBar(BuildContext context) {
                     dataMng.initData(menuMng.index == 1);
                     dataMng.selectFileName = "";
                     mng.selectData = Data();
+                    menuMng.init();
 
                     pageMng.changeScene(context, menuMng.index);
                   },
