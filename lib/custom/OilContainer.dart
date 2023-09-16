@@ -13,8 +13,8 @@ class OilContainer extends StatelessWidget {
   int index = 0;
 
 
-  OilContainer(int idx, {super.key}) {
-    title = oilMng.oils(idx).getName();
+  OilContainer(int idx, String name, {super.key}) {
+    title = name;
     index = idx;
   }
 
@@ -22,6 +22,7 @@ class OilContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 2,),
       color: Colors.transparent,
@@ -41,46 +42,14 @@ class OilContainer extends StatelessWidget {
             height: 38,
             width: double.maxFinite,
             color: Colors.transparent,
-            child: Stack(
-              children: [
-                Positioned(
-                  left: 10,
-                  top: 0,
-                  bottom: 0,
-                  child: Row(
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Positioned(
-                  right: 10,
-                  top: 0,
-                  bottom: 0,
-                  child: Row(
-                    children: [
-                      Container(
-                        color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
-                        width: 2,
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                      ),
-                      const Padding(padding: EdgeInsets.symmetric(horizontal: 3)),
-                      SvgPicture.asset(
-                        'assets/icon/star.svg',
-                        width: 20,
-                        height: 20,
-                        color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(left: 15),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
+              ),
             ),
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:isma/custom/OilContainer.dart';
 import 'package:isma/custom/OilContainerShort.dart';
 import 'package:isma/main/main_IndexScreen.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:provider/provider.dart';
 
 import '../config/define.dart';
@@ -17,6 +18,7 @@ class OilDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
+    OilMng oilMng = Provider.of<OilMng>(context);
     return Visibility(
       visible: pageMngProvider.enableDialog,
       child: SafeArea(
@@ -72,7 +74,7 @@ class OilDialog extends StatelessWidget {
                                       child:ListView.builder(
                                         itemCount: oilMng.default_oils.length + oilMng.userOils.length,
                                         itemBuilder: (BuildContext con, int idx) {
-                                          return OilContainer(idx);
+                                          return OilContainer(idx, oilMng.oils(idx).getName());
                                         },
                                       ),
                                     ),
@@ -87,7 +89,8 @@ class OilDialog extends StatelessWidget {
                                         scrollDirection: Axis.horizontal,
                                         itemCount: dataMngProvider.data.data[pageMngProvider.getIndexSub1()].length,
                                         itemBuilder: (BuildContext con, int idx) {
-                                          return OilShortContainer(dataMngProvider.data.data[pageMngProvider.getIndexSub1()].keys.elementAt(idx));
+                                          int i = dataMngProvider.data.data[pageMngProvider.getIndexSub1()].keys.elementAt(idx);
+                                          return OilShortContainer(i, oilMng.oils(i).korean);
                                         },
                                       ),
                                     ),

@@ -144,9 +144,6 @@ class DataMng with ChangeNotifier {
     notifyListeners();
   }
 
-  /// 0 - 수상층
-  /// 1 - 유상층
-  /// 2 - 총용량
   void calculateBeautyWeight(bool isTotal, String str) {
     if(isTotal) {
       data.weight[0] = int.parse(str);
@@ -161,6 +158,7 @@ class DataMng with ChangeNotifier {
   int getTypeIndex() {
     return data.type.index;
   }
+
   ///index
   ///```
   ///0 - LYE PURITY

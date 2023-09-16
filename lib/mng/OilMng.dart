@@ -16,6 +16,17 @@ class OilMng extends ChangeNotifier {
     }
   }
 
-  SplayTreeMap<int, Oil> markOils = SplayTreeMap<int, Oil>();
-  SplayTreeMap<int, Oil> unMarkOils = SplayTreeMap<int, Oil>();
+  length() {
+    return default_oils.length + userOils.length;
+  }
+
+
+  void addOil(Oil oil) {
+    userOils[userOils.length] = oil;
+    notifyListeners();
+  }
+
+  void done() {
+    notifyListeners();
+  }
 }

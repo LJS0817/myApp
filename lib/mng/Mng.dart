@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/Oil.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:provider/provider.dart';
 
 import 'DataMng.dart';
@@ -31,9 +32,9 @@ class Mng with ChangeNotifier {
     selectData = data;
   }
 
-  void calculateData(Data data, {BuildContext? context}) {
+  void calculateData(Data data, BuildContext context) {
     calculateLye(data, context);
-    calculateFat(data);
+    calculateFat(data, context);
     calculateWater(data);
     if(data.type == TYPE.E_HOT) {
       calculateHotData(data);
@@ -63,12 +64,12 @@ class Mng with ChangeNotifier {
     resultHot[5] = (resultHot[1] - resultHot[2] - resultHot[3] - resultWater).round();
   }
 
-  void calculateLye(Data data, BuildContext? context) {
+  void calculateLye(Data data, BuildContext context) {
     resultLye = 0;
     int lye = 0;
     for(int i = 0; i < data.data[0].length; i++) {
       int index = data.data[0].keys.elementAt(i);
-      lye = (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oilMng.oils(index)!.KOH : oilMng.oils(index)!.NaOH)).round();
+      lye = (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? Provider.of<OilMng>(context!, listen: false).oils(index)!.KOH : Provider.of<OilMng>(context!, listen: false).oils(index)!.NaOH)).round();
       if(context != null) {
         String str = Provider.of<DataMng>(context, listen: false).data.data[0][index].toString();
         if(str.split('`').length > 2) {
@@ -81,15 +82,15 @@ class Mng with ChangeNotifier {
     resultLye = (resultLye * int.parse(data.values[1]!.replaceAll(' ', ''))) / int.parse(data.values[0]!.replaceAll(' ', ''));
   }
 
-  void calculateFat(Data data) {
+  void calculateFat(Data data, BuildContext context) {
     List<double> start = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
     for(int i = 0; i < data.data[0].length; i++) {
       int index = data.data[0].keys.elementAt(i);
-      start = addDoubleList(start, mulDoubleList(oilMng.oils(index)!.fat, double.parse(data.data[0][index]!.split('`')[0]) * 0.01));
+      start = addDoubleList(start, mulDoubleList(Provider.of<OilMng>(context!, listen: false).oils(index)!.fat, double.parse(data.data[0][index]!.split('`')[0]) * 0.01));
     }
     for(int i = 0; i < data.data[1].length; i++) {
       int index = data.data[1].keys.elementAt(i);
-      start = addDoubleList(start, mulDoubleList(oilMng.oils(index)!.fat, double.parse(data.data[1][index]!.split('`')[0]) * 0.01));
+      start = addDoubleList(start, mulDoubleList(Provider.of<OilMng>(context!, listen: false).oils(index)!.fat, double.parse(data.data[1][index]!.split('`')[0]) * 0.01));
     }
     resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
     int weight = data.weight[1] + data.weight[2];
@@ -159,11 +160,12 @@ class Mng with ChangeNotifier {
     selectData = Data();
   }
 
-  void showResultView(Data data) {
+  void showResultView(Data? data, BuildContext context) {
     popUpActive = true;
-    selectData = data;
-    if(data.type.index < 3) {
-      calculateData(selectData);
+    selectData = data ?? Data();
+    selectData.type = TYPE.E_ETC;
+    if(selectData.type.index < 3) {
+      calculateData(selectData, context);
     }
     notifyListeners();
   }

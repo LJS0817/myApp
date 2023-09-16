@@ -10,7 +10,7 @@ import 'dart:ui';
 const List<Color> mainTheme = [
   Color(0xFF3B6C95),
   Color(0xFF75A657),
-  Color(0xFFAC94BB),
+  Color(0xFF918BDE),
   Color(0xFFEE9181),
 ];
 
@@ -52,6 +52,17 @@ const List<List<Color>> beautyThemeColor = [
   [ Color(0xFF92A863), Color(0xFFF6FFE3), Color(0xFFEAEE1A), Color(0xFFD7E7B5) ],
   [ Color(0xFF4F8F61), Color(0xFFEAFFF0), Color(0xFF4DEC7A), Color(0xFFB6CEBD) ],
   [ Color(0xFFA18D5A), Color(0xFFFFF7E2), Color(0xFFFFD66E), Color(0xFFD1C7AF) ],
+];
+
+///[0] - 테마,
+///[1] - 텍스트,
+///[2] - 강조, 활성화(버튼),
+///[3] - 비활성화 버튼
+const List<Color> oilThemeColor = [
+  Color(0xFF4D4794),
+  Color(0xFFE7E6FF),
+  Color(0xFF857BFF),
+  Color(0xFF727286),
 ];
 
 int parseIndex(String type) {

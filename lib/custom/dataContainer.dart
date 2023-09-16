@@ -36,7 +36,7 @@ class DataContainer extends StatelessWidget {
               highlightColor: getThemeColor(data.type.index, 2).withOpacity(0.2),
               onTap: () {
                 Provider.of<DataMng>(context, listen: false).setSelectedFileName(_path);
-                Provider.of<Mng>(context, listen: false).showResultView(data);
+                Provider.of<Mng>(context, listen: false).showResultView(data, context);
               },
               child: Stack(
                 children: [

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
@@ -38,7 +39,7 @@ void loadAsset(BuildContext context) async {
       list = s.split('\n');
       //data added
       //오일 데이터 = oil
-      oilMng.default_oils[int.parse(data[0]) - 1] = oil;
+      Provider.of<OilMng>(context, listen: false).default_oils[int.parse(data[0]) - 1] = oil;
     } catch(ex) {
       log("ERROR : $ex");
     }
@@ -233,7 +234,7 @@ class _IndexScreenState extends State<IndexScreen> {
       loadAsset(context);
       FileMng fileMng =  Provider.of<FileMng>(context, listen: false);
       fileMng.load();
-      fileMng.readDirectory('soap', 0).then((value) => fileMng.readDirectory('beauty', 1));
+      fileMng.readDirectory('soap', 0).then((value) => fileMng.readDirectory('beauty', 1).then((value) => fileMng.readDirectory('oil', 2)));
       Mng.isLoad = true;
     }
   }

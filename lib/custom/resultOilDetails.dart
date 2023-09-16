@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,8 @@ class ResultOilDetailsContainer extends StatelessWidget {
   Widget oilDetails(BuildContext context) {
     Mng data = Provider.of<Mng>(context);
     MenuMng menuMng = Provider.of<MenuMng>(context);
+    OilMng oilMng = Provider.of<OilMng>(context);
+
     return SizedBox(
       height: _size,
       child: Row(
@@ -85,6 +88,8 @@ class ResultOilDetailsContainer extends StatelessWidget {
   Widget otherDetails(BuildContext context) {
     Mng data = Provider.of<Mng>(context);
     MenuMng menuMng = Provider.of<MenuMng>(context);
+    OilMng oilMng = Provider.of<OilMng>(context);
+
     return SizedBox(
       height: _size,
       child: Row(

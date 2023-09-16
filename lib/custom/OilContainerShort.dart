@@ -12,8 +12,8 @@ class OilShortContainer extends StatelessWidget {
   String title = "";
   int index = 0;
 
-  OilShortContainer(int idx, {super.key}) {
-    title = oilMng.oils(idx).korean;
+  OilShortContainer(int idx, String name, {super.key}) {
+    title = name;
     index = idx;
   }
 

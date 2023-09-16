@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/DataMng.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:provider/provider.dart';
 
 import '../mng/PageMng.dart';
@@ -36,6 +37,7 @@ class EditableOilContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
+    OilMng oilMng = Provider.of<OilMng>(context);
 
     List<String> list = dataMngProvider.data.data[_page - 1][index].toString().split('`');
     controller.text = list[0] == "0" || list[0] == 'null' ? "" : list[0];

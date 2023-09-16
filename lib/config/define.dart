@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:isma/config/colors.dart';
-import 'package:isma/custom/OilMng.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
@@ -13,11 +13,6 @@ import '../mng/DataMng.dart';
 enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_LOTION, E_ESSENCE, E_CREAM, E_ETC }
 
 enum SKINTYPE { E_MINGAM, E_GUN, E_ATOPI, E_JOONG, E_JI, E_YEO }
-
-//final FileMng fileMng = FileMng();
-// final MenuMng menuMng = MenuMng();
-final OilMng oilMng = OilMng();
-// final Mng mng = Mng();
 
 const int aniTime = 240;
 
@@ -131,7 +126,7 @@ String getIcon(TYPE t) {
     case TYPE.E_CREAM:
       return 'assets/icon/cream.svg';
     default:
-      return 'assets/icon/star.svg';
+      return 'assets/icon/cold.svg';
   }
 }
 
@@ -165,7 +160,9 @@ String getOilTypeText(int n) {
 ///[2] - 강조, 활성화(버튼),
 ///[4] - 비활성화 버튼
 Color getThemeColor(int idx, int colorIdx) {
-  if(idx < 3) {
+  if(idx == -1) {
+    return oilThemeColor[colorIdx];
+  } else if(idx < 3) {
     return soapThemeColor[idx][colorIdx];
   } else {
     return beautyThemeColor[idx - 3][colorIdx];
