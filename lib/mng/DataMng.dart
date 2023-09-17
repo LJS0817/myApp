@@ -193,7 +193,7 @@ class DataMng with ChangeNotifier {
   ///16 ~ 19 - 유화제
   ///20 - 총용량
   String? getValue(int idx) {
-    return (data.values[idx] == null || data.values[idx] == "") ? data.default_values[idx] : data.values[idx];
+    return (data.values[idx] == null || data.values[idx] == ""|| data.values[idx] == "null") ? data.default_values[idx] : data.values[idx];
   }
 
 
@@ -274,27 +274,100 @@ Map<int, String> parseString(String str) {
   return result;
 }
 
-///데이터 구분은 ?
+
 ///배열 내 구분은 @
+///```
 ///[0] - 이름,
 ///[1] - 타입,
 ///[2] - 날짜,
 ///[3] - 무게,
 Data parseData(String str) {
+  log(str);
   List<String> strList = str.split('?');
 
-  Data result = Data(nameStr: strList[0], t: parseTYPE(strList[1]), dateStr: strList[2]);
-  result.skinType = parseSKINTYPE(strList[7]);
-  result.weight = json.decode(strList[3]).cast<int>().toList();
-  result.values = parseString(strList[4]);
+  // Data result = Data(nameStr: strList[0], t: parseTYPE(strList[1]), dateStr: strList[2]);
+  Data result = Data();
+  if(!str.contains('nul')) {
+    result.name = strList[0];
+    result.date = strList[2];
+    result.type = parseTYPE(strList[1]);
 
-  List<String> dataList = strList[5].replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '').replaceAll('},', '}@').split('@');
-  result.data[0] = parseString(dataList[0]);
-  result.data[1] = parseString(dataList[1]);
-  result.data[2] = parseString(dataList[2]);
-  result.data[3] = parseString(dataList[3]);
+    result.skinType = parseSKINTYPE(strList[7]);
+    result.weight = json.decode(strList[3]).cast<int>().toList();
+    result.values = parseString(strList[4]);
 
-  result.memo = strList[6];
+    List<String> dataList = strList[5].replaceAll('[', '').replaceAll(']', '').replaceAll(' ', '').replaceAll('},', '}@').split('@');
+    result.data[0] = parseString(dataList[0]);
+    result.data[1] = parseString(dataList[1]);
+    result.data[2] = parseString(dataList[2]);
+    result.data[3] = parseString(dataList[3]);
+
+    result.memo = strList[6];
+  } else {
+    List<String> newLineList = str.split('\n');
+    strList = newLineList[0].split(',');
+
+    result.name = strList[0];
+    result.date = strList[1];
+    result.type = parseTYPE(strList[3]);
+
+    result.weight[0] = int.parse(strList[8].replaceAll('g', ''));
+    result.weight[1] = int.parse(strList[9].replaceAll('g', ''));
+
+    result.values[0] = getValue(0, strList[4], result)!;
+    result.values[1] = getValue(1, strList[5], result)!;
+    result.values[2] = getValue(2, strList[6].split('%')[0], result)!;
+
+
+    result.memo = strList[28];
+
+    strList = strList[2].split('|');
+    for(int i = 0; i < strList.length && strList.toString() != "[]"; i++) {
+      String name = strList[i].split(' [')[0];
+      String data = strList[i].split(':')[1].replaceAll(" ", "").replaceAll("g", '').replaceAll('`', '');
+      result.data[2][-i - 2] = '$data`$name';
+    }
+
+    strList = newLineList[2].split('`');
+    for(int i = 0; i < strList.length && strList.toString() != "[]"; i++) {
+      List<String> str = strList[i].split(',');
+      result.data[0][int.parse(str[2])] = '${str[3].replaceAll('g', '')}`${str[1]}`${str[4]}';
+    }
+
+    strList = newLineList[3].split('`');
+    for(int i = 0; i < strList.length && strList.toString() != "[]"; i++) {
+      List<String> str = strList[i].split(',');
+      result.data[1][int.parse(str[2])] = '${str[3].replaceAll('g', '')}`${str[1]}';
+    }
+
+    strList = newLineList[5].replaceAll(',', '\$').split('\$');
+    List<String> hotData = [];
+    log(strList.length.toString());
+    for(int i = 0; i < strList.length - 2 && strList.toString() != "[]"; i++) {
+      if(i == 2) continue;
+      String str = strList[i];
+      str = str.replaceRange(str.indexOf('%'), null, '');
+      if(i > 2) {
+        str = str.replaceRange(0, str.indexOf('(') + 1, '');
+      }
+      log(str);
+      hotData.add(str);
+    }
+    if(hotData.toString() != "[]") {
+      result.values[3] = hotData[0];
+      result.values[4] = hotData[3];
+      result.values[5] = hotData[4];
+      result.values[6] = hotData[1];
+      result.values[7] = hotData[2];
+    }
+
+    log(result.toString());
+  }
+
 
   return result;
+}
+
+String? getValue(int idx, String target, Data d) {
+  return (target == null || target == ""|| target == "null") ? d.default_values[idx] : target;
 }

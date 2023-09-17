@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 import 'package:provider/provider.dart';
@@ -15,18 +17,19 @@ class StepView extends StatelessWidget {
   int pageIndex = 0;
 
   Widget Dot(bool isShown) {
-    return  Container(
-      width: 7,
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      width: isShown ? 20 : 7,
       height: 7,
       decoration: BoxDecoration(
-        color: isShown ? getThemeColor(colorIndex, 3) : getThemeColor(colorIndex, 0),
+        color: isShown ? getThemeColor(colorIndex, 0) : getThemeColor(colorIndex, 3),
         borderRadius: BorderRadius.circular(100),
       ),
     );
   }
 
   bool getChecked(int idx) {
-    return pageIndex <= idx;
+    return pageIndex == idx;
   }
 
   @override
@@ -42,7 +45,7 @@ class StepView extends StatelessWidget {
           padding: EdgeInsets.zero,
           itemCount: context.watch<PageMng>().MAX_INDEX(colorIndex) + (colorIndex == 1 ? 0 : 1),
           itemBuilder: (BuildContext context, int index) {
-            return Center(child: Container(margin: const EdgeInsets.symmetric(horizontal: 12), child: Dot(getChecked(index)),));
+            return Center(child: Container(margin: const EdgeInsets.symmetric(horizontal: 12), child: Dot(getChecked(index + 1)),));
           },
         ),
       ),

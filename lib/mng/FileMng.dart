@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 class FileMng with ChangeNotifier {
   String dataPath = 'assets/data.csv';
-  List files = [];
+  // List files = [];
 
   List<Map<String, String>> data = [
     {}, {}, {}
@@ -21,49 +21,67 @@ class FileMng with ChangeNotifier {
 
 
   Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
+    final directory = await getExternalStorageDirectory();
+    return directory!.path;
   }
 
   Future<void> load() async {
     String path = await _localPath;
-    Directory dir = Directory(path);
+    // Directory dir = Directory(path);
 
-    files = dir.listSync();
-    if(!files.toString().contains("userData")) {
-
-      Directory('$path/userData').createSync();
-
-      path = "$path/userData";
-      Directory('$path/soap').createSync();
-      Directory('$path/beauty').createSync();
-      Directory('$path/oil').createSync();
-      Directory('$path/config').createSync();
-
-      files = dir.listSync();
-    } else {
-      path = "$path/userData";
-    }
+    // files = dir.listSync();
+    Directory('$path/UserData_Recipe').createSync();
+    Directory('$path/UserData_Oil').createSync();
+    Directory('$path/UserData_Beauty').createSync();
+    Directory('$path/UserData_Config').createSync();
+    // files = dir.listSync();
+    //
+    // if(!files.toString().contains("userData")) {
+    //
+    //   Directory('$path/userData').createSync();
+    //
+    //   path = "$path/userData";
+    //   Directory('$path/soap').createSync();
+    //   Directory('$path/beauty').createSync();
+    //   Directory('$path/oil').createSync();
+    //   Directory('$path/config').createSync();
+    //
+    //   files = dir.listSync();
+    // } else {
+    //   path = "$path";
+    // }
   }
 
   int getIndex(String str) {
-    if(str == 'soap') {
+    if(str == 'UserData_Recipe') {
       return 0;
-    } else if(str == "beauty") {
+    } else if(str == "UserData_Beauty") {
       return 1;
     } else {
       return 2;
     }
   }
 
+  String getPath(int index) {
+    if(index == 0) {
+      return "UserData_Recipe";
+    } else if(index == 1) {
+      return "UserData_Beauty";
+    } else if(index == 2) {
+      return "UserData_Oil";
+    } else {
+      return "UserData_Config";
+    }
+  }
+
   Future<String> readDirectory(String str, int idx) async {
     try {
       String path = await _localPath;
-      path = "$path/userData";
-      Directory dir = Directory('$path/$str/');
+      Directory dir = Directory('$path/${getPath(idx)}/');
 
 
       List fileList = dir.listSync();
+      log(fileList.toString());
       for(int i = 0; i < fileList.length; i++) {
         File file = fileList[i];
 
@@ -85,7 +103,6 @@ class FileMng with ChangeNotifier {
   Future<String> readFile(String name, String type) async {
     try {
       String path = await _localPath;
-      path = "$path/userData";
       File file = File('$path/$type/$name.txt');
 
 
@@ -99,9 +116,22 @@ class FileMng with ChangeNotifier {
     }
   }
 
+  Future<int> deleteFile(String name, int index) async {
+    try {
+      String path = await _localPath;
+      path = "$path/${getPath(index)}/$name.txt";
+      await File(path).delete();
+      data[index].remove(name);
+      notifyListeners();
+      return 1;
+    } catch(e) {
+      log(e.toString());
+      return 0;
+    }
+  }
+
   Future<File> writeFile(String name, String type, String str) async {
     String path = await _localPath;
-    path = "$path/userData";
     final file = File('$path/$type/$name.txt');
 
     // Write the file

@@ -17,6 +17,10 @@ class Oil {
     required this.fat,
   });
 
+  double getFat(FAT_TYPE type) {
+    return fat.elementAt(type.index);
+  }
+
   @override
   String toString() {
     return "$korean, $english, $NaOH,$KOH, ${fat[0]}, ${fat[1]}, ${fat[2]}, ${fat[3]}, ${fat[4]}, "

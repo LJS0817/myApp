@@ -26,8 +26,10 @@ const int aniTime = 240;
 TYPE parseTYPE(String str) {
   switch(str) {
     case '0':
+    case "SOLID":
       return TYPE.E_COLD;
     case '1':
+    case 'H.P.':
       return TYPE.E_HOT;
     case '2':
       return TYPE.E_PASTE;

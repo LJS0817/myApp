@@ -35,7 +35,7 @@ class OilDetailContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           onTap: () {
-            Provider.of<Mng>(context, listen: false).showResultView(null, context);
+            Provider.of<Mng>(context, listen: false).showResultView(null, context, oil: data);
           },
           splashColor: getThemeColor(-1, 1).withOpacity(0.5),
           highlightColor: getThemeColor(-1, 1).withOpacity(0.5),
