@@ -120,7 +120,7 @@ class FileMng with ChangeNotifier {
   Future<int> deleteFile(String name, int index) async {
     try {
       String path = await _localPath;
-      path = "$path/${getPath(index)}/$name";
+      path = "$path/${getPath(index)}/$name${name.contains(".txt") ? "" : ".txt"}";
       await File(path).delete();
       data[index].remove(name);
       notifyListeners();
