@@ -306,11 +306,18 @@ Data parseData(String str) {
     List<String> newLineList = str.split('\n');
     strList = newLineList[0].split(',');
 
-    result.name = strList[0];
-    result.date = strList[1];
-    result.type = parseTYPE(strList[3]);
 
-    result.weight[0] = int.parse(strList[8].replaceAll('g', ''));
+    if(strList.length < 30) {
+      result.name = strList[0];
+      result.date = strList[1];
+      result.type = parseTYPE(strList[3]);
+      result.weight[0] = int.parse(strList[8].replaceAll('g', ''));
+    } else {
+      result.name = "${strList[0]}, ${strList[1]}";
+      result.date = strList[2];
+      result.type = parseTYPE(strList[4]);
+      result.weight[0] = int.parse(strList[9].replaceAll('g', ''));
+    }
 
     result.values[0] = getValue(0, strList[4], result)!;
     result.values[1] = getValue(1, strList[5], result)!;
@@ -318,7 +325,14 @@ Data parseData(String str) {
 
     result.memo = strList[28].replaceAll('|', '\n');
 
-    strList = strList[2].split('|');
+    log(strList.toString());
+
+    if(strList.length < 30) {
+      strList = strList[2].split('|');
+    } else {
+      strList = strList[3].split('|');
+    }
+    log(strList.toString());
     for(int i = 0; i < strList.length && strList.toString() != "[]"; i++) {
       String name = strList[i].split(' [')[0];
       String data = strList[i].split(':')[1].replaceAll(" ", "").replaceAll("g", '').replaceAll('`', '');

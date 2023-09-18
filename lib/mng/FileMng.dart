@@ -81,6 +81,8 @@ class FileMng with ChangeNotifier {
 
 
       List fileList = dir.listSync();
+      log(dir.path.toString());
+
       for(int i = 0; i < fileList.length; i++) {
         File file = fileList[i];
 
@@ -118,7 +120,7 @@ class FileMng with ChangeNotifier {
   Future<int> deleteFile(String name, int index) async {
     try {
       String path = await _localPath;
-      path = "$path/${getPath(index)}/$name.txt";
+      path = "$path/${getPath(index)}/$name";
       await File(path).delete();
       data[index].remove(name);
       notifyListeners();
