@@ -274,6 +274,27 @@ Map<int, String> parseString(String str) {
   return result;
 }
 
+List<String> checkOverFlow(List<String> d, int maxIndex) {
+  List<String> result = [];
+  if(maxIndex == d.length) return d;
+  result = d;
+  try {
+    int.parse(d[1].replaceAll('-', ''));
+  } catch (e) {
+    result[0] = "${result[0]}@ ${result[1]}";
+    result.removeAt(1);
+  }
+
+  try {
+    d[2].split(':')[2].replaceAll(" ", "").replaceAll("g", '').replaceAll('`', '');
+  } catch (e) {
+    result[2] = "${d[2]}, ${d[3]}";
+    result.removeAt(3);
+  }
+
+  return result;
+}
+
 
 ///배열 내 구분은 @
 ///```
@@ -306,33 +327,19 @@ Data parseData(String str) {
     List<String> newLineList = str.split('\n');
     strList = newLineList[0].split(',');
 
+    strList = checkOverFlow(strList, 29);
 
-    if(strList.length < 30) {
-      result.name = strList[0];
-      result.date = strList[1];
-      result.type = parseTYPE(strList[3]);
-      result.weight[0] = int.parse(strList[8].replaceAll('g', ''));
-    } else {
-      result.name = "${strList[0]}, ${strList[1]}";
-      result.date = strList[2];
-      result.type = parseTYPE(strList[4]);
-      result.weight[0] = int.parse(strList[9].replaceAll('g', ''));
-    }
-
+    result.name = strList[0];
+    result.date = strList[1];
+    result.type = parseTYPE(strList[3]);
+    result.weight[0] = int.parse(strList[8].replaceAll('g', ''));
     result.values[0] = getValue(0, strList[4], result)!;
     result.values[1] = getValue(1, strList[5], result)!;
     result.values[2] = getValue(2, strList[6].split('%')[0], result)!;
 
-    result.memo = strList[28].replaceAll('|', '\n');
+    result.memo = strList.getRange(28, (strList.length - 1 == 28 ? 29 : strList.length - 1)).join(', ').replaceAll('|', '\n');
 
-    log(strList.toString());
-
-    if(strList.length < 30) {
-      strList = strList[2].split('|');
-    } else {
-      strList = strList[3].split('|');
-    }
-    log(strList.toString());
+    strList = strList[2].split('|');
     for(int i = 0; i < strList.length && strList.toString() != "[]"; i++) {
       String name = strList[i].split(' [')[0];
       String data = strList[i].split(':')[1].replaceAll(" ", "").replaceAll("g", '').replaceAll('`', '');
