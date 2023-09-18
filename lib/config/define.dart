@@ -32,6 +32,7 @@ TYPE parseTYPE(String str) {
     case 'H.P.':
       return TYPE.E_HOT;
     case '2':
+    case 'PASTE':
       return TYPE.E_PASTE;
     case '3':
       return TYPE.E_SKIN;
