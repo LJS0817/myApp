@@ -20,11 +20,14 @@ class PageMng with ChangeNotifier {
   ];
   final int SOAP_MAX_INDEX = 3;
   final int BEAUTY_MAX_INDEX = 4;
+  final int OIL_MAX_INDEX = 1;
   int MAX_INDEX(int type) {
     if(type < 3) {
       return SOAP_MAX_INDEX;
-    } else {
+    } else if(type < 7) {
       return BEAUTY_MAX_INDEX;
+    } else {
+      return OIL_MAX_INDEX;
     }
   }
 
