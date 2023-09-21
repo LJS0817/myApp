@@ -18,16 +18,16 @@ class PageMng with ChangeNotifier {
     '/tabs/oil',
     '/tabs/config'
   ];
-  final int SOAP_MAX_INDEX = 3;
-  final int BEAUTY_MAX_INDEX = 4;
+  final int SOAP_MAX_INDEX = 4;
+  final int BEAUTY_MAX_INDEX = 5;
   final int OIL_MAX_INDEX = 1;
   int MAX_INDEX(int type) {
     if(type < 3) {
-      return SOAP_MAX_INDEX;
+      return SOAP_MAX_INDEX - 1;
     } else if(type < 7) {
-      return BEAUTY_MAX_INDEX;
+      return BEAUTY_MAX_INDEX - 1;
     } else {
-      return OIL_MAX_INDEX;
+      return OIL_MAX_INDEX - 1;
     }
   }
 
@@ -89,8 +89,10 @@ class PageMng with ChangeNotifier {
   int typeToInt(TYPE type) {
     if(type.index < 3) {
       return 0;
-    } else {
+    } else if(type.index < 7) {
       return 1;
+    } else {
+      return 2;
     }
   }
 

@@ -20,6 +20,7 @@ class Footer extends StatelessWidget {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
     FileMng fileMngProvider = Provider.of<FileMng>(context);
+
     return SizedBox(
       height: 70,
       child: Row(
@@ -135,13 +136,15 @@ class Footer extends StatelessWidget {
                           dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
                               mngProvider.resultWater.round() + mngProvider.resultLye.round();
                         }
-                      } else {
+                      } else if(dataMngProvider.getTypeIndex() < 7) {
                         String result = "";
                         dataMngProvider.data.weight[4] = 0;
                         for(int i = 0; i < dataMngProvider.data.data[3].values.length; i++) {
                           result = dataMngProvider.data.data[3].values.elementAt(i).split('`')[0];
                           dataMngProvider.data.weight[4] += int.parse(result);
                         }
+                      } else {
+                        log(dataMngProvider.getOilData().toString());
                       }
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());

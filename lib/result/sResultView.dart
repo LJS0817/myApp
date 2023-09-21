@@ -462,7 +462,7 @@ class sResultView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                         onTap: () {
                           pageMng.index = 0;
-                          dataMng.initData(menuMng.index == 1);
+                          dataMng.initData(menuMng.index);
                           dataMng.data = data.selectData;
                           dataMng.data.weight[0] = dataMng.data.weight[1] + dataMng.data.weight[2];
                           data.init();

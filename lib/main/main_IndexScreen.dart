@@ -179,7 +179,7 @@ Widget BottomBar(BuildContext context) {
                   onTap: () {
 
                     pageMng.index = 0;
-                    dataMng.initData(menuMng.index == 1);
+                    dataMng.initData(menuMng.index);
                     dataMng.selectFileName = "";
                     mng.selectData = Data();
                     menuMng.init();

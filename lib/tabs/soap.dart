@@ -39,8 +39,8 @@ class SoapWorkspace extends StatelessWidget {
               Column(
                 children: [
                   Header(),
-                  context.watch<PageMng>().getCurPage(true),
-                  StepView(dataMng.getTypeIndex(), context.watch<PageMng>().index + 1),
+                  pageMng.getCurPage(true),
+                  StepView(dataMng.getTypeIndex(), pageMng.index + 1),
                   Footer(),
                 ],
               ),

@@ -8,6 +8,7 @@ import '../mng/PageMng.dart';
 
 class StepView extends StatelessWidget {
   StepView(int idx, int page, {super.key}) {
+    log(idx.toString());
     colorIndex = idx;
     pageIndex = page;
   }
@@ -43,7 +44,7 @@ class StepView extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.zero,
-          itemCount: context.watch<PageMng>().MAX_INDEX(colorIndex) + (colorIndex == 1 ? 0 : 1),
+          itemCount: context.watch<PageMng>().MAX_INDEX(colorIndex) + 1,
           itemBuilder: (BuildContext context, int index) {
             return Center(child: Container(margin: const EdgeInsets.symmetric(horizontal: 12), child: Dot(getChecked(index + 1)),));
           },

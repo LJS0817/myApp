@@ -163,7 +163,7 @@ String getOilTypeText(int n) {
 ///[2] - 강조, 활성화(버튼),
 ///[4] - 비활성화 버튼
 Color getThemeColor(int idx, int colorIdx) {
-  if(idx == -1) {
+  if(idx == -1 || idx == 7) {
     return oilThemeColor[colorIdx];
   } else if(idx < 3) {
     return soapThemeColor[idx][colorIdx];

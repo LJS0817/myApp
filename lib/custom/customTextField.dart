@@ -16,6 +16,9 @@ class CustomTextField extends StatelessWidget {
 
   bool needBackground = true;
   bool needLabel = false;
+  bool onlyNumber = false;
+
+  bool needBorder = true;
 
   late Function onChange;
   bool isMultipleLine = false;
@@ -23,7 +26,7 @@ class CustomTextField extends StatelessWidget {
 
   TextEditingController controller = TextEditingController();
 
-  CustomTextField(Function func, {bool multipleLine = false, bool needLb = false, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String defaultValue="", String str="", double height=50, int maxLines=1, double radius=100, super.key}) {
+  CustomTextField(Function func, {bool multipleLine = false, bool needLb = false, bool onlyNum = false, bool needBor = true, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String defaultValue="", String str="", double height=50, int maxLines=1, double radius=100, super.key}) {
     isActive = active;
     needBackground = needBg;
     _height = height;
@@ -34,9 +37,20 @@ class CustomTextField extends StatelessWidget {
     isMultipleLine = multipleLine;
     _default = defaultValue;
     controller.text = str;
+    onlyNumber = onlyNum;
+
+    needBorder = needBor;
 
     needLabel = needLb;
     labelText = labelTxt;
+  }
+
+  String getOnlyOneDot(String data) {
+    if(data.split('.').length < 3 || (!onlyNumber && !needLabel)) return data;
+    String result = data.substring(data.indexOf('.') + 1);
+    result = result.replaceAll('.', "");
+    result = "${data.split('.')[0]}.$result";
+    return result;
   }
 
   @override
@@ -75,29 +89,26 @@ class CustomTextField extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: needLabel ? BorderRadius.only(bottomLeft: Radius.circular(_radius), bottomRight: Radius.circular(_radius), topRight: Radius.circular(_radius)) : BorderRadius.circular(_radius),
               color: getThemeColor(themeIndex, needBackground ? 1 : 0),
-              border: Border.all(color: getThemeColor(themeIndex, 0), width: 3)
+              border: Border.all(color: getThemeColor(themeIndex, 0), width: needBorder ? 3 : 0)
           ),
           child: Focus(
             onFocusChange: (hasFocus) {
               if(!hasFocus) {
-                onChange(controller.text);
+                onChange(getOnlyOneDot(controller.text));
                 FocusManager.instance.primaryFocus?.unfocus();
               } else {
+
               }
             },
             child: TextField(
               controller: controller,
               readOnly: !isActive,
               maxLines: _maxLines,
-              keyboardType: needLabel ? const TextInputType.numberWithOptions(decimal: true) : TextInputType.multiline,
+              keyboardType: onlyNumber || needLabel ? const TextInputType.numberWithOptions(decimal: true) : TextInputType.multiline,
               textInputAction: _maxLines > 10 ? TextInputAction.newline : TextInputAction.done,
               onSubmitted: (_) => {
-                if(_.toString().split('.').length > 1) {
-                  log("ERROR"),
-                } else {
-                  onChange(_.toString()),
-                  FocusScope.of(context).unfocus(),
-                }
+                onChange(getOnlyOneDot(_.toString())),
+                FocusScope.of(context).unfocus(),
               },
               onChanged: (_) {
                 if(isMultipleLine) {
@@ -105,15 +116,17 @@ class CustomTextField extends StatelessWidget {
                 }
               },
               inputFormatters: needLabel ? [
-                FilteringTextInputFormatter.deny(RegExp('[,A-Za-z]'))
-              ] : [],
+                FilteringTextInputFormatter.deny(RegExp('[\$,A-Za-z]'))
+              ] : [
+                FilteringTextInputFormatter.deny(RegExp('[\$,]')),
+              ],
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: _default,
                 hintStyle: TextStyle(
                   color: getThemeColor(themeIndex, needBackground ? 0 : 1),
                   fontWeight: FontWeight.bold,
-                  height: _maxLines == 3 || _maxLines > 10 ? 1 : 0,
+                  height: 1,
                 ),
               ),
               style: TextStyle(

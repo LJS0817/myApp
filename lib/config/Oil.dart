@@ -7,7 +7,6 @@ class Oil {
   double NaOH = 0.0;
   double KOH = 0.0;
   List<double> fat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
-  bool marked = false;
 
   Oil({
     required this.korean,

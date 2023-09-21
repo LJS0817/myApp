@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:isma/config/Oil.dart';
 
 import 'package:isma/config/define.dart';
 
@@ -97,15 +98,49 @@ class Data {
 class DataMng with ChangeNotifier {
 
   Data data = Data();
+  Oil? _oil;
 
   String selectFileName = "";
 
-  void initData(bool isBeauty) {
+  void initData(int idx) {
     data = Data();
-    data.type = isBeauty ? TYPE.E_SKIN : TYPE.E_COLD;
-    if(isBeauty) {
+    data.type = idx == 1 ? TYPE.E_SKIN : (idx == 2 ? TYPE.E_ETC : TYPE.E_COLD);
+    _oil = null;
+    if(idx == 1) {
       data.weight.add(0);
+    } else if(idx == 2) {
+      _oil = Oil(korean: "", english: "", NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
     }
+  }
+
+  Oil? getOilData() {
+    return _oil;
+  }
+
+  ///```
+  ///0 - NaOH
+  ///1 - KOH
+  ///2 - Lauric
+  ///3 - Myristic
+  ///4 - Palmitic
+  ///5 - Stearic
+  ///6 - Palmitoleic,
+  ///7 - Ricinoleic
+  ///8 - Oleic
+  ///9 - Linoleic
+  ///10 - Linolenic
+  void setOilData(int id, double d) {
+    switch(id) {
+      case 0: _oil!.NaOH = d; break;
+      case 1: _oil!.KOH = d; break;
+      default: _oil!.fat[id - 2] = d; break;
+    }
+    notifyListeners();
+  }
+
+  void setOilName(String name) {
+    _oil!.english = name;
+    notifyListeners();
   }
 
   void setSelectedFileName(String str) {
@@ -253,7 +288,11 @@ class DataMng with ChangeNotifier {
 
   @override
   String toString() {
-    return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo.replaceAll('\n', '|')}?${data.skinType.index}";
+    if(_oil == null) {
+      return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo.replaceAll('\n', '|')}?${data.skinType.index}";
+    } else {
+      return _oil.toString();
+    }
   }
 }
 

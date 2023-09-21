@@ -9,6 +9,10 @@ class FileMng with ChangeNotifier {
   String dataPath = 'assets/data.csv';
   // List files = [];
 
+  ///```
+  ///0 - 비누
+  ///1 - 화장품
+  ///2 - 오일
   List<Map<String, String>> data = [
     {}, {}, {}
   ];
