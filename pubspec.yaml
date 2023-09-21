@@ -16,6 +16,7 @@ dependencies:
   path_provider: ^2.0.13
   flutter_svg:
   path:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:

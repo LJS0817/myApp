@@ -8,6 +8,7 @@ import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:isma/result/resultView.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'package:isma/custom/iconButton.dart';
@@ -218,11 +219,17 @@ Widget BottomBar(BuildContext context) {
   );
 }
 
+Future<bool> requestPermission() async {
+  await Permission.storage.request();
+  return true;
+}
+
 class _IndexScreenState extends State<IndexScreen> {
 
   @override
   void initState() {
     super.initState();
+    requestPermission();
   }
 
   @override
@@ -233,8 +240,9 @@ class _IndexScreenState extends State<IndexScreen> {
       log("실패");
       loadAsset(context);
       FileMng fileMng =  Provider.of<FileMng>(context, listen: false);
+      OilMng oilMng =  Provider.of<OilMng>(context, listen: false);
       fileMng.load();
-      fileMng.readDirectory('soap', 0).then((value) => fileMng.readDirectory('beauty', 1).then((value) => fileMng.readDirectory('oil', 2)));
+      fileMng.readDirectory('soap', 0).then((value) => fileMng.readDirectory('beauty', 1).then((value) => fileMng.readDirectory('oil', 2).then((value) => oilMng.syncUserData(fileMng.data[2].values.toList()))));
       Mng.isLoad = true;
     }
   }

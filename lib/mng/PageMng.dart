@@ -81,8 +81,10 @@ class PageMng with ChangeNotifier {
   String typeToString(TYPE type) {
     if(type.index < 3) {
       return 'UserData_Recipe';
-    } else {
+    } else if(type.index <7) {
       return 'UserData_Beauty';
+    } else {
+      return 'UserData_Oil';
     }
   }
 

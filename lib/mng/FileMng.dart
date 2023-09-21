@@ -85,7 +85,7 @@ class FileMng with ChangeNotifier {
 
 
       List fileList = dir.listSync();
-      log(dir.path.toString());
+      //log(dir.path.toString());
 
       for(int i = 0; i < fileList.length; i++) {
         File file = fileList[i];

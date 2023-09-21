@@ -129,7 +129,8 @@ class DataMng with ChangeNotifier {
   ///8 - Oleic
   ///9 - Linoleic
   ///10 - Linolenic
-  void setOilData(int id, double d) {
+  void setOilData(int id, String str) {
+    double d = str.isEmpty ? 0 : double.parse(str);
     switch(id) {
       case 0: _oil!.NaOH = d; break;
       case 1: _oil!.KOH = d; break;
@@ -139,7 +140,7 @@ class DataMng with ChangeNotifier {
   }
 
   void setOilName(String name) {
-    _oil!.english = name;
+    _oil!.korean = name;
     notifyListeners();
   }
 
@@ -265,6 +266,7 @@ class DataMng with ChangeNotifier {
   }
 
   void setDefaultData() {
+    if(data.type == TYPE.E_ETC) return;
     DateTime date = DateTime.now();
     data.date = date.toString().split(' ')[0];
 
@@ -419,7 +421,7 @@ Data parseData(String str) {
       result.values[7] = hotData[2];
     }
 
-    log(result.toString());
+    //log(result.toString());
   }
 
   return result;

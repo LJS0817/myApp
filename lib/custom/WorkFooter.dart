@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/Mng.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class Footer extends StatelessWidget {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
     FileMng fileMngProvider = Provider.of<FileMng>(context);
+    OilMng oilMngProvider = Provider.of<OilMng>(context);
 
     return SizedBox(
       height: 70,
@@ -119,8 +121,8 @@ class Footer extends StatelessWidget {
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(30)),
                 child: InkWell(
                   onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     if(pageMngProvider.index >= pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex())) {
-                      log("IN");
                       String fileName = "";
                       if(dataMngProvider.getSelectedFileName().isNotEmpty) {
                         fileName = dataMngProvider.getSelectedFileName();
@@ -144,13 +146,12 @@ class Footer extends StatelessWidget {
                           dataMngProvider.data.weight[4] += int.parse(result);
                         }
                       } else {
-                        log(dataMngProvider.getOilData().toString());
+                        oilMngProvider.addOil(dataMngProvider.getOilData()!);
                       }
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();
                     } else {
-                      FocusManager.instance.primaryFocus?.unfocus();
                       pageMngProvider.nextPage(dataMngProvider.getTypeIndex());
                     }
                   },

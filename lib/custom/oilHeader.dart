@@ -42,7 +42,7 @@ class OilHeader extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              dataMng.getOilData()!.english,
+                              dataMng.getOilData()!.korean,
                               style: TextStyle(
                                 color: getThemeColor(-1, 0),
                                 fontSize: 15,

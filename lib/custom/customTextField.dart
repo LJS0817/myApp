@@ -46,8 +46,9 @@ class CustomTextField extends StatelessWidget {
   }
 
   String getOnlyOneDot(String data) {
-    if(data.split('.').length < 3 || (!onlyNumber && !needLabel)) return data;
-    String result = data.substring(data.indexOf('.') + 1);
+    String result = data.replaceAll(' ', '');
+    if(data.split('.').length < 3 || (!onlyNumber && !needLabel)) return result;
+    result = data.substring(data.indexOf('.') + 1);
     result = result.replaceAll('.', "");
     result = "${data.split('.')[0]}.$result";
     return result;

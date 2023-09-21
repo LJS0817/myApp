@@ -22,8 +22,7 @@ class Oil {
 
   @override
   String toString() {
-    return "$korean, $english, $NaOH,$KOH, ${fat[0]}, ${fat[1]}, ${fat[2]}, ${fat[3]}, ${fat[4]}, "
-        "${fat[5]}, ${fat[6]}, ${fat[7]}, ${fat[8]}";
+    return "$korean,$english,$NaOH,$KOH,${fat[0]},${fat[1]},${fat[2]},${fat[3]},${fat[4]},${fat[5]},${fat[6]},${fat[7]},${fat[8]}";
   }
 
   String getName() {

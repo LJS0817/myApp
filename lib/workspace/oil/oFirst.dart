@@ -40,24 +40,34 @@ class oFirstView extends StatelessWidget {
               ),
               Container(
                 width: 200,
-                child: TextField(
-                  controller: controller,
-                  textAlign: TextAlign.right,
-                  textInputAction: TextInputAction.done,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                  style: TextStyle(
-                    color: getThemeColor(-1, 1),
-                    fontWeight: FontWeight.bold,
+                child: Focus(
+                  onFocusChange: (hasFocus) {
+                    if(!hasFocus) {
+                      func(controller.text);
+                    }
+                  },
+                  child: TextField(
+                    controller: controller,
+                    textAlign: TextAlign.right,
+                    textInputAction: TextInputAction.done,
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    style: TextStyle(
+                      color: getThemeColor(-1, 1),
+                      fontWeight: FontWeight.bold,
+                    ),
+                    onSubmitted: (_) {
+                      func(_);
+                    },
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: defaultValue,
+                        hintStyle: TextStyle(
+                          color: getThemeColor(-1, 1),
+                          fontWeight: FontWeight.bold,
+                        )
+                    ),
                   ),
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: defaultValue,
-                      hintStyle: TextStyle(
-                        color: getThemeColor(-1, 1),
-                        fontWeight: FontWeight.bold,
-                      )
-                  ),
-                ),
+                )
               ),
             ],
           ),
@@ -84,10 +94,9 @@ class oFirstView extends StatelessWidget {
                 color: getThemeColor(-1, 0),
               ),
             ),
-            CustomTextField((_) { dataMng.setOilName(_.toString()); }, index: -1, active: true, radius: 15, defaultValue: dataMng.getOilData()!.english,),
+            CustomTextField((_) { dataMng.setOilName(_.toString()); }, index: -1, active: true, radius: 15, defaultValue: dataMng.getOilData()!.korean,),
 
             const Padding(padding: EdgeInsets.only(top: 20)),
-
 
 
             Row(
@@ -117,7 +126,7 @@ class oFirstView extends StatelessWidget {
                             ),
                           ),
                           const Padding(padding: EdgeInsets.only(bottom: 3)),
-                          CustomTextField((_) { log(double.parse(_).toString()); dataMng.setOilData(0, double.parse(_)); }, onlyNum: true, index: -1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.NaOH.toString(),),
+                          CustomTextField((_) { log(_.toString()); dataMng.setOilData(0, _); }, onlyNum: true, index: -1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.NaOH.toString(),),
                         ],
                       ),
                     )
@@ -147,7 +156,7 @@ class oFirstView extends StatelessWidget {
                           ),
                         ),
                         const Padding(padding: EdgeInsets.only(bottom: 3)),
-                        CustomTextField((_) { dataMng.setOilData(1, double.parse(_)); }, onlyNum: true, index: -1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.KOH.toString(),),
+                        CustomTextField((_) { dataMng.setOilData(1, _); }, onlyNum: true, index: -1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.KOH.toString(),),
                       ],
                     ),
                   )
@@ -178,16 +187,16 @@ class oFirstView extends StatelessWidget {
                     ),
                   ),
 
-                  oilTextFiled((_) {}, "Lauric", dataMng.getOilData()!.fat[0].toString(), isFirst: true),
-                  oilTextFiled((_) {}, "Myristic", dataMng.getOilData()!.fat[1].toString()),
-                  oilTextFiled((_) {}, "Palmitic", dataMng.getOilData()!.fat[2].toString()),
-                  oilTextFiled((_) {}, "Stearic", dataMng.getOilData()!.fat[3].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(2, _.toString().isEmpty ? dataMng.getOilData()!.fat[0].toString() : _); },"Lauric", dataMng.getOilData()!.fat[0].toString(), isFirst: true),
+                  oilTextFiled((_) { dataMng.setOilData(3, _.toString().isEmpty ? dataMng.getOilData()!.fat[1].toString() : _); }, "Myristic", dataMng.getOilData()!.fat[1].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(4, _.toString().isEmpty ? dataMng.getOilData()!.fat[2].toString() : _); }, "Palmitic", dataMng.getOilData()!.fat[2].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(5, _.toString().isEmpty ? dataMng.getOilData()!.fat[3].toString() : _); }, "Stearic", dataMng.getOilData()!.fat[3].toString()),
 
-                  oilTextFiled((_) {}, "Palmitoleic", dataMng.getOilData()!.fat[4].toString()),
-                  oilTextFiled((_) {}, "Ricinoleic", dataMng.getOilData()!.fat[5].toString()),
-                  oilTextFiled((_) {}, "Oleic", dataMng.getOilData()!.fat[6].toString()),
-                  oilTextFiled((_) {}, "Linoleic", dataMng.getOilData()!.fat[7].toString()),
-                  oilTextFiled((_) {}, "Linolenic", dataMng.getOilData()!.fat[8].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(6, _.toString().isEmpty ? dataMng.getOilData()!.fat[4].toString() : _); }, "Palmitoleic", dataMng.getOilData()!.fat[4].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(7, _.toString().isEmpty ? dataMng.getOilData()!.fat[5].toString() : _); }, "Ricinoleic", dataMng.getOilData()!.fat[5].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(8, _.toString().isEmpty ? dataMng.getOilData()!.fat[6].toString() : _); }, "Oleic", dataMng.getOilData()!.fat[6].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(9, _.toString().isEmpty ? dataMng.getOilData()!.fat[7].toString() : _); }, "Linoleic", dataMng.getOilData()!.fat[7].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(10, _.toString().isEmpty ? dataMng.getOilData()!.fat[8].toString() : _); }, "Linolenic", dataMng.getOilData()!.fat[8].toString()),
                 ],
               ),
             )
