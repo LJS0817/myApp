@@ -17,7 +17,11 @@ class mainOilScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10),
         itemCount: oilMng.length(),
         itemBuilder: (BuildContext context, int index) {
-          return OilDetailContainer(index, oilMng.oils(index));
+          if(index < oilMng.userOils.length) {
+            return OilDetailContainer(index + oilMng.default_oils.length, oilMng.oils(index + oilMng.default_oils.length));
+          } else {
+            return OilDetailContainer(index - oilMng.userOils.length, oilMng.oils(index - oilMng.userOils.length));
+          }
         },
       ),
     );

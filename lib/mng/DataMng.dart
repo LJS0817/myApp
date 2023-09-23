@@ -109,7 +109,7 @@ class DataMng with ChangeNotifier {
     if(idx == 1) {
       data.weight.add(0);
     } else if(idx == 2) {
-      _oil = Oil(korean: "", english: "", NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
+      _oil = Oil(korean: "", english: "사용자 오일", NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
     }
   }
 

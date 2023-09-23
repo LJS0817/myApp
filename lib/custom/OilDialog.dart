@@ -74,7 +74,11 @@ class OilDialog extends StatelessWidget {
                                       child:ListView.builder(
                                         itemCount: oilMng.default_oils.length + oilMng.userOils.length,
                                         itemBuilder: (BuildContext con, int idx) {
-                                          return OilContainer(idx, oilMng.oils(idx).getName());
+                                          if(idx < oilMng.userOils.length) {
+                                            return OilContainer(idx + oilMng.default_oils.length, oilMng.oils(idx + oilMng.default_oils.length).getName());
+                                          } else {
+                                            return OilContainer(idx - oilMng.userOils.length, oilMng.oils(idx - oilMng.userOils.length).getName());
+                                          }
                                         },
                                       ),
                                     ),
