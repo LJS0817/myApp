@@ -7,6 +7,7 @@ import 'package:isma/custom/customTextField.dart';
 import 'package:isma/custom/resultOilBox.dart';
 import 'package:isma/custom/resultOilDetails.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
@@ -33,6 +34,7 @@ class bResultView extends StatelessWidget {
     PageMng pageMng = Provider.of<PageMng>(context);
     DataMng dataMng = Provider.of<DataMng>(context);
     MenuMng menuMng = Provider.of<MenuMng>(context);
+    FileMng fileMng = Provider.of<FileMng>(context);
 
     return Container(
         margin: const EdgeInsets.only(left: 20, right: 20),
@@ -254,29 +256,27 @@ class bResultView extends StatelessWidget {
                     left: 5,
                     top: 10,
                     child: Material(
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(10),
                       color: getThemeColor(themeIndex, 0),
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(10),
                         onTap: () {
-                          pageMng.index = 0;
-                          dataMng.initData(menuMng.index);
-                          dataMng.data = data.selectData;
-                          dataMng.data.weight[0] = dataMng.data.weight[1] + dataMng.data.weight[2];
                           data.init();
-                          pageMng.changeScene(context, menuMng.index);
+                          menuMng.init();
+                          fileMng.deleteFile(dataMng.selectFileName, 1);
+                          dataMng.selectFileName = "";
                         },
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          width: 50,
+                          width: 100,
                           height: 50,
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
-                            borderRadius: BorderRadius.circular(100),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: SvgPicture.asset(
-                            "assets/icon/edit.svg",
+                            "assets/icon/delete.svg",
                             width: 15,
                             height: 15,
                             fit: BoxFit.none,

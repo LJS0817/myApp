@@ -15,12 +15,14 @@ class OilDetailContainer extends StatelessWidget {
   String title = "";
   int index = 0;
   late Oil data;
+  String _path = "";
 
 
-  OilDetailContainer(int idx, Oil oil, {super.key}) {
+  OilDetailContainer(int idx, Oil oil, String path, {super.key}) {
     data = oil;
     title = data.getName();
     index = idx;
+    _path = path;
   }
 
   @override
@@ -35,7 +37,8 @@ class OilDetailContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           onTap: () {
-            Provider.of<Mng>(context, listen: false).showResultView(null, context, oil: data);
+            Provider.of<DataMng>(context, listen: false).setSelectedFileName(_path);
+            Provider.of<Mng>(context, listen: false).showResultView(null, context, oil: data, idx: index);
           },
           splashColor: getThemeColor(-1, 1).withOpacity(0.5),
           highlightColor: getThemeColor(-1, 1).withOpacity(0.5),

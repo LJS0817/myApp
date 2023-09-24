@@ -11,8 +11,10 @@ import 'package:isma/custom/resultOilBox.dart';
 import 'package:isma/custom/resultOilDetails.dart';
 import 'package:isma/custom/resultValueBox.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
+import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 import 'package:isma/custom/graph.dart';
@@ -36,6 +38,8 @@ class oResultView extends StatelessWidget {
     PageMng pageMng = Provider.of<PageMng>(context);
     DataMng dataMng = Provider.of<DataMng>(context);
     MenuMng menuMng = Provider.of<MenuMng>(context);
+    FileMng fileMng = Provider.of<FileMng>(context);
+    OilMng oilMng = Provider.of<OilMng>(context);
 
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20),
@@ -194,35 +198,113 @@ class oResultView extends StatelessWidget {
                 ),
               )
           ),
+
+
           Container(
             margin: const EdgeInsets.only(top: 20),
             height: 70,
-            child:  Center(
-              child: Material(
-                borderRadius: BorderRadius.circular(100),
-                color: getThemeColor(themeIndex, 0),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(100),
-                  onTap: () {
-                    data.hideResultView();
-                  },
-                  splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
-                  highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
-                      borderRadius: BorderRadius.circular(100),
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 5,
+                  top: 10,
+                  child: Visibility(
+                    visible: dataMng.selectFileName.isNotEmpty,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(10),
+                      color: getThemeColor(themeIndex, 0),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () {
+                          data.init();
+                          menuMng.init();
+                          oilMng.removeOil(data.selectOilDataIndex - oilMng.default_oils.length);
+                          fileMng.deleteFile(dataMng.selectFileName, 2);
+                          dataMng.selectFileName = "";
+                        },
+                        splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                        highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                        child: Container(
+                          width: 100,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: SvgPicture.asset(
+                            "assets/icon/delete.svg",
+                            width: 15,
+                            height: 15,
+                            fit: BoxFit.none,
+                            color: getThemeColor(themeIndex, 1),
+                          ),
+                        ),
+                      ),
                     ),
-                    child: SvgPicture.asset(
-                      "assets/icon/close.svg",
-                      color: getThemeColor(themeIndex, 1),
+                  )
+                ),
+                Positioned(
+                  right: 5,
+                  top: 10,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(100),
+                    color: getThemeColor(themeIndex, 0),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(100),
+                      onTap: () {
+                        pageMng.index = 0;
+                        dataMng.initData(menuMng.index, data.selectOil);
+                        data.init();
+                        pageMng.changeScene(context, menuMng.index);
+                      },
+                      splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                      highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: SvgPicture.asset(
+                          "assets/icon/edit.svg",
+                          width: 15,
+                          height: 15,
+                          fit: BoxFit.none,
+                          color: getThemeColor(themeIndex, 1),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                Center(
+                  child: Material(
+                    borderRadius: BorderRadius.circular(100),
+                    color: getThemeColor(themeIndex, 0),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(100),
+                      onTap: () {
+                        data.hideResultView();
+                      },
+                      splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                      highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: SvgPicture.asset(
+                          "assets/icon/close.svg",
+                          color: getThemeColor(themeIndex, 1),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

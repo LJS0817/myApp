@@ -85,17 +85,14 @@ class FileMng with ChangeNotifier {
 
 
       List fileList = dir.listSync();
-      //log(dir.path.toString());
 
       for(int i = 0; i < fileList.length; i++) {
         File file = fileList[i];
 
-
+        // Read the file
         final contents = await file.readAsString();
         setData(idx, basename(file.path), contents);
       }
-      // Read the file
-      //final contents = await file.readAsString();
 
       return 'Done';
     } catch (e) {

@@ -13,6 +13,7 @@ class Mng with ChangeNotifier {
   bool showChart = false;
   Data selectData = Data();
   late Oil? selectOil;
+  int selectOilDataIndex = -1;
 
   double resultLye = 0;
   double resultWater = 0;
@@ -161,10 +162,11 @@ class Mng with ChangeNotifier {
     selectData = Data();
   }
 
-  void showResultView(Data? data, BuildContext context, {Oil? oil}) {
+  void showResultView(Data? data, BuildContext context, {Oil? oil, int idx=-1}) {
     popUpActive = true;
     selectData = data ?? Data();
     selectOil = oil;
+    selectOilDataIndex = idx;
     if(oil != null) {
       selectData.type = TYPE.E_ETC;
     }

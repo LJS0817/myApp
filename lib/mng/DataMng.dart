@@ -17,6 +17,7 @@ class Data {
   String date = "";
   TYPE type = TYPE.E_COLD;
   SKINTYPE skinType = SKINTYPE.E_MINGAM;
+  bool isReturn = false;
 
   ///index
   ///```
@@ -91,7 +92,7 @@ class Data {
 
   @override
   String toString() {
-    return "$name?${type.index}?$date?$weight?$values?$data?$memo?${skinType.index}";
+    return "$name?${isReturn ? "-" : ""}${type.index}?$date?$weight?$values?$data?$memo?${skinType.index}";
   }
 }
 
@@ -102,14 +103,14 @@ class DataMng with ChangeNotifier {
 
   String selectFileName = "";
 
-  void initData(int idx) {
+  void initData(int idx, [Oil? oil]) {
     data = Data();
     data.type = idx == 1 ? TYPE.E_SKIN : (idx == 2 ? TYPE.E_ETC : TYPE.E_COLD);
     _oil = null;
     if(idx == 1) {
       data.weight.add(0);
     } else if(idx == 2) {
-      _oil = Oil(korean: "", english: "사용자 오일", NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
+      _oil = oil ?? Oil(korean: "", english: "사용자 오일", NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
     }
   }
 
@@ -232,6 +233,11 @@ class DataMng with ChangeNotifier {
     return (data.values[idx] == null || data.values[idx] == ""|| data.values[idx] == "null") ? data.default_values[idx] : data.values[idx];
   }
 
+  void setSoapType() {
+    data.isReturn = !data.isReturn;
+    notifyListeners();
+  }
+
 
   ///page : 0 ~ 3까지,
   ///```
@@ -291,7 +297,7 @@ class DataMng with ChangeNotifier {
   @override
   String toString() {
     if(_oil == null) {
-      return "${data.name}?${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo.replaceAll('\n', '|')}?${data.skinType.index}";
+      return "${data.name}?${data.isReturn ? "-" : ""}${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo.replaceAll('\n', '|')}?${data.skinType.index}";
     } else {
       return _oil.toString();
     }
@@ -351,7 +357,8 @@ Data parseData(String str) {
   if(!str.contains('nul')) {
     result.name = strList[0];
     result.date = strList[2];
-    result.type = parseTYPE(strList[1]);
+    result.type = parseTYPE(strList[1].replaceAll('-', ''));
+    result.isReturn = strList[1].contains('-');
 
     result.skinType = parseSKINTYPE(strList[7]);
     result.weight = json.decode(strList[3]).cast<int>().toList();
@@ -421,7 +428,6 @@ Data parseData(String str) {
       result.values[7] = hotData[2];
     }
 
-    //log(result.toString());
   }
 
   return result;

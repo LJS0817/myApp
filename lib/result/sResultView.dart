@@ -89,7 +89,7 @@ class sResultView extends StatelessWidget {
                                     alignment: Alignment.topLeft,
                                     margin: const EdgeInsets.only(left: 20, top: 12),
                                     child: Text(
-                                      typeToString(parseTYPE(themeIndex.toString())),
+                                      "${typeToString(parseTYPE(themeIndex.toString()))}  ${data.selectData.isReturn ? "[ 회수용 ]" : ""}",
                                       style: TextStyle(
                                         color: getThemeColor(themeIndex, 2),
                                         fontWeight: FontWeight.bold,
