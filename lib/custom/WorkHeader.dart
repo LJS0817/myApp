@@ -61,7 +61,7 @@ class Header extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                         Text(
-                          typeToString(dataMngProvider.data.type),
+                          "${typeToString(dataMngProvider.data.type)} ${dataMngProvider.data.isReturn ? "[ 비누화수 ]" : "[ 일반비누 ]"}",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(

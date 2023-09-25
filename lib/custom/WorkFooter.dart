@@ -134,6 +134,9 @@ class Footer extends StatelessWidget {
                         mngProvider.calculateData(dataMngProvider.data, context);
                         if(dataMngProvider.getTypeIndex() == 1) {
                           dataMngProvider.data.weight[0] = mngProvider.resultHot[0] + mngProvider.resultHot[1] + mngProvider.resultHot[4];
+                        } else if(dataMngProvider.data.isReturn) {
+                          dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
+                              (mngProvider.resultWater.round() - (mngProvider.resultLye * 0.5).round()) + mngProvider.resultLye.round();
                         } else {
                           dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
                               mngProvider.resultWater.round() + mngProvider.resultLye.round();

@@ -97,7 +97,7 @@ class FirstView extends StatelessWidget {
                             ),
                             const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
                             Text(
-                              "${dataMngProvider.data.isReturn ? "일반비누용" : "비누회수용"}으로 계산하기",
+                              "${dataMngProvider.data.isReturn ? "일반비누용" : "비누화수용"}으로 계산하기",
                               style: TextStyle(
                                 color: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1),
                                 fontWeight: FontWeight.bold,

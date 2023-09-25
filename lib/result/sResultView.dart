@@ -89,7 +89,7 @@ class sResultView extends StatelessWidget {
                                     alignment: Alignment.topLeft,
                                     margin: const EdgeInsets.only(left: 20, top: 12),
                                     child: Text(
-                                      "${typeToString(parseTYPE(themeIndex.toString()))}  ${data.selectData.isReturn ? "[ 회수용 ]" : ""}",
+                                      "${typeToString(parseTYPE(themeIndex.toString()))}  ${data.selectData.isReturn ? "[ 비누화수 ]" : "[ 일반비누 ]"}",
                                       style: TextStyle(
                                         color: getThemeColor(themeIndex, 2),
                                         fontWeight: FontWeight.bold,
@@ -317,9 +317,88 @@ class sResultView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ResultValueBox(themeIndex, "오일양", "${data.selectData.weight[1] + data.selectData.weight[2]}g"),
-                            ResultValueBox(themeIndex, "Lye 양", "${data.resultLye.round()}g"),
+                            ResultValueBox(themeIndex, !data.selectData.isReturn ? "Lye 양" : "비누화수양", "${data.resultLye.round()}g"),
                             ResultValueBox(themeIndex, "정제수 양", "${data.getValue(2)}%\n(${data.resultWater.round()}g)"),
                           ],
+                        ),
+                      ),
+
+                      Visibility(
+                        visible: data.selectData.isReturn,
+                        child: Container(
+                          height: 100,
+                          width: double.maxFinite,
+                          margin: EdgeInsets.only(left: leftPadding, bottom: 15, right: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: getThemeColor(themeIndex, 0),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "비누화수 물의 양",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1),
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${(data.resultLye * 0.5).round()}",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "비누화수 Lye 양",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1),
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${(data.resultLye * 0.5).round()}",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "필요 물 양 (식초 등)",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1),
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${(data.resultWater - data.resultLye * 0.5).round()}",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
 
