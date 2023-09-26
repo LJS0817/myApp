@@ -21,7 +21,7 @@ class customRadioButton extends StatelessWidget {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     return Container(
       height: 120,
-      padding: EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.only(top: 8, left: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 0 : 3),
@@ -40,8 +40,8 @@ class customRadioButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                width: 60,
-                height: 60,
+                width: 55,
+                height: 55,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(100)),
@@ -52,7 +52,8 @@ class customRadioButton extends StatelessWidget {
                   color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 0 : 1),
                 ),
               ),
-              Center(
+              FittedBox(
+                fit: BoxFit.fitWidth,
                 child: Text(
                   typeToString(data),
                   style: TextStyle(

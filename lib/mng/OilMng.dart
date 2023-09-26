@@ -8,6 +8,8 @@ class OilMng extends ChangeNotifier {
   SplayTreeMap<int, Oil> default_oils = SplayTreeMap<int, Oil>();
   SplayTreeMap<int, Oil> userOils = SplayTreeMap<int, Oil>();
 
+  SplayTreeMap<int, String> Udata = SplayTreeMap<int, String>();
+
   oils([key]) {
     if(key < default_oils.length) {
       return default_oils[key]!;

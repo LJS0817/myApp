@@ -73,14 +73,18 @@ class CustomTextField extends StatelessWidget {
                 border: Border.all(color: getThemeColor(themeIndex, 0), width: 4),
                 color: getThemeColor(themeIndex, 1),
               ),
-              child: Text(
-                labelText,
-                style: TextStyle(
-                  color: getThemeColor(themeIndex, 0),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  labelText,
+                  style: TextStyle(
+                    color: getThemeColor(themeIndex, 0),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    height: 1
+                  ),
                 ),
-              ),
+              )
             ),
           )
         ),

@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 class FileMng with ChangeNotifier {
   String dataPath = 'assets/data.csv';
+  String UdataPath = 'assets/Udata.csv';
   // List files = [];
 
   ///```

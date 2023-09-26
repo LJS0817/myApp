@@ -49,6 +49,20 @@ void loadAsset(BuildContext context) async {
   //korean,english,NaOH,KOH,Lauric,Myristic,Palmitic,Stearic,Palmitoleic,Ricinoleic,Oleic,Linoleic,Linolenic
 }
 
+void loadUAsset(BuildContext context) async {
+  String s = await DefaultAssetBundle.of(context).loadString(Provider.of<FileMng>(context).UdataPath);
+  List<String> list = s.split('\n');
+  for(int i = 0; i < list.length; i++) {
+    try{
+      //data added
+      Provider.of<OilMng>(context, listen: false).Udata[i] = list[i];
+      list = s.split('\n');
+    } catch(ex) {
+      log("ERROR : $ex");
+    }
+  }
+}
+
 Widget getIndex(BuildContext context) {
   int idx = Provider.of<MenuMng>(context).getIndex();
   if(idx == 0) { return mainSoapScreen(); }
@@ -239,6 +253,7 @@ class _IndexScreenState extends State<IndexScreen> {
     if(!Mng.isLoad) {
       log("실패");
       loadAsset(context);
+      loadUAsset(context);
       FileMng fileMng =  Provider.of<FileMng>(context, listen: false);
       OilMng oilMng =  Provider.of<OilMng>(context, listen: false);
       fileMng.load();
