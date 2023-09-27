@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:isma/custom/OilContainer.dart';
 import 'package:isma/custom/OilContainerShort.dart';
+import 'package:isma/custom/uOilContainer.dart';
 import 'package:isma/main/main_IndexScreen.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +12,8 @@ import '../config/define.dart';
 import '../mng/DataMng.dart';
 import '../mng/PageMng.dart';
 
-class OilDialog extends StatelessWidget {
-  const OilDialog({super.key});
+class uOilDialog extends StatelessWidget {
+  const uOilDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class OilDialog extends StatelessWidget {
     PageMng pageMngProvider = Provider.of<PageMng>(context);
     OilMng oilMng = Provider.of<OilMng>(context);
     return Visibility(
-      visible: pageMngProvider.enableDialog == 1,
+      visible: pageMngProvider.enableDialog == 2,
       child: SafeArea(
         child: Material(
           color: Colors.black.withOpacity(0.4),
@@ -54,7 +55,7 @@ class OilDialog extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            "오일 추가",
+                            "유화제 추가",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -72,13 +73,9 @@ class OilDialog extends StatelessWidget {
                                     child:  ScrollConfiguration(
                                       behavior: const ScrollBehavior().copyWith(overscroll: false),
                                       child:ListView.builder(
-                                        itemCount: oilMng.default_oils.length + oilMng.userOils.length,
+                                        itemCount: oilMng.Udata.length,
                                         itemBuilder: (BuildContext con, int idx) {
-                                          if(idx < oilMng.userOils.length) {
-                                            return OilContainer(idx + oilMng.default_oils.length);
-                                          } else {
-                                            return OilContainer(idx - oilMng.userOils.length);
-                                          }
+                                          return uOilContainer(100000 + idx);
                                         },
                                       ),
                                     ),
@@ -94,7 +91,7 @@ class OilDialog extends StatelessWidget {
                                         itemCount: dataMngProvider.data.data[pageMngProvider.getIndexSub1()].length,
                                         itemBuilder: (BuildContext con, int idx) {
                                           int i = dataMngProvider.data.data[pageMngProvider.getIndexSub1()].keys.elementAt(idx);
-                                          return OilShortContainer(i, oilMng.oils(i).korean);
+                                          return OilShortContainer(i, oilMng.oils(i).english);
                                         },
                                       ),
                                     ),

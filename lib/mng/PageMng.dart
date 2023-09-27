@@ -32,7 +32,7 @@ class PageMng with ChangeNotifier {
   }
 
   int index = 0;
-  bool enableDialog = false;
+  int enableDialog = 0;
 
   ///0 : 비누, 1 : 화장품, 2 : 오일, 3 : 설정
   void changeScene(BuildContext context, int idx) {
@@ -98,8 +98,12 @@ class PageMng with ChangeNotifier {
     }
   }
 
-  void setDialog() {
-    enableDialog = !enableDialog;
+  ///```
+  ///0 - disabled
+  ///1 - soap
+  ///2 - beauty
+  void setDialog(int setIndex) {
+    enableDialog = setIndex;
     notifyListeners();
   }
 

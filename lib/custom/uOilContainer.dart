@@ -9,11 +9,11 @@ import '../config/define.dart';
 import '../mng/DataMng.dart';
 import '../mng/PageMng.dart';
 
-class OilContainer extends StatelessWidget {
+class uOilContainer extends StatelessWidget {
   int index = 0;
 
 
-  OilContainer(int idx, {super.key}) {
+  uOilContainer(int idx, {super.key}) {
     index = idx;
   }
 
@@ -45,9 +45,10 @@ class OilContainer extends StatelessWidget {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.only(left: 15),
             child: Text(
-              oilMng.oils(index).getName(),
+              oilMng.oils(index).english,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+                fontSize: 13,
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
               ),
             ),

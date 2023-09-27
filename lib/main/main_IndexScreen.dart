@@ -52,10 +52,14 @@ void loadAsset(BuildContext context) async {
 void loadUAsset(BuildContext context) async {
   String s = await DefaultAssetBundle.of(context).loadString(Provider.of<FileMng>(context).UdataPath);
   List<String> list = s.split('\n');
+  late Oil oil;
   for(int i = 0; i < list.length; i++) {
     try{
+      oil = Oil(korean: list[i].split(',')[0], english: list[i].split(',')[1], NaOH: 0,
+          KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index,
+                  (index) => 0));
       //data added
-      Provider.of<OilMng>(context, listen: false).Udata[i] = list[i];
+      Provider.of<OilMng>(context, listen: false).Udata[i] = oil;
       list = s.split('\n');
     } catch(ex) {
       log("ERROR : $ex");

@@ -22,6 +22,13 @@ class ResultOilDetailsContainer extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     OilMng oilMng = Provider.of<OilMng>(context);
 
+    String percent = "";
+    try {
+      percent = (int.parse(data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[0]) / data.selectData.weight[1] * 100).round().toString();
+    } catch(e) {
+      percent = "0";
+    }
+
     return SizedBox(
       height: _size,
       child: Row(
@@ -38,7 +45,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  "${(int.parse(data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[0]) / data.selectData.weight[1] * 100).round()}%",
+                  "$percent%",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: getThemeColor(themeIndex, 1),
