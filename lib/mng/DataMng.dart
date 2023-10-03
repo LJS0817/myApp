@@ -178,7 +178,7 @@ class DataMng with ChangeNotifier {
     if(needCal) {
       data.weight[0] += weight;
     }
-    notifyListeners();
+    //notifyListeners();
   }
 
   void calculateBeautyWeight(bool isTotal, String str) {
@@ -188,8 +188,7 @@ class DataMng with ChangeNotifier {
     data.weight[1] = (int.parse(getValue(8)!) * data.weight[0] * 0.01).round();
     data.weight[2] = (int.parse(getValue(9)!) * data.weight[0] * 0.01).round();
     data.weight[3] = (int.parse(getValue(10)!) * data.weight[0] * 0.01).round();
-
-    notifyListeners();
+    //notifyListeners();
   }
 
   int getTypeIndex() {
@@ -245,7 +244,7 @@ class DataMng with ChangeNotifier {
   ///1 - 슈퍼팻(비누) or 유상층(화장품),
   ///2 - 첨가물(비누) or 유화제(화장품),
   ///3(화장품만) - EO
-  void setData(int page, int idx, String str) {
+  void setData(int page, int idx, String str, {bool needRefresh=false}) {
     if(str == '-2') {
       data.data[page][idx] = "0";
     } else if(str == '-1') {
@@ -253,7 +252,9 @@ class DataMng with ChangeNotifier {
     } else {
       data.data[page][idx] = str;
     }
-    notifyListeners();
+    if(needRefresh) {
+      notifyListeners();
+    }
   }
 
   ///page : 0 ~ 3까지,

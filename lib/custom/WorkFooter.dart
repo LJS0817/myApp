@@ -80,10 +80,11 @@ class Footer extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                       if((dataMngProvider.getTypeIndex() < 3 && pageMngProvider.index < 3) || (dataMngProvider.getTypeIndex() < 7 && pageMngProvider.index == 2)) {
                         pageMngProvider.setDialog(1);
-                      } else if(dataMngProvider.getTypeIndex() < 7 && pageMngProvider.index == 3) {
+                      } else if(dataMngProvider.getTypeIndex() > 2 && dataMngProvider.getTypeIndex() < 7 && pageMngProvider.index == 3) {
                         pageMngProvider.setDialog(2);
                       } else {
-                        dataMngProvider.setData(pageMngProvider.index - 1, -dataMngProvider.data.data[pageMngProvider.index - 1].length - 2, '-2');
+                        log("TEASDASD");
+                        dataMngProvider.setData(pageMngProvider.index - 1, -dataMngProvider.data.data[pageMngProvider.index - 1].length - 2, '-2', needRefresh: true);
                       }
                     },
                     borderRadius: const BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
@@ -171,7 +172,7 @@ class Footer extends StatelessWidget {
                         children: [
                           const Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
                           Text(
-                            pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? "다음" : "저장",
+                            pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? "적용" : "저장",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

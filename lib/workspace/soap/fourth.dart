@@ -18,7 +18,7 @@ class FourthView extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-         DataListView(pageMngProvider.index),
+          DataListView(pageMngProvider.index),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Focus(

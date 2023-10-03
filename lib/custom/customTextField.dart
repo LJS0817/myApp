@@ -100,7 +100,6 @@ class CustomTextField extends StatelessWidget {
             onFocusChange: (hasFocus) {
               if(!hasFocus) {
                 onChange(getOnlyOneDot(controller.text));
-                FocusManager.instance.primaryFocus?.unfocus();
               } else {
 
               }
@@ -113,7 +112,6 @@ class CustomTextField extends StatelessWidget {
               textInputAction: _maxLines > 10 ? TextInputAction.newline : TextInputAction.done,
               onSubmitted: (_) => {
                 onChange(getOnlyOneDot(_.toString())),
-                FocusScope.of(context).unfocus(),
               },
               onChanged: (_) {
                 if(isMultipleLine) {

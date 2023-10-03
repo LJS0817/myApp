@@ -74,7 +74,7 @@ class EditableOilContainer extends StatelessWidget {
                   }
                   dataMngProvider.setData(getIndexSub1(), index, '-1');
 
-                  FocusManager.instance.primaryFocus?.unfocus();
+                  //FocusManager.instance.primaryFocus?.unfocus();
                 },
                 splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
                 highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
@@ -119,7 +119,6 @@ class EditableOilContainer extends StatelessWidget {
                             dataMngProvider.setWeight(_page, weight!, needCal: _page < 3);
                           }
                         }
-                        FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
                     child: TextField(
@@ -185,7 +184,7 @@ class EditableOilContainer extends StatelessWidget {
                         str = str.replaceRange(str.indexOf('`') + 1, null, name);
                         dataMngProvider.setData(getIndexSub1(), index, str);
 
-                        FocusManager.instance.primaryFocus?.unfocus();
+                        //FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
                     child: TextField(
