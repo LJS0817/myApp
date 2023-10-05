@@ -25,7 +25,8 @@ class Data {
   ///1 - 오일
   ///2 - 슈퍼팻
   ///3 - 첨가물
-  ///4 - EO
+  ///4 - 유상층
+  ///5 - EO(화장품)
   List<int> weight = [0, 0, 0, 0];
 
 
@@ -78,10 +79,12 @@ class Data {
   ///0 ~ 3까지,
   ///```
   ///0 - 오일(비누) or 수상층(화장품),
-  ///1 - 슈퍼팻(비누) or 유상층(화장품),
+  ///1 - 슈퍼팻(비누) or 첨가물(화장품),
   ///2 - 첨가물(비누) or 유화제(화장품),
-  ///3(화장품만) - EO
+  ///3(화장품만) - 유상층
+  ///4(화장품만) - EO
   List<Map<int, String>> data = [
+    {},
     {},
     {},
     {},
@@ -108,6 +111,7 @@ class DataMng with ChangeNotifier {
     data.type = idx == 1 ? TYPE.E_SKIN : (idx == 2 ? TYPE.E_ETC : TYPE.E_COLD);
     _oil = null;
     if(idx == 1) {
+      data.weight.add(0);
       data.weight.add(0);
     } else if(idx == 2) {
       _oil = oil ?? Oil(korean: "", english: "사용자 오일", NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
@@ -244,9 +248,10 @@ class DataMng with ChangeNotifier {
   ///1 - 슈퍼팻(비누) or 유상층(화장품),
   ///2 - 첨가물(비누) or 유화제(화장품),
   ///3(화장품만) - EO
+  ///4(화장품만) - 첨가물
   void setData(int page, int idx, String str, {bool needRefresh=false}) {
     if(str == '-2') {
-      data.data[page][idx] = "0";
+      data.data[page][idx] = "0`";
     } else if(str == '-1') {
       data.data[page].remove(idx);
     } else {
@@ -263,6 +268,7 @@ class DataMng with ChangeNotifier {
   ///1 - 슈퍼팻(비누) or 유상층(화장품),
   ///2 - 첨가물(비누) or 유화제(화장품),
   ///3(화장품만) - EO
+  ///4(화장품만) - EO
   String getData(int page, int idx) {
     String result = data.data[page][idx] ?? "";
     return result;

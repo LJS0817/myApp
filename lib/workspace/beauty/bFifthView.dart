@@ -14,38 +14,7 @@ class bFifthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMngProvider = Provider.of<PageMng>(context);
-    return Expanded(
-      child: Column(
-        children: [
-          DataListView(pageMngProvider.index),
-
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Focus(
-              onFocusChange: (hasFocus) {
-                if(!hasFocus) {
-
-                }
-              },
-              child: CustomTextField(
-                    (_) {
-                  dataMngProvider.setMemo(_);
-                },
-                multipleLine: true,
-                index: dataMngProvider.getTypeIndex(),
-                needBg: true,
-                active: true,
-                maxLines: 12,
-                height: 150,
-                radius: 20,
-                str: dataMngProvider.data.memo.isEmpty ? "메모 입력" : dataMngProvider.data.memo,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return DataListView(pageMngProvider.index);
   }
 }

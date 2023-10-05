@@ -203,6 +203,7 @@ Widget BottomBar(BuildContext context) {
                     mng.selectData = Data();
                     menuMng.init();
 
+                    pageMng.UpdateText(dataMng.data);
                     pageMng.changeScene(context, menuMng.index);
                   },
                   child: AnimatedContainer(

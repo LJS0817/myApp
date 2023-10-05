@@ -31,6 +31,7 @@ class OilShortContainer extends StatelessWidget {
           onTap: () {
             dataMngProvider.setWeight(pageMngProvider.index, -int.parse(dataMngProvider.getData(pageMngProvider.index - 1, index).split('`')[0]));
             dataMngProvider.setData(pageMngProvider.index - 1, index, '-1');
+            pageMngProvider.UpdateText(dataMngProvider.data, re: true);
           },
           splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.5),
           highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.5),

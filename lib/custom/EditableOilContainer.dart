@@ -68,13 +68,12 @@ class EditableOilContainer extends StatelessWidget {
                 onTap: () {
                   String str = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0];
                   int weight = str == 'null' ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
-                  log(_page.toString());
                   if(dataMngProvider.getTypeIndex() < 3) {
                     dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3);
                   }
                   dataMngProvider.setData(getIndexSub1(), index, '-1');
+                  pageMngProvider.UpdateText(dataMngProvider.data, re: true);
 
-                  //FocusManager.instance.primaryFocus?.unfocus();
                 },
                 splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
                 highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
@@ -110,14 +109,14 @@ class EditableOilContainer extends StatelessWidget {
                       if(!hasFocus) {
                         if(data.isNotEmpty) {
                           int weight = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0] == "null" ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
-                          if(dataMngProvider.getTypeIndex() < 3) {
-                            dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3);
-                          }
+
+                          dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+
                           dataMngProvider.setData(getIndexSub1(), index, '$data`${nameController.text}');
-                          if(dataMngProvider.getTypeIndex() < 3) {
-                            weight = int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
-                            dataMngProvider.setWeight(_page, weight!, needCal: _page < 3);
-                          }
+
+                          weight = int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
+
+                          dataMngProvider.setWeight(_page, weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
                         }
                       }
                     },
@@ -151,7 +150,7 @@ class EditableOilContainer extends StatelessWidget {
                   )
                 ),
                 Text(
-                  _page == 4 ? "dr" : "G",
+                  _page == 5 ? "dr" : "G",
                   style: TextStyle(
                       color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                       fontWeight: FontWeight.bold,
@@ -183,7 +182,6 @@ class EditableOilContainer extends StatelessWidget {
                         }
                         str = str.replaceRange(str.indexOf('`') + 1, null, name);
                         dataMngProvider.setData(getIndexSub1(), index, str);
-
                         //FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },

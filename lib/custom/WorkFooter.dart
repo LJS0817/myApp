@@ -12,8 +12,7 @@ import 'package:provider/provider.dart';
 import '../mng/DataMng.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({super.key});
-
+  Footer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class Footer extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   if(pageMngProvider.index > 0) {
-                    pageMngProvider.prevPage(dataMngProvider.getTypeIndex());
+                    pageMngProvider.prevPage(dataMngProvider.getTypeIndex(), dataMngProvider.data);
                   } else {
                     dataMngProvider.setSelectedFileName("");
                     Navigator.of(context).pop();
@@ -78,12 +77,11 @@ class Footer extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       FocusManager.instance.primaryFocus?.unfocus();
-                      if((dataMngProvider.getTypeIndex() < 3 && pageMngProvider.index < 3) || (dataMngProvider.getTypeIndex() < 7 && pageMngProvider.index == 2)) {
+                      if((dataMngProvider.getTypeIndex() < 3 && pageMngProvider.index < 3) || (dataMngProvider.getTypeIndex() < 7 && pageMngProvider.index == 4)) {
                         pageMngProvider.setDialog(1);
                       } else if(dataMngProvider.getTypeIndex() > 2 && dataMngProvider.getTypeIndex() < 7 && pageMngProvider.index == 3) {
                         pageMngProvider.setDialog(2);
                       } else {
-                        log("TEASDASD");
                         dataMngProvider.setData(pageMngProvider.index - 1, -dataMngProvider.data.data[pageMngProvider.index - 1].length - 2, '-2', needRefresh: true);
                       }
                     },
@@ -154,11 +152,12 @@ class Footer extends StatelessWidget {
                       } else {
                         oilMngProvider.addOil(dataMngProvider.getOilData()!);
                       }
+                      log(dataMngProvider.toString());
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();
                     } else {
-                      pageMngProvider.nextPage(dataMngProvider.getTypeIndex());
+                      pageMngProvider.nextPage(dataMngProvider.getTypeIndex(), dataMngProvider.data);
                     }
                   },
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? 30 : 0)),

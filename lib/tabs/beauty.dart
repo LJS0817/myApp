@@ -28,9 +28,9 @@ class BeautyWorkspace extends StatelessWidget {
         },
         onHorizontalDragEnd: (DragEndDetails _) {
           if(_.primaryVelocity! > 0) {
-            pageMng.prevPage(dataMng.getTypeIndex());
+            pageMng.prevPage(dataMng.getTypeIndex(), dataMng.data);
           } else if(_.primaryVelocity! < 0) {
-            pageMng.nextPage(dataMng.getTypeIndex());
+            pageMng.nextPage(dataMng.getTypeIndex(), dataMng.data);
           }
         },
         child: Container(

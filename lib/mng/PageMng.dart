@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/DataMng.dart';
 import 'package:isma/workspace/beauty/bFifthView.dart';
 import 'package:isma/workspace/beauty/bFirstView.dart';
 import 'package:isma/workspace/beauty/bFourthView.dart';
 import 'package:isma/workspace/beauty/bSecondView.dart';
+import 'package:isma/workspace/beauty/bSixthView.dart';
 import 'package:isma/workspace/beauty/bThirdView.dart';
 import 'package:isma/workspace/soap/first.dart';
 import 'package:isma/workspace/soap/fourth.dart';
@@ -19,7 +23,7 @@ class PageMng with ChangeNotifier {
     '/tabs/config'
   ];
   final int SOAP_MAX_INDEX = 4;
-  final int BEAUTY_MAX_INDEX = 5;
+  final int BEAUTY_MAX_INDEX = 6;
   final int OIL_MAX_INDEX = 1;
   int MAX_INDEX(int type) {
     if(type < 3) {
@@ -34,6 +38,20 @@ class PageMng with ChangeNotifier {
   int index = 0;
   int enableDialog = 0;
 
+  List<Widget> headerText = [];
+  
+  final List<List<String>> headerTextTitles = [
+    ["오일", "슈퍼팻", "첨가물", "총량"],
+    ["총오일", "", "총량"],
+    ["총슈퍼팻", "", "총량"],
+    ["총첨가물", "", "총량"],
+    
+    ["수상층", "유상층", "유화제", "총량"],
+    ["수상층", "첨가물", "유화제", "총량"],
+    ["유상층", "", "총량"],
+    ["EO", "", "총량"],
+  ];
+
   ///0 : 비누, 1 : 화장품, 2 : 오일, 3 : 설정
   void changeScene(BuildContext context, int idx) {
     Navigator.pushNamed(context, Workspaces[idx]);
@@ -43,30 +61,168 @@ class PageMng with ChangeNotifier {
     if(idx == 1) {
       return type > 2 ? "수상층" : "오일";
     } else if(idx == 2 && type != 1) {
-      return type > 2 ? "유상층" : "슈퍼팻";
+      return type > 2 ? "첨가물" : "슈퍼팻";
     } else if(idx == 3) {
       return type > 2 ? "유화제" : "첨가물";
-    } else {
+    } else if(idx == 4) {
+      return type > 2 ? "유상층" : "첨가물";
+    }  else {
       return type > 2 ? "EO" : "첨가물";
     }
   }
 
-  void nextPage(int type) {
+  Widget textWidget(String str, Color color) {
+    return Text(
+      str,
+      style: TextStyle(
+          color: color,
+          fontWeight: FontWeight.bold,
+          fontSize: 13
+      ),
+    );
+  }
+
+  Widget rowTextWidget(String title, String detail, Color color) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          textWidget(title, color),
+          textWidget(detail, color),
+        ],
+      ),
+    );
+  }
+
+  void changeText(int colorIndex, List<String> detail) {
+    headerText = [];
+    int idx = colorIndex < 3 ? index : 4 + (index == 0 ? 0 : index < 4 ? 1 : index - 2);
+
+    for(int i = 0; i < headerTextTitles[idx].length; i++) {
+      headerText.add(rowTextWidget(headerTextTitles[idx][i], detail[i], getThemeColor(colorIndex, 1)));
+    }
+  }
+
+  void UpdateText(Data data, {bool re=false}) {
+    changeText(data.type.index, getDetails(data));
+    if(re) {
+      FocusManager.instance.primaryFocus?.unfocus();
+      notifyListeners();
+    }
+  }
+
+  //     ["오일", "슈퍼팻", "첨가물", "총량"],
+  //     ["총오일", "", "총량"],
+  //     ["총슈퍼팻", "", "총량"],
+  //     ["총첨가물", "", "총량"],
+  //
+  //     ["수상층", "유상층", "유화제", "총량"],
+  //     ["수상층", "첨가물", "유화제", "총량"],
+  //     ["유상층", "", "총량"],
+  //     ["EO", "", "총량"],
+  List<String> getDetails(Data data) {
+    List<String> result = [];
+
+    switch(index) {
+      case 0:
+        result = [
+          data.weight[1].toString(),
+          data.weight[2].toString(),
+          data.weight[3].toString(),
+          data.weight[0].toString(),
+        ];
+        break;
+      case 1:
+        if(data.type.index < 3) {
+          result = [
+            data.data[0].length.toString(),
+            "",
+            data.weight[1].toString(),
+          ];
+        } else {
+          result = [
+            data.weight[1].toString(),
+            data.weight[2].toString(),
+            data.weight[3].toString(),
+            (data.weight[1] + data.weight[2]+ data.weight[3]).toString(),
+          ];
+        }
+        break;
+      case 2:
+        if(data.type.index < 3) {
+          result = [
+            data.data[1].length.toString(),
+            "",
+            data.weight[2].toString(),
+          ];
+        } else {
+          result = [
+            data.weight[1].toString(),
+            data.weight[2].toString(),
+            data.weight[3].toString(),
+            (data.weight[1] + data.weight[2]+ data.weight[3]).toString(),
+          ];
+        }
+        break;
+      case 3:
+        if(data.type.index < 3) {
+          result = [
+            data.data[2].length.toString(),
+            "",
+            data.weight[3].toString(),
+          ];
+        } else {
+          result = [
+            data.weight[1].toString(),
+            data.weight[2].toString(),
+            data.weight[3].toString(),
+            (data.weight[1] + data.weight[2]+ data.weight[3]).toString(),
+          ];
+        }
+        break;
+      case 4:
+        result = [
+          data.data[3].length.toString(),
+          "",
+          data.weight[4].toString(),
+        ];
+        break;
+      case 5:
+        result = [
+          data.data[4].length.toString(),
+          "",
+          data.weight[5].toString(),
+        ];
+        break;
+      default:
+        result = [
+
+        ];
+        break;
+    }
+
+    return result;
+  }
+
+  void nextPage(int type, Data detail) {
     index++;
     if(type == 1 && index == 2) index++;
     if(index >= MAX_INDEX(type)) {
       index = MAX_INDEX(type);
     }
+    changeText(type, getDetails(detail));
     notifyListeners();
   }
 
-  void prevPage(int type) {
+  void prevPage(int type, Data detail) {
     index--;
     if(type == 1 && index == 2) index--;
     if(index < 0) {
       index = 0;
       return;
     }
+    changeText(type, getDetails(detail));
     notifyListeners();
   }
 
@@ -123,6 +279,7 @@ class PageMng with ChangeNotifier {
         case 2: return bThirdView();
         case 3: return bFourthView();
         case 4: return bFifthView();
+        case 5: return bSixthView();
         default: return bFirstView();
       }
     }

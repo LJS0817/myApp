@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/define.dart';
+import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
 import '../mng/DataMng.dart';
@@ -11,6 +12,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
+    PageMng pageMng = Provider.of<PageMng>(context);
     return Container(
       decoration: BoxDecoration(
         color: getThemeColor(dataMngProvider.data.type.index, 0),
@@ -94,102 +96,105 @@ class Header extends StatelessWidget {
                   alignment: Alignment.topRight,
                   width: MediaQuery.of(context).size.width * 0.25,
                   height: double.maxFinite,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              dataMngProvider.getTypeIndex() > 2 ? "수상층" : "오일",
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
-
-                            Text(
-                              dataMngProvider.getTypeIndex() > 2 ? "유상층" : "슈퍼펫",
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
-
-                            Text(
-                              dataMngProvider.getTypeIndex() > 2 ? "유화제" : "첨가물",
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
-
-                            Text(
-                              "총량",
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        right: 0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              dataMngProvider.data.weight[1].toString(),
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
-
-                            Text(
-                              dataMngProvider.data.weight[2].toString(),
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
-
-                            Text(
-                              dataMngProvider.data.weight[3].toString(),
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
-
-                            Text(
-                              dataMngProvider.data.weight[0].toString(),
-                              style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                  child: Column(
+                    children: pageMng.headerText,
+                  )
+                  // Stack(
+                  //   children: [
+                  //     Positioned(
+                  //       left: 0,
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.end,
+                  //         children: [
+                  //           Text(
+                  //             dataMngProvider.getTypeIndex() > 2 ? "수상층" : "오일",
+                  //             style: TextStyle(
+                  //                 color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize: 13
+                  //             ),
+                  //           ),
+                  //           const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
+                  //
+                  //           Text(
+                  //             dataMngProvider.getTypeIndex() > 2 ? "유상층" : "슈퍼펫",
+                  //             style: TextStyle(
+                  //                 color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize: 13
+                  //             ),
+                  //           ),
+                  //           const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
+                  //
+                  //           Text(
+                  //             dataMngProvider.getTypeIndex() > 2 ? "유화제" : "첨가물",
+                  //             style: TextStyle(
+                  //                 color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize: 13
+                  //             ),
+                  //           ),
+                  //           const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
+                  //
+                  //           Text(
+                  //             "총량",
+                  //             style: TextStyle(
+                  //                 color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize: 13
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     // Positioned(
+                  //     //   right: 0,
+                  //     //   child: Column(
+                  //     //     crossAxisAlignment: CrossAxisAlignment.end,
+                  //     //     children: [
+                  //     //       Text(
+                  //     //         dataMngProvider.data.weight[1].toString(),
+                  //     //         style: TextStyle(
+                  //     //             color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //     //             fontWeight: FontWeight.bold,
+                  //     //             fontSize: 13
+                  //     //         ),
+                  //     //       ),
+                  //     //       const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
+                  //     //
+                  //     //       Text(
+                  //     //         dataMngProvider.data.weight[2].toString(),
+                  //     //         style: TextStyle(
+                  //     //             color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //     //             fontWeight: FontWeight.bold,
+                  //     //             fontSize: 13
+                  //     //         ),
+                  //     //       ),
+                  //     //       const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
+                  //     //
+                  //     //       Text(
+                  //     //         dataMngProvider.data.weight[3].toString(),
+                  //     //         style: TextStyle(
+                  //     //             color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //     //             fontWeight: FontWeight.bold,
+                  //     //             fontSize: 13
+                  //     //         ),
+                  //     //       ),
+                  //     //       const Padding(padding: EdgeInsets.symmetric(vertical: 2)),
+                  //     //
+                  //     //       Text(
+                  //     //         dataMngProvider.data.weight[0].toString(),
+                  //     //         style: TextStyle(
+                  //     //             color: getThemeColor(dataMngProvider.data.type.index, 1),
+                  //     //             fontWeight: FontWeight.bold,
+                  //     //             fontSize: 13
+                  //     //         ),
+                  //     //       ),
+                  //     //     ],
+                  //     //   ),
+                  //     // )
+                  //   ],
+                  // ),
                 ),
               ),
             ],

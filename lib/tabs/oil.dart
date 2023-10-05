@@ -22,13 +22,6 @@ class OilWorkspace extends StatelessWidget {
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        onHorizontalDragEnd: (DragEndDetails _) {
-          if(_.primaryVelocity! > 0) {
-            pageMng.prevPage(dataMng.getTypeIndex());
-          } else if(_.primaryVelocity! < 0) {
-            pageMng.nextPage(dataMng.getTypeIndex());
-          }
-        },
         child: Container(
           color: mainTextColor[menuMng.index],
           child: Stack(
