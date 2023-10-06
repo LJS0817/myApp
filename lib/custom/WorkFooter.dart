@@ -171,7 +171,7 @@ class Footer extends StatelessWidget {
                         children: [
                           const Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
                           Text(
-                            pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? "적용" : "저장",
+                           pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? "다음" : "저장",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,

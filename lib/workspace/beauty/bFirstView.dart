@@ -6,6 +6,7 @@ import 'package:isma/custom/customRadioButton.dart';
 import 'package:isma/custom/customRadioButtonWithoutIcon.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/mng/DataMng.dart';
+import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
 class bFirstView extends StatelessWidget {
@@ -13,6 +14,7 @@ class bFirstView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PageMng pageMngProvider = Provider.of<PageMng>(context);
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     return Expanded(
       child: ScrollConfiguration(
@@ -31,7 +33,7 @@ class bFirstView extends StatelessWidget {
                 ),
               ),
               const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
-              CustomTextField((String data) { dataMngProvider.setName(data); }, str: dataMngProvider.getName(), active: true, index: dataMngProvider.getTypeIndex(),),
+              CustomTextField((String data) { dataMngProvider.setName(data); }, defaultValue: dataMngProvider.getName(), active: true, index: dataMngProvider.getTypeIndex(),),
 
               const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
               Text(
@@ -105,17 +107,18 @@ class bFirstView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8); dataMngProvider.calculateBeautyWeight(false, str); }, defaultValue: dataMngProvider.getValue(8)!, needLb: true, labelTxt: "수상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8); dataMngProvider.calculateBeautyWeight(false, str); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(8)!, needLb: true, labelTxt: "수상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 9); dataMngProvider.calculateBeautyWeight(false, str); }, defaultValue: dataMngProvider.getValue(9)!, needLb: true, labelTxt: "유상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 9); dataMngProvider.calculateBeautyWeight(false, str); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(9)!, needLb: true, labelTxt: "유상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 10); dataMngProvider.calculateBeautyWeight(false, str); }, defaultValue: dataMngProvider.getValue(10)!, needLb: true, labelTxt: "유화제", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 10); dataMngProvider.calculateBeautyWeight(false, str); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(10)!, needLb: true, labelTxt: "유화제", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 ],
               ),
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
               CustomTextField(
                 (String str) {
                   dataMngProvider.calculateBeautyWeight(true, str);
+                  pageMngProvider.UpdateText(dataMngProvider.data);
                 },
                 defaultValue: dataMngProvider.data.weight[0].toString(),
                 needLb: true,

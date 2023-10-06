@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/MenuMng.dart';
@@ -9,12 +11,15 @@ class ResultOilBox extends StatelessWidget {
   int index = 0;
   double _width = 0;
   double _height = 0;
-  ResultOilBox(String d, int themeIdx, int compare, {double w = 85,double h = 70, super.key}) {
+  late Function? func;
+
+  ResultOilBox(String d, int themeIdx, int compare, {double w = 85,double h = 70, Function? function, super.key}) {
     str = d;
     themeIndex = themeIdx;
     index = compare;
     _width = w;
     _height = h;
+    func = function;
   }
 
   @override
@@ -25,9 +30,12 @@ class ResultOilBox extends StatelessWidget {
       color: getThemeColor(themeIndex, (index == menuMng.showOilDetails || menuMng.showOilDetails < 1 ? 1 : 3)),
       child: InkWell(
         onTap: () {
+          if(func != null) {
+            func!();
+          }
           menuMng.setOilDetails(index);
         },
-        borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+        borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
         splashColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
         highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
         child: Container(

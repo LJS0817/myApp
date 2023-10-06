@@ -32,7 +32,7 @@ class FirstView extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
-            CustomTextField((String data) { dataMngProvider.setName(data); }, str: dataMngProvider.getName(), active: true, index: dataMngProvider.getTypeIndex(),),
+            CustomTextField((String data) { dataMngProvider.setName(data); }, defaultValue: dataMngProvider.getName(), active: true, index: dataMngProvider.getTypeIndex(),),
 
             const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
             Text(

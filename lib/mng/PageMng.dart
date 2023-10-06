@@ -42,14 +42,15 @@ class PageMng with ChangeNotifier {
   
   final List<List<String>> headerTextTitles = [
     ["오일", "슈퍼팻", "첨가물", "총량"],
-    ["총오일", "", "총량"],
-    ["총슈퍼팻", "", "총량"],
-    ["총첨가물", "", "총량"],
+    ["오일"],
+    ["슈퍼팻"],
+    ["첨가물"],
     
     ["수상층", "유상층", "유화제", "총량"],
-    ["수상층", "첨가물", "유화제", "총량"],
-    ["유상층", "", "총량"],
-    ["EO", "", "총량"],
+    ["워터", "첨가물", "총량", "", "설정값"],
+    ["유화제", "", "설정값"],
+    ["유상층", "", "설정값"],
+    ["EO"],
   ];
 
   ///0 : 비누, 1 : 화장품, 2 : 오일, 3 : 설정
@@ -97,8 +98,9 @@ class PageMng with ChangeNotifier {
 
   void changeText(int colorIndex, List<String> detail) {
     headerText = [];
-    int idx = colorIndex < 3 ? index : 4 + (index == 0 ? 0 : index < 4 ? 1 : index - 2);
+    int idx = colorIndex < 3 ? index : 4 + (index == 0 ? 0 : index < 3 ? 1 : index - 1);
 
+    log(headerTextTitles[idx].toString());
     for(int i = 0; i < headerTextTitles[idx].length; i++) {
       headerText.add(rowTextWidget(headerTextTitles[idx][i], detail[i], getThemeColor(colorIndex, 1)));
     }
@@ -108,90 +110,83 @@ class PageMng with ChangeNotifier {
     changeText(data.type.index, getDetails(data));
     if(re) {
       FocusManager.instance.primaryFocus?.unfocus();
-      notifyListeners();
     }
   }
 
-  //     ["오일", "슈퍼팻", "첨가물", "총량"],
-  //     ["총오일", "", "총량"],
-  //     ["총슈퍼팻", "", "총량"],
-  //     ["총첨가물", "", "총량"],
-  //
-  //     ["수상층", "유상층", "유화제", "총량"],
-  //     ["수상층", "첨가물", "유화제", "총량"],
-  //     ["유상층", "", "총량"],
-  //     ["EO", "", "총량"],
   List<String> getDetails(Data data) {
     List<String> result = [];
 
+
     switch(index) {
       case 0:
-        result = [
-          data.weight[1].toString(),
-          data.weight[2].toString(),
-          data.weight[3].toString(),
-          data.weight[0].toString(),
-        ];
+        if(data.type.index < 3) {
+          result = [
+            data.weight[1].toString(),
+            data.weight[2].toString(),
+            data.weight[3].toString(),
+            data.weight[0].toString(),
+          ];
+        } else {
+          result = [
+            data.getValue(8).toString(),
+            data.getValue(9).toString(),
+            data.getValue(10).toString(),
+            data.weight[0].toString(),
+          ];
+        }
         break;
       case 1:
         if(data.type.index < 3) {
           result = [
-            data.data[0].length.toString(),
-            "",
             data.weight[1].toString(),
           ];
         } else {
           result = [
             data.weight[1].toString(),
             data.weight[2].toString(),
-            data.weight[3].toString(),
-            (data.weight[1] + data.weight[2]+ data.weight[3]).toString(),
+            (data.weight[1] + data.weight[2]).toString(),
+            "",
+            (int.parse(data.getValue(8)!) * data.weight[0] * 0.01).round().toString(),
           ];
         }
         break;
       case 2:
         if(data.type.index < 3) {
           result = [
-            data.data[1].length.toString(),
-            "",
             data.weight[2].toString(),
           ];
         } else {
           result = [
             data.weight[1].toString(),
             data.weight[2].toString(),
-            data.weight[3].toString(),
-            (data.weight[1] + data.weight[2]+ data.weight[3]).toString(),
+            (data.weight[1] + data.weight[2]).toString(),
+            "",
+            (int.parse(data.getValue(8)!) * data.weight[0] * 0.01).round().toString(),
           ];
         }
         break;
       case 3:
         if(data.type.index < 3) {
           result = [
-            data.data[2].length.toString(),
-            "",
             data.weight[3].toString(),
           ];
         } else {
           result = [
-            data.weight[1].toString(),
-            data.weight[2].toString(),
             data.weight[3].toString(),
-            (data.weight[1] + data.weight[2]+ data.weight[3]).toString(),
+            "",
+            (int.parse(data.getValue(10)!) * data.weight[0] * 0.01).round().toString(),
           ];
         }
         break;
       case 4:
         result = [
-          data.data[3].length.toString(),
-          "",
           data.weight[4].toString(),
+          "",
+          (int.parse(data.getValue(9)!) * data.weight[0] * 0.01).round().toString(),
         ];
         break;
       case 5:
         result = [
-          data.data[4].length.toString(),
-          "",
           data.weight[5].toString(),
         ];
         break;

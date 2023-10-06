@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/result/bResultView.dart';
 import 'package:isma/result/oResultView.dart';
@@ -17,13 +18,13 @@ class ResultView extends StatelessWidget {
     themeIndex = idx;
   }
 
-  Widget getResultView() {
+  Widget getResultView(bool b) {
     if(themeIndex == 7) {
       return oResultView(leftPadding);
     } else if(themeIndex < 3) {
-      return sResultView(themeIndex, leftPadding, oilBoxSize);
+      return sResultView(themeIndex, leftPadding, oilBoxSize - (b ? 20 : 0));
     } else {
-      return bResultView(themeIndex, leftPadding, oilBoxSize);
+      return bResultView(themeIndex, leftPadding, oilBoxSize - 20);
     }
   }
 
@@ -51,7 +52,7 @@ class ResultView extends StatelessWidget {
           ),
           Positioned(
             child: Center(
-              child: getResultView(),
+              child: getResultView(Provider.of<MenuMng>(context, listen: false).oilBoxSmallSize),
             ),
           )
         ],

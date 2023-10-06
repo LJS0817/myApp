@@ -93,6 +93,24 @@ class Data {
 
   String memo = "";
 
+
+  ///index
+  ///```
+  ///0 - LYE PURITY
+  ///1 - LYE COUNT
+  ///2 - WATER
+  ///3 - PURE SOAP
+  ///4 - GLYCERINE
+  ///5 - SUGAR
+  ///6 - SOLVENT
+  ///7 - ETHANOL
+  ///8 - 수상층
+  ///9 - 유상층
+  ///10 - 유화제
+  String? getValue(int idx) {
+    return (values[idx] == null || values[idx] == ""|| values[idx] == "null") ? default_values[idx] : values[idx];
+  }
+
   @override
   String toString() {
     return "$name?${isReturn ? "-" : ""}${type.index}?$date?$weight?$values?$data?$memo?${skinType.index}";
@@ -121,6 +139,7 @@ class DataMng with ChangeNotifier {
   Oil? getOilData() {
     return _oil;
   }
+
 
   ///```
   ///0 - NaOH
@@ -160,6 +179,7 @@ class DataMng with ChangeNotifier {
 
   void setName(String str) {
     data.name = str;
+    log("asdazzc");
     notifyListeners();
   }
 
@@ -182,17 +202,17 @@ class DataMng with ChangeNotifier {
     if(needCal) {
       data.weight[0] += weight;
     }
-    //notifyListeners();
+    notifyListeners();
   }
 
   void calculateBeautyWeight(bool isTotal, String str) {
     if(isTotal) {
       data.weight[0] = int.parse(str);
     }
-    data.weight[1] = (int.parse(getValue(8)!) * data.weight[0] * 0.01).round();
-    data.weight[2] = (int.parse(getValue(9)!) * data.weight[0] * 0.01).round();
-    data.weight[3] = (int.parse(getValue(10)!) * data.weight[0] * 0.01).round();
-    //notifyListeners();
+    notifyListeners();
+    // data.weight[1] = (int.parse(getValue(8)!) * data.weight[0] * 0.01).round();
+    // data.weight[2] = (int.parse(getValue(9)!) * data.weight[0] * 0.01).round();
+    // data.weight[3] = (int.parse(getValue(10)!) * data.weight[0] * 0.01).round();
   }
 
   int getTypeIndex() {
@@ -228,12 +248,12 @@ class DataMng with ChangeNotifier {
   ///5 - SUGAR
   ///6 - SOLVENT
   ///7 - ETHANOL
-  ///8 ~ 11 - 수상층
-  ///12 ~ 15 - 유상층
-  ///16 ~ 19 - 유화제
-  ///20 - 총용량
+  ///8 - 수상층
+  ///9 - 유상층
+  ///10 - 유화제
+  ///11 - 총용량
   String? getValue(int idx) {
-    return (data.values[idx] == null || data.values[idx] == ""|| data.values[idx] == "null") ? data.default_values[idx] : data.values[idx];
+    return data.getValue(idx);
   }
 
   void setSoapType() {
@@ -257,7 +277,7 @@ class DataMng with ChangeNotifier {
     } else {
       data.data[page][idx] = str;
     }
-    if(needRefresh) {
+    if(needRefresh || str == '-1') {
       notifyListeners();
     }
   }

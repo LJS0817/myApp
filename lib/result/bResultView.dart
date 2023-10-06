@@ -36,6 +36,8 @@ class bResultView extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     FileMng fileMng = Provider.of<FileMng>(context);
 
+    log(menuMng.showOilDetails.toString());
+
     return Container(
         margin: const EdgeInsets.only(left: 20, right: 20),
         height: 600,
@@ -71,7 +73,7 @@ class bResultView extends StatelessWidget {
 
                       //오일
                       Container(
-                          height: (menuMng.showOilDetails > 0) ? 260 + (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize : 190,
+                          height: (menuMng.showOilDetails > 0) ? 260 + (menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize : 190,
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.only(left: leftPadding),
                           decoration: BoxDecoration(
@@ -138,10 +140,10 @@ class bResultView extends StatelessWidget {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              ResultOilBox("수상층\n${data.selectData.data[0].length}", themeIndex, 1, w: 70, h: 70,),
-                                              ResultOilBox("유상층\n${data.selectData.data[1].length}", themeIndex, 2, w: 70, h: 70,),
-                                              ResultOilBox("유화제\n${data.selectData.data[2].length}", themeIndex, 3, w: 70, h: 70,),
-                                              ResultOilBox("EO\n${data.selectData.data[3].length}", themeIndex, 4, w: 70, h: 70,),
+                                              ResultOilBox("수상층\n${data.selectData.data[0].length + data.selectData.data[1].length}", themeIndex, 1, w: 70, h: 70,),
+                                              ResultOilBox("유상층\n${data.selectData.data[2].length}", themeIndex, 2, w: 70, h: 70,),
+                                              ResultOilBox("유화제\n${data.selectData.data[3].length}", themeIndex, 3, w: 70, h: 70,),
+                                              ResultOilBox("EO\n${data.selectData.data[4].length}", themeIndex, 4, w: 70, h: 70,),
                                             ],
                                           ),
                                           Visibility(
@@ -150,7 +152,8 @@ class bResultView extends StatelessWidget {
                                                 offset: const Offset(0, -1),
                                                 child: Container(
                                                   width: double.maxFinite,
-                                                  height: ((menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 70),
+
+                                                  height: ((menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize + 70),
                                                   decoration: BoxDecoration(
                                                     borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
                                                     color: getThemeColor(themeIndex, 1),
@@ -158,11 +161,11 @@ class bResultView extends StatelessWidget {
                                                   child: Column(
                                                     children: [
                                                       SizedBox(
-                                                          height: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 5,
+                                                          height: (menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize + 5,
                                                           child: ListView.builder(
                                                             shrinkWrap: true,
                                                             padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
-                                                            itemCount: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0),
+                                                            itemCount: (menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0),
                                                             itemBuilder: (con, index)  {
                                                               return ResultOilDetailsContainer(oilBoxSize, themeIndex, index);
                                                             },
@@ -174,7 +177,7 @@ class bResultView extends StatelessWidget {
                                                         alignment: Alignment.centerRight,
                                                         padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
                                                         child: Text(
-                                                          "총합    -    ${data.selectData.weight[menuMng.showOilDetails]}${menuMng.showOilDetails == 4 ? "dr" : "g"}",
+                                                          "총합    -    ${(data.selectData.type.index > 2 && menuMng.showOilDetails == 1 ? data.selectData.weight[1] + data.selectData.weight[2] : data.selectData.weight[1 + menuMng.showOilDetails])}${menuMng.showOilDetails == 4 ? "dr" : "g"}",
                                                           style: TextStyle(
                                                             color: getThemeColor(themeIndex, 0),
                                                             fontWeight: FontWeight.bold,
@@ -241,7 +244,7 @@ class bResultView extends StatelessWidget {
                       //메모
                       Container(
                         margin: EdgeInsets.only(left: leftPadding, right: 15),
-                        child: CustomTextField((String str) {}, index: themeIndex, str: data.selectData.memo, maxLines: 11, height: 210, radius: 15,),
+                        child: CustomTextField((String str) {}, index: themeIndex, defaultValue: data.selectData.memo, maxLines: 11, height: 210, radius: 15,),
                       ),
                     ],
                   ),

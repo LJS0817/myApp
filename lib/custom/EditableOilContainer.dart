@@ -14,8 +14,6 @@ class EditableOilContainer extends StatelessWidget {
   int index = 0;
   int _page = 0;
 
-  TextEditingController controller = TextEditingController();
-  TextEditingController nameController = TextEditingController();
   String data = "";
   String name = "";
 
@@ -40,8 +38,8 @@ class EditableOilContainer extends StatelessWidget {
     OilMng oilMng = Provider.of<OilMng>(context);
 
     List<String> list = dataMngProvider.data.data[_page - 1][index].toString().split('`');
-    controller.text = list[0] == "0" || list[0] == 'null' ? "" : list[0];
-    nameController.text = index > -1 ? oilMng.oils(index)!.korean : (list.length > 1 ? list[1] : "");
+    data = list[0] == "0" || list[0] == 'null' ? "" : list[0];
+    name = index > -1 ? oilMng.oils(index)!.korean : (list.length > 1 ? list[1] : "");
 
     return Container(
       height: 75,
@@ -68,12 +66,10 @@ class EditableOilContainer extends StatelessWidget {
                 onTap: () {
                   String str = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0];
                   int weight = str == 'null' ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
-                  if(dataMngProvider.getTypeIndex() < 3) {
-                    dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3);
-                  }
-                  dataMngProvider.setData(getIndexSub1(), index, '-1');
-                  pageMngProvider.UpdateText(dataMngProvider.data, re: true);
-
+                  dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+                  dataMngProvider.setData(getIndexSub1(), index, '-1', needRefresh: true);
+                  pageMngProvider.UpdateText(dataMngProvider.data);
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
                 splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
                 highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.4),
@@ -108,20 +104,24 @@ class EditableOilContainer extends StatelessWidget {
                     onFocusChange: (hasFocus) {
                       if(!hasFocus) {
                         if(data.isNotEmpty) {
+                          log(data.toString());
                           int weight = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0] == "null" ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
                           dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
 
-                          dataMngProvider.setData(getIndexSub1(), index, '$data`${nameController.text}');
+                          dataMngProvider.setData(getIndexSub1(), index, '$data`$name');
 
                           weight = int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
                           dataMngProvider.setWeight(_page, weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+
+                          pageMngProvider.UpdateText(dataMngProvider.data);
+
                         }
                       }
                     },
-                    child: TextField(
-                      controller: controller,
+                    child: TextFormField(
+                      initialValue: data,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
                       textDirection: TextDirection.rtl,
@@ -185,8 +185,9 @@ class EditableOilContainer extends StatelessWidget {
                         //FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
-                    child: TextField(
-                      controller: nameController,
+                    child: TextFormField(
+                      key: UniqueKey(),
+                      initialValue: name,
                       readOnly: index > -1,
                       textAlignVertical: TextAlignVertical.top,
                       onChanged: (_) {

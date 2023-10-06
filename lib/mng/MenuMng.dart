@@ -8,10 +8,15 @@ class MenuMng with ChangeNotifier {
   bool isConfig = false;
   int showOilDetails = 0;
   bool showOilPopup = false;
+  bool oilBoxSmallSize = false;
 
   void init() {
     showOilDetails = 0;
     showOilPopup = false;
+  }
+
+  void sizeChanged(bool b) {
+    oilBoxSmallSize = b;
   }
 
   void showOilResult() {

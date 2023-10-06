@@ -141,9 +141,9 @@ class sResultView extends StatelessWidget {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              ResultOilBox("오일\n${data.selectData.data[0].length}", themeIndex, 1),
-                                              ResultOilBox("슈퍼팻\n${data.selectData.data[1].length}", themeIndex, 2),
-                                              ResultOilBox("첨가물\n${data.selectData.data[2].length}", themeIndex, 3),
+                                              ResultOilBox("오일\n${data.selectData.data[0].length}", themeIndex, 1, function: () { menuMng.sizeChanged(false); },),
+                                              ResultOilBox("슈퍼팻\n${data.selectData.data[1].length}", themeIndex, 2, function: () { menuMng.sizeChanged(true); },),
+                                              ResultOilBox("첨가물\n${data.selectData.data[2].length}", themeIndex, 3, function: () { menuMng.sizeChanged(true); },),
                                             ],
                                           ),
                                           Visibility(
@@ -486,7 +486,7 @@ class sResultView extends StatelessWidget {
                       //메모
                       Container(
                         margin: EdgeInsets.only(left: leftPadding, right: 15),
-                        child: CustomTextField((String str) {}, index: themeIndex, str: data.selectData.memo, maxLines: 3, height: 80, radius: 15,),
+                        child: CustomTextField((String str) {}, index: themeIndex, defaultValue: data.selectData.memo, maxLines: 3, height: 80, radius: 15,),
                       ),
                     ],
                   ),

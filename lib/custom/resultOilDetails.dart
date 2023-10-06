@@ -11,6 +11,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
   double _size = 0;
   int themeIndex = 0;
   int index = 0;
+
   ResultOilDetailsContainer(double size, int color, int idx, {super.key}) {
     _size = size;
     themeIndex = color;
@@ -103,19 +104,19 @@ class ResultOilDetailsContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            oilMng.oils(data.selectData.data[menuMng.showOilDetails - 1].keys.elementAt(index)).korean,
+            oilMng.oils(data.selectData.data[menuMng.showOilDetails - (data.selectData.type.index > 2 ? 0 : 1)].keys.elementAt(index)).korean,
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 15,
             ),
           ),
           Text(
-            "${data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`')[0]}g",
+            "${data.selectData.data[menuMng.showOilDetails - (data.selectData.type.index > 2 ? 0 : 1)].values.elementAt(index).split('`')[0]}g",
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 15,
             ),
           ),
         ],
@@ -126,9 +127,26 @@ class ResultOilDetailsContainer extends StatelessWidget {
   Widget addDetails(BuildContext context) {
     Mng data = Provider.of<Mng>(context);
     MenuMng menuMng = Provider.of<MenuMng>(context);
-    List<String> dataList = data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`');
-    String name = dataList.length > 1 && dataList[1].isNotEmpty ? dataList[1] : "[이름없음]";
+    List<String> dataList = [];
+
+    if(data.selectData.type.index > 2) {
+      if(menuMng.showOilDetails == 1) {
+        try {
+          dataList = data.selectData.data[0].values.elementAt(index).split('`');
+        } catch(e) {
+          dataList = data.selectData.data[1].values.elementAt(index - data.selectData.data[0].values.length).split('`');
+        }
+
+      } else {
+        dataList = data.selectData.data[menuMng.showOilDetails].values.elementAt(index).split('`');
+      }
+    } else {
+      dataList = data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`');
+    }
+
+    String name = dataList.length > 1 && dataList[1].isNotEmpty ? dataList[1] : "${data.selectData.type.index > 2 && menuMng.showOilDetails == 1 && index >= data.selectData.data[0].values.length ? "[첨] " : ""}[이름없음]";
     String gram = dataList[0].isEmpty || dataList[0] == "null" ? "0" : dataList[0];
+
     return SizedBox(
       height: _size,
       child: Row(
@@ -139,7 +157,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 15,
             ),
           ),
           Text(
@@ -147,7 +165,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 15,
             ),
           ),
         ],
