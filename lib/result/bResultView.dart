@@ -301,8 +301,9 @@ class bResultView extends StatelessWidget {
                           pageMng.index = 0;
                           dataMng.initData(menuMng.index);
                           dataMng.data = data.selectData;
-                          dataMng.data.weight[0] = dataMng.data.weight[1] + dataMng.data.weight[2];
                           data.init();
+                          log(dataMng.data.toString());
+                          pageMng.UpdateText(dataMng.data);
                           pageMng.changeScene(context, menuMng.index);
                         },
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),

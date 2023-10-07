@@ -205,11 +205,8 @@ class DataMng with ChangeNotifier {
     notifyListeners();
   }
 
-  void calculateBeautyWeight(bool isTotal, String str) {
-    if(isTotal) {
-      data.weight[0] = int.parse(str);
-    }
-    notifyListeners();
+  void calculateBeautyWeight(String str) {
+    data.weight[0] = int.parse(str);
     // data.weight[1] = (int.parse(getValue(8)!) * data.weight[0] * 0.01).round();
     // data.weight[2] = (int.parse(getValue(9)!) * data.weight[0] * 0.01).round();
     // data.weight[3] = (int.parse(getValue(10)!) * data.weight[0] * 0.01).round();
@@ -236,6 +233,7 @@ class DataMng with ChangeNotifier {
   ///11 - 총용량
   void setValue(String str, int idx) {
     data.values[idx] = str;
+    notifyListeners();
   }
 
   ///index

@@ -60,7 +60,7 @@ class PageMng with ChangeNotifier {
 
   String addButtonText(int type, int idx) {
     if(idx == 1) {
-      return type > 2 ? "수상층" : "오일";
+      return type > 2 ? "워터" : "오일";
     } else if(idx == 2 && type != 1) {
       return type > 2 ? "첨가물" : "슈퍼팻";
     } else if(idx == 3) {
@@ -128,10 +128,10 @@ class PageMng with ChangeNotifier {
           ];
         } else {
           result = [
-            data.getValue(8).toString(),
-            data.getValue(9).toString(),
-            data.getValue(10).toString(),
-            data.weight[0].toString(),
+            "${(int.parse(data.getValue(8)!) * data.weight[0] * 0.01).round()}g",
+            "${(int.parse(data.getValue(9)!) * data.weight[0] * 0.01).round()}g",
+            "${(int.parse(data.getValue(10)!) * data.weight[0] * 0.01).round()}g",
+            "${data.weight[0]}g",
           ];
         }
         break;

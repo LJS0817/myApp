@@ -32,7 +32,7 @@ class OilContainer extends StatelessWidget {
         child: InkWell(
           onTap: () {
             if(dataMngProvider.getData(pageMngProvider.index - 1, index).isEmpty) {
-              dataMngProvider.setData(pageMngProvider.index - 1, index, '0`${oilMng.oils(index).korean}');
+              dataMngProvider.setData(pageMngProvider.index - 1, index, '0`${oilMng.oils(index).korean}', needRefresh: true);
               pageMngProvider.UpdateText(dataMngProvider.data, re: true);
             }
           },

@@ -30,7 +30,7 @@ class OilShortContainer extends StatelessWidget {
         child: InkWell(
           onTap: () {
             dataMngProvider.setWeight(pageMngProvider.index, -int.parse(dataMngProvider.getData(pageMngProvider.index - 1, index).split('`')[0]));
-            dataMngProvider.setData(pageMngProvider.index - 1, index, '-1');
+            dataMngProvider.setData(pageMngProvider.index - 1, index, '-1', needRefresh: true);
             pageMngProvider.UpdateText(dataMngProvider.data, re: true);
           },
           splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.5),

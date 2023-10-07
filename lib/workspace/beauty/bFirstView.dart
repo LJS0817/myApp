@@ -107,17 +107,17 @@ class bFirstView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8); dataMngProvider.calculateBeautyWeight(false, str); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(8)!, needLb: true, labelTxt: "수상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(8)!, needLb: true, labelTxt: "수상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 9); dataMngProvider.calculateBeautyWeight(false, str); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(9)!, needLb: true, labelTxt: "유상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 9); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(9)!, needLb: true, labelTxt: "유상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 10); dataMngProvider.calculateBeautyWeight(false, str); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(10)!, needLb: true, labelTxt: "유화제", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 10); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(10)!, needLb: true, labelTxt: "유화제", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 ],
               ),
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
               CustomTextField(
                 (String str) {
-                  dataMngProvider.calculateBeautyWeight(true, str);
+                  dataMngProvider.calculateBeautyWeight(str);
                   pageMngProvider.UpdateText(dataMngProvider.data);
                 },
                 defaultValue: dataMngProvider.data.weight[0].toString(),

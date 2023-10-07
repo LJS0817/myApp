@@ -102,20 +102,14 @@ class CustomTextField extends StatelessWidget {
               onFocusChange: (hasFocus) {
                 if(!hasFocus) {
                   onChange(getOnlyOneDot(_default));
-                } else {
-                  //FocusManager.instance.primaryFocus?.unfocus();
                 }
               },
               child: TextFormField(
-                key: UniqueKey(),
                 initialValue: _default == "0" ? "" : _default,
                 readOnly: !isActive,
                 maxLines: _maxLines,
                 keyboardType: onlyNumber || needLabel ? const TextInputType.numberWithOptions(decimal: true) : TextInputType.multiline,
                 textInputAction: _maxLines > 10 ? TextInputAction.newline : TextInputAction.done,
-                onFieldSubmitted: (_) => {
-                  onChange(getOnlyOneDot(_.toString())),
-                },
                 onChanged: (_) {
                   _default = _.toString();
                   if(isMultipleLine) {
