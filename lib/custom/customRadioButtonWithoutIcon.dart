@@ -18,7 +18,8 @@ class customRadioButtonWithoutIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 240),
       height: 55,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),

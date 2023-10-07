@@ -188,45 +188,50 @@ Widget BottomBar(BuildContext context) {
           ),
           Positioned(
               bottom: 35,
-              child: Material(
-                borderRadius: BorderRadius.circular(500),
-                color: mainTheme[menuMng.getIndex()],
-                child: InkWell(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 240),
+                decoration: BoxDecoration(
+                  color: mainTheme[menuMng.getIndex()],
                   borderRadius: BorderRadius.circular(500),
-                  splashColor: getSecondColor(context).withOpacity(0.2),
-                  highlightColor: getSecondColor(context).withOpacity(0.5),
-                  onTap: () {
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(500),
+                    splashColor: getSecondColor(context).withOpacity(0.2),
+                    highlightColor: getSecondColor(context).withOpacity(0.5),
+                    onTap: () {
 
-                    pageMng.index = 0;
-                    dataMng.initData(menuMng.index);
-                    dataMng.selectFileName = "";
-                    mng.selectData = Data();
-                    menuMng.init();
+                      pageMng.index = 0;
+                      dataMng.initData(menuMng.index);
+                      dataMng.selectFileName = "";
+                      mng.selectData = Data();
+                      menuMng.init();
 
-                    pageMng.UpdateText(dataMng.data);
-                    pageMng.changeScene(context, menuMng.index);
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: aniTime),
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(500.0),
-                        border: Border.all(
-                           strokeAlign: BorderSide.strokeAlignOutside,
-                            width: 4,
-                            color: getMainColor(context).withOpacity(0.5)
-                        )
-                    ),
-                    child: menuMng.isConfig ? SvgPicture.asset(
-                      'assets/icon/save.svg',
-                      width: 29,
-                      height: 29,
-                      color: themeIconColors[menuMng.getIndex()],
-                      fit: BoxFit.none,) : Icon(
-                      Icons.add_rounded,
-                      size: 30,
-                      color: themeIconColors[menuMng.getIndex()],
+                      pageMng.UpdateText(dataMng.data);
+                      pageMng.changeScene(context, menuMng.index);
+                    },
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(500.0),
+                          border: Border.all(
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                              width: 4,
+                              color: getMainColor(context).withOpacity(0.5)
+                          )
+                      ),
+                      child: menuMng.isConfig ? SvgPicture.asset(
+                        'assets/icon/save.svg',
+                        width: 29,
+                        height: 29,
+                        color: themeIconColors[menuMng.getIndex()],
+                        fit: BoxFit.none,) : Icon(
+                        Icons.add_rounded,
+                        size: 30,
+                        color: themeIconColors[menuMng.getIndex()],
+                      ),
                     ),
                   ),
                 ),
@@ -269,31 +274,49 @@ class _IndexScreenState extends State<IndexScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: getSecondColor(context),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: getMainColor(context),
-        title: Text("테스트"),
-      ),
-      body: Stack(
-        children: [
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 80,
-            child: getIndex(context),
-          ),
-          BottomBar(context),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: ResultView(Provider.of<Mng>(context).selectData.type.index),
-          ),
-        ],
+    return SafeArea(
+      top: false,
+      child: Container(
+        color: getSecondColor(context),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 240),
+                height: 80,
+                color: getMainColor(context),
+                alignment: Alignment.bottomLeft,
+                padding: const EdgeInsets.only(left: 25, bottom: 15),
+                child: Text(
+                  "테스트",
+                  style: TextStyle(
+                    color: getSecondColor(context),
+                    fontSize: 20,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 80,
+              bottom: 80,
+              child: getIndex(context),
+            ),
+            BottomBar(context),
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              child: ResultView(Provider.of<Mng>(context).selectData.type.index),
+            ),
+          ],
+        ),
       ),
     );
   }

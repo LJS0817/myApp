@@ -65,7 +65,8 @@ class CustomTextField extends StatelessWidget {
             visible: needLabel,
             child: Transform.translate(
               offset: const Offset(0, 1),
-              child: Container(
+              child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 240),
                   height: 27,
                   width: 90,
                   padding: const EdgeInsets.only(left: 5),
@@ -90,7 +91,8 @@ class CustomTextField extends StatelessWidget {
               ),
             )
         ),
-        Container(
+        AnimatedContainer(
+            duration: const Duration(milliseconds: 240),
             height: _height,
             padding: const EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(

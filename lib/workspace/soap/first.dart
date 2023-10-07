@@ -57,11 +57,16 @@ class FirstView extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
 
-            Visibility(
-              visible: dataMngProvider.getTypeIndex() == 0 || dataMngProvider.getTypeIndex() == 2,
-              child: Material(
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 240),
+              width: double.maxFinite,
+              height: dataMngProvider.getTypeIndex() == 0 || dataMngProvider.getTypeIndex() == 2 ? 60 : 0,
+              decoration: BoxDecoration(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 1 : 0),
                 borderRadius: BorderRadius.circular(10),
+              ),
+              child: Material(
+                color: Colors.transparent,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(10),
                   highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1).withOpacity(0.5),
@@ -70,12 +75,10 @@ class FirstView extends StatelessWidget {
                     dataMngProvider.setSoapType();
                   },
                   child: Container(
-                    width: double.maxFinite,
-                    height: 60,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: dataMngProvider.data.isReturn ? 3 : 0, color: getThemeColor(dataMngProvider.getTypeIndex(), 0)),
+                      border: Border.all(width: dataMngProvider.data.isReturn ? 3 : 0, color: (dataMngProvider.getTypeIndex() == 0 || dataMngProvider.getTypeIndex() == 2 ? getThemeColor(dataMngProvider.getTypeIndex(), 0) : Colors.transparent)),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -117,6 +120,68 @@ class FirstView extends StatelessWidget {
                 ),
               ),
             ),
+
+            // Visibility(
+            //   visible: dataMngProvider.getTypeIndex() == 0 || dataMngProvider.getTypeIndex() == 2,
+            //   child: Material(
+            //     color: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 1 : 0),
+            //     borderRadius: BorderRadius.circular(10),
+            //     child: InkWell(
+            //       borderRadius: BorderRadius.circular(10),
+            //       highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1).withOpacity(0.5),
+            //       splashColor: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1).withOpacity(0.5),
+            //       onTap: () {
+            //         dataMngProvider.setSoapType();
+            //       },
+            //       child: Container(
+            //         width: double.maxFinite,
+            //         height: 60,
+            //         padding: const EdgeInsets.symmetric(horizontal: 20),
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(10),
+            //           border: Border.all(width: dataMngProvider.data.isReturn ? 3 : 0, color: getThemeColor(dataMngProvider.getTypeIndex(), 0)),
+            //         ),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             Row(
+            //               children: [
+            //                 Container(
+            //                   height: 45,
+            //                   width: 45,
+            //                   padding: const EdgeInsets.all(10),
+            //                   decoration: BoxDecoration(
+            //                     borderRadius: BorderRadius.circular(100),
+            //                     color: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1),
+            //                   ),
+            //                   child: SvgPicture.asset(
+            //                     'assets/icon/change.svg',
+            //                     color: getThemeColor(dataMngProvider.data.type.index, dataMngProvider.data.isReturn ? 1 : 0),
+            //                   ),
+            //                 ),
+            //                 const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
+            //                 Text(
+            //                   "${dataMngProvider.data.isReturn ? "일반비누용" : "비누화수용"}으로 계산하기",
+            //                   style: TextStyle(
+            //                     color: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1),
+            //                     fontWeight: FontWeight.bold,
+            //                     fontSize: 16,
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
+            //             SvgPicture.asset(
+            //               'assets/icon/click.svg',
+            //               width: 30,
+            //               color: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
 
 
             const Padding(padding: EdgeInsets.symmetric(vertical: 20)),

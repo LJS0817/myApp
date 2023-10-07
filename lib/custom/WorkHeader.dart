@@ -22,7 +22,8 @@ class _HeaderState extends State<Header> {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 240),
       decoration: BoxDecoration(
         color: getThemeColor(dataMngProvider.data.type.index, 0),
         borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
