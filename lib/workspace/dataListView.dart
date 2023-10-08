@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:isma/custom/EditableOilContainer.dart';
 import 'package:isma/mng/DataMng.dart';
@@ -8,7 +10,7 @@ class DataListView extends StatelessWidget {
   int page = 0;
 
   DataListView(int pageId, {super.key}) {
-    page = pageId - 1;
+    page = pageId - 1 < 0 ? 0 : pageId - 1;
   }
 
   @override

@@ -39,7 +39,6 @@ class bResultView extends StatelessWidget {
     log(menuMng.showOilDetails.toString());
 
     return Container(
-        margin: const EdgeInsets.only(left: 20, right: 20),
         height: 600,
         width: MediaQuery.of(context).size.width,
         child: Column(

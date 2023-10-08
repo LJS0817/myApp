@@ -40,14 +40,12 @@ class sResultView extends StatelessWidget {
     FileMng fileMng = Provider.of<FileMng>(context);
 
     return Container(
-        margin: const EdgeInsets.only(left: 20, right: 20),
-        height: 600,
-        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.6 + 100,
         child: Column(
           children: [
             Container(
-                height: 500,
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                height: MediaQuery.of(context).size.height * 0.6,
+                padding: const EdgeInsets.only(bottom: 20),
                 decoration: BoxDecoration(
                   color: mainTextColor[Provider.of<MenuMng>(context).getIndex()],
                   borderRadius: BorderRadius.circular(30),

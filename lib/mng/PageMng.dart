@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/DataMng.dart';
+import 'package:isma/tabs/soap.dart';
 import 'package:isma/workspace/beauty/bFifthView.dart';
 import 'package:isma/workspace/beauty/bFirstView.dart';
 import 'package:isma/workspace/beauty/bFourthView.dart';

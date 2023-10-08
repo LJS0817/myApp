@@ -33,30 +33,37 @@ class ResultView extends StatelessWidget {
     Mng data = Provider.of<Mng>(context);
     return Visibility(
       visible: data.popUpActive,
-      child: Stack(
-        children: [
-          Positioned(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Material(
-                color: Colors.black.withOpacity(0.6),
-                child: InkWell(
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onTap: () {
-                    data.hideResultView();
-                  },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            Positioned(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Material(
+                  color: Colors.black.withOpacity(0.6),
+                  child: InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
+                      data.hideResultView();
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            child: Center(
-              child: getResultView(Provider.of<MenuMng>(context, listen: false).oilBoxSmallSize),
-            ),
-          )
-        ],
-      ),
+            Positioned(
+              right: 20,
+              left: 20,
+              top: 0,
+              bottom: 0,
+              child: Center(
+                child: getResultView(Provider.of<MenuMng>(context, listen: false).oilBoxSmallSize),
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 }

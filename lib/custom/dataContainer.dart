@@ -21,16 +21,18 @@ class DataContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 98,
-        margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-        decoration: BoxDecoration(
-          color: getThemeColor(data.type.index, 0),
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
+    return LayoutBuilder(
+      builder: (context, cons) {
+        return Container(
+          height: 90,
+          margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          decoration: BoxDecoration(
+            color: getThemeColor(data.type.index, 0),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(30)),
               splashColor: getThemeColor(data.type.index, 2).withOpacity(0.3),
               highlightColor: getThemeColor(data.type.index, 2).withOpacity(0.2),
@@ -41,58 +43,73 @@ class DataContainer extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned(
-                    left: 30,
-                    top: 15,
-                    child: Text(
-                      data.name,
-                      style: TextStyle(
-                        color: getThemeColor(data.type.index, 1),
-                        fontSize: 21,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                      left: 30,
+                      top: 15,
+                      child: Container(
+                        height: 27,
+                        width: double.maxFinite,
+                        child: FittedBox(
+                          child: Text(
+                            data.name,
+                            style: TextStyle(
+                              color: getThemeColor(data.type.index, 1),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
                   ),
                   Positioned(
-                    left: 30,
-                    top: 43,
-                    child: Text(
-                      data.date,
-                      style: TextStyle(
-                        color: getThemeColor(data.type.index, 1),
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                      left: 30,
+                      top: 40,
+                      child: Container(
+                        height: 15,
+                        child: FittedBox(
+                          child: Text(
+                            data.date,
+                            style: TextStyle(
+                              color: getThemeColor(data.type.index, 1),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
                   ),
                   Positioned(
-                    left: 30,
-                    top: 64,
-                    child: Text(
-                      typeToString(data.type),
-                      style: TextStyle(
-                        color: getThemeColor(data.type.index, 2),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                      left: 30,
+                      top: 60,
+                      child: Container(
+                        height: 20,
+                        child: FittedBox(
+                          child: Text(
+                            typeToString(data.type),
+                            style: TextStyle(
+                              color: getThemeColor(data.type.index, 2),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                  ),
+                  Positioned(
+                      right: 25,
+                      top: 0,
+                      bottom: 0,
+                      child: SvgPicture.asset(
+                        getIcon(data.type),
+                        width: 64,
+                        height: 64,
+                        color: getThemeColor(data.type.index, 2).withOpacity(0.3),
+                      )
                   ),
                   Positioned(
                     right: 25,
-                    top: 17,
-                    child: SvgPicture.asset(
-                      getIcon(data.type),
-                      width: 64,
-                      height: 64,
-                      color: getThemeColor(data.type.index, 2).withOpacity(0.3),
-                    ),
-                  ),
-                  Positioned(
-                    right: 25,
-                    bottom: 14,
+                    bottom: 8,
                     child: Text(
                       "${data.weight[0]}G",
                       style: TextStyle(
-                        color: getThemeColor(data.type.index, 2).withOpacity(0.8),
+                        color: getThemeColor(data.type.index, 2).withOpacity(0.9),
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -100,8 +117,10 @@ class DataContainer extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
           ),
-        ),
+        );
+      },
     );
   }
 }

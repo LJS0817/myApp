@@ -47,7 +47,7 @@ class SoapWorkspace extends StatelessWidget {
               OilDialog(),
             ],
           ),
-        ),
+        )
       ),
     );
   }

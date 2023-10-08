@@ -88,11 +88,11 @@ Color getSecondColor(BuildContext context) {
 }
 
 Widget BottomBar(BuildContext context) {
-
   Mng mng = Provider.of<Mng>(context);
   MenuMng menuMng = Provider.of<MenuMng>(context);
   PageMng pageMng = Provider.of<PageMng>(context);
   DataMng dataMng = Provider.of<DataMng>(context);
+
 
   return Positioned(
     bottom: 0,
@@ -158,13 +158,13 @@ Widget BottomBar(BuildContext context) {
             bottom: 0,
             child: Container(
               height: 70,
-              padding: const EdgeInsets.symmetric(horizontal: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   iconButton('assets/icon/soap.svg', 0, () { menuMng.setIndex(0); }),
                   iconButton('assets/icon/beauty.svg', 1, () { menuMng.setIndex(1); }),
-                  const SizedBox(width: 82, height: 80, ),
+                  Expanded(child: Container(),),
                   iconButton('assets/icon/oil.svg', 2, () { menuMng.setIndex(2); }, size: 16),
                   iconButton('assets/icon/settings.svg', 3, () { menuMng.setIndex(3); }),
                 ],

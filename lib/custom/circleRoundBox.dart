@@ -27,32 +27,38 @@ class circleRoundBox extends StatelessWidget {
             child: Container(
               width: 50,
               height: 30,
+              padding: const EdgeInsets.symmetric(horizontal: 7),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: getThemeColor(_index, 1),
               ),
               alignment: Alignment.center,
-              child: Text (
-                _title,
-                style: TextStyle(
-                  color: getThemeColor(_index, 0),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text (
+                  _title,
+                  style: TextStyle(
+                    color: getThemeColor(_index, 0),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                 ),
-              ),
+              )
             ),
           ),
           Positioned(
             right: 10,
             bottom: 7,
-            child: Text (
-              _data,
-              style: TextStyle(
-                color: getThemeColor(_index, 1),
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
+            child: FittedBox(
+              child: Text (
+                _data,
+                style: TextStyle(
+                  color: getThemeColor(_index, 1),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
               ),
-            ),
+            )
           ),
         ],
       )

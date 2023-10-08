@@ -31,19 +31,23 @@ class circleBorderBox extends StatelessWidget {
             child: Container(
               width: _width,
               height: 25,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: getThemeColor(_index, 0).withOpacity(0.7),
               ),
               alignment: Alignment.center,
-              child: Text (
-                _title,
-                style: TextStyle(
-                  color: getThemeColor(_index, 1),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text (
+                  _title,
+                  style: TextStyle(
+                    color: getThemeColor(_index, 1),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                 ),
-              ),
+              )
             ),
           ),
           Positioned(
