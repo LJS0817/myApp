@@ -162,11 +162,11 @@ Widget BottomBar(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  iconButton('assets/icon/soap.svg', 0, () { menuMng.setIndex(0); }),
-                  iconButton('assets/icon/beauty.svg', 1, () { menuMng.setIndex(1); }),
+                  iconButton('assets/icon/soap.svg', 0, () { menuMng.setIndex(0); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());  }),
+                  iconButton('assets/icon/beauty.svg', 1, () { menuMng.setIndex(1); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());   }),
                   Expanded(child: Container(),),
-                  iconButton('assets/icon/oil.svg', 2, () { menuMng.setIndex(2); }, size: 16),
-                  iconButton('assets/icon/settings.svg', 3, () { menuMng.setIndex(3); }),
+                  iconButton('assets/icon/oil.svg', 2, () { menuMng.setIndex(2); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());   }, size: 16),
+                  iconButton('assets/icon/settings.svg', 3, () { menuMng.setIndex(3); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());   }),
                 ],
               ),
             ),
@@ -201,15 +201,20 @@ Widget BottomBar(BuildContext context) {
                     splashColor: getSecondColor(context).withOpacity(0.2),
                     highlightColor: getSecondColor(context).withOpacity(0.5),
                     onTap: () {
+                      if(menuMng.isConfig) {
+                        FileMng fileMng = Provider.of<FileMng>(context, listen: false);
+                        fileMng.writeFile("config", "UserData_Config", mng.getThemeSaveString());
+                        fileMng.setData(3, "config.txt", mng.getThemeSaveString());
+                      } else {
+                        pageMng.index = 0;
+                        dataMng.initData(menuMng.index);
+                        dataMng.selectFileName = "";
+                        mng.selectData = Data();
+                        menuMng.init();
 
-                      pageMng.index = 0;
-                      dataMng.initData(menuMng.index);
-                      dataMng.selectFileName = "";
-                      mng.selectData = Data();
-                      menuMng.init();
-
-                      pageMng.UpdateText(dataMng.data);
-                      pageMng.changeScene(context, menuMng.index);
+                        pageMng.UpdateText(dataMng.data);
+                        pageMng.changeScene(context, menuMng.index);
+                      }
                     },
                     child: Container(
                       width: 60,
@@ -273,7 +278,7 @@ class _IndexScreenState extends State<IndexScreen> {
               {
                 oilMng.syncUserData(fileMng.data[2].values.toList()),
                 fileMng.readDirectory('config', 3).then((value) =>
-                    Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3].toString().split('\n')[0])
+                    Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
                 )
               })
           )
@@ -298,8 +303,8 @@ class _IndexScreenState extends State<IndexScreen> {
                 duration: const Duration(milliseconds: 240),
                 height: 80,
                 color: getMainColor(context),
-                alignment: Alignment.bottomLeft,
-                padding: const EdgeInsets.only(left: 25, bottom: 15),
+                alignment: Alignment.bottomCenter,
+                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
                 child: Text(
                   "테스트",
                   style: TextStyle(

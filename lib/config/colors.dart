@@ -1,12 +1,6 @@
 import 'dart:ui';
 
-//soap main
-// primary : 3B6C95
-//text & background : EFF1F5
 
-//beauty main
-//primary : 75A657
-//text & background : EDF2E8
 const List<Color> mainTheme = [
   Color(0xFF3B6C95),
   Color(0xFF75A657),

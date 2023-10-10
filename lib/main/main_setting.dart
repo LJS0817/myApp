@@ -15,10 +15,19 @@ class mainSettingScreen extends StatelessWidget {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           children: [
+            Text(
+              "색 변경하기",
+              style: TextStyle(
+                  color: getMainColor(context),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(bottom: 5)),
             ThemeChanger(),
             const Padding(padding: EdgeInsets.only(bottom: 10)),
             Text(
-              "1 - 비누 2 - 화장품 3 - 오일 4 - 설정",
+              "1 - 비누, 2 - 화장품, 3 - 오일, 4 - 설정",
               textAlign: TextAlign.right,
               style: TextStyle(
                 color: getMainColor(context),
@@ -27,7 +36,36 @@ class mainSettingScreen extends StatelessWidget {
               ),
             ),
 
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "개발자 연락처 ",
+                  style: TextStyle(
+                    color: getMainColor(context),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
+                ),
+                Text(
+                  "( 의견 제시 )",
+                  style: TextStyle(
+                    color: getMainColor(context),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+            const Padding(padding: EdgeInsets.only(bottom: 5)),
+            Text(
+              "이메일    -    iam0817jun@gmail.com",
+              style: TextStyle(
+                color: getMainColor(context),
+              ),
+            ),
+
+            const Padding(padding: EdgeInsets.only(bottom: 35)),
             Material(
               color: getMainColor(context),
               borderRadius: BorderRadius.circular(20),

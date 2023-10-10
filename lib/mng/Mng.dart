@@ -18,7 +18,7 @@ class Mng with ChangeNotifier {
   double resultLye = 0;
   double resultWater = 0;
   List<double> resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
-  List<int> themeColorIndex = [ 0, 1, 2, 3 ];
+  List<int> themeColorIndex = [ 0, 1, 2, 3, 0 ];
 
   ///```
   ///0 - PURE SOAP
@@ -52,6 +52,58 @@ class Mng with ChangeNotifier {
     if(data.type == TYPE.E_HOT) {
       calculateHotData(data);
     }
+  }
+
+  String getThemeSaveString() {
+    return "${themeColorIndex[0]},${themeColorIndex[1]},${themeColorIndex[2]},${themeColorIndex[3]}";
+  }
+
+  void changePage(String str) {
+    List<String> sList = str.split(',');
+    if(sList.length < 3) {
+      sList = [];
+      sList[0] = '0';
+      sList[1] = '1';
+      sList[2] = '2';
+      sList[3] = '3';
+    }
+    if(themeColorIndex[0].toString() != sList[0] || themeColorIndex[1].toString() != sList[1] ||
+        themeColorIndex[2].toString() != sList[2] || themeColorIndex[3].toString() != sList[3]) {
+      themeColorIndex[0] = int.parse(sList[0]);
+      themeColorIndex[1] = int.parse(sList[1]);
+      themeColorIndex[2] = int.parse(sList[2]);
+      themeColorIndex[3] = int.parse(sList[3]);
+    }
+  }
+
+  void changeTheme(int colorIdx) {
+    themeColorIndex[themeColorIndex[4]] = colorIdx;
+    themeColorIndex[4]++;
+    if(themeColorIndex[4] > 3) {
+      themeColorIndex[4] = 0;
+    }
+    notifyListeners();
+  }
+
+  int IndexOfTheme(int colorIdx) {
+    if(themeColorIndex[0] == colorIdx) {
+      return 1;
+    } else if(themeColorIndex[1] == colorIdx) {
+      return 2;
+    } else if(themeColorIndex[2] == colorIdx) {
+      return 3;
+    } else if(themeColorIndex[3] == colorIdx) {
+      return 4;
+    } else {
+      return -1;
+    }
+  }
+
+  bool containTheme(int colorIdx) {
+    return themeColorIndex[0] == colorIdx ||
+        themeColorIndex[1] == colorIdx ||
+        themeColorIndex[2] == colorIdx ||
+        themeColorIndex[3] == colorIdx;
   }
 
   ///0 - PURE SOAP

@@ -12,8 +12,8 @@ class ThemeChanger extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RowColorList(0 , 1),
-        RowColorList(2 , 3),
+        RowColorList(0 , "차가운 얼음", 1, "여름의 숲"),
+        RowColorList(2 , "보라색 하늘", 3, "산뜻한 불꽃"),
 
         // ColorPick(Colors.black),
         // ColorPick(Colors.black),

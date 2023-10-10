@@ -13,6 +13,7 @@ class MenuMng with ChangeNotifier {
   void init() {
     showOilDetails = 0;
     showOilPopup = false;
+    isConfig = false;
   }
 
   void sizeChanged(bool b) {
@@ -31,6 +32,11 @@ class MenuMng with ChangeNotifier {
 
   void setIndex(int idx) {
     index = idx;
+    if(idx == 3) {
+      isConfig = true;
+    } else if(isConfig) {
+      isConfig = false;
+    }
     notifyListeners();
   }
 
