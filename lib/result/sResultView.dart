@@ -310,7 +310,7 @@ class sResultView extends StatelessWidget {
 
                       //설정값
                       Container(
-                        margin: EdgeInsets.only(left: leftPadding, top: 15, bottom: 15, right: 15),
+                        margin: EdgeInsets.only(left: leftPadding, top: 15, bottom: 15, right: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

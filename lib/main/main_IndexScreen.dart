@@ -267,7 +267,17 @@ class _IndexScreenState extends State<IndexScreen> {
       FileMng fileMng =  Provider.of<FileMng>(context, listen: false);
       OilMng oilMng =  Provider.of<OilMng>(context, listen: false);
       fileMng.load();
-      fileMng.readDirectory('soap', 0).then((value) => fileMng.readDirectory('beauty', 1).then((value) => fileMng.readDirectory('oil', 2).then((value) => oilMng.syncUserData(fileMng.data[2].values.toList()))));
+      fileMng.readDirectory('soap', 0).then((value) =>
+          fileMng.readDirectory('beauty', 1).then((value) =>
+              fileMng.readDirectory('oil', 2).then((value) =>
+              {
+                oilMng.syncUserData(fileMng.data[2].values.toList()),
+                fileMng.readDirectory('config', 3).then((value) =>
+                    Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3].toString().split('\n')[0])
+                )
+              })
+          )
+      );
       Mng.isLoad = true;
     }
   }
@@ -276,9 +286,9 @@ class _IndexScreenState extends State<IndexScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      child: Container(
-        color: getSecondColor(context),
-        child: Stack(
+      child: Scaffold(
+        backgroundColor: getSecondColor(context),
+        body: Stack(
           children: [
             Positioned(
               top: 0,

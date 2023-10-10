@@ -18,6 +18,7 @@ class Mng with ChangeNotifier {
   double resultLye = 0;
   double resultWater = 0;
   List<double> resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
+  List<int> themeColorIndex = [ 0, 1, 2, 3 ];
 
   ///```
   ///0 - PURE SOAP
@@ -32,6 +33,16 @@ class Mng with ChangeNotifier {
 
   void setData(Data data) {
     selectData = data;
+  }
+
+  void setThemeColor(String data) {
+    List<String> s = data.replaceAll(' ', '').split(',');
+    if(s.length > 3) {
+      themeColorIndex[0] = int.parse(s[0]);
+      themeColorIndex[1] = int.parse(s[1]);
+      themeColorIndex[2] = int.parse(s[2]);
+      themeColorIndex[3] = int.parse(s[3]);
+    }
   }
 
   void calculateData(Data data, BuildContext context) {

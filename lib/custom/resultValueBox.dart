@@ -16,45 +16,52 @@ class ResultValueBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 95,
-      height: 110,
-      decoration: BoxDecoration(
-        color: getThemeColor(themeIndex, 0),
-        borderRadius: BorderRadius.circular(13),
-      ),
-      child: Column(
-        children: [
-          Container(
-            height: 57,
-            margin: const EdgeInsets.only(left: 7, right: 7, top: 7),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(13),
-              color: getThemeColor(themeIndex, 1),
-            ),
-            child: Text(
-              value,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: getThemeColor(themeIndex, 0),
-              ),
-            ),
-          ),
-          Container(
-            height: 43,
-            alignment: Alignment.center,
-            child: Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+    return Expanded(
+      child: Container(
+        height: 110,
+        margin: const EdgeInsets.only(right: 10),
+        decoration: BoxDecoration(
+          color: getThemeColor(themeIndex, 0),
+          borderRadius: BorderRadius.circular(13),
+        ),
+        child: Column(
+          children: [
+            Container(
+              height: 57,
+              margin: const EdgeInsets.only(left: 7, right: 7, top: 7),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(13),
                 color: getThemeColor(themeIndex, 1),
               ),
+              child: FittedBox(
+                child: Text(
+                  value,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: getThemeColor(themeIndex, 0),
+                  ),
+                ),
+              )
             ),
-          ),
-        ],
-      ),
+            Container(
+              height: 43,
+              alignment: Alignment.center,
+              child: FittedBox(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: getThemeColor(themeIndex, 1),
+                  ),
+                ),
+              )
+            ),
+          ],
+        ),
+      )
     );
   }
 

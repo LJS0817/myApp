@@ -43,16 +43,18 @@ class ResultOilBox extends StatelessWidget {
           height: _height,
           alignment: Alignment.center,
           color: Colors.transparent,
-          child: Text(
-            str,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              height: 1.5,
-              color: getThemeColor(themeIndex, 0),
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+          child: FittedBox(
+            child: Text(
+              str,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                height: 1.5,
+                color: getThemeColor(themeIndex, 0),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
+          )
         ),
       ),
     );
