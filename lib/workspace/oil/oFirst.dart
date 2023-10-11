@@ -24,7 +24,7 @@ class oFirstView extends StatelessWidget {
               visible: !isFirst,
               child: Container(
                 height: 2,
-                color: getThemeColor(-1, 1),
+                color: getThemeColor(1, 1),
               ),
             ),
           ),
@@ -34,7 +34,7 @@ class oFirstView extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  color: getThemeColor(-1, 1),
+                  color: getThemeColor(1, 1),
                   fontSize: 15,
                 ),
               ),
@@ -52,7 +52,7 @@ class oFirstView extends StatelessWidget {
                     textInputAction: TextInputAction.done,
                     keyboardType: const TextInputType.numberWithOptions(decimal: true),
                     style: TextStyle(
-                      color: getThemeColor(-1, 1),
+                      color: getThemeColor(1, 1),
                       fontWeight: FontWeight.bold,
                     ),
                     onSubmitted: (_) {
@@ -62,7 +62,7 @@ class oFirstView extends StatelessWidget {
                         border: InputBorder.none,
                         hintText: defaultValue,
                         hintStyle: TextStyle(
-                          color: getThemeColor(-1, 1),
+                          color: getThemeColor(1, 1),
                           fontWeight: FontWeight.bold,
                         )
                     ),
@@ -91,10 +91,10 @@ class oFirstView extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: getThemeColor(-1, 0),
+                color: getThemeColor(1, 0),
               ),
             ),
-            CustomTextField((_) { dataMng.setOilName(_.toString()); }, index: -1, active: true, radius: 15, defaultValue: dataMng.getOilData()!.korean,),
+            CustomTextField((_) { dataMng.setOilName(_.toString()); }, index: 1, active: true, radius: 15, defaultValue: dataMng.getOilData()!.korean,),
 
             const Padding(padding: EdgeInsets.only(top: 20)),
 
@@ -107,7 +107,7 @@ class oFirstView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       height: 90,
                       decoration: BoxDecoration(
-                        color: getThemeColor(-1, 0).withOpacity(0.85),
+                        color: getThemeColor(1, 0).withOpacity(0.85),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
@@ -121,12 +121,12 @@ class oFirstView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: getThemeColor(-1, 1),
+                                color: getThemeColor(1, 1),
                               ),
                             ),
                           ),
                           const Padding(padding: EdgeInsets.only(bottom: 3)),
-                          CustomTextField((_) { log(_.toString()); dataMng.setOilData(0, _); }, onlyNum: true, index: -1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.NaOH.toString(),),
+                          CustomTextField((_) { log(_.toString()); dataMng.setOilData(0, _); }, onlyNum: true, index: 1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.NaOH.toString(),),
                         ],
                       ),
                     )
@@ -137,7 +137,7 @@ class oFirstView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     height: 90,
                     decoration: BoxDecoration(
-                      color: getThemeColor(-1, 0).withOpacity(0.85),
+                      color: getThemeColor(1, 0).withOpacity(0.85),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
@@ -151,12 +151,12 @@ class oFirstView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: getThemeColor(-1, 1),
+                              color: getThemeColor(1, 1),
                             ),
                           ),
                         ),
                         const Padding(padding: EdgeInsets.only(bottom: 3)),
-                        CustomTextField((_) { dataMng.setOilData(1, _); }, onlyNum: true, index: -1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.KOH.toString(),),
+                        CustomTextField((_) { dataMng.setOilData(1, _); }, onlyNum: true, index: 1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.KOH.toString(),),
                       ],
                     ),
                   )
@@ -169,7 +169,7 @@ class oFirstView extends StatelessWidget {
               height: 440,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: getThemeColor(-1, 0).withOpacity(0.85),
+                color: getThemeColor(1, 0).withOpacity(0.85),
               ),
               child: Column(
                 children: [
@@ -180,7 +180,7 @@ class oFirstView extends StatelessWidget {
                     child: Text(
                       "Enter Fat Values",
                       style: TextStyle(
-                        color: getThemeColor(-1, 1),
+                        color: getThemeColor(1, 1),
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                       ),

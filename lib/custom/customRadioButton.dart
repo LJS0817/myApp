@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
 import '../config/define.dart';
@@ -36,6 +37,7 @@ class customRadioButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           onTap: () {
             onSelected();
+            Provider.of<PageMng>(context, listen: false).UpdateText(dataMngProvider.data);
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

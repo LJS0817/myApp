@@ -47,7 +47,7 @@ class sResultView extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.6,
                 padding: const EdgeInsets.only(bottom: 20),
                 decoration: BoxDecoration(
-                  color: mainTextColor[Provider.of<MenuMng>(context).getIndex()],
+                  color: getThemeColor(1, 1),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: ScrollConfiguration(

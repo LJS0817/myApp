@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/custom/OilDialog.dart';
 import 'package:isma/custom/WorkFooter.dart';
 import 'package:isma/custom/WorkHeader.dart';
@@ -34,7 +35,7 @@ class BeautyWorkspace extends StatelessWidget {
           }
         },
         child: Container(
-          color: mainTextColor[menuMng.index],
+          color: getThemeColor(1, 1),
           child: Stack(
             children: [
               Column(

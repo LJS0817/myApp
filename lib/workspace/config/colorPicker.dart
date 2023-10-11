@@ -20,6 +20,7 @@ class ColorPick extends StatelessWidget {
       child: SizedBox(
         height: 65,
         child: Material(
+          color: Colors.transparent,
           child: InkWell(
             onTap: () {
               mng.changeTheme(_colorIndex);
@@ -37,7 +38,7 @@ class ColorPick extends StatelessWidget {
                         child: Text(
                           _title,
                           style: TextStyle(
-                              color: mainTheme[_colorIndex],
+                              color: themes[_colorIndex][1][0],
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -49,7 +50,7 @@ class ColorPick extends StatelessWidget {
                           width: 16,
                           decoration: BoxDecoration(
                             color: Colors.transparent,
-                            border: Border.all(color: mainTheme[_colorIndex], width: 2),
+                            border: Border.all(color: themes[_colorIndex][1][0], width: 2),
                             borderRadius: BorderRadius.circular(100),
                           ),
                           padding: const EdgeInsets.all(2),
@@ -57,7 +58,7 @@ class ColorPick extends StatelessWidget {
                           child: Text(
                             mng.IndexOfTheme(_colorIndex).toString(),
                             style: TextStyle(
-                                color: mainTheme[_colorIndex],
+                                color: themes[_colorIndex][1][0],
                                 fontWeight: FontWeight.bold,
                                 fontSize: 11,
                                 height: 1
@@ -68,11 +69,32 @@ class ColorPick extends StatelessWidget {
                     ],
                   )
                 ),
-               Expanded(
-                 child: Container(
-                   color: mainTheme[_colorIndex],
-                 )
-               )
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          color: themes[_colorIndex][0][0],
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          color: themes[_colorIndex][1][0],
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          color: themes[_colorIndex][2][0],
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          color: themes[_colorIndex][3][0],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             )
           ),

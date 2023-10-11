@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/main/main_IndexScreen.dart';
 import 'package:isma/workspace/config/themeConfig.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class mainSettingScreen extends StatelessWidget {
             Text(
               "색 변경하기",
               style: TextStyle(
-                  color: getMainColor(context),
+                  color: getThemeColor(1, 0),
                   fontSize: 20,
                   fontWeight: FontWeight.bold
               ),
@@ -30,7 +31,7 @@ class mainSettingScreen extends StatelessWidget {
               "1 - 비누, 2 - 화장품, 3 - 오일, 4 - 설정",
               textAlign: TextAlign.right,
               style: TextStyle(
-                color: getMainColor(context),
+                color: getThemeColor(1, 0),
                 fontSize: 12,
                 fontWeight: FontWeight.bold
               ),
@@ -42,7 +43,7 @@ class mainSettingScreen extends StatelessWidget {
                 Text(
                   "개발자 연락처 ",
                   style: TextStyle(
-                    color: getMainColor(context),
+                    color: getThemeColor(1, 0),
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
                   ),
@@ -50,7 +51,7 @@ class mainSettingScreen extends StatelessWidget {
                 Text(
                   "( 의견 제시 )",
                   style: TextStyle(
-                    color: getMainColor(context),
+                    color: getThemeColor(1, 0),
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -61,13 +62,13 @@ class mainSettingScreen extends StatelessWidget {
             Text(
               "이메일    -    iam0817jun@gmail.com",
               style: TextStyle(
-                color: getMainColor(context),
+                color: getThemeColor(1, 0),
               ),
             ),
 
             const Padding(padding: EdgeInsets.only(bottom: 35)),
             Material(
-              color: getMainColor(context),
+              color: getThemeColor(1, 0),
               borderRadius: BorderRadius.circular(20),
               child: InkWell(
                 child: Container(
@@ -78,7 +79,7 @@ class mainSettingScreen extends StatelessWidget {
                     child: Text(
                       "데이터 초기화",
                       style: TextStyle(
-                        color: getSecondColor(context),
+                        color: getThemeColor(1, 1),
                         fontWeight: FontWeight.bold,
                       ),
                     ),

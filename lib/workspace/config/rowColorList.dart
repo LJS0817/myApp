@@ -3,19 +3,13 @@ import 'package:isma/config/colors.dart';
 import 'package:isma/workspace/config/colorPicker.dart';
 
 class RowColorList extends StatelessWidget {
-  RowColorList(int lColor, String lTitle, int rColor, String rTitle, {super.key}) {
+  RowColorList(int lColor, int rColor, {super.key}) {
     leftColor = lColor;
     rightColor = rColor;
-
-    leftTitle = lTitle;
-    rightTitle = rTitle;
   }
 
   int leftColor = 0;
   int rightColor = 0;
-
-  String leftTitle = "";
-  String rightTitle = "";
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +17,9 @@ class RowColorList extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
-          ColorPick(leftColor, leftTitle),
+          ColorPick(leftColor, themeTitle[leftColor]),
           const Padding(padding: EdgeInsets.only(right: 15)),
-          ColorPick(rightColor, rightTitle),
+          ColorPick(rightColor, themeTitle[rightColor]),
         ],
       ),
     );

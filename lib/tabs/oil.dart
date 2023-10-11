@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/custom/WorkFooter.dart';
 import 'package:isma/custom/oilHeader.dart';
 import 'package:isma/custom/step.dart';
@@ -14,7 +15,6 @@ class OilWorkspace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuMng menuMng = Provider.of<MenuMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
     DataMng dataMng = Provider.of<DataMng>(context);
     return Scaffold(
@@ -23,7 +23,7 @@ class OilWorkspace extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: Container(
-          color: mainTextColor[menuMng.index],
+          color: getThemeColor(1, 1),
           child: Stack(
             children: [
               Column(

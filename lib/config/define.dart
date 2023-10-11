@@ -10,7 +10,7 @@ import 'package:isma/mng/PageMng.dart';
 
 import '../mng/DataMng.dart';
 
-enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_LOTION, E_ESSENCE, E_CREAM, E_ETC }
+enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_ESSENCE, E_LOTION, E_CREAM, E_ETC }
 
 enum SKINTYPE { E_MINGAM, E_GUN, E_ATOPI, E_JOONG, E_JI, E_YEO }
 
@@ -163,12 +163,10 @@ String getOilTypeText(int n) {
 ///[2] - 강조, 활성화(버튼),
 ///[4] - 비활성화 버튼
 Color getThemeColor(int idx, int colorIdx) {
-  if(idx == -1 || idx == 7) {
-    return oilThemeColor[colorIdx];
-  } else if(idx < 3) {
-    return soapThemeColor[idx][colorIdx];
+  if(idx == -1 || idx == 7 || idx < 3) {
+    return themes[Mng.curThemeColorIndex][idx][colorIdx];
   } else {
-    return beautyThemeColor[idx - 3][colorIdx];
+    return themes[Mng.curThemeColorIndex][idx - 3][colorIdx];
   }
 }
 

@@ -23,7 +23,7 @@ class StepView extends StatelessWidget {
       width: isShown ? 20 : 7,
       height: 7,
       decoration: BoxDecoration(
-        color: isShown ? getThemeColor(colorIndex, 0) : getThemeColor(colorIndex, 3),
+        color: isShown ? getThemeColor(colorIndex == 7 ? 1 : colorIndex, 0) : getThemeColor(colorIndex == 7 ? 1 : colorIndex, 3),
         borderRadius: BorderRadius.circular(100),
       ),
     );

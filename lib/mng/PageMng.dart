@@ -117,7 +117,6 @@ class PageMng with ChangeNotifier {
   List<String> getDetails(Data data) {
     List<String> result = [];
 
-
     switch(index) {
       case 0:
         if(data.type.index < 3) {

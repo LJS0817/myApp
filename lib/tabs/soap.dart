@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/custom/OilDialog.dart';
 import 'package:isma/custom/WorkFooter.dart';
 import 'package:isma/custom/WorkHeader.dart';
 import 'package:isma/mng/MenuMng.dart';
+import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +35,7 @@ class SoapWorkspace extends StatelessWidget {
           }
         },
         child: Container(
-          color: mainTextColor[menuMng.index],
+          color: getThemeColor(1, 1),
           child: Stack(
             children: [
               Column(

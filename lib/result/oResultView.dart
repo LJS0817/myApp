@@ -28,7 +28,7 @@ class oResultView extends StatelessWidget {
   int themeIndex = -1;
 
   oResultView(double padding, {super.key}) {
-    themeIndex = -1;
+    themeIndex = Mng.curThemeColorIndex;
     leftPadding = padding;
   }
 
@@ -50,7 +50,7 @@ class oResultView extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.7,
               padding: const EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
-                color: mainTextColor[Provider.of<MenuMng>(context).getIndex()],
+                color: getThemeColor(1, 1),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: ScrollConfiguration(

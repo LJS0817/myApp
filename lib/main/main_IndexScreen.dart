@@ -75,17 +75,17 @@ Widget getIndex(BuildContext context) {
   else { return mainSettingScreen(); }
 }
 
-Color getMainColor(BuildContext context) {
-  MenuMng menu = Provider.of<MenuMng>(context);
-
-  return mainTheme[menu.getIndex()];
-}
-
-Color getSecondColor(BuildContext context) {
-  MenuMng menu = Provider.of<MenuMng>(context);
-
-  return mainTextColor[menu.getIndex()];
-}
+// Color getMainColor(BuildContext context) {
+//   MenuMng menu = Provider.of<MenuMng>(context);
+//
+//   return mainTheme[menu.getIndex()];
+// }
+//
+// Color getSecondColor(BuildContext context) {
+//   MenuMng menu = Provider.of<MenuMng>(context);
+//
+//   return mainTextColor[menu.getIndex()];
+// }
 
 Widget BottomBar(BuildContext context) {
   Mng mng = Provider.of<Mng>(context);
@@ -117,7 +117,7 @@ Widget BottomBar(BuildContext context) {
                       width: 100,
                       height: 70,
                       decoration: BoxDecoration(
-                        color: getMainColor(context),
+                        color: getThemeColor(1, 0),
                         borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(47),
                         ),
@@ -132,7 +132,7 @@ Widget BottomBar(BuildContext context) {
                       width: 100,
                       height: 70,
                       decoration: BoxDecoration(
-                        color: getMainColor(context),
+                        color: getThemeColor(1, 0),
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(47),
                         ),
@@ -149,7 +149,7 @@ Widget BottomBar(BuildContext context) {
               duration: const Duration(milliseconds: aniTime),
               width: 90,
               height: 41,
-              color: getMainColor(context),
+              color: getThemeColor(1, 0),
             ),
           ),
           Positioned(
@@ -162,11 +162,11 @@ Widget BottomBar(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  iconButton('assets/icon/soap.svg', 0, () { menuMng.setIndex(0); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());  }),
-                  iconButton('assets/icon/beauty.svg', 1, () { menuMng.setIndex(1); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());   }),
+                  iconButton('assets/icon/soap.svg', 0, () { menuMng.setIndex(0); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index];  }),
+                  iconButton('assets/icon/beauty.svg', 1, () { menuMng.setIndex(1); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }),
                   Expanded(child: Container(),),
-                  iconButton('assets/icon/oil.svg', 2, () { menuMng.setIndex(2); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());   }, size: 16),
-                  iconButton('assets/icon/settings.svg', 3, () { menuMng.setIndex(3); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString());   }),
+                  iconButton('assets/icon/oil.svg', 2, () { menuMng.setIndex(2); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }, size: 16),
+                  iconButton('assets/icon/settings.svg', 3, () { menuMng.setIndex(3); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }),
                 ],
               ),
             ),
@@ -178,7 +178,7 @@ Widget BottomBar(BuildContext context) {
               width: 80,
               height: 50,
               decoration: BoxDecoration(
-                color: getSecondColor(context),
+                color: getThemeColor(1, 1),
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(500),
                   bottomRight: Radius.circular(500),
@@ -191,20 +191,22 @@ Widget BottomBar(BuildContext context) {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 240),
                 decoration: BoxDecoration(
-                  color: mainTheme[menuMng.getIndex()],
+                  color: getThemeColor(1, 0),
                   borderRadius: BorderRadius.circular(500),
                 ),
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(500),
-                    splashColor: getSecondColor(context).withOpacity(0.2),
-                    highlightColor: getSecondColor(context).withOpacity(0.5),
+                    splashColor: getThemeColor(1, 1).withOpacity(0.2),
+                    highlightColor: getThemeColor(1, 1).withOpacity(0.5),
                     onTap: () {
                       if(menuMng.isConfig) {
                         FileMng fileMng = Provider.of<FileMng>(context, listen: false);
                         fileMng.writeFile("config", "UserData_Config", mng.getThemeSaveString());
                         fileMng.setData(3, "config.txt", mng.getThemeSaveString());
+                        mng.changePage(fileMng.data[3]['config.txt'].toString());
+                        Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index];
                       } else {
                         pageMng.index = 0;
                         dataMng.initData(menuMng.index);
@@ -212,7 +214,9 @@ Widget BottomBar(BuildContext context) {
                         mng.selectData = Data();
                         menuMng.init();
 
-                        pageMng.UpdateText(dataMng.data);
+                        if(dataMng.getTypeIndex() != 7) {
+                          pageMng.UpdateText(dataMng.data);
+                        }
                         pageMng.changeScene(context, menuMng.index);
                       }
                     },
@@ -224,18 +228,18 @@ Widget BottomBar(BuildContext context) {
                           border: Border.all(
                               strokeAlign: BorderSide.strokeAlignOutside,
                               width: 4,
-                              color: getMainColor(context).withOpacity(0.5)
+                              color: getThemeColor(1, 0).withOpacity(0.5)
                           )
                       ),
                       child: menuMng.isConfig ? SvgPicture.asset(
                         'assets/icon/save.svg',
                         width: 29,
                         height: 29,
-                        color: themeIconColors[menuMng.getIndex()],
+                        color: getThemeColor(1, 1),
                         fit: BoxFit.none,) : Icon(
                         Icons.add_rounded,
                         size: 30,
-                        color: themeIconColors[menuMng.getIndex()],
+                        color: getThemeColor(1, 1),
                       ),
                     ),
                   ),
@@ -253,7 +257,7 @@ Future<bool> requestPermission() async {
   return true;
 }
 
-class _IndexScreenState extends State<IndexScreen> {
+class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
@@ -264,7 +268,9 @@ class _IndexScreenState extends State<IndexScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+  }
 
+  Future<String> _fetch1() async {
     if(!Mng.isLoad) {
       log("실패");
       loadAsset(context);
@@ -278,13 +284,15 @@ class _IndexScreenState extends State<IndexScreen> {
               {
                 oilMng.syncUserData(fileMng.data[2].values.toList()),
                 fileMng.readDirectory('config', 3).then((value) =>
-                    Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
+                Mng.curThemeColorIndex = Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
                 )
               })
           )
       );
       Mng.isLoad = true;
     }
+    await Future.delayed(Duration(seconds: 4));
+    return 'Call Data';
   }
 
   @override
@@ -292,47 +300,112 @@ class _IndexScreenState extends State<IndexScreen> {
     return SafeArea(
       top: false,
       child: Scaffold(
-        backgroundColor: getSecondColor(context),
-        body: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 240),
-                height: 80,
-                color: getMainColor(context),
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
-                child: Text(
-                  "테스트",
-                  style: TextStyle(
-                    color: getSecondColor(context),
-                    fontSize: 20,
-                    decoration: TextDecoration.none,
+        body: FutureBuilder(
+          future: _fetch1(),
+          builder: (BuildContext contxt, AsyncSnapshot snapshot) {
+            if(!snapshot.hasData) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ScaleTransition(
+                        scale: CurvedAnimation(
+                          parent: AnimationController(
+                            vsync: this,
+                            duration: const Duration(milliseconds: 2000),
+                          )..repeat(reverse: true),
+                          curve: Curves.fastOutSlowIn,
+                        ),
+                        child: SvgPicture.asset(
+                          "assets/icon/phone.svg",
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(right: 20)),
+                      ScaleTransition(
+                        scale: CurvedAnimation(
+                          parent: AnimationController(
+                            vsync: this,
+                            duration: const Duration(milliseconds: 1800),
+                          )..repeat(reverse: true),
+                          curve: Curves.elasticInOut,
+                        ),
+                        child: SvgPicture.asset(
+                          "assets/icon/save.svg",
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(right: 20)),
+                      ScaleTransition(
+                        scale: CurvedAnimation(
+                          parent: AnimationController(
+                            vsync: this,
+                            duration: const Duration(milliseconds: 2000),
+                          )..repeat(reverse: true),
+                          curve: Curves.easeInOutBack,
+                        ),
+                        child: SvgPicture.asset(
+                          "assets/icon/calculator.svg",
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 80,
-              bottom: 80,
-              child: getIndex(context),
-            ),
-            BottomBar(context),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              child: ResultView(Provider.of<Mng>(context).selectData.type.index),
-            ),
-          ],
+                  const Padding(padding: EdgeInsets.only(bottom: 40)),
+                  Text(
+                    "데이터를 불러오고 있습니다...",
+                  ),
+                ],
+              );
+            } else {
+              return Stack(
+                children: [
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 240),
+                      height: 80,
+                      color: getThemeColor(1, 0),
+                      alignment: Alignment.bottomCenter,
+                      padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
+                      child: Text(
+                        "테스트",
+                        style: TextStyle(
+                          color: getThemeColor(1, 1),
+                          fontSize: 20,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 80,
+                    bottom: 80,
+                    child: getIndex(context),
+                  ),
+                  BottomBar(context),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    child: ResultView(Provider.of<Mng>(context).selectData.type.index),
+                  ),
+                ],
+              );
+            }
+          },
         ),
-      ),
+      )
     );
   }
 }

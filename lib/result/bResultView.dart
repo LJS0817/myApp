@@ -47,7 +47,7 @@ class bResultView extends StatelessWidget {
                 height: 500,
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 decoration: BoxDecoration(
-                  color: mainTextColor[Provider.of<MenuMng>(context).getIndex()],
+                  color: getThemeColor(1, 1),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: ScrollConfiguration(

@@ -37,8 +37,8 @@ class iconButton extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                   borderRadius: BorderRadius.circular(500),
-                  splashColor: mainTextColor[menu.getIndex()].withOpacity(0.2),
-                  highlightColor: mainTextColor[menu.getIndex()].withOpacity(0.5),
+                  splashColor: getThemeColor(1, 1).withOpacity(0.2),
+                  highlightColor: getThemeColor(1, 1).withOpacity(0.5),
                   onTap: () {
                     menu.init();
                     _func();
@@ -47,7 +47,7 @@ class iconButton extends StatelessWidget {
                     padding: EdgeInsets.all(scale),
                     child: SvgPicture.asset(
                       _src,
-                      color: menu.getIndex() == _index ? themeIconColors[menu.getIndex()] : themeIconColors[menu.getIndex() + 4],
+                      color: menu.getIndex() == _index ? getThemeColor(1, 1) : getThemeColor(1, 3),
                     ),
                   )
               ),

@@ -20,6 +20,8 @@ class Mng with ChangeNotifier {
   List<double> resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
   List<int> themeColorIndex = [ 0, 1, 2, 3, 0 ];
 
+  static int curThemeColorIndex = 0;
+
   ///```
   ///0 - PURE SOAP
   ///1 - SOLVENT
@@ -35,7 +37,7 @@ class Mng with ChangeNotifier {
     selectData = data;
   }
 
-  void setThemeColor(String data) {
+  int setThemeColor(String data) {
     List<String> s = data.replaceAll(' ', '').split(',');
     if(s.length > 3) {
       themeColorIndex[0] = int.parse(s[0]);
@@ -43,6 +45,7 @@ class Mng with ChangeNotifier {
       themeColorIndex[2] = int.parse(s[2]);
       themeColorIndex[3] = int.parse(s[3]);
     }
+    return themeColorIndex[0];
   }
 
   void calculateData(Data data, BuildContext context) {
@@ -61,11 +64,7 @@ class Mng with ChangeNotifier {
   void changePage(String str) {
     List<String> sList = str.split(',');
     if(sList.length < 3) {
-      sList = [];
-      sList[0] = '0';
-      sList[1] = '1';
-      sList[2] = '2';
-      sList[3] = '3';
+      sList = [ '0' , '1', '2', '3' ];
     }
     if(themeColorIndex[0].toString() != sList[0] || themeColorIndex[1].toString() != sList[1] ||
         themeColorIndex[2].toString() != sList[2] || themeColorIndex[3].toString() != sList[3]) {
@@ -74,6 +73,7 @@ class Mng with ChangeNotifier {
       themeColorIndex[2] = int.parse(sList[2]);
       themeColorIndex[3] = int.parse(sList[3]);
     }
+    notifyListeners();
   }
 
   void changeTheme(int colorIdx) {

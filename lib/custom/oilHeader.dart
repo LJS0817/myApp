@@ -12,13 +12,13 @@ class OilHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DataMng dataMng = Provider.of<DataMng>(context);
-    OilMng  oilMng = Provider.of<OilMng>(context);
+    OilMng oilMng = Provider.of<OilMng>(context);
     return Container(
-      color: getThemeColor(-1, 0),
+      color: getThemeColor(1, 0),
       child: SafeArea(
         child: Container(
           height: 180,
-          color: getThemeColor(-1, 0),
+          color: getThemeColor(1, 0),
           padding: const EdgeInsets.only(left: 55, right: 55, bottom: 20, top: 10),
           child: Transform.translate(
             offset: const Offset(10, 10),
@@ -33,7 +33,7 @@ class OilHeader extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   decoration: BoxDecoration(
-                    color: getThemeColor(-1, 1),
+                    color: getThemeColor(1, 1),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Stack(
@@ -46,7 +46,7 @@ class OilHeader extends StatelessWidget {
                             child: Text(
                               dataMng.getOilData()!.korean,
                               style: TextStyle(
-                                color: getThemeColor(-1, 0),
+                                color: getThemeColor(1, 0),
                                 fontSize: 15,
                                 overflow: TextOverflow.fade,
                               ),
@@ -64,7 +64,7 @@ class OilHeader extends StatelessWidget {
                         child: Text(
                           dataMng.getOilData()!.NaOH.toString(),
                           style: TextStyle(
-                              color: getThemeColor(-1, 2),
+                              color: getThemeColor(1, 2),
                               fontSize: 15,
                               fontWeight: FontWeight.bold
                           ),
@@ -76,7 +76,7 @@ class OilHeader extends StatelessWidget {
                         child: Text(
                           "NaOH",
                           style: TextStyle(
-                            color: getThemeColor(-1, 0),
+                            color: getThemeColor(1, 0),
                             fontSize: 11
                           ),
                         ),
@@ -88,7 +88,7 @@ class OilHeader extends StatelessWidget {
                         child: Text(
                           dataMng.getOilData()!.KOH.toString(),
                           style: TextStyle(
-                              color: getThemeColor(-1, 2),
+                              color: getThemeColor(1, 2),
                               fontSize: 15,
                               fontWeight: FontWeight.bold
                           ),
@@ -100,7 +100,7 @@ class OilHeader extends StatelessWidget {
                         child: Text(
                           "KOH",
                           style: TextStyle(
-                              color: getThemeColor(-1, 0),
+                              color: getThemeColor(1, 0),
                               fontSize: 11
                           ),
                         ),
@@ -113,7 +113,7 @@ class OilHeader extends StatelessWidget {
                         child: Text(
                           "NO.${oilMng.userOils.length + 1}",
                           style: TextStyle(
-                            color: getThemeColor(-1, 0).withOpacity(0.3),
+                            color: getThemeColor(1, 0).withOpacity(0.3),
                             fontSize: 20,
                             fontWeight: FontWeight.bold
                           ),
@@ -127,7 +127,7 @@ class OilHeader extends StatelessWidget {
                           'assets/icon/oil.svg',
                           width: 20,
                           height: 20,
-                          color: getThemeColor(-1, 0),
+                          color: getThemeColor(1, 0),
                         ),
                       ),
                     ],

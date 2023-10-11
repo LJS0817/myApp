@@ -48,7 +48,7 @@ class OilDialog extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                       decoration: BoxDecoration(
-                        color: getSecondColor(context),
+                        color: getThemeColor(1, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(

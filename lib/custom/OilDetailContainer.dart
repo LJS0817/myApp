@@ -33,15 +33,15 @@ class OilDetailContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
       color: Colors.transparent,
       child: Material(
-        color: getThemeColor(-1, 0),
+        color: getThemeColor(1, 0),
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           onTap: () {
             Provider.of<DataMng>(context, listen: false).setSelectedFileName(_path);
             Provider.of<Mng>(context, listen: false).showResultView(null, context, oil: data, idx: index);
           },
-          splashColor: getThemeColor(-1, 1).withOpacity(0.5),
-          highlightColor: getThemeColor(-1, 1).withOpacity(0.5),
+          splashColor: getThemeColor(1, 1).withOpacity(0.5),
+          highlightColor: getThemeColor(1, 1).withOpacity(0.5),
           borderRadius: BorderRadius.circular(10),
           child: Container(
             height: 38,
@@ -55,14 +55,14 @@ class OilDetailContainer extends StatelessWidget {
                   'assets/icon/oil.svg',
                   width: 17,
                   height: 17,
-                  color: getThemeColor(-1, 1),
+                  color: getThemeColor(1, 1),
                 ),
                 const Padding(padding: EdgeInsets.only(left: 15)),
                 Text(
                   title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: getThemeColor(-1, 1),
+                    color: getThemeColor(1, 1),
                   ),
                 ),
               ],

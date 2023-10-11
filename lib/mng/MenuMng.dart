@@ -37,7 +37,6 @@ class MenuMng with ChangeNotifier {
     } else if(isConfig) {
       isConfig = false;
     }
-    notifyListeners();
   }
 
   int getIndex() {
