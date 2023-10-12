@@ -89,9 +89,21 @@ class FileMng with ChangeNotifier {
       for(int i = 0; i < fileList.length; i++) {
         File file = fileList[i];
 
-        // Read the file
-        final contents = await file.readAsString();
-        setData(idx, basename(file.path), contents);
+        if(idx == 2 && file.path.contains('.csv')) {
+          // Read the file
+          final contents = await file.readAsString();
+          await file.delete();
+          List<String> str = contents.split('\n');
+          for(int j = 0; j < str.length - 1; j++) {
+            String title = DateTime.now().toString();
+            setData(idx, title, str[j]);
+            writeFile(title, 'UserData_Oil', str[j]);
+          }
+        } else {
+          // Read the file
+          final contents = await file.readAsString();
+          setData(idx, basename(file.path), contents);
+        }
       }
 
       return 'Done';

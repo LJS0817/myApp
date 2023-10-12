@@ -62,11 +62,10 @@ class OilMng extends ChangeNotifier {
 
   void removeOil(int index) {
     userOils.remove(index);
-    notifyListeners();
   }
 
   void addOil(Oil oil, {int idx=-1}) {
-    userOils[idx == -1 ? userOils.length : idx] = oil;
+    userOils[idx == -1 ? default_oils.length + userOils.length : idx] = oil;
     notifyListeners();
   }
 

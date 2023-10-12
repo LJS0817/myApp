@@ -217,7 +217,7 @@ class oResultView extends StatelessWidget {
                         onTap: () {
                           data.init();
                           menuMng.init();
-                          oilMng.removeOil(data.selectOilDataIndex - oilMng.default_oils.length);
+                          oilMng.removeOil(data.selectOilDataIndex);
                           fileMng.deleteFile(dataMng.selectFileName, 2);
                           dataMng.selectFileName = "";
                         },
@@ -291,7 +291,7 @@ class oResultView extends StatelessWidget {
                       splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                       highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                       child: Container(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         width: 70,
                         height: 70,
                         decoration: BoxDecoration(

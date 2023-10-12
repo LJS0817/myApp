@@ -177,9 +177,9 @@ Widget BottomBar(BuildContext context) {
               duration: const Duration(milliseconds: aniTime),
               width: 80,
               height: 50,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: themeBackgrounds[Mng.curThemeColorIndex],
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(500),
                   bottomRight: Radius.circular(500),
                 ),
