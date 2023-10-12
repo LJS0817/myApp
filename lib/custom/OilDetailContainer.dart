@@ -27,8 +27,6 @@ class OilDetailContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
       color: Colors.transparent,

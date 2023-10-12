@@ -212,6 +212,7 @@ Widget BottomBar(BuildContext context) {
                         dataMng.initData(menuMng.index);
                         dataMng.selectFileName = "";
                         mng.selectData = Data();
+                        mng.selectOilDataIndex = -1;
                         menuMng.init();
 
                         if(dataMng.getTypeIndex() != 7) {
@@ -299,13 +300,13 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      child: Scaffold(
-        backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
-        body: FutureBuilder(
-          future: _fetch1(),
-          builder: (BuildContext contxt, AsyncSnapshot snapshot) {
-            if(!snapshot.hasData) {
-              return Column(
+      child: FutureBuilder(
+        future: _fetch1(),
+        builder: (BuildContext contxt, AsyncSnapshot snapshot) {
+          if(!snapshot.hasData) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FadeTransition(
@@ -377,9 +378,12 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                     "데이터를 불러오고 있습니다...",
                   ),
                 ],
-              );
-            } else {
-              return Stack(
+              ),
+            );
+          } else {
+            return Scaffold(
+              backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
+              body: Stack(
                 children: [
                   Positioned(
                     top: 0,
@@ -417,11 +421,11 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                     child: ResultView(Provider.of<Mng>(context).selectData.type.index),
                   ),
                 ],
-              );
-            }
-          },
-        ),
-      )
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

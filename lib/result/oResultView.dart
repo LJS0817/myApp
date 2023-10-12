@@ -245,36 +245,39 @@ class oResultView extends StatelessWidget {
                 Positioned(
                   right: 5,
                   top: 10,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(100),
-                    color: getThemeColor(themeIndex, 0),
-                    child: InkWell(
+                  child: Visibility(
+                    visible: dataMng.selectFileName.isNotEmpty,
+                    child: Material(
                       borderRadius: BorderRadius.circular(100),
-                      onTap: () {
-                        pageMng.index = 0;
-                        dataMng.initData(menuMng.index, data.selectOil);
-                        data.init();
-                        pageMng.changeScene(context, menuMng.index);
-                      },
-                      splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
-                      highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: SvgPicture.asset(
-                          "assets/icon/edit.svg",
-                          width: 15,
-                          height: 15,
-                          fit: BoxFit.none,
-                          color: getThemeColor(themeIndex, 1),
+                      color: getThemeColor(themeIndex, 0),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(100),
+                        onTap: () {
+                          pageMng.index = 0;
+                          dataMng.initData(menuMng.index, data.selectOil);
+                          data.init();
+                          pageMng.changeScene(context, menuMng.index);
+                        },
+                        splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                        highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: SvgPicture.asset(
+                            "assets/icon/edit.svg",
+                            width: 15,
+                            height: 15,
+                            fit: BoxFit.none,
+                            color: getThemeColor(themeIndex, 1),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  )
                 ),
                 Center(
                   child: Material(

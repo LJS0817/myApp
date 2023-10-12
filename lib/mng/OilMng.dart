@@ -14,7 +14,7 @@ class OilMng extends ChangeNotifier {
     if(key < default_oils.length) {
       return default_oils[key]!;
     } else if(key < 100000) {
-      return userOils[key - default_oils.length]!;
+      return userOils[key]!;
     } else {
       return Udata[key - 100000]!;
     }
@@ -28,19 +28,34 @@ class OilMng extends ChangeNotifier {
     List<String> data = [];
     for(int i = 0; i < list.length; i++) {
       data = list[i].split(',');
-      userOils[i] = Oil(korean: data[0], english: data[1], NaOH: double.parse(data[2]), KOH: double.parse(data[3]), fat: [
-        double.parse(data[4]),
-        double.parse(data[5]),
-        double.parse(data[6]),
-        double.parse(data[7]),
+      try {
+        userOils[i + default_oils.length] = Oil(korean: data[0], english: data[1], NaOH: double.parse(data[2]), KOH: double.parse(data[3]), fat: [
+          double.parse(data[4]),
+          double.parse(data[5]),
+          double.parse(data[6]),
+          double.parse(data[7]),
 
-        double.parse(data[8]),
-        double.parse(data[9]),
-        double.parse(data[10]),
-        double.parse(data[11]),
-        double.parse(data[12]),
-      ]);
-      log(userOils[i].toString());
+          double.parse(data[8]),
+          double.parse(data[9]),
+          double.parse(data[10]),
+          double.parse(data[11]),
+          double.parse(data[12]),
+        ]);
+      } catch(e) {
+        userOils[i + default_oils.length] = Oil(korean: data[1].replaceAll('*', ''), english: data[2], NaOH: double.parse(data[3]), KOH: double.parse(data[4]), fat: [
+          double.parse(data[5]),
+          double.parse(data[6]),
+          double.parse(data[7]),
+          double.parse(data[8]),
+
+          double.parse(data[9]),
+          double.parse(data[10]),
+          double.parse(data[11]),
+          double.parse(data[12]),
+          double.parse(data[13]),
+        ]);
+      }
+      // log(userOils[i].toString());
     }
     notifyListeners();
   }
@@ -50,8 +65,8 @@ class OilMng extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addOil(Oil oil) {
-    userOils[userOils.length] = oil;
+  void addOil(Oil oil, {int idx=-1}) {
+    userOils[idx == -1 ? userOils.length : idx] = oil;
     notifyListeners();
   }
 
