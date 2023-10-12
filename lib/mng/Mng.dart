@@ -227,6 +227,8 @@ class Mng with ChangeNotifier {
   void showResultView(Data? data, BuildContext context, {Oil? oil, int idx=-1}) {
     popUpActive = true;
     selectData = data ?? Data();
+    log(selectData.toString());
+    log(data.toString());
     selectOil = oil;
     selectOilDataIndex = idx;
     if(oil != null) {

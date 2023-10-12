@@ -22,7 +22,7 @@ class DataContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, cons) {
+      builder: (BuildContext context, BoxConstraints cons) {
         return Container(
           height: 90,
           margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
@@ -43,57 +43,52 @@ class DataContainer extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned(
-                    top: 10,
-                    bottom: 10,
+                    top: 5,
+                    bottom: 5,
                     left: 24,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Flexible(
-                          flex: 2,
-                          fit: FlexFit.tight,
-                          child: SizedBox(
-                              child: FittedBox(
-                                child: Text(
-                                  data.name,
-                                  style: TextStyle(
-                                    color: getThemeColor(data.type.index, 1),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              )
-                          )
+                          flex: 3,
+                          child: FittedBox(
+                            child: Text(
+                              data.name.isEmpty ? " " : data.name,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                color: getThemeColor(data.type.index, 1),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
                         Flexible(
                             flex: 1,
-                            child: SizedBox(
-                                child: FittedBox(
-                                  child: Text(
-                                    data.date,
-                                    style: TextStyle(
-                                      color: getThemeColor(data.type.index, 1),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )
-                            )
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                data.date,
+                                style: TextStyle(
+                                  color: getThemeColor(data.type.index, 1),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                         ),
                         const Padding(padding: EdgeInsets.only(bottom: 5)),
                         Flexible(
                             flex: 2,
-                            fit: FlexFit.loose,
-                            child: SizedBox(
-                                child: FittedBox(
-                                  child: Text(
-                                    typeToString(data.type),
-                                    style: TextStyle(
-                                      color: getThemeColor(data.type.index, 2),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )
-                            )
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                typeToString(data.type),
+                                style: TextStyle(
+                                  color: getThemeColor(data.type.index, 2),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                         ),
                       ],
                     ),

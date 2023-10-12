@@ -114,6 +114,16 @@ class PageMng with ChangeNotifier {
     }
   }
 
+  late Function beforeSave;
+
+  void setBeforeSaveEvent(Function func) {
+    beforeSave = func;
+  }
+
+  Function getBeforeSaveEvent() {
+    return beforeSave;
+  }
+
   List<String> getDetails(Data data) {
     List<String> result = [];
 

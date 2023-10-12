@@ -316,7 +316,9 @@ class sResultView extends StatelessWidget {
                           children: [
                             ResultValueBox(themeIndex, "오일양", "${data.selectData.weight[1] + data.selectData.weight[2]}g"),
                             ResultValueBox(themeIndex, !data.selectData.isReturn ? "Lye 양" : "비누화수양", "${data.resultLye.round()}g"),
-                            ResultValueBox(themeIndex, "정제수 양", "${data.getValue(2)}%\n(${data.resultWater.round()}g)"),
+                            ResultValueBox(themeIndex,
+                                !data.selectData.isReturn ? "정제수 양" : "필요 물 양\n(식초 등)",
+                                !data.selectData.isReturn ? "${data.getValue(2)}%\n(${data.resultWater.round()}g)" : "${(data.resultWater - data.resultLye * 0.5).round()}"),
                           ],
                         ),
                       ),
@@ -379,14 +381,14 @@ class sResultView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "필요 물 양 (식초 등)",
+                                    "정제수 양  [ ${data.getValue(2)}% ]",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
                                       fontSize: 15,
                                     ),
                                   ),
                                   Text(
-                                    "${(data.resultWater - data.resultLye * 0.5).round()}",
+                                    "${data.resultWater.round()}",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
                                       fontSize: 15,

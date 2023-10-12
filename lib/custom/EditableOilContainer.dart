@@ -104,7 +104,6 @@ class EditableOilContainer extends StatelessWidget {
                     onFocusChange: (hasFocus) {
                       if(!hasFocus) {
                         if(data.isNotEmpty) {
-                          log(data.toString());
                           int weight = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0] == "null" ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
                           dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
@@ -116,7 +115,26 @@ class EditableOilContainer extends StatelessWidget {
                           dataMngProvider.setWeight(_page, weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
 
                           pageMngProvider.UpdateText(dataMngProvider.data);
+                        }
+                      } else {
+                        if(pageMngProvider.index >= pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex())) {
+                          pageMngProvider.setBeforeSaveEvent(() {
+                            if(data.isNotEmpty) {
+                              int weight = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0] == "null" ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
+                              dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+
+                              dataMngProvider.setData(getIndexSub1(), index, '$data`$name');
+
+                              weight = int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
+
+                              dataMngProvider.setWeight(_page, weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+
+                              pageMngProvider.UpdateText(dataMngProvider.data);
+
+                              log("ASDADAS");
+                            }
+                          });
                         }
                       }
                     },
@@ -182,7 +200,6 @@ class EditableOilContainer extends StatelessWidget {
                         }
                         str = str.replaceRange(str.indexOf('`') + 1, null, name);
                         dataMngProvider.setData(getIndexSub1(), index, str);
-                        //FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
                     child: TextFormField(

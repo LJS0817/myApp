@@ -48,10 +48,12 @@ class ResultValueBox extends StatelessWidget {
             ),
             Container(
               height: 43,
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               alignment: Alignment.center,
               child: FittedBox(
                 child: Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: getThemeColor(themeIndex, 1),

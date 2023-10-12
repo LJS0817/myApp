@@ -125,6 +125,8 @@ class Footer extends StatelessWidget {
                     FocusManager.instance.primaryFocus?.unfocus();
                     if(pageMngProvider.index >= pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex())) {
                       String fileName = "";
+                      pageMngProvider.getBeforeSaveEvent()();
+                      pageMngProvider.beforeSave = () {};
                       if(dataMngProvider.getSelectedFileName().isNotEmpty) {
                         fileName = dataMngProvider.getSelectedFileName();
                       } else {
@@ -152,10 +154,9 @@ class Footer extends StatelessWidget {
                       } else {
                         oilMngProvider.addOil(dataMngProvider.getOilData()!, idx: mngProvider.selectOilDataIndex);
                       }
-                      // log(dataMngProvider.toString());
+                      log(dataMngProvider.toString());
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
-                      log(fileMngProvider.data[2].toString());
                       Navigator.of(context).pop();
                     } else {
                       pageMngProvider.nextPage(dataMngProvider.getTypeIndex(), dataMngProvider.data);

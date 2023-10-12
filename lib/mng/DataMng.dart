@@ -179,7 +179,6 @@ class DataMng with ChangeNotifier {
 
   void setName(String str) {
     data.name = str;
-    log("asdazzc");
     notifyListeners();
   }
 
@@ -322,7 +321,7 @@ class DataMng with ChangeNotifier {
   @override
   String toString() {
     if(_oil == null) {
-      return "${data.name}?${data.isReturn ? "-" : ""}${getTypeIndex()}?${data.date}?${data.weight}?${data.values}?${data.data}?${data.memo.replaceAll('\n', '|')}?${data.skinType.index}";
+      return "${data.name}?${data.isReturn ? "-" : ""}${getTypeIndex()}?${data.date}?${data.weight}?${data.values.toString().replaceAll(' ', '')}?${data.data}?${data.memo.replaceAll('\n', '|')}?${data.skinType.index}";
     } else {
       return _oil.toString();
     }
@@ -394,6 +393,9 @@ Data parseData(String str) {
     result.data[1] = parseString(dataList[1]);
     result.data[2] = parseString(dataList[2]);
     result.data[3] = parseString(dataList[3]);
+    if(result.type.index > 2) {
+      result.data[4] = parseString(dataList[4]);
+    }
 
     result.memo = strList[6].replaceAll('|', '\n');
   } else {

@@ -36,16 +36,13 @@ class bResultView extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     FileMng fileMng = Provider.of<FileMng>(context);
 
-    log(menuMng.showOilDetails.toString());
-
     return Container(
-        height: 600,
-        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.6 + 100,
         child: Column(
           children: [
             Container(
-                height: 500,
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                height: MediaQuery.of(context).size.height * 0.6,
+                padding: const EdgeInsets.only(bottom: 20),
                 decoration: BoxDecoration(
                   color: getThemeColor(1, 1),
                   borderRadius: BorderRadius.circular(30),
@@ -140,8 +137,8 @@ class bResultView extends StatelessWidget {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               ResultOilBox("수상층\n${data.selectData.data[0].length + data.selectData.data[1].length}", themeIndex, 1, w: 70, h: 70,),
-                                              ResultOilBox("유상층\n${data.selectData.data[2].length}", themeIndex, 2, w: 70, h: 70,),
-                                              ResultOilBox("유화제\n${data.selectData.data[3].length}", themeIndex, 3, w: 70, h: 70,),
+                                              ResultOilBox("유상층\n${data.selectData.data[3].length}", themeIndex, 3, w: 70, h: 70,),
+                                              ResultOilBox("유화제\n${data.selectData.data[2].length}", themeIndex, 2, w: 70, h: 70,),
                                               ResultOilBox("EO\n${data.selectData.data[4].length}", themeIndex, 4, w: 70, h: 70,),
                                             ],
                                           ),
