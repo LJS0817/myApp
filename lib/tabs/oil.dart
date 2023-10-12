@@ -6,6 +6,7 @@ import 'package:isma/custom/oilHeader.dart';
 import 'package:isma/custom/step.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/MenuMng.dart';
+import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:isma/workspace/oil/oFirst.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class OilWorkspace extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: Container(
-          color: getThemeColor(1, 1),
+          color: themeBackgrounds[Mng.curThemeColorIndex],
           child: Stack(
             children: [
               Column(

@@ -17,6 +17,23 @@ const List<String> themeTitle = [
   "깊은 바다",
 ];
 
+const List<Color> themeBackgrounds = [
+  Color(0xFFEFF8FF),
+  Color(0xFFE9FFFB),
+
+  Color(0xFFF5F0FF),
+  Color(0xFFFFF1EE),
+
+  Color(0xFFFFF2EE),
+  Color(0xFFFFEBF0),
+
+  Color(0xFFFFF2E3),
+  Color(0xFFE9F9FF),
+
+  Color(0xFFFFF3E2),
+  Color(0xFFE2F7FF),
+];
+
 ///```
 ///[0] - 테마,
 ///[1] - 텍스트,

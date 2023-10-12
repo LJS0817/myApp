@@ -43,54 +43,60 @@ class DataContainer extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned(
-                      left: 30,
-                      top: 15,
-                      child: Container(
-                        height: 27,
-                        width: double.maxFinite,
-                        child: FittedBox(
-                          child: Text(
-                            data.name,
-                            style: TextStyle(
-                              color: getThemeColor(data.type.index, 1),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    top: 10,
+                    bottom: 10,
+                    left: 24,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          fit: FlexFit.tight,
+                          child: SizedBox(
+                              child: FittedBox(
+                                child: Text(
+                                  data.name,
+                                  style: TextStyle(
+                                    color: getThemeColor(data.type.index, 1),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                          )
                         ),
-                      )
-                  ),
-                  Positioned(
-                      left: 30,
-                      top: 40,
-                      child: Container(
-                        height: 16,
-                        child: FittedBox(
-                          child: Text(
-                            data.date,
-                            style: TextStyle(
-                              color: getThemeColor(data.type.index, 1),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        Flexible(
+                            flex: 1,
+                            child: SizedBox(
+                                child: FittedBox(
+                                  child: Text(
+                                    data.date,
+                                    style: TextStyle(
+                                      color: getThemeColor(data.type.index, 1),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                            )
                         ),
-                      )
-                  ),
-                  Positioned(
-                      left: 30,
-                      top: 60,
-                      child: Container(
-                        height: 20,
-                        child: FittedBox(
-                          child: Text(
-                            typeToString(data.type),
-                            style: TextStyle(
-                              color: getThemeColor(data.type.index, 2),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        const Padding(padding: EdgeInsets.only(bottom: 5)),
+                        Flexible(
+                            flex: 2,
+                            fit: FlexFit.loose,
+                            child: SizedBox(
+                                child: FittedBox(
+                                  child: Text(
+                                    typeToString(data.type),
+                                    style: TextStyle(
+                                      color: getThemeColor(data.type.index, 2),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                            )
                         ),
-                      )
+                      ],
+                    ),
                   ),
                   Positioned(
                       right: 25,
@@ -110,7 +116,7 @@ class DataContainer extends StatelessWidget {
                       "${data.weight[0]}G",
                       style: TextStyle(
                         color: getThemeColor(data.type.index, 2).withOpacity(0.9),
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

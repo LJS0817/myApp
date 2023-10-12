@@ -46,24 +46,23 @@ class ColorPick extends StatelessWidget {
                       Visibility(
                         visible: mng.containTheme(_colorIndex),
                         child: Container(
-                          height: 16,
-                          width: 16,
+                          height: 17,
+                          width: 17,
                           decoration: BoxDecoration(
                             color: Colors.transparent,
                             border: Border.all(color: themes[_colorIndex][1][0], width: 2),
-                            borderRadius: BorderRadius.circular(100),
+                            borderRadius: BorderRadius.circular(40),
                           ),
-                          padding: const EdgeInsets.all(2),
-                          alignment: Alignment.center,
-                          child: Text(
-                            mng.IndexOfTheme(_colorIndex).toString(),
-                            style: TextStyle(
-                                color: themes[_colorIndex][1][0],
-                                fontWeight: FontWeight.bold,
-                                fontSize: 11,
-                                height: 1
+                          child: FittedBox(
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              mng.IndexOfTheme(_colorIndex).toString(),
+                              style: TextStyle(
+                                  color: themes[_colorIndex][1][0],
+                                  fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
+                          )
                         ),
                       )
                     ],

@@ -8,6 +8,7 @@ import 'package:isma/custom/WorkFooter.dart';
 import 'package:isma/custom/WorkHeader.dart';
 import 'package:isma/custom/uOilDialog.dart';
 import 'package:isma/mng/MenuMng.dart';
+import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,6 @@ class BeautyWorkspace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuMng menuMng = Provider.of<MenuMng>(context);
     DataMng dataMng = Provider.of<DataMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
     return Scaffold(
@@ -35,7 +35,7 @@ class BeautyWorkspace extends StatelessWidget {
           }
         },
         child: Container(
-          color: getThemeColor(1, 1),
+          color: themeBackgrounds[Mng.curThemeColorIndex],
           child: Stack(
             children: [
               Column(

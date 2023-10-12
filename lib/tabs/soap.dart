@@ -19,7 +19,6 @@ class SoapWorkspace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuMng menuMng = Provider.of<MenuMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
     DataMng dataMng = Provider.of<DataMng>(context);
     return Scaffold(
@@ -35,7 +34,7 @@ class SoapWorkspace extends StatelessWidget {
           }
         },
         child: Container(
-          color: getThemeColor(1, 1),
+          color: themeBackgrounds[Mng.curThemeColorIndex],
           child: Stack(
             children: [
               Column(

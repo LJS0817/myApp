@@ -300,7 +300,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
     return SafeArea(
       top: false,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
         body: FutureBuilder(
           future: _fetch1(),
           builder: (BuildContext contxt, AsyncSnapshot snapshot) {
