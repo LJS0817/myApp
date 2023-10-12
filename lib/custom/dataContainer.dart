@@ -63,7 +63,7 @@ class DataContainer extends StatelessWidget {
                       left: 30,
                       top: 40,
                       child: Container(
-                        height: 15,
+                        height: 16,
                         child: FittedBox(
                           child: Text(
                             data.date,

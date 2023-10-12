@@ -47,7 +47,7 @@ class iconButton extends StatelessWidget {
                     padding: EdgeInsets.all(scale),
                     child: SvgPicture.asset(
                       _src,
-                      color: menu.getIndex() == _index ? getThemeColor(1, 1) : getThemeColor(1, 3),
+                      color: menu.getIndex() == _index ? getThemeColor(1, 1) : getThemeColor(1, 3).withOpacity(0.7),
                     ),
                   )
               ),

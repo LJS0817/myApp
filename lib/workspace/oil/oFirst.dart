@@ -38,8 +38,7 @@ class oFirstView extends StatelessWidget {
                   fontSize: 15,
                 ),
               ),
-              Container(
-                width: 200,
+              Expanded(
                 child: Focus(
                   onFocusChange: (hasFocus) {
                     if(!hasFocus) {

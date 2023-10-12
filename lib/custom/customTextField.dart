@@ -65,30 +65,34 @@ class CustomTextField extends StatelessWidget {
             visible: needLabel,
             child: Transform.translate(
               offset: const Offset(0, 1),
-              child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 240),
-                  height: 27,
-                  width: 90,
-                  padding: const EdgeInsets.only(left: 5),
-                  alignment: Alignment.bottomLeft,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(_radius - 5), topLeft: Radius.circular(_radius - 5)),
-                    border: Border.all(color: getThemeColor(themeIndex, 0), width: 4),
-                    color: getThemeColor(themeIndex, 1),
-                  ),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: Text(
-                      labelText,
-                      style: TextStyle(
-                          color: getThemeColor(themeIndex, 0),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                          height: 1
+              child: LayoutBuilder(
+                builder: (BuildContext con, BoxConstraints constraints) {
+                  log(constraints.maxWidth.toString());
+                  return AnimatedContainer(
+                      duration: const Duration(milliseconds: 240),
+                      height: 27,
+                      width: constraints.maxWidth > 120 ? labelText.length * 5 + 40 : constraints.maxWidth - 20,
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      alignment: Alignment.bottomLeft,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(_radius - 5), topLeft: Radius.circular(_radius - 5)),
+                        border: Border.all(color: getThemeColor(themeIndex, 0), width: 4),
+                        color: getThemeColor(themeIndex, 1),
                       ),
-                    ),
-                  )
-              ),
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Text(
+                          labelText,
+                          style: TextStyle(
+                              color: getThemeColor(themeIndex, 0),
+                              fontWeight: FontWeight.bold,
+                              height: 1
+                          ),
+                        ),
+                      )
+                  );
+                },
+              )
             )
         ),
         AnimatedContainer(

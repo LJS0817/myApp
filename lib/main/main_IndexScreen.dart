@@ -162,11 +162,11 @@ Widget BottomBar(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  iconButton('assets/icon/soap.svg', 0, () { menuMng.setIndex(0); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index];  }),
-                  iconButton('assets/icon/beauty.svg', 1, () { menuMng.setIndex(1); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }),
+                  iconButton('assets/icon/soap.svg', 0, () { mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); menuMng.setIndex(0);  Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index];  }),
+                  iconButton('assets/icon/beauty.svg', 1, () { mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); menuMng.setIndex(1);  Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }),
                   Expanded(child: Container(),),
-                  iconButton('assets/icon/oil.svg', 2, () { menuMng.setIndex(2); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }, size: 16),
-                  iconButton('assets/icon/settings.svg', 3, () { menuMng.setIndex(3); mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }),
+                  iconButton('assets/icon/oil.svg', 2, () { mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); menuMng.setIndex(2); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }, size: 16),
+                  iconButton('assets/icon/settings.svg', 3, () { mng.changePage(Provider.of<FileMng>(context, listen: false).data[3]['config.txt'].toString()); menuMng.setIndex(3); Mng.curThemeColorIndex = mng.themeColorIndex[menuMng.index]; }),
                 ],
               ),
             ),
@@ -177,9 +177,9 @@ Widget BottomBar(BuildContext context) {
               duration: const Duration(milliseconds: aniTime),
               width: 80,
               height: 50,
-              decoration: BoxDecoration(
-                color: getThemeColor(1, 1),
-                borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(500),
                   bottomRight: Radius.circular(500),
                 ),
@@ -253,8 +253,8 @@ Widget BottomBar(BuildContext context) {
 }
 
 Future<bool> requestPermission() async {
-  await Permission.storage.request();
-  return true;
+  // await Permission.storage.request();
+  return !await Permission.storage.request().isDenied;
 }
 
 class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin {
@@ -284,7 +284,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
               {
                 oilMng.syncUserData(fileMng.data[2].values.toList()),
                 fileMng.readDirectory('config', 3).then((value) =>
-                Mng.curThemeColorIndex = Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
+                  Mng.curThemeColorIndex = Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
                 )
               })
           )
@@ -300,6 +300,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
     return SafeArea(
       top: false,
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: FutureBuilder(
           future: _fetch1(),
           builder: (BuildContext contxt, AsyncSnapshot snapshot) {
@@ -307,6 +308,21 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  FadeTransition(
+                    opacity: CurvedAnimation(
+                      parent: AnimationController(
+                        vsync: this,
+                        duration: const Duration(milliseconds: 1500),
+                      )..forward(),
+                      curve: Curves.decelerate,
+                    ),
+                    child: Image.asset(
+                      "assets/icon/icon.png",
+                      width: 130,
+                      height: 130,
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.only(bottom: 30)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

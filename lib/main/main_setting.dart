@@ -26,7 +26,7 @@ class mainSettingScreen extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             ThemeChanger(),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
+            const Padding(padding: EdgeInsets.only(bottom: 5)),
             Text(
               "1 - 비누, 2 - 화장품, 3 - 오일, 4 - 설정",
               textAlign: TextAlign.right,
@@ -37,6 +37,7 @@ class mainSettingScreen extends StatelessWidget {
               ),
             ),
 
+            const Padding(padding: EdgeInsets.only(bottom: 15)),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -86,7 +87,8 @@ class mainSettingScreen extends StatelessWidget {
                   )
                 )
               ),
-            )
+            ),
+            const Padding(padding: EdgeInsets.only(bottom: 20)),
           ],
         ),
       )

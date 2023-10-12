@@ -64,7 +64,7 @@ class Mng with ChangeNotifier {
   void changePage(String str) {
     List<String> sList = str.split(',');
     if(sList.length < 3) {
-      sList = [ '0' , '1', '2', '3' ];
+      sList = ['0', '1', '2', '3'];
     }
     if(themeColorIndex[0].toString() != sList[0] || themeColorIndex[1].toString() != sList[1] ||
         themeColorIndex[2].toString() != sList[2] || themeColorIndex[3].toString() != sList[3]) {
@@ -73,7 +73,6 @@ class Mng with ChangeNotifier {
       themeColorIndex[2] = int.parse(sList[2]);
       themeColorIndex[3] = int.parse(sList[3]);
     }
-    notifyListeners();
   }
 
   void changeTheme(int colorIdx) {
