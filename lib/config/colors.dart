@@ -5,7 +5,7 @@ const List<String> themeTitle = [
   "숲속의 나무",
 
   "보라빛 달",
-  "땅속 식물의 뿌리",
+  "진흙",
 
   "벽돌",
   "홍학",
@@ -15,6 +15,9 @@ const List<String> themeTitle = [
 
   "조각상",
   "깊은 바다",
+
+  "올리브",
+  "초콜릿",
 ];
 
 const List<Color> themeBackgrounds = [
@@ -32,6 +35,9 @@ const List<Color> themeBackgrounds = [
 
   Color(0xFFFFF3E2),
   Color(0xFFE2F7FF),
+
+  Color(0xFFf1efea),
+  Color(0xFFffe3d3),
 ];
 
 ///```
@@ -99,6 +105,18 @@ const List<List<List<Color>>> themes = [
     [ Color(0xFF2C97B9), Color(0xFFF0FBFF), Color(0xFF13566C), Color(0xFFA8D2E0) ],
     [ Color(0xFF68AFC5), Color(0xFFD1EFF8), Color(0xFF315864), Color(0xFFC4DDE5) ],
     [ Color(0xFF95C8D8), Color(0xFFE9F8FF), Color(0xFF4495AF), Color(0xFFDDEAEE) ],
+  ],
+  [
+    [ Color(0xFF606650), Color(0xFFF5FFDA), Color(0xFFCAE07A), Color(0xFFC3C5BE) ],
+    [ Color(0xFF798066), Color(0xFFF4FFDC), Color(0xFFADC965), Color(0xFFC9D5A7) ],
+    [ Color(0xFF9DA684), Color(0xFFE2EFC0), Color(0xFF536425), Color(0xFFCED3C0) ],
+    [ Color(0xFFC1CCA2), Color(0xFF8F9D62), Color(0xFF587508), Color(0xFF959F7A) ],
+  ],
+  [
+    [ Color(0xFF835F54), Color(0xFFF8E4DE), Color(0xFFF5A389), Color(0xFFCCB6AE) ],
+    [ Color(0xFF9E7A6E), Color(0xFFFFEDE9), Color(0xFFEFA994), Color(0xFFD9B4A8) ],
+    [ Color(0xFFAD8F86), Color(0xFFFFE6E0), Color(0xFF724235), Color(0xFFF3C0B3) ],
+    [ Color(0xFFC59F92), Color(0xFFFFF5F1), Color(0xFF5B4A40), Color(0xFF967B76) ],
   ],
 ];
 //
