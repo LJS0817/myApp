@@ -68,7 +68,7 @@ class _HeaderState extends State<Header> {
                             style: TextStyle(
                                 color: getThemeColor(dataMngProvider.data.type.index, 1),
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16
+                                fontSize: 13
                             ),
                           ),
                           const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
@@ -79,7 +79,7 @@ class _HeaderState extends State<Header> {
                             style: TextStyle(
                                 color: getThemeColor(dataMngProvider.data.type.index, 2),
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16
+                                fontSize: 14
                             ),
                           ),
                           Visibility(
@@ -91,7 +91,7 @@ class _HeaderState extends State<Header> {
                               style: TextStyle(
                                   color: getThemeColor(dataMngProvider.data.type.index, 2),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16
+                                  fontSize: 14
                               ),
                             ),
                           ),

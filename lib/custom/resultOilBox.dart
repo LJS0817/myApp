@@ -25,38 +25,43 @@ class ResultOilBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MenuMng menuMng = Provider.of<MenuMng>(context);
-    return Material(
-      borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-      color: getThemeColor(themeIndex, (index == menuMng.showOilDetails || menuMng.showOilDetails < 1 ? 1 : 3)),
-      child: InkWell(
-        onTap: () {
-          if(func != null) {
-            func!();
-          }
-          menuMng.setOilDetails(index);
-        },
-        borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-        splashColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
-        highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
-        child: Container(
-          width: _width,
-          height: _height,
-          alignment: Alignment.center,
-          color: Colors.transparent,
-          child: FittedBox(
-            child: Text(
-              str,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                height: 1.5,
-                color: getThemeColor(themeIndex, 0),
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        child: Material(
+          borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+          color: getThemeColor(themeIndex, (index == menuMng.showOilDetails || menuMng.showOilDetails < 1 ? 1 : 3)),
+          child: InkWell(
+            onTap: () {
+              if(func != null) {
+                func!();
+              }
+              menuMng.setOilDetails(index);
+            },
+            borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+            splashColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
+            highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
+            child: Container(
+                height: _height,
+                width: _width,
+                alignment: Alignment.center,
+                color: Colors.transparent,
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                child: FittedBox(
+                  child: Text(
+                    str,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      height: 1.5,
+                      color: getThemeColor(themeIndex, 0),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
             ),
-          )
+          ),
         ),
-      ),
+      )
     );
   }
 

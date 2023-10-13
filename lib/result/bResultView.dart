@@ -130,7 +130,7 @@ class bResultView extends StatelessWidget {
                               //오일 내용
                               Center(
                                   child: Container(
-                                      margin: EdgeInsets.only(top: 80, left: leftPadding, right: leftPadding),
+                                      margin: EdgeInsets.only(top: 80, left: leftPadding - 5, right: leftPadding - 5),
                                       child: Column(
                                         children: [
                                           Row(
@@ -221,15 +221,16 @@ class bResultView extends StatelessWidget {
                               //마지막
                               Container(
                                 alignment: Alignment.bottomCenter,
-                                margin: const EdgeInsets.only(bottom: 7),
-                                child: Text(
-                                  "각 항목을 터치하면 사용한 목록이 나옵니다.",
-                                  style: TextStyle(
-                                    color: getThemeColor(themeIndex, 1).withOpacity(0.5),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
+                                margin: const EdgeInsets.only(bottom: 5, left: 30, right: 30),
+                                child: FittedBox(
+                                  child: Text(
+                                    "각 항목을 터치하면 사용한 목록이 나옵니다.",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1).withOpacity(0.5),
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
+                                )
                               ),
                             ],
                           )
