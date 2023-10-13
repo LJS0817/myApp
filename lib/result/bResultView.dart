@@ -148,7 +148,7 @@ class bResultView extends StatelessWidget {
                                                 offset: const Offset(0, -1),
                                                 child: Container(
                                                   width: double.maxFinite,
-
+                                                  margin: const EdgeInsets.only(left: 5, right: 5),
                                                   height: ((menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize + 70),
                                                   decoration: BoxDecoration(
                                                     borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),

@@ -133,7 +133,7 @@ class sResultView extends StatelessWidget {
                               //오일 내용
                               Center(
                                   child: Container(
-                                      margin: EdgeInsets.only(top: 80, left: leftPadding, right: leftPadding),
+                                      margin: EdgeInsets.only(top: 80, left: leftPadding - 5, right: leftPadding - 5),
                                       child: Column(
                                         children: [
                                           Row(
@@ -151,6 +151,7 @@ class sResultView extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   height: ((menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 70),
+                                                  margin: const EdgeInsets.only(left: 5, right: 5),
                                                   decoration: BoxDecoration(
                                                     borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
                                                     color: getThemeColor(themeIndex, 1),
