@@ -127,6 +127,7 @@ class Footer extends StatelessWidget {
                       String fileName = "";
                       pageMngProvider.getBeforeSaveEvent()();
                       pageMngProvider.beforeSave = () {};
+                      log(dataMngProvider.getTypeIndex().toString());
                       if(dataMngProvider.getSelectedFileName().isNotEmpty) {
                         fileName = dataMngProvider.getSelectedFileName();
                       } else {

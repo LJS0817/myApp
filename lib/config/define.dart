@@ -37,9 +37,9 @@ TYPE parseTYPE(String str) {
     case '3':
       return TYPE.E_SKIN;
     case '4':
-      return TYPE.E_LOTION;
-    case '5':
       return TYPE.E_ESSENCE;
+    case '5':
+      return TYPE.E_LOTION;
     case '6':
       return TYPE.E_CREAM;
     default:
@@ -82,10 +82,10 @@ String typeToString(TYPE t) {
       return "Paste";
     case TYPE.E_SKIN:
       return "Skin";
-    case TYPE.E_LOTION:
-      return "Lotion";
     case TYPE.E_ESSENCE:
       return "Essence";
+    case TYPE.E_LOTION:
+      return "Lotion";
     case TYPE.E_CREAM:
       return "Cream";
     default:

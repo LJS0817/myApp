@@ -22,6 +22,8 @@ class BeautyWorkspace extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMng = Provider.of<DataMng>(context);
     PageMng pageMng = Provider.of<PageMng>(context);
+
+    log(dataMng.data.type.toString());
     return Scaffold(
       body: GestureDetector(
         onTap: () {
