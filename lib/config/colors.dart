@@ -13,7 +13,7 @@ const List<String> themeTitle = [
   "모래성",
   "얕은 바다",
 
-  "조각상",
+  "진흙",
   "깊은 바다",
 
   "올리브",
