@@ -20,7 +20,6 @@ class mainOilScreen extends StatelessWidget {
         itemCount: oilMng.length(),
         itemBuilder: (BuildContext context, int index) {
           if(index < oilMng.userOils.length) {
-            log(oilMng.userOils.toString());
             return OilDetailContainer(oilMng.userOils.keys.elementAt(index), oilMng.oils(oilMng.userOils.keys.elementAt(index)), fileMng.data[2].keys.elementAt(index));
           } else {
             return OilDetailContainer(index - oilMng.userOils.length, oilMng.oils(index - oilMng.userOils.length), "");

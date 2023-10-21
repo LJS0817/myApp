@@ -114,7 +114,7 @@ class PageMng with ChangeNotifier {
     }
   }
 
-  late Function beforeSave;
+  Function beforeSave = () {};
 
   void setBeforeSaveEvent(Function func) {
     beforeSave = func;

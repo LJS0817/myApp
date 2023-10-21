@@ -130,7 +130,7 @@ class bResultView extends StatelessWidget {
                               //오일 내용
                               Center(
                                   child: Container(
-                                      margin: EdgeInsets.only(top: 80, left: leftPadding, right: leftPadding),
+                                      margin: EdgeInsets.only(top: 80, left: leftPadding - 5, right: leftPadding - 5),
                                       child: Column(
                                         children: [
                                           Row(
@@ -148,7 +148,7 @@ class bResultView extends StatelessWidget {
                                                 offset: const Offset(0, -1),
                                                 child: Container(
                                                   width: double.maxFinite,
-
+                                                  margin: const EdgeInsets.only(left: 5, right: 5),
                                                   height: ((menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize + 70),
                                                   decoration: BoxDecoration(
                                                     borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
@@ -221,15 +221,16 @@ class bResultView extends StatelessWidget {
                               //마지막
                               Container(
                                 alignment: Alignment.bottomCenter,
-                                margin: const EdgeInsets.only(bottom: 7),
-                                child: Text(
-                                  "각 항목을 터치하면 사용한 목록이 나옵니다.",
-                                  style: TextStyle(
-                                    color: getThemeColor(themeIndex, 1).withOpacity(0.5),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
+                                margin: const EdgeInsets.only(bottom: 5, left: 30, right: 30),
+                                child: FittedBox(
+                                  child: Text(
+                                    "각 항목을 터치하면 사용한 목록이 나옵니다.",
+                                    style: TextStyle(
+                                      color: getThemeColor(themeIndex, 1).withOpacity(0.5),
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
+                                )
                               ),
                             ],
                           )
@@ -297,6 +298,7 @@ class bResultView extends StatelessWidget {
                           pageMng.index = 0;
                           dataMng.initData(menuMng.index);
                           dataMng.data = data.selectData;
+                          log(data.selectData.toString());
                           data.init();
                           log(dataMng.data.toString());
                           pageMng.UpdateText(dataMng.data);

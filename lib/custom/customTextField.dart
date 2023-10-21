@@ -67,7 +67,6 @@ class CustomTextField extends StatelessWidget {
               offset: const Offset(0, 1),
               child: LayoutBuilder(
                 builder: (BuildContext con, BoxConstraints constraints) {
-                  log(constraints.maxWidth.toString());
                   return AnimatedContainer(
                       duration: const Duration(milliseconds: 240),
                       height: 27,

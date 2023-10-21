@@ -50,7 +50,7 @@ class DataContainer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Flexible(
+                        Expanded(
                           flex: 3,
                           child: FittedBox(
                             child: Text(
@@ -64,9 +64,8 @@ class DataContainer extends StatelessWidget {
                           ),
                         ),
                         Flexible(
-                            flex: 1,
+                            flex: 2,
                             child: FittedBox(
-                              fit: BoxFit.scaleDown,
                               child: Text(
                                 data.date,
                                 style: TextStyle(
@@ -78,7 +77,7 @@ class DataContainer extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.only(bottom: 5)),
                         Flexible(
-                            flex: 2,
+                            flex: 4,
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(

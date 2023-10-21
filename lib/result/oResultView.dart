@@ -28,7 +28,7 @@ class oResultView extends StatelessWidget {
   int themeIndex = -1;
 
   oResultView(double padding, {super.key}) {
-    themeIndex = Mng.curThemeColorIndex;
+    themeIndex = 1;
     leftPadding = padding;
   }
 
