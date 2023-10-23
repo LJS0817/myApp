@@ -23,7 +23,7 @@ class Footer extends StatelessWidget {
     OilMng oilMngProvider = Provider.of<OilMng>(context);
 
     return SizedBox(
-      height: 70,
+      height: MediaQuery.of(context).size.height * 0.09,
       child: Row(
         children: [
           Expanded(
@@ -59,7 +59,7 @@ class Footer extends StatelessWidget {
                         pageMngProvider.index > 0 ? "이전" : "나가기",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                            fontSize: sizeMng.defaultFontSize,
                           color: getThemeColor(dataMngProvider.getTypeIndex() == 7 ? 1 : dataMngProvider.getTypeIndex(), pageMngProvider.index > 0 ? 1 : 0)
                         ),
                       ),
@@ -105,7 +105,7 @@ class Footer extends StatelessWidget {
                               pageMngProvider.addButtonText(dataMngProvider.getTypeIndex() == 7 ? 1 : dataMngProvider.getTypeIndex(), pageMngProvider.index),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                  fontSize: sizeMng.defaultFontSize,
                                   color: getThemeColor(dataMngProvider.getTypeIndex() == 7 ? 1 : dataMngProvider.getTypeIndex(), 0)
                               ),
                             ),
@@ -177,7 +177,7 @@ class Footer extends StatelessWidget {
                            pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? "다음" : "저장",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: sizeMng.defaultFontSize,
                                 color: getThemeColor(dataMngProvider.getTypeIndex() == 7 ? 1 : dataMngProvider.getTypeIndex(), 1)
                             ),
                           ),

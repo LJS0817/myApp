@@ -20,7 +20,7 @@ class mainSettingScreen extends StatelessWidget {
               "색 변경하기",
               style: TextStyle(
                   color: getThemeColor(1, 0),
-                  fontSize: 20,
+                  fontSize: sizeMng.defaultFontSize + 4,
                   fontWeight: FontWeight.bold
               ),
             ),
@@ -32,7 +32,7 @@ class mainSettingScreen extends StatelessWidget {
               textAlign: TextAlign.right,
               style: TextStyle(
                 color: getThemeColor(1, 0),
-                fontSize: 12,
+                fontSize: sizeMng.defaultFontSize - 4,
                 fontWeight: FontWeight.bold
               ),
             ),
@@ -46,7 +46,7 @@ class mainSettingScreen extends StatelessWidget {
                   style: TextStyle(
                     color: getThemeColor(1, 0),
                     fontWeight: FontWeight.bold,
-                    fontSize: 17,
+                    fontSize: sizeMng.defaultFontSize + 1,
                   ),
                 ),
                 Text(
@@ -54,7 +54,7 @@ class mainSettingScreen extends StatelessWidget {
                   style: TextStyle(
                     color: getThemeColor(1, 0),
                     fontWeight: FontWeight.bold,
-                    fontSize: 12,
+                    fontSize: sizeMng.defaultFontSize - 4,
                   ),
                 ),
               ],
@@ -64,17 +64,18 @@ class mainSettingScreen extends StatelessWidget {
               "이메일    -    iam0817jun@gmail.com",
               style: TextStyle(
                 color: getThemeColor(1, 0),
+                fontSize: sizeMng.defaultFontSize - 2,
               ),
             ),
 
-            const Padding(padding: EdgeInsets.only(bottom: 35)),
+            Padding(padding: EdgeInsets.only(bottom: 35 * sizeMng.defaultScale,)),
             Material(
               color: getThemeColor(1, 0),
               borderRadius: BorderRadius.circular(20),
               child: InkWell(
                 child: Container(
                   alignment: Alignment.center,
-                  height: 50,
+                  height: 50 * sizeMng.defaultScale,
                   padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: FittedBox(
                     child: Text(
@@ -82,6 +83,7 @@ class mainSettingScreen extends StatelessWidget {
                       style: TextStyle(
                         color: getThemeColor(1, 1),
                         fontWeight: FontWeight.bold,
+                        fontSize: sizeMng.defaultFontSize - 2,
                       ),
                     ),
                   )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:isma/config/colors.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class ColorPick extends StatelessWidget {
     Mng mng = Provider.of<Mng>(context);
     return Expanded(
       child: SizedBox(
-        height: 65,
+        height: 65 * sizeMng.defaultScale,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -28,7 +29,7 @@ class ColorPick extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: 20,
+                  height: 20 * sizeMng.defaultScale,
                   width: double.maxFinite,
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -38,16 +39,17 @@ class ColorPick extends StatelessWidget {
                         child: Text(
                           _title,
                           style: TextStyle(
-                              color: themes[_colorIndex][1][0],
-                              fontWeight: FontWeight.bold
+                            color: themes[_colorIndex][1][0],
+                            fontWeight: FontWeight.bold,
+                            fontSize: sizeMng.defaultFontSize - 2,
                           ),
                         ),
                       ),
                       Visibility(
                         visible: mng.containTheme(_colorIndex),
                         child: Container(
-                          height: 17,
-                          width: 17,
+                          height: 17 * sizeMng.defaultScale,
+                          width: 17 * sizeMng.defaultScale,
                           decoration: BoxDecoration(
                             color: Colors.transparent,
                             border: Border.all(color: themes[_colorIndex][1][0], width: 2),
@@ -58,8 +60,9 @@ class ColorPick extends StatelessWidget {
                             child: Text(
                               mng.IndexOfTheme(_colorIndex).toString(),
                               style: TextStyle(
-                                  color: themes[_colorIndex][1][0],
-                                  fontWeight: FontWeight.bold,
+                                color: themes[_colorIndex][1][0],
+                                fontWeight: FontWeight.bold,
+                                fontSize: sizeMng.defaultFontSize - 2,
                               ),
                             ),
                           )

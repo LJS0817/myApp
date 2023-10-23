@@ -66,7 +66,7 @@ class oResultView extends StatelessWidget {
                         data.selectOil!.english,
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: sizeMng.defaultFontSize + 4,
                           fontWeight: FontWeight.bold,
                           color: getThemeColor(themeIndex, 0),
                         ),
@@ -79,7 +79,7 @@ class oResultView extends StatelessWidget {
                         data.selectOil!.korean,
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: sizeMng.defaultFontSize - 2,
                           fontWeight: FontWeight.bold,
                           color: getThemeColor(themeIndex, 0).withOpacity(0.5),
                         ),
@@ -108,7 +108,7 @@ class oResultView extends StatelessWidget {
                         "Fat",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: sizeMng.defaultFontSize,
                           color: getThemeColor(themeIndex, 0),
                         ),
                       ),
@@ -151,7 +151,7 @@ class oResultView extends StatelessWidget {
                         "Unfat",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: sizeMng.defaultFontSize,
                           color: getThemeColor(themeIndex, 0),
                         ),
                       ),
@@ -201,7 +201,7 @@ class oResultView extends StatelessWidget {
 
           Container(
             margin: const EdgeInsets.only(top: 20),
-            height: 70,
+            height: 70 * sizeMng.defaultScale,
             child: Stack(
               children: [
                 Positioned(
@@ -224,8 +224,9 @@ class oResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          width: 100,
-                          height: 50,
+                          width: 100 * sizeMng.defaultScale,
+                          height: 50 * sizeMng.defaultScale,
+                          padding: EdgeInsets.symmetric(vertical: 7 * sizeMng.defaultScale),
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(10),
@@ -234,7 +235,7 @@ class oResultView extends StatelessWidget {
                             "assets/icon/delete.svg",
                             width: 15,
                             height: 15,
-                            fit: BoxFit.none,
+                            fit: BoxFit.fitHeight,
                             color: getThemeColor(themeIndex, 1),
                           ),
                         ),
@@ -261,8 +262,9 @@ class oResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          width: 50,
-                          height: 50,
+                          width: 50 * sizeMng.defaultScale,
+                          height: 50 * sizeMng.defaultScale,
+                          padding: EdgeInsets.symmetric(vertical: 10 * sizeMng.defaultScale),
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(100),
@@ -271,7 +273,7 @@ class oResultView extends StatelessWidget {
                             "assets/icon/edit.svg",
                             width: 15,
                             height: 15,
-                            fit: BoxFit.none,
+                            fit: BoxFit.fitHeight,
                             color: getThemeColor(themeIndex, 1),
                           ),
                         ),
@@ -291,9 +293,9 @@ class oResultView extends StatelessWidget {
                       splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                       highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                       child: Container(
-                        padding: const EdgeInsets.all(15),
-                        width: 70,
-                        height: 70,
+                        padding: EdgeInsets.all(15 * sizeMng.defaultScale),
+                        width: 70 * sizeMng.defaultScale,
+                        height: 70 * sizeMng.defaultScale,
                         decoration: BoxDecoration(
                           border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                           borderRadius: BorderRadius.circular(100),

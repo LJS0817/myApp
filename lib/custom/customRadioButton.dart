@@ -22,7 +22,7 @@ class customRadioButton extends StatelessWidget {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 240),
-      height: 120,
+      height: 120 * sizeMng.defaultScale,
       padding: const EdgeInsets.only(top: 8, left: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -43,11 +43,11 @@ class customRadioButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                width: 55,
-                height: 55,
-                padding: const EdgeInsets.all(12),
+                width: 55 * sizeMng.defaultScale,
+                height: 55 * sizeMng.defaultScale,
+                padding: EdgeInsets.all(12 * sizeMng.defaultScale),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
                   color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 1 : 0),
                 ),
                 child: SvgPicture.asset(
@@ -61,7 +61,7 @@ class customRadioButton extends StatelessWidget {
                   typeToString(data),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: sizeMng.defaultFontSize,
                     color: getThemeColor(colorIndex, dataMngProvider.data.type == data ? 1 : 0),
                   ),
                 ),

@@ -45,25 +45,26 @@ class sResultView extends StatelessWidget {
           children: [
             Container(
                 height: MediaQuery.of(context).size.height * 0.6,
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 20 * sizeMng.defaultScale, top: 20 * sizeMng.defaultScale,),
                 decoration: BoxDecoration(
                   color: getThemeColor(1, 1),
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(30 * sizeMng.defaultScale),
                 ),
                 child: ScrollConfiguration(
                   behavior: const ScrollBehavior().copyWith(overscroll: false),
                   child: ListView(
                     shrinkWrap: true,
+                    padding: EdgeInsets.zero,
                     children: [
                       //이름
                       Container(
                         alignment: Alignment.topLeft,
-                        padding: EdgeInsets.only(left: leftPadding + 5, right: leftPadding, bottom: 15),
+                        padding: EdgeInsets.only(left: leftPadding + 5, right: leftPadding, bottom: 15 * sizeMng.defaultScale,),
                         child: Text(
                           data.selectData.name,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: sizeMng.defaultFontSize + 4,
                             fontWeight: FontWeight.bold,
                             color: getThemeColor(themeIndex, 0),
                           ),
@@ -72,12 +73,12 @@ class sResultView extends StatelessWidget {
 
                       //오일
                       Container(
-                          height: (menuMng.showOilDetails > 0) ? 260 + (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize : 190,
+                          height: (menuMng.showOilDetails > 0) ? 260 + (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize * sizeMng.defaultScale + sizeMng.defaultPadding : 190 * sizeMng.defaultScale - sizeMng.defaultPadding,
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.only(left: leftPadding),
                           decoration: BoxDecoration(
                             color: getThemeColor(themeIndex, 0),
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20 * sizeMng.defaultScale), bottomLeft: Radius.circular(20 * sizeMng.defaultScale)),
                           ),
                           child: Stack(
                             children: [
@@ -91,7 +92,7 @@ class sResultView extends StatelessWidget {
                                       style: TextStyle(
                                         color: getThemeColor(themeIndex, 2),
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                        fontSize: sizeMng.defaultFontSize,
                                       ),
                                     )
                                 ),
@@ -102,8 +103,8 @@ class sResultView extends StatelessWidget {
                                   margin: const EdgeInsets.only(right: 10, top: 15),
                                   child: SvgPicture.asset(
                                     getIcon(parseTYPE(themeIndex.toString())),
-                                    width: 150,
-                                    height: 150,
+                                    width: 150 * sizeMng.defaultScale,
+                                    height: 150 * sizeMng.defaultScale,
                                     color: getThemeColor(themeIndex, 1).withOpacity(0.25),
                                   ),
                                 ),
@@ -113,18 +114,18 @@ class sResultView extends StatelessWidget {
                                 left: 20,
                                 child: Icon(
                                   Icons.water_drop_outlined,
-                                  size: 29,
+                                  size: 29 * sizeMng.defaultScale,
                                   color: getThemeColor(themeIndex, 1),
                                 ),
                               ),
                               Positioned(
                                 top: 35,
-                                left: 56,
+                                left: 56 + sizeMng.defaultPadding,
                                 child: Text(
                                   "${data.selectData.weight[0]} g",
                                   style: TextStyle(
                                     color: getThemeColor(themeIndex, 1),
-                                    fontSize: 24,
+                                    fontSize: sizeMng.defaultFontSize + 8,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -133,7 +134,7 @@ class sResultView extends StatelessWidget {
                               //오일 내용
                               Center(
                                   child: Container(
-                                      margin: EdgeInsets.only(top: 80, left: leftPadding - 5, right: leftPadding - 5),
+                                      margin: EdgeInsets.only(top: 80 + sizeMng.defaultPadding, left: leftPadding - 5, right: leftPadding - 5),
                                       child: Column(
                                         children: [
                                           Row(
@@ -150,10 +151,10 @@ class sResultView extends StatelessWidget {
                                                 offset: const Offset(0, -1),
                                                 child: Container(
                                                   width: double.maxFinite,
-                                                  height: ((menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 70),
+                                                  height: ((menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 35 + (35 * sizeMng.defaultScale)),
                                                   margin: const EdgeInsets.only(left: 5, right: 5),
                                                   decoration: BoxDecoration(
-                                                    borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
+                                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(15 * sizeMng.defaultScale), bottomLeft: Radius.circular(15 * sizeMng.defaultScale)),
                                                     color: getThemeColor(themeIndex, 1),
                                                   ),
                                                   child: Column(
@@ -179,7 +180,7 @@ class sResultView extends StatelessWidget {
                                                           style: TextStyle(
                                                             color: getThemeColor(themeIndex, 0),
                                                             fontWeight: FontWeight.bold,
-                                                            fontSize: 15,
+                                                            fontSize: sizeMng.defaultFontSize - 1,
                                                           ),
                                                         ),
                                                       ),
@@ -198,13 +199,13 @@ class sResultView extends StatelessWidget {
                                                             color: Colors.transparent,
                                                             width: double.maxFinite,
                                                             alignment: Alignment.center,
-                                                            height: 35,
+                                                            height: 35 * sizeMng.defaultScale,
                                                             child: Text(
                                                               "닫기        X",
                                                               style: TextStyle(
                                                                 color: getThemeColor(themeIndex, 0),
                                                                 fontWeight: FontWeight.bold,
-                                                                fontSize: 15,
+                                                                fontSize: sizeMng.defaultFontSize - 1,
                                                               ),
                                                             ),
                                                           ),
@@ -229,7 +230,7 @@ class sResultView extends StatelessWidget {
                                   style: TextStyle(
                                     color: getThemeColor(themeIndex, 1).withOpacity(0.5),
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 13,
+                                    fontSize: sizeMng.defaultFontSize - 3,
                                   ),
                                 ),
                               ),
@@ -240,13 +241,14 @@ class sResultView extends StatelessWidget {
                       AnimatedContainer(
                           duration: const Duration(milliseconds: 130),
                           margin: EdgeInsets.only(top: (data.showChart ? 14 : 0), left: leftPadding + 5, right: leftPadding),
-                          height: data.showChart ? 210 : 0,
+                          height: data.showChart ? 210 * sizeMng.defaultScale : 0,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: getThemeColor(themeIndex, 0),
                           ),
                           child: ListView(
                               shrinkWrap: true,
+                              padding: EdgeInsets.zero,
                               physics: const NeverScrollableScrollPhysics(),
                               children: [
                                 Stack(
@@ -256,9 +258,9 @@ class sResultView extends StatelessWidget {
                                       bottom: 0,
                                       left: 0,
                                       child: Container(
-                                        width: MediaQuery.of(context).size.width * 0.365,
+                                        width: MediaQuery.of(context).size.width * 0.365 + sizeMng.defaultPadding * sizeMng.defaultScale,
                                         decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20 * sizeMng.defaultScale), bottomLeft: Radius.circular(20 * sizeMng.defaultScale)),
                                           color: getThemeColor(themeIndex, 1).withOpacity(0.6),
                                         ),
                                       ),
@@ -289,6 +291,7 @@ class sResultView extends StatelessWidget {
                                               style: TextStyle(
                                                 color: getThemeColor(themeIndex, 0),
                                                 fontWeight: FontWeight.bold,
+                                                fontSize: sizeMng.defaultFontSize - 2,
                                               ),
                                             ),
                                             Text(
@@ -296,6 +299,7 @@ class sResultView extends StatelessWidget {
                                               style: TextStyle(
                                                 color: getThemeColor(themeIndex, 1),
                                                 fontWeight: FontWeight.bold,
+                                                fontSize: sizeMng.defaultFontSize - 2,
                                               ),
                                             ),
                                           ],
@@ -327,7 +331,7 @@ class sResultView extends StatelessWidget {
                       Visibility(
                         visible: data.selectData.isReturn,
                         child: Container(
-                          height: 100,
+                          height: 100 * sizeMng.defaultScale,
                           width: double.maxFinite,
                           margin: EdgeInsets.only(left: leftPadding, bottom: 15, right: 15),
                           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
@@ -345,14 +349,14 @@ class sResultView extends StatelessWidget {
                                     "비누화수 물의 양",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
-                                      fontSize: 15,
+                                      fontSize: sizeMng.defaultFontSize - 1,
                                     ),
                                   ),
                                   Text(
                                     "${(data.resultLye * 0.5).round()}",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
-                                      fontSize: 15,
+                                      fontSize: sizeMng.defaultFontSize - 1,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -365,14 +369,14 @@ class sResultView extends StatelessWidget {
                                     "비누화수 Lye 양",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
-                                      fontSize: 15,
+                                      fontSize: sizeMng.defaultFontSize - 1,
                                     ),
                                   ),
                                   Text(
                                     "${(data.resultLye * 0.5).round()}",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
-                                      fontSize: 15,
+                                      fontSize: sizeMng.defaultFontSize - 1,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -385,14 +389,14 @@ class sResultView extends StatelessWidget {
                                     "정제수 양  [ ${data.getValue(2)}% ]",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
-                                      fontSize: 15,
+                                      fontSize: sizeMng.defaultFontSize - 1,
                                     ),
                                   ),
                                   Text(
                                     "${data.resultWater.round()}",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
-                                      fontSize: 15,
+                                      fontSize: sizeMng.defaultFontSize - 1,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -406,11 +410,11 @@ class sResultView extends StatelessWidget {
                       Visibility(
                         visible: data.selectData.type == TYPE.E_HOT,
                         child: Container(
-                            height: 170,
+                            height: 170 * sizeMng.defaultScale,
                             margin: EdgeInsets.only(left: leftPadding, bottom: 15, right: 15),
                             decoration: BoxDecoration(
                               color: getThemeColor(themeIndex, 1),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20 * sizeMng.defaultScale),
                               border: Border.all(color: getThemeColor(themeIndex, 0), width: 3),
                             ),
                             child: Column(
@@ -421,7 +425,7 @@ class sResultView extends StatelessWidget {
                                         child: Transform.translate(
                                           offset: const Offset(-1 , -1),
                                           child: Container(
-                                            height: 50,
+                                            height: 50 * sizeMng.defaultScale,
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomRight: Radius.circular(15),),
@@ -432,7 +436,7 @@ class sResultView extends StatelessWidget {
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: getThemeColor(themeIndex, 1),
-                                                  fontSize: 13,
+                                                  fontSize: sizeMng.defaultFontSize - 3,
                                                   fontWeight: FontWeight.bold
                                               ),
                                             ),
@@ -443,14 +447,14 @@ class sResultView extends StatelessWidget {
                                       child: Transform.translate(
                                         offset: const Offset(0, -1),
                                         child: Container(
-                                          height: 50,
+                                          height: 50 * sizeMng.defaultScale,
                                           alignment: Alignment.center,
                                           child: Text(
                                             "Solvent\n${data.selectData.values[6]}%  -  ${data.resultHot[1]}g",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: getThemeColor(themeIndex, 0),
-                                                fontSize: 13,
+                                                fontSize: sizeMng.defaultFontSize - 3,
                                                 fontWeight: FontWeight.bold
                                             ),
                                           ),
@@ -495,7 +499,7 @@ class sResultView extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 20),
-              height: 70,
+              height: 70 * sizeMng.defaultScale,
               child: Stack(
                 children: [
                   Positioned(
@@ -515,8 +519,9 @@ class sResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          width: 100,
-                          height: 50,
+                          width: 100 * sizeMng.defaultScale,
+                          height: 50 * sizeMng.defaultScale,
+                          padding: EdgeInsets.symmetric(vertical: 7 * sizeMng.defaultScale),
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(10),
@@ -525,7 +530,7 @@ class sResultView extends StatelessWidget {
                             "assets/icon/delete.svg",
                             width: 15,
                             height: 15,
-                            fit: BoxFit.none,
+                            fit: BoxFit.fitHeight,
                             color: getThemeColor(themeIndex, 1),
                           ),
                         ),
@@ -552,8 +557,9 @@ class sResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          width: 50,
-                          height: 50,
+                          width: 50 * sizeMng.defaultScale,
+                          height: 50 * sizeMng.defaultScale,
+                          padding: EdgeInsets.symmetric(vertical: 10 * sizeMng.defaultScale),
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(100),
@@ -562,7 +568,7 @@ class sResultView extends StatelessWidget {
                             "assets/icon/edit.svg",
                             width: 15,
                             height: 15,
-                            fit: BoxFit.none,
+                            fit: BoxFit.fitHeight,
                             color: getThemeColor(themeIndex, 1),
                           ),
                         ),
@@ -570,7 +576,7 @@ class sResultView extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    right: 65,
+                    right: 65 * sizeMng.defaultScale,
                     top: 10,
                     child: Material(
                       borderRadius: BorderRadius.circular(100),
@@ -583,8 +589,9 @@ class sResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 0).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.3),
                         child: Container(
-                          width: 50,
-                          height: 50,
+                          width: 50 * sizeMng.defaultScale,
+                          height: 50 * sizeMng.defaultScale,
+                          padding: EdgeInsets.symmetric(vertical: 10 * sizeMng.defaultScale),
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(100),
@@ -593,7 +600,7 @@ class sResultView extends StatelessWidget {
                             "assets/icon/chart.svg",
                             width: 15,
                             height: 15,
-                            fit: BoxFit.none,
+                            fit: BoxFit.fitHeight,
                             color: getThemeColor(themeIndex, 0),
                           ),
                         ),
@@ -612,9 +619,9 @@ class sResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          padding: EdgeInsets.all(15),
-                          width: 70,
-                          height: 70,
+                          padding: EdgeInsets.all(15 * sizeMng.defaultScale),
+                          width: 70 * sizeMng.defaultScale,
+                          height: 70 * sizeMng.defaultScale,
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(100),

@@ -28,7 +28,7 @@ class uOilContainer extends StatelessWidget {
       color: Colors.transparent,
       child: Material(
         color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10 * sizeMng.defaultScale),
         child: InkWell(
           onTap: () {
             if(dataMngProvider.getData(pageMngProvider.index - 1, index).isEmpty) {
@@ -37,9 +37,9 @@ class uOilContainer extends StatelessWidget {
           },
           splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.5),
           highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.5),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10 * sizeMng.defaultScale),
           child: Container(
-            height: 38,
+            height: 38 * sizeMng.defaultScale,
             width: double.maxFinite,
             color: Colors.transparent,
             alignment: Alignment.centerLeft,
@@ -48,7 +48,7 @@ class uOilContainer extends StatelessWidget {
               oilMng.oils(index).english,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 13,
+                fontSize: sizeMng.defaultFontSize - 3,
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
               ),
             ),

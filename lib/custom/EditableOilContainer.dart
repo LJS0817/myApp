@@ -42,14 +42,14 @@ class EditableOilContainer extends StatelessWidget {
     name = index > -1 ? oilMng.oils(index)!.korean : (list.length > 1 ? list[1] : "");
 
     return Container(
-      height: 75,
+      height: 75 * sizeMng.defaultScale,
       width: double.maxFinite,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20 * sizeMng.defaultScale),
         border: Border.all(
-          width: 3,
+          width: 3 * sizeMng.defaultScale,
           color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
         ),
       ),
@@ -83,8 +83,8 @@ class EditableOilContainer extends StatelessWidget {
                     ),
                     child: SvgPicture.asset(
                       'assets/icon/close.svg',
-                      width: 20,
-                      height: 20,
+                      width: 20 * sizeMng.defaultScale,
+                      height: 20 * sizeMng.defaultScale,
                       color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                     ),
                 ),
@@ -93,13 +93,12 @@ class EditableOilContainer extends StatelessWidget {
           ),
           Positioned(
             right: 15,
-            top: 5,
             bottom: 0,
             child: Row(
               children: [
                 Container(
                   alignment: Alignment.center,
-                  width: 150,
+                  width: 150 * sizeMng.defaultScale,
                   child: Focus(
                     onFocusChange: (hasFocus) {
                       if(!hasFocus) {
@@ -131,8 +130,6 @@ class EditableOilContainer extends StatelessWidget {
                               dataMngProvider.setWeight(_page, weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
 
                               pageMngProvider.UpdateText(dataMngProvider.data);
-
-                              log("ASDADAS");
                             }
                           });
                         }
@@ -150,9 +147,9 @@ class EditableOilContainer extends StatelessWidget {
                         FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                       ],
                       style: TextStyle(
-                          color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17
+                        color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
+                        fontWeight: FontWeight.bold,
+                        fontSize: sizeMng.defaultFontSize + 1,
                       ),
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -161,7 +158,7 @@ class EditableOilContainer extends StatelessWidget {
                         hintStyle: TextStyle(
                           color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                           fontWeight: FontWeight.bold,
-                          fontSize: 17
+                          fontSize: sizeMng.defaultFontSize + 1,
                         ),
                       ),
                     ),
@@ -169,10 +166,11 @@ class EditableOilContainer extends StatelessWidget {
                 ),
                 Text(
                   _page == 5 ? "dr" : "G",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                       fontWeight: FontWeight.bold,
-                      fontSize: 17
+                    fontSize: sizeMng.defaultFontSize + 1,
                   ),
                 ),
               ],
@@ -187,7 +185,7 @@ class EditableOilContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 150,
+                  width: 150 * sizeMng.defaultScale,
                   height: 20,
                   padding: EdgeInsets.zero,
                   margin: EdgeInsets.zero,
@@ -216,15 +214,15 @@ class EditableOilContainer extends StatelessWidget {
                         contentPadding: EdgeInsets.zero,
                         hintText: "${pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page)}명",
                         hintStyle: TextStyle(
-                            color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17
+                          color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
+                          fontWeight: FontWeight.bold,
+                          fontSize: sizeMng.defaultFontSize + 1,
                         ),
                       ),
                       style: TextStyle(
                         color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: sizeMng.defaultFontSize + 1,
                       ),
                     ),
                   )
@@ -233,7 +231,7 @@ class EditableOilContainer extends StatelessWidget {
                   index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : oilMng.oils(index)!.english,
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.6),
-                    fontSize: 14,
+                    fontSize: sizeMng.defaultFontSize - 2,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

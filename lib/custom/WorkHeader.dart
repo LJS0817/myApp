@@ -29,57 +29,62 @@ class _HeaderState extends State<Header> {
         borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
       ),
       child: SafeArea(
-          child: Container(
-            height: 160,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.18,
             width: double.maxFinite,
             child: Stack(
               children: [
-                Center(
-                  child: SvgPicture.asset(
-                    getIcon(dataMngProvider.data.type),
-                    width: 128,
-                    height: 128,
-                    color: getThemeColor(dataMngProvider.data.type.index, 2).withOpacity(0.15),
-                  ),
+                Container(
+                    padding: const EdgeInsets.all(20),
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                      child: SvgPicture.asset(
+                        getIcon(dataMngProvider.data.type),
+                        width: 128,
+                        height: 128,
+                        color: getThemeColor(dataMngProvider.data.type.index, 2).withOpacity(0.15),
+                      ),
+                    )
                 ),
                 Positioned(
-                    top: 30,
                     left: 20,
-                    child: Container(
+                    bottom: 0,
+                    top: 0,
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.55,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             dataMngProvider.data.name,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
-                                color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16
+                              color: getThemeColor(dataMngProvider.data.type.index, 1),
+                              fontWeight: FontWeight.bold,
+                              fontSize: sizeMng.defaultFontSize,
                             ),
                           ),
-                          const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                           Text(
                             DateTime.now().toString().split(' ')[0],
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
-                                color: getThemeColor(dataMngProvider.data.type.index, 1),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13
+                              color: getThemeColor(dataMngProvider.data.type.index, 1),
+                              fontWeight: FontWeight.bold,
+                              fontSize: sizeMng.defaultFontSize - 3,
                             ),
                           ),
-                          const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
+                          const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
                           Text(
                             "${typeToString(dataMngProvider.data.type)} ${dataMngProvider.data.isReturn ? "[ 비누화수 ]" : (dataMngProvider.getTypeIndex() < 3 ? "[ 일반비누 ]" : "")}",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
-                                color: getThemeColor(dataMngProvider.data.type.index, 2),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14
+                              color: getThemeColor(dataMngProvider.data.type.index, 2),
+                              fontWeight: FontWeight.bold,
+                              fontSize: sizeMng.defaultFontSize - 2,
                             ),
                           ),
                           Visibility(
@@ -89,9 +94,9 @@ class _HeaderState extends State<Header> {
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: TextStyle(
-                                  color: getThemeColor(dataMngProvider.data.type.index, 2),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14
+                                color: getThemeColor(dataMngProvider.data.type.index, 2),
+                                fontWeight: FontWeight.bold,
+                                fontSize: sizeMng.defaultFontSize - 2,
                               ),
                             ),
                           ),
@@ -100,13 +105,14 @@ class _HeaderState extends State<Header> {
                     )
                 ),
                 Positioned(
-                  top: 30,
+                  top: 20,
                   right: 20,
+                  bottom: 20,
                   child: Container(
                       alignment: Alignment.topRight,
                       width: MediaQuery.of(context).size.width * 0.25,
-                      height: double.maxFinite,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: pageMng.headerText,
                       )
                     // Stack(

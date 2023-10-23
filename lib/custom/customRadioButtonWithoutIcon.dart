@@ -20,18 +20,18 @@ class customRadioButtonWithoutIcon extends StatelessWidget {
     DataMng dataMngProvider = Provider.of<DataMng>(context);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 240),
-      height: 55,
+      height: 55 * sizeMng.defaultScale,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
         color: getThemeColor(colorIndex, dataMngProvider.data.skinType == skinType ? 0 : 3),
       ),
       child: Material(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
         child: InkWell(
           splashColor: getThemeColor(colorIndex, 0).withOpacity(0.4),
           highlightColor: getThemeColor(colorIndex, 0).withOpacity(0.4),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
           onTap: () {
             onSelected();
           },
@@ -40,7 +40,7 @@ class customRadioButtonWithoutIcon extends StatelessWidget {
               skinTypeToString(skinType),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: sizeMng.defaultFontSize,
                 color: getThemeColor(colorIndex, dataMngProvider.data.skinType == skinType ? 1 : 0),
               ),
             ),

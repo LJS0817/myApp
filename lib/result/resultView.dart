@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/result/bResultView.dart';
@@ -22,9 +23,9 @@ class ResultView extends StatelessWidget {
     if(themeIndex == 7) {
       return oResultView(leftPadding);
     } else if(themeIndex < 3) {
-      return sResultView(themeIndex, leftPadding, oilBoxSize - (b ? 20 : 0));
+      return sResultView(themeIndex, leftPadding, (oilBoxSize - (b ? 20 : 0)) * sizeMng.defaultScale );
     } else {
-      return bResultView(themeIndex, leftPadding, oilBoxSize - 20);
+      return bResultView(themeIndex, leftPadding, (oilBoxSize - 20) * sizeMng.defaultScale,);
     }
   }
 

@@ -97,7 +97,7 @@ Widget BottomBar(BuildContext context) {
   return Positioned(
     bottom: 0,
     child: Container(
-      height: 100,
+      height: 100 * sizeMng.defaultScale,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.zero,
       margin: EdgeInsets.zero,
@@ -107,7 +107,7 @@ Widget BottomBar(BuildContext context) {
           Positioned(
             bottom: 0,
             child: SizedBox(
-              height: 70,
+              height: 70 * sizeMng.defaultScale,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 children: [
@@ -115,7 +115,7 @@ Widget BottomBar(BuildContext context) {
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: aniTime),
                       width: 100,
-                      height: 70,
+                      height: 70 * sizeMng.defaultScale,
                       decoration: BoxDecoration(
                         color: getThemeColor(1, 0),
                         borderRadius: const BorderRadius.only(
@@ -125,12 +125,12 @@ Widget BottomBar(BuildContext context) {
                     ),
                   ),
 
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 31)),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 31 + sizeMng.defaultPadding,)),
                   Expanded(
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: aniTime),
                       width: 100,
-                      height: 70,
+                      height: 70 * sizeMng.defaultScale,
                       decoration: BoxDecoration(
                         color: getThemeColor(1, 0),
                         borderRadius: const BorderRadius.only(
@@ -148,7 +148,7 @@ Widget BottomBar(BuildContext context) {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: aniTime),
               width: 90,
-              height: 41,
+              height: 41 * sizeMng.defaultScale,
               color: getThemeColor(1, 0),
             ),
           ),
@@ -157,7 +157,7 @@ Widget BottomBar(BuildContext context) {
             right: 0,
             bottom: 0,
             child: Container(
-              height: 70,
+              height: 70 * sizeMng.defaultScale,
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -172,11 +172,11 @@ Widget BottomBar(BuildContext context) {
             ),
           ),
           Positioned(
-            bottom: 21,
+            bottom: 21 * sizeMng.defaultScale,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: aniTime),
-              width: 80,
-              height: 50,
+              width: 80 * sizeMng.defaultScale,
+              height: 50 * sizeMng.defaultScale,
               decoration: BoxDecoration(
                 color: themeBackgrounds[Mng.curThemeColorIndex],
                 borderRadius: const BorderRadius.only(
@@ -187,7 +187,7 @@ Widget BottomBar(BuildContext context) {
             ),
           ),
           Positioned(
-              bottom: 35,
+              bottom: 35 * sizeMng.defaultScale,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 240),
                 decoration: BoxDecoration(
@@ -222,24 +222,24 @@ Widget BottomBar(BuildContext context) {
                       }
                     },
                     child: Container(
-                      width: 60,
-                      height: 60,
+                      width: 60 * sizeMng.defaultScale,
+                      height: 60 * sizeMng.defaultScale,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(500.0),
                           border: Border.all(
                               strokeAlign: BorderSide.strokeAlignOutside,
-                              width: 4,
+                              width: 4 * sizeMng.defaultScale,
                               color: getThemeColor(1, 0).withOpacity(0.5)
                           )
                       ),
                       child: menuMng.isConfig ? SvgPicture.asset(
                         'assets/icon/save.svg',
-                        width: 29,
-                        height: 29,
+                        width: 29 * sizeMng.defaultScale,
+                        height: 29 * sizeMng.defaultScale,
                         color: getThemeColor(1, 1),
                         fit: BoxFit.none,) : Icon(
                         Icons.add_rounded,
-                        size: 30,
+                        size: 30 * sizeMng.defaultScale,
                         color: getThemeColor(1, 1),
                       ),
                     ),
@@ -274,6 +274,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
   Future<String> _fetch1() async {
     if(!Mng.isLoad) {
       log("실패");
+      sizeMng.init(MediaQuery.of(context).devicePixelRatio);
       loadAsset(context);
       loadUAsset(context);
       FileMng fileMng =  Provider.of<FileMng>(context, listen: false);
@@ -292,7 +293,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
       );
       Mng.isLoad = true;
     }
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 4));
     return 'Call Data';
   }
 
@@ -391,7 +392,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                     right: 0,
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 240),
-                      height: 80,
+                      height: 80 * sizeMng.defaultScale,
                       color: getThemeColor(1, 0),
                       alignment: Alignment.bottomCenter,
                       padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
@@ -399,7 +400,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                         "테스트",
                         style: TextStyle(
                           color: getThemeColor(1, 1),
-                          fontSize: 20,
+                          fontSize: sizeMng.defaultFontSize + 4,
                           decoration: TextDecoration.none,
                         ),
                       ),
@@ -408,8 +409,8 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                   Positioned(
                     left: 0,
                     right: 0,
-                    top: 80,
-                    bottom: 80,
+                    top: 80 * sizeMng.defaultScale,
+                    bottom: 80 * sizeMng.defaultScale,
                     child: getIndex(context),
                   ),
                   BottomBar(context),

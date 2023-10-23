@@ -35,7 +35,7 @@ class OilDialog extends StatelessWidget {
             child: Container(
                 alignment: Alignment.center,
                 height: double.maxFinite,
-                margin: const EdgeInsets.symmetric(vertical: 55, horizontal: 20),
+                margin: EdgeInsets.symmetric(vertical: 55 * sizeMng.defaultScale, horizontal: 20 * sizeMng.defaultScale),
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
@@ -59,7 +59,7 @@ class OilDialog extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                              fontSize: 20,
+                              fontSize: sizeMng.defaultFontSize + 2,
                             ),
                           ),
                           const Padding(padding: EdgeInsets.only(top: 10)),
@@ -85,7 +85,7 @@ class OilDialog extends StatelessWidget {
                                   ),
                                   const Padding(padding: EdgeInsets.only(top: 7)),
                                   SizedBox(
-                                    height: 50,
+                                    height: 50 * sizeMng.defaultScale,
                                     width: double.maxFinite,
                                     child: ScrollConfiguration(
                                       behavior: const ScrollBehavior().copyWith(overscroll: false),
@@ -100,7 +100,7 @@ class OilDialog extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    height: 50,
+                                    height: 50 * sizeMng.defaultScale,
                                     alignment: Alignment.bottomRight,
                                     padding: const EdgeInsets.only(right: 10),
                                     child: Material(
@@ -113,8 +113,8 @@ class OilDialog extends StatelessWidget {
                                           pageMngProvider.setDialog(0);
                                         },
                                         child: Container(
-                                          width: 50,
-                                          height: 50,
+                                          width: 50 * sizeMng.defaultScale,
+                                          height: 50 * sizeMng.defaultScale,
                                           color: Colors.transparent,
                                           alignment: Alignment.center,
                                           child: Text(
@@ -122,7 +122,7 @@ class OilDialog extends StatelessWidget {
                                             style: TextStyle(
                                               color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18,
+                                              fontSize: sizeMng.defaultFontSize + 1,
                                             ),
                                           ),
                                         ),

@@ -7,6 +7,7 @@ import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
+import 'package:isma/mng/SizeMng.dart';
 
 import '../mng/DataMng.dart';
 
@@ -15,6 +16,8 @@ enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_ESSENCE, E_LOTION, E_CREAM, E_ETC 
 enum SKINTYPE { E_MINGAM, E_GUN, E_ATOPI, E_JOONG, E_JI, E_YEO }
 
 const int aniTime = 240;
+
+final SizeMng sizeMng = SizeMng();
 
 ///0 - COLD
 ///1  - HOT

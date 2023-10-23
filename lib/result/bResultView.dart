@@ -42,7 +42,7 @@ class bResultView extends StatelessWidget {
           children: [
             Container(
                 height: MediaQuery.of(context).size.height * 0.6,
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 20 * sizeMng.defaultScale, top: 20 * sizeMng.defaultScale,),
                 decoration: BoxDecoration(
                   color: getThemeColor(1, 1),
                   borderRadius: BorderRadius.circular(30),
@@ -51,6 +51,7 @@ class bResultView extends StatelessWidget {
                   behavior: const ScrollBehavior().copyWith(overscroll: false),
                   child: ListView(
                     shrinkWrap: true,
+                    padding: EdgeInsets.zero,
                     children: [
                       //이름
                       Container(
@@ -60,7 +61,7 @@ class bResultView extends StatelessWidget {
                           data.selectData.name,
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: sizeMng.defaultFontSize + 4,
                             fontWeight: FontWeight.bold,
                             color: getThemeColor(themeIndex, 0),
                           ),
@@ -69,12 +70,12 @@ class bResultView extends StatelessWidget {
 
                       //오일
                       Container(
-                          height: (menuMng.showOilDetails > 0) ? 260 + (menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize : 190,
+                          height: (menuMng.showOilDetails > 0) ? 200 + (60 * sizeMng.defaultScale + sizeMng.defaultPadding)+ (menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize : 190 * sizeMng.defaultScale - sizeMng.defaultPadding,
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.only(left: leftPadding),
                           decoration: BoxDecoration(
                             color: getThemeColor(themeIndex, 0),
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20 * sizeMng.defaultScale ), bottomLeft: Radius.circular(20 * sizeMng.defaultScale )),
                           ),
                           child: Stack(
                             children: [
@@ -88,7 +89,7 @@ class bResultView extends StatelessWidget {
                                       style: TextStyle(
                                         color: getThemeColor(themeIndex, 2),
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                        fontSize: sizeMng.defaultFontSize,
                                       ),
                                     )
                                 ),
@@ -99,29 +100,29 @@ class bResultView extends StatelessWidget {
                                   margin: const EdgeInsets.only(right: 10, top: 15),
                                   child: SvgPicture.asset(
                                     getIcon(parseTYPE(themeIndex.toString())),
-                                    width: 150,
-                                    height: 150,
+                                    width: 150 * sizeMng.defaultScale,
+                                    height: 150 * sizeMng.defaultScale,
                                     color: getThemeColor(themeIndex, 1).withOpacity(0.25),
                                   ),
                                 ),
                               ),
                               Positioned(
                                 top: 35,
-                                left: 20,
+                                left: 20 * sizeMng.defaultScale,
                                 child: Icon(
                                   Icons.water_drop_outlined,
-                                  size: 29,
+                                  size: 29 * sizeMng.defaultScale,
                                   color: getThemeColor(themeIndex, 1),
                                 ),
                               ),
                               Positioned(
                                 top: 35,
-                                left: 56,
+                                left: 56 * sizeMng.defaultScale,
                                 child: Text(
                                   "${data.selectData.weight[0]} g",
                                   style: TextStyle(
                                     color: getThemeColor(themeIndex, 1),
-                                    fontSize: 24,
+                                    fontSize: sizeMng.defaultFontSize + 8,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -130,7 +131,7 @@ class bResultView extends StatelessWidget {
                               //오일 내용
                               Center(
                                   child: Container(
-                                      margin: EdgeInsets.only(top: 80, left: leftPadding - 5, right: leftPadding - 5),
+                                      margin: EdgeInsets.only(top: 80 + sizeMng.defaultPadding, left: leftPadding - 5, right: leftPadding - 5),
                                       child: Column(
                                         children: [
                                           Row(
@@ -149,7 +150,7 @@ class bResultView extends StatelessWidget {
                                                 child: Container(
                                                   width: double.maxFinite,
                                                   margin: const EdgeInsets.only(left: 5, right: 5),
-                                                  height: ((menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize + 70),
+                                                  height: ((menuMng.showOilDetails > 0 ? (data.selectData.type.index > 2 ? (menuMng.showOilDetails == 1 ? data.selectData.data[0].length + data.selectData.data[1].length : data.selectData.data[menuMng.showOilDetails].length) : data.selectData.data[menuMng.showOilDetails - 1].length) : 0) * oilBoxSize + 35 + (35 * sizeMng.defaultScale)),
                                                   decoration: BoxDecoration(
                                                     borderRadius: const BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
                                                     color: getThemeColor(themeIndex, 1),
@@ -177,7 +178,7 @@ class bResultView extends StatelessWidget {
                                                           style: TextStyle(
                                                             color: getThemeColor(themeIndex, 0),
                                                             fontWeight: FontWeight.bold,
-                                                            fontSize: 15,
+                                                            fontSize: sizeMng.defaultFontSize - 1,
                                                           ),
                                                         ),
                                                       ),
@@ -196,13 +197,13 @@ class bResultView extends StatelessWidget {
                                                             color: Colors.transparent,
                                                             width: double.maxFinite,
                                                             alignment: Alignment.center,
-                                                            height: 35,
+                                                            height: 35 * sizeMng.defaultScale,
                                                             child: Text(
                                                               "닫기        X",
                                                               style: TextStyle(
                                                                 color: getThemeColor(themeIndex, 0),
                                                                 fontWeight: FontWeight.bold,
-                                                                fontSize: 15,
+                                                                fontSize: sizeMng.defaultFontSize - 1,
                                                               ),
                                                             ),
                                                           ),
@@ -228,6 +229,7 @@ class bResultView extends StatelessWidget {
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1).withOpacity(0.5),
                                       fontWeight: FontWeight.bold,
+                                      fontSize: sizeMng.defaultFontSize - 2,
                                     ),
                                   ),
                                 )
@@ -241,7 +243,7 @@ class bResultView extends StatelessWidget {
                       //메모
                       Container(
                         margin: EdgeInsets.only(left: leftPadding, right: 15),
-                        child: CustomTextField((String str) {}, index: themeIndex, defaultValue: data.selectData.memo, maxLines: 11, height: 210, radius: 15,),
+                        child: CustomTextField((String str) {}, index: themeIndex, defaultValue: data.selectData.memo, maxLines: 11, height: 210 * sizeMng.defaultScale + sizeMng.defaultPadding, radius: 15,),
                       ),
                     ],
                   ),
@@ -249,7 +251,7 @@ class bResultView extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 20),
-              height: 70,
+              height: 70 * sizeMng.defaultScale,
               child: Stack(
                 children: [
                   Positioned(
@@ -269,8 +271,9 @@ class bResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          width: 100,
-                          height: 50,
+                          width: 100 * sizeMng.defaultScale,
+                          height: 50 * sizeMng.defaultScale,
+                          padding: EdgeInsets.symmetric(vertical: 7 * sizeMng.defaultScale),
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(10),
@@ -279,7 +282,7 @@ class bResultView extends StatelessWidget {
                             "assets/icon/delete.svg",
                             width: 15,
                             height: 15,
-                            fit: BoxFit.none,
+                            fit: BoxFit.fitHeight,
                             color: getThemeColor(themeIndex, 1),
                           ),
                         ),
@@ -307,8 +310,9 @@ class bResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          width: 50,
-                          height: 50,
+                          width: 50 * sizeMng.defaultScale,
+                          height: 50 * sizeMng.defaultScale,
+                          padding: EdgeInsets.symmetric(vertical: 10 * sizeMng.defaultScale),
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(100),
@@ -317,7 +321,7 @@ class bResultView extends StatelessWidget {
                             "assets/icon/edit.svg",
                             width: 15,
                             height: 15,
-                            fit: BoxFit.none,
+                            fit: BoxFit.fitHeight,
                             color: getThemeColor(themeIndex, 1),
                           ),
                         ),
@@ -336,9 +340,9 @@ class bResultView extends StatelessWidget {
                         splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                         child: Container(
-                          padding: EdgeInsets.all(15),
-                          width: 70,
-                          height: 70,
+                          padding: EdgeInsets.all(15 * sizeMng.defaultScale),
+                          width: 70 * sizeMng.defaultScale,
+                          height: 70 * sizeMng.defaultScale,
                           decoration: BoxDecoration(
                             border: Border.all(color: getThemeColor(themeIndex, 1), width: 3),
                             borderRadius: BorderRadius.circular(100),

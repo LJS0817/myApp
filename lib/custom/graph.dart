@@ -19,9 +19,9 @@ class CustomChartBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 24,
-      height: 175,
-      padding: const EdgeInsets.only(bottom: 10),
+      width: 24 * sizeMng.defaultScale,
+      height: 175 * sizeMng.defaultScale,
+      padding: EdgeInsets.only(bottom: 10 * sizeMng.defaultScale),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -40,34 +40,37 @@ class CustomChartBar extends StatelessWidget {
                 style: TextStyle(
                   color: lightMode ? getThemeColor(themeIndex, 0) : getThemeColor(themeIndex, 1),
                   fontWeight: FontWeight.bold,
-                  fontSize: 13,
+                  fontSize: sizeMng.defaultFontSize - 3,
                 ),
               ),
             ),
           ),
           Container(
-            width: 20,
-            height: 20,
+            width: 20 * sizeMng.defaultScale,
+            height: 20 * sizeMng.defaultScale,
             padding: const EdgeInsets.only(top: 5),
             child: OverflowBox(
-              maxWidth: 150,
-              maxHeight: 20,
+              maxWidth: 150 * sizeMng.defaultScale,
+              maxHeight: 20 * sizeMng.defaultScale,
               child: Container(
                 width: double.infinity,
                 height: double.infinity,
                 alignment: Alignment.center,
                 child: RotationTransition(
                   turns: const AlwaysStoppedAnimation(-36 / 360),
-                  child: Text(
-                    getOilTypeText(oilType),
-                    overflow: TextOverflow.visible,
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: lightMode ? getThemeColor(themeIndex, 1) : getThemeColor(themeIndex, 0),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      getOilTypeText(oilType),
+                      overflow: TextOverflow.visible,
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: lightMode ? getThemeColor(themeIndex, 1) : getThemeColor(themeIndex, 0),
+                        fontWeight: FontWeight.bold,
+                        fontSize: sizeMng.defaultFontSize - 6,
+                      ),
                     ),
-                  ),
+                  )
                 ),
               )
             )

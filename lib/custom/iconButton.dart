@@ -29,6 +29,7 @@ class iconButton extends StatelessWidget {
             duration: const Duration(milliseconds: aniTime),
             width: 60,
             height: 60,
+            margin: const EdgeInsets.symmetric(horizontal: 3,),
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(500),
