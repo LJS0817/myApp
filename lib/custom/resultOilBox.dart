@@ -29,7 +29,7 @@ class ResultOilBox extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 5),
         child: Material(
-          borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+          borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20 * sizeMng.defaultScale) : BorderRadius.only(topRight: Radius.circular(20 * sizeMng.defaultScale), topLeft: Radius.circular(20 * sizeMng.defaultScale)),
           color: getThemeColor(themeIndex, (index == menuMng.showOilDetails || menuMng.showOilDetails < 1 ? 1 : 3)),
           child: InkWell(
             onTap: () {
@@ -38,11 +38,11 @@ class ResultOilBox extends StatelessWidget {
               }
               menuMng.setOilDetails(index);
             },
-            borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20) : const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+            borderRadius: menuMng.showOilDetails < 1 ? BorderRadius.circular(20 * sizeMng.defaultScale) : BorderRadius.only(topRight: Radius.circular(20 * sizeMng.defaultScale), topLeft: Radius.circular(20 * sizeMng.defaultScale)),
             splashColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
             highlightColor: getThemeColor(themeIndex, 0).withOpacity(0.4),
             child: Container(
-                height: _height,
+                height: _height * sizeMng.defaultScale,
                 alignment: Alignment.center,
                 color: Colors.transparent,
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -54,6 +54,7 @@ class ResultOilBox extends StatelessWidget {
                     style: TextStyle(
                       color: getThemeColor(themeIndex, 0),
                       fontWeight: FontWeight.bold,
+                      fontSize: sizeMng.defaultFontSize,
                     ),
                   ),
                 )

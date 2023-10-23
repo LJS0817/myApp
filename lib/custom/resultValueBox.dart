@@ -18,7 +18,7 @@ class ResultValueBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 110,
+        height: 110 * sizeMng.defaultScale,
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
           color: getThemeColor(themeIndex, 0),
@@ -27,7 +27,7 @@ class ResultValueBox extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 57,
+              height: 57 * sizeMng.defaultScale,
               margin: const EdgeInsets.only(left: 7, right: 7, top: 7),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               alignment: Alignment.center,
@@ -42,12 +42,13 @@ class ResultValueBox extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: getThemeColor(themeIndex, 0),
+                    fontSize: sizeMng.defaultFontSize - 2,
                   ),
                 ),
               )
             ),
             Container(
-              height: 43,
+              height: 43 * sizeMng.defaultScale,
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               alignment: Alignment.center,
               child: FittedBox(
@@ -57,6 +58,7 @@ class ResultValueBox extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: getThemeColor(themeIndex, 1),
+                    fontSize: sizeMng.defaultFontSize - 2,
                   ),
                 ),
               )

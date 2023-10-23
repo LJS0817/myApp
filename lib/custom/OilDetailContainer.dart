@@ -42,7 +42,7 @@ class OilDetailContainer extends StatelessWidget {
           highlightColor: getThemeColor(_path.isNotEmpty ? 0 : 1, 1).withOpacity(0.5),
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            height: 38,
+            height: 38 * sizeMng.defaultScale,
             width: double.maxFinite,
             color: Colors.transparent,
             alignment: Alignment.centerLeft,
@@ -51,8 +51,8 @@ class OilDetailContainer extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   'assets/icon/oil.svg',
-                  width: 17,
-                  height: 17,
+                  width: 17 * sizeMng.defaultScale,
+                  height: 17 * sizeMng.defaultScale,
                   color: getThemeColor(_path.isNotEmpty ? 0 : 1, 1),
                 ),
                 const Padding(padding: EdgeInsets.only(left: 15)),
@@ -61,6 +61,7 @@ class OilDetailContainer extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: getThemeColor(_path.isNotEmpty ? 0 : 1, 1),
+                    fontSize: sizeMng.defaultFontSize - 1,
                   ),
                 ),
               ],

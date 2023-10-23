@@ -48,7 +48,7 @@ class PageMng with ChangeNotifier {
     ["첨가물"],
     
     ["수상층", "유상층", "유화제", "총량"],
-    ["워터", "첨가물", "총량", "", "설정값"],
+    ["워터", "첨가물", "총량", "설정값"],
     ["유화제", "", "설정값"],
     ["유상층", "", "설정값"],
     ["EO"],
@@ -77,9 +77,9 @@ class PageMng with ChangeNotifier {
     return Text(
       str,
       style: TextStyle(
-          color: color,
-          fontWeight: FontWeight.bold,
-          fontSize: 13
+        color: color,
+        fontWeight: FontWeight.bold,
+        fontSize: sizeMng.defaultFontSize - 3,
       ),
     );
   }
@@ -155,7 +155,6 @@ class PageMng with ChangeNotifier {
             data.weight[1].toString(),
             data.weight[2].toString(),
             (data.weight[1] + data.weight[2]).toString(),
-            "",
             (int.parse(data.getValue(8)!) * data.weight[0] * 0.01).round().toString(),
           ];
         }
@@ -170,7 +169,6 @@ class PageMng with ChangeNotifier {
             data.weight[1].toString(),
             data.weight[2].toString(),
             (data.weight[1] + data.weight[2]).toString(),
-            "",
             (int.parse(data.getValue(8)!) * data.weight[0] * 0.01).round().toString(),
           ];
         }

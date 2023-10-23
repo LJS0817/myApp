@@ -17,14 +17,14 @@ class CircleChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45,
-      width: 150,
-      margin: const EdgeInsets.symmetric(vertical: 5),
+      height: 45 * sizeMng.defaultScale,
+      width: 150 * sizeMng.defaultScale,
+      margin: EdgeInsets.symmetric(vertical: 5 * sizeMng.defaultScale),
       child: Row(
         children: [
           Container(
-            width: 45,
-            height: 45,
+            width: 45 * sizeMng.defaultScale,
+            height: 45 * sizeMng.defaultScale,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               color: getThemeColor(1, 0),
@@ -36,7 +36,7 @@ class CircleChart extends StatelessWidget {
                 percent.isEmpty ? "+" : "$percent%",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: sizeMng.defaultFontSize - 3,
                   fontWeight: FontWeight.bold,
                   color: getThemeColor(1, 1),
                 ),
@@ -53,7 +53,7 @@ class CircleChart extends StatelessWidget {
                 style: TextStyle(
                   color: getThemeColor(1, 0).withOpacity(0.5),
                   fontWeight: FontWeight.bold,
-                  fontSize: 12,
+                  fontSize: sizeMng.defaultFontSize - 4,
                 ),
               ),
               Text(
@@ -61,7 +61,7 @@ class CircleChart extends StatelessWidget {
                 style: TextStyle(
                   color: getThemeColor(1, 0),
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontSize: sizeMng.defaultFontSize - 2,
                 ),
               ),
             ],

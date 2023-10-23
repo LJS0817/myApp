@@ -38,8 +38,8 @@ class ResultOilDetailsContainer extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 45,
-                height: 45,
+                width: 45 * sizeMng.defaultScale,
+                height: 45 * sizeMng.defaultScale,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: getThemeColor(themeIndex, 0),
@@ -51,7 +51,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
                   style: TextStyle(
                     color: getThemeColor(themeIndex, 1),
                     fontWeight: FontWeight.bold,
-                    fontSize: 13,
+                    fontSize: sizeMng.defaultFontSize - 3,
                   ),
                 ),
               ),
@@ -65,7 +65,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
                     style: TextStyle(
                       color: getThemeColor(themeIndex, 0),
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: sizeMng.defaultFontSize,
                     ),
                   ),
                   Text(
@@ -73,7 +73,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
                     style: TextStyle(
                       color: getThemeColor(themeIndex, 0).withOpacity(0.5),
                       fontWeight: FontWeight.bold,
-                      fontSize: 12,
+                      fontSize: sizeMng.defaultFontSize - 4,
                     ),
                   ),
                 ],
@@ -85,7 +85,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: sizeMng.defaultFontSize + 1,
             ),
           ),
         ],
@@ -108,7 +108,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: sizeMng.defaultFontSize - 1,
             ),
           ),
           Text(
@@ -116,7 +116,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: sizeMng.defaultFontSize - 1,
             ),
           ),
         ],
@@ -157,7 +157,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: sizeMng.defaultFontSize - 1,
             ),
           ),
           Text(
@@ -165,7 +165,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: sizeMng.defaultFontSize - 1,
             ),
           ),
         ],

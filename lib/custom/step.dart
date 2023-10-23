@@ -20,8 +20,8 @@ class StepView extends StatelessWidget {
   Widget Dot(bool isShown) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      width: isShown ? 20 : 7,
-      height: 7,
+      width: isShown ? 20 * sizeMng.defaultScale : 7 * sizeMng.defaultScale,
+      height: 7 * sizeMng.defaultScale,
       decoration: BoxDecoration(
         color: isShown ? getThemeColor(colorIndex == 7 ? 1 : colorIndex, 0) : getThemeColor(colorIndex == 7 ? 1 : colorIndex, 3),
         borderRadius: BorderRadius.circular(100),
@@ -36,7 +36,7 @@ class StepView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 30,
+      height: 30 * sizeMng.defaultScale,
       alignment: Alignment.center,
       child: ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),

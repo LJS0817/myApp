@@ -38,9 +38,9 @@ class OilContainer extends StatelessWidget {
           },
           splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.5),
           highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 1).withOpacity(0.5),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10 * sizeMng.defaultScale),
           child: Container(
-            height: 38,
+            height: 38 * sizeMng.defaultScale,
             width: double.maxFinite,
             color: Colors.transparent,
             alignment: Alignment.centerLeft,
@@ -50,6 +50,7 @@ class OilContainer extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
+                fontSize: sizeMng.defaultFontSize - 2,
               ),
             ),
           ),

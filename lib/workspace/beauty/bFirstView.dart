@@ -28,7 +28,7 @@ class bFirstView extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                  fontSize: 20,
+                  fontSize: sizeMng.defaultFontSize + 4,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -41,7 +41,7 @@ class bFirstView extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                  fontSize: 20,
+                  fontSize: sizeMng.defaultFontSize + 4,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -65,7 +65,7 @@ class bFirstView extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                  fontSize: 20,
+                  fontSize: sizeMng.defaultFontSize + 4,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -99,7 +99,7 @@ class bFirstView extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                  fontSize: 20,
+                  fontSize: sizeMng.defaultFontSize + 4,
                   fontWeight: FontWeight.bold,
                 ),
               ),

@@ -12,18 +12,18 @@ class oFirstView extends StatelessWidget {
   Widget oilTextFiled(Function func, String title, String defaultValue, {bool isFirst=false}) {
     TextEditingController controller = TextEditingController();
     return Container(
-      height: isFirst? 42 : 44,
+      height: isFirst? 42 * sizeMng.defaultScale : 44 * sizeMng.defaultScale,
       margin: const EdgeInsets.only(left: 15, right: 15),
       child: Stack(
         children: [
           Positioned(
             top: 0,
-            left: 30,
+            left: 30 * sizeMng.defaultScale,
             right: 0,
             child: Visibility(
               visible: !isFirst,
               child: Container(
-                height: 2,
+                height: 2 * sizeMng.defaultScale,
                 color: getThemeColor(1, 1),
               ),
             ),
@@ -35,7 +35,7 @@ class oFirstView extends StatelessWidget {
                 title,
                 style: TextStyle(
                   color: getThemeColor(1, 1),
-                  fontSize: 15,
+                  fontSize: sizeMng.defaultFontSize - 1,
                 ),
               ),
               Expanded(
@@ -53,6 +53,7 @@ class oFirstView extends StatelessWidget {
                     style: TextStyle(
                       color: getThemeColor(1, 1),
                       fontWeight: FontWeight.bold,
+                      fontSize: sizeMng.defaultFontSize - 2,
                     ),
                     onSubmitted: (_) {
                       func(_);
@@ -63,6 +64,7 @@ class oFirstView extends StatelessWidget {
                         hintStyle: TextStyle(
                           color: getThemeColor(1, 1),
                           fontWeight: FontWeight.bold,
+                          fontSize: sizeMng.defaultFontSize - 2,
                         )
                     ),
                   ),
@@ -82,20 +84,20 @@ class oFirstView extends StatelessWidget {
       child: ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),
         child: ListView(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10),
+          padding: EdgeInsets.only(left: 20 * sizeMng.defaultScale, right: 20 * sizeMng.defaultScale, top: 15 * sizeMng.defaultScale, bottom: 10),
           children: [
             Text(
               "오일명",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: sizeMng.defaultFontSize + 2,
                 fontWeight: FontWeight.bold,
                 color: getThemeColor(1, 0),
               ),
             ),
-            CustomTextField((_) { dataMng.setOilName(_.toString()); }, index: 1, active: true, radius: 15, defaultValue: dataMng.getOilData()!.korean,),
+            CustomTextField((_) { dataMng.setOilName(_.toString()); }, index: 1, active: true, radius: 15 * sizeMng.defaultScale, defaultValue: dataMng.getOilData()!.korean,),
 
-            const Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 20 * sizeMng.defaultScale)),
 
 
             Row(
@@ -104,10 +106,10 @@ class oFirstView extends StatelessWidget {
                 Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      height: 90,
+                      height: 90 * sizeMng.defaultScale,
                       decoration: BoxDecoration(
                         color: getThemeColor(1, 0).withOpacity(0.85),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10 * sizeMng.defaultScale),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -118,14 +120,14 @@ class oFirstView extends StatelessWidget {
                             child: Text(
                               "NaOH",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: sizeMng.defaultFontSize - 1,
                                 fontWeight: FontWeight.bold,
                                 color: getThemeColor(1, 1),
                               ),
                             ),
                           ),
                           const Padding(padding: EdgeInsets.only(bottom: 3)),
-                          CustomTextField((_) { log(_.toString()); dataMng.setOilData(0, _); }, onlyNum: true, index: 1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.NaOH.toString(),),
+                          CustomTextField((_) { log(_.toString()); dataMng.setOilData(0, _); }, onlyNum: true, index: 1, active: true, radius: 11 * sizeMng.defaultScale, needBor: false, height: 45 + (sizeMng.defaultPadding * sizeMng.defaultScale), defaultValue: dataMng.getOilData()!.NaOH.toString(),),
                         ],
                       ),
                     )
@@ -134,10 +136,10 @@ class oFirstView extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    height: 90,
+                    height: 90 * sizeMng.defaultScale,
                     decoration: BoxDecoration(
                       color: getThemeColor(1, 0).withOpacity(0.85),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10 * sizeMng.defaultScale),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -148,14 +150,14 @@ class oFirstView extends StatelessWidget {
                           child: Text(
                             "KOH",
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: sizeMng.defaultFontSize - 1,
                               fontWeight: FontWeight.bold,
                               color: getThemeColor(1, 1),
                             ),
                           ),
                         ),
                         const Padding(padding: EdgeInsets.only(bottom: 3)),
-                        CustomTextField((_) { dataMng.setOilData(1, _); }, onlyNum: true, index: 1, active: true, radius: 11, needBor: false, height: 45, defaultValue: dataMng.getOilData()!.KOH.toString(),),
+                        CustomTextField((_) { dataMng.setOilData(1, _); }, onlyNum: true, index: 1, active: true, radius: 11 * sizeMng.defaultScale, needBor: false, height: 45 + (sizeMng.defaultPadding * sizeMng.defaultScale), defaultValue: dataMng.getOilData()!.KOH.toString(),),
                       ],
                     ),
                   )
@@ -165,7 +167,7 @@ class oFirstView extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(bottom: 20)),
 
             Container(
-              height: 440,
+              height: 440 * sizeMng.defaultScale,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: getThemeColor(1, 0).withOpacity(0.85),
@@ -173,7 +175,7 @@ class oFirstView extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    height: 42,
+                    height: 42 * sizeMng.defaultScale,
                     padding: const EdgeInsets.only(right: 15, top: 10),
                     alignment: Alignment.centerRight,
                     child: Text(
@@ -181,7 +183,7 @@ class oFirstView extends StatelessWidget {
                       style: TextStyle(
                         color: getThemeColor(1, 1),
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                        fontSize: sizeMng.defaultFontSize,
                       ),
                     ),
                   ),

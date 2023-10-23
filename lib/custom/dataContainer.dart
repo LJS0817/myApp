@@ -24,16 +24,16 @@ class DataContainer extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints cons) {
         return Container(
-          height: 90,
+          height: 90 * sizeMng.defaultScale,
           margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           decoration: BoxDecoration(
             color: getThemeColor(data.type.index, 0),
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            borderRadius: BorderRadius.all(Radius.circular(30 * sizeMng.defaultScale)),
           ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              borderRadius: BorderRadius.all(Radius.circular(30 * sizeMng.defaultScale)),
               splashColor: getThemeColor(data.type.index, 2).withOpacity(0.3),
               highlightColor: getThemeColor(data.type.index, 2).withOpacity(0.2),
               onTap: () {
@@ -59,6 +59,7 @@ class DataContainer extends StatelessWidget {
                               style: TextStyle(
                                 color: getThemeColor(data.type.index, 1),
                                 fontWeight: FontWeight.bold,
+                                fontSize: sizeMng.defaultFontSize - 2,
                               ),
                             ),
                           ),
@@ -71,6 +72,7 @@ class DataContainer extends StatelessWidget {
                                 style: TextStyle(
                                   color: getThemeColor(data.type.index, 1),
                                   fontWeight: FontWeight.bold,
+                                  fontSize: sizeMng.defaultFontSize - 2,
                                 ),
                               ),
                             ),
@@ -85,6 +87,7 @@ class DataContainer extends StatelessWidget {
                                 style: TextStyle(
                                   color: getThemeColor(data.type.index, 2),
                                   fontWeight: FontWeight.bold,
+                                  fontSize: sizeMng.defaultFontSize - 2,
                                 ),
                               ),
                             ),
@@ -98,8 +101,8 @@ class DataContainer extends StatelessWidget {
                       bottom: 0,
                       child: SvgPicture.asset(
                         getIcon(data.type),
-                        width: 64,
-                        height: 64,
+                        width: 64 * sizeMng.defaultScale,
+                        height: 64 * sizeMng.defaultScale,
                         color: getThemeColor(data.type.index, 2).withOpacity(0.3),
                       )
                   ),
@@ -110,7 +113,7 @@ class DataContainer extends StatelessWidget {
                       "${data.weight[0]}G",
                       style: TextStyle(
                         color: getThemeColor(data.type.index, 2).withOpacity(0.9),
-                        fontSize: 22,
+                        fontSize: sizeMng.defaultFontSize + 6,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

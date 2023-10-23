@@ -242,6 +242,7 @@ class Mng with ChangeNotifier {
 
   void hideResultView() {
     popUpActive = false;
+    showChart = false;
     notifyListeners();
   }
 

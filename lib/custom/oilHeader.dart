@@ -17,7 +17,7 @@ class OilHeader extends StatelessWidget {
       color: getThemeColor(1, 0),
       child: SafeArea(
         child: Container(
-          height: 180,
+          height: 180 * sizeMng.defaultScale,
           color: getThemeColor(1, 0),
           padding: const EdgeInsets.only(left: 55, right: 55, bottom: 20, top: 10),
           child: Transform.translate(
@@ -47,7 +47,7 @@ class OilHeader extends StatelessWidget {
                               dataMng.getOilData()!.korean,
                               style: TextStyle(
                                 color: getThemeColor(1, 0),
-                                fontSize: 15,
+                                fontSize: sizeMng.defaultFontSize - 1,
                                 overflow: TextOverflow.fade,
                               ),
                               softWrap: false,
@@ -57,51 +57,50 @@ class OilHeader extends StatelessWidget {
                         )
                       ),
 
-
                       Positioned(
                         left: 0,
-                        bottom: 20,
+                        bottom: 20 * sizeMng.defaultScale,
                         child: Text(
                           dataMng.getOilData()!.NaOH.toString(),
                           style: TextStyle(
                               color: getThemeColor(1, 2),
-                              fontSize: 15,
+                              fontSize: sizeMng.defaultFontSize - 1,
                               fontWeight: FontWeight.bold
                           ),
                         ),
                       ),
                       Positioned(
                         left: 0,
-                        bottom: 10,
+                        bottom: 10 * sizeMng.defaultScale,
                         child: Text(
                           "NaOH",
                           style: TextStyle(
                             color: getThemeColor(1, 0),
-                            fontSize: 11
+                            fontSize: sizeMng.defaultFontSize - 5,
                           ),
                         ),
                       ),
 
                       Positioned(
                         right: 0,
-                        bottom: 20,
+                        bottom: 20 * sizeMng.defaultScale,
                         child: Text(
                           dataMng.getOilData()!.KOH.toString(),
                           style: TextStyle(
                               color: getThemeColor(1, 2),
-                              fontSize: 15,
+                              fontSize: sizeMng.defaultFontSize - 1,
                               fontWeight: FontWeight.bold
                           ),
                         ),
                       ),
                       Positioned(
                         right: 0,
-                        bottom: 10,
+                        bottom: 10 * sizeMng.defaultScale,
                         child: Text(
                           "KOH",
                           style: TextStyle(
-                              color: getThemeColor(1, 0),
-                              fontSize: 11
+                            color: getThemeColor(1, 0),
+                            fontSize: sizeMng.defaultFontSize - 5,
                           ),
                         ),
                       ),
@@ -109,12 +108,12 @@ class OilHeader extends StatelessWidget {
 
                       Positioned(
                         right: 0,
-                        top: 5,
+                        top: 5 * sizeMng.defaultScale,
                         child: Text(
                           "NO.${oilMng.userOils.length + 1}",
                           style: TextStyle(
                             color: getThemeColor(1, 0).withOpacity(0.3),
-                            fontSize: 20,
+                            fontSize: sizeMng.defaultFontSize + 2,
                             fontWeight: FontWeight.bold
                           ),
                         ),
@@ -122,11 +121,11 @@ class OilHeader extends StatelessWidget {
 
                       Positioned(
                         left: 0,
-                        top: 5,
+                        top: 5 * sizeMng.defaultScale,
                         child: SvgPicture.asset(
                           'assets/icon/oil.svg',
-                          width: 20,
-                          height: 20,
+                          width: 20 * sizeMng.defaultScale,
+                          height: 20 * sizeMng.defaultScale,
                           color: getThemeColor(1, 0),
                         ),
                       ),

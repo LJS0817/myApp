@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
 
   double _height = 55;
   int _maxLines = 1;
-  double _radius = 100;
+  double _radius = 50;
 
   bool needBackground = true;
   bool needLabel = false;
@@ -26,7 +26,7 @@ class CustomTextField extends StatelessWidget {
   String _default = "";
   String _hint = "";
 
-  CustomTextField(Function func, {bool multipleLine = false, bool needLb = false, bool onlyNum = false, bool needBor = true, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String defaultValue="", String hintStr="", double height=50, int maxLines=1, double radius=100, super.key}) {
+  CustomTextField(Function func, {bool multipleLine = false, bool needLb = false, bool onlyNum = false, bool needBor = true, String labelTxt = "", bool needBg = true, int index=0, bool active=false, String defaultValue="", String hintStr="", double height=50, int maxLines=1, double radius=50, super.key}) {
     isActive = active;
     needBackground = needBg;
     _height = height;
@@ -69,13 +69,13 @@ class CustomTextField extends StatelessWidget {
                 builder: (BuildContext con, BoxConstraints constraints) {
                   return AnimatedContainer(
                       duration: const Duration(milliseconds: 240),
-                      height: 27,
-                      width: constraints.maxWidth > 120 ? labelText.length * 5 + 40 : constraints.maxWidth - 20,
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                      alignment: Alignment.bottomLeft,
+                      height: 27 + (sizeMng.defaultPadding * 0.3),
+                      width: constraints.maxWidth > 120 ? labelText.length * 5 + 40 * sizeMng.defaultScale : constraints.maxWidth - 20,
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(topRight: Radius.circular(_radius - 5), topLeft: Radius.circular(_radius - 5)),
-                        border: Border.all(color: getThemeColor(themeIndex, 0), width: 4),
+                        border: Border.all(color: getThemeColor(themeIndex, 0), width: 4 * sizeMng.defaultScale),
                         color: getThemeColor(themeIndex, 1),
                       ),
                       child: FittedBox(
@@ -85,7 +85,7 @@ class CustomTextField extends StatelessWidget {
                           style: TextStyle(
                               color: getThemeColor(themeIndex, 0),
                               fontWeight: FontWeight.bold,
-                              height: 1
+                              fontSize: sizeMng.defaultFontSize,
                           ),
                         ),
                       )
@@ -96,13 +96,14 @@ class CustomTextField extends StatelessWidget {
         ),
         AnimatedContainer(
             duration: const Duration(milliseconds: 240),
-            height: _height,
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            height: _height * sizeMng.defaultScale,
+            padding: const EdgeInsets.symmetric(horizontal: 15,),
             decoration: BoxDecoration(
                 borderRadius: needLabel ? BorderRadius.only(bottomLeft: Radius.circular(_radius), bottomRight: Radius.circular(_radius), topRight: Radius.circular(_radius)) : BorderRadius.circular(_radius),
                 color: getThemeColor(themeIndex, needBackground ? 1 : 0),
-                border: Border.all(color: getThemeColor(themeIndex, 0), width: needBorder ? 3 : 0)
+                border: Border.all(color: getThemeColor(themeIndex, 0), width: needBorder ? 3 * sizeMng.defaultScale : 0)
             ),
+            alignment: Alignment.center,
             child: Focus(
               onFocusChange: (hasFocus) {
                 if(!hasFocus) {
@@ -121,6 +122,7 @@ class CustomTextField extends StatelessWidget {
                     onChange(_.toString());
                   }
                 },
+                textAlignVertical: TextAlignVertical.center,
                 inputFormatters: needLabel ? [
                   FilteringTextInputFormatter.deny(RegExp('[\$,A-Za-z]'))
                 ] : [
@@ -128,16 +130,19 @@ class CustomTextField extends StatelessWidget {
                 ],
                 decoration: InputDecoration(
                   border: InputBorder.none,
+                  counterText: "",
                   hintText: _hint,
                   hintStyle: TextStyle(
                     color: getThemeColor(themeIndex, needBackground ? 0 : 1),
                     fontWeight: FontWeight.bold,
+                    fontSize: sizeMng.defaultFontSize,
                     height: 1,
                   ),
                 ),
                 style: TextStyle(
                   color: getThemeColor(themeIndex, needBackground ? 0 : 1),
                   fontWeight: FontWeight.bold,
+                  fontSize: sizeMng.defaultFontSize,
                   height: _maxLines == 3 || _maxLines > 10 ? 1 : 0,
                 ),
 

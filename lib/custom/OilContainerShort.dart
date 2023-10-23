@@ -26,7 +26,7 @@ class OilShortContainer extends StatelessWidget {
       color: Colors.transparent,
       child: Material(
         color: getThemeColor(dataMngProvider.getTypeIndex(), 1),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
         child: InkWell(
           onTap: () {
             dataMngProvider.setWeight(pageMngProvider.index, -int.parse(dataMngProvider.getData(pageMngProvider.index - 1, index).split('`')[0]));
@@ -35,35 +35,38 @@ class OilShortContainer extends StatelessWidget {
           },
           splashColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.5),
           highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.5),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
           child: Container(
-            height: 38,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            height: 38 * sizeMng.defaultScale,
+            padding: EdgeInsets.symmetric(horizontal: 10 * sizeMng.defaultScale),
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
-                width: 3,
+                width: 3 * sizeMng.defaultScale,
               ),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
             ),
             child: Row(
               children: [
                 Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
+                    fontSize: sizeMng.defaultFontSize - 1,
                   ),
                 ),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 3)),
                 Container(
-                  height: 22,
+                  height: 22 * sizeMng.defaultScale,
                   alignment: Alignment.topCenter,
                   child: SvgPicture.asset(
                     'assets/icon/close.svg',
-                    width: 20,
-                    height: 20,
+                    width: 20 * sizeMng.defaultScale,
+                    height: 20 * sizeMng.defaultScale,
+                    fit: BoxFit.fitHeight,
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                   ),
                 ),
