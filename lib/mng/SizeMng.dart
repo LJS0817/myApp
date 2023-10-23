@@ -16,16 +16,6 @@ class SizeMng {
 
   void setSize() {
     switch(_dpi) {
-      case 160:
-        _fontSize = 20;
-        _scale = 1.4;
-        _padding = 6;
-        break;
-      case 240:
-        _fontSize = 18;
-        _scale = 1.2;
-        _padding = 3;
-        break;
       case 320:
         _fontSize = 16;
         _scale = 1;

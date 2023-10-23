@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/colors.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/DataMng.dart';
+import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,8 @@ class OilHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     DataMng dataMng = Provider.of<DataMng>(context);
     OilMng oilMng = Provider.of<OilMng>(context);
+    Mng mng = Provider.of<Mng>(context);
+
     return Container(
       color: getThemeColor(1, 0),
       child: SafeArea(
@@ -110,7 +113,7 @@ class OilHeader extends StatelessWidget {
                         right: 0,
                         top: 5 * sizeMng.defaultScale,
                         child: Text(
-                          "NO.${oilMng.userOils.length + 1}",
+                          "NO.${mng.selectOilDataIndex == - 1 ? oilMng.userOils.length + 1 : mng.selectOilDataIndex - 73}",
                           style: TextStyle(
                             color: getThemeColor(1, 0).withOpacity(0.3),
                             fontSize: sizeMng.defaultFontSize + 2,

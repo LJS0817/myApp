@@ -83,7 +83,7 @@ class DataContainer extends StatelessWidget {
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                typeToString(data.type),
+                                "${typeToString(data.type)} ${data.type.index > 2 ? "[ ${skinTypeToString(data.skinType)} 피부 ]" : ""}",
                                 style: TextStyle(
                                   color: getThemeColor(data.type.index, 2),
                                   fontWeight: FontWeight.bold,

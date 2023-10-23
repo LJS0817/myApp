@@ -85,7 +85,7 @@ class bResultView extends StatelessWidget {
                                     alignment: Alignment.topLeft,
                                     margin: const EdgeInsets.only(left: 20, top: 12),
                                     child: Text(
-                                      typeToString(parseTYPE(themeIndex.toString())),
+                                      "${typeToString(parseTYPE(themeIndex.toString()))} [ ${skinTypeToString(data.selectData.skinType)} 피부 ]",
                                       style: TextStyle(
                                         color: getThemeColor(themeIndex, 2),
                                         fontWeight: FontWeight.bold,

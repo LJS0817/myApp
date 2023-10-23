@@ -36,6 +36,7 @@ class Footer extends StatelessWidget {
                     pageMngProvider.prevPage(dataMngProvider.getTypeIndex(), dataMngProvider.data);
                   } else {
                     dataMngProvider.setSelectedFileName("");
+                    mngProvider.selectOilDataIndex = -1;
                     Navigator.of(context).pop();
                   }
                 },
@@ -154,8 +155,8 @@ class Footer extends StatelessWidget {
                         }
                       } else {
                         oilMngProvider.addOil(dataMngProvider.getOilData()!, idx: mngProvider.selectOilDataIndex);
+                        mngProvider.selectOilDataIndex = -1;
                       }
-                      log(dataMngProvider.toString());
                       fileMngProvider.setData(pageMngProvider.typeToInt(dataMngProvider.data.type), fileName, dataMngProvider.toString());
                       fileMngProvider.writeFile(fileName.replaceAll('.txt', ''), pageMngProvider.typeToString(dataMngProvider.data.type), dataMngProvider.toString());
                       Navigator.of(context).pop();

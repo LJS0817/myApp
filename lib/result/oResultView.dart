@@ -289,6 +289,7 @@ class oResultView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100),
                       onTap: () {
                         data.hideResultView();
+                        data.selectOilDataIndex = -1;
                       },
                       splashColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
                       highlightColor: getThemeColor(themeIndex, 1).withOpacity(0.3),
