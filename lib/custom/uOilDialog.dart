@@ -55,7 +55,7 @@ class uOilDialog extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            "유화제 추가",
+                            language.getText(TITLE.E_BEAUTY_ADDUHWA),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class uOilDialog extends StatelessWidget {
                                           color: Colors.transparent,
                                           alignment: Alignment.center,
                                           child: Text(
-                                            "확인",
+                                            language.getText(TITLE.E_RESULT_CLOSE),
                                             style: TextStyle(
                                               color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                                               fontWeight: FontWeight.bold,

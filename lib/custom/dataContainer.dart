@@ -83,7 +83,9 @@ class DataContainer extends StatelessWidget {
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                "${typeToString(data.type)} ${data.type.index > 2 ? "[ ${skinTypeToString(data.skinType)} 피부 ]" : ""}",
+                                "${language.getText(typeToTitleEnum(data.type))} "
+                                    "${data.type.index > 2 ? "[ ${language.getText(skinTypeToTitleEnum(data.skinType))} ${language.getText(TITLE.E_SKINTYPE_TITLE)} ]" :
+                                        data.isReturn ? "[ ${language.getText(TITLE.E_OIL_SOAPHWA)} ]" : ""}",
                                 style: TextStyle(
                                   color: getThemeColor(data.type.index, 2),
                                   fontWeight: FontWeight.bold,

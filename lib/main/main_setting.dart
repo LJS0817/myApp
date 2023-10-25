@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
-import 'package:isma/main/main_IndexScreen.dart';
 import 'package:isma/workspace/config/themeConfig.dart';
-import 'package:provider/provider.dart';
 
 class mainSettingScreen extends StatelessWidget {
   @override
@@ -17,7 +15,7 @@ class mainSettingScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             Text(
-              "색 변경하기",
+              language.getText(TITLE.E_CONFIG_COLOR_TITLE),
               style: TextStyle(
                   color: getThemeColor(1, 0),
                   fontSize: sizeMng.defaultFontSize + 4,
@@ -28,7 +26,8 @@ class mainSettingScreen extends StatelessWidget {
             ThemeChanger(),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             Text(
-              "1 - 비누, 2 - 화장품, 3 - 오일, 4 - 설정",
+              "1 - ${language.getText(TITLE.E_SOAPTITLE)}, 2 - ${language.getText(TITLE.E_MAKEUPTITLE)}, 3 - ${language.getText(TITLE.E_OILTITLE)}, 4 - ${language.getText(TITLE.E_CONFIGTITLE)}",
+
               textAlign: TextAlign.right,
               style: TextStyle(
                 color: getThemeColor(1, 0),
@@ -42,7 +41,7 @@ class mainSettingScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "개발자 연락처 ",
+                  "${language.getText(TITLE.E_CONFIG_CONTACT_TITLE)} ",
                   style: TextStyle(
                     color: getThemeColor(1, 0),
                     fontWeight: FontWeight.bold,
@@ -50,7 +49,7 @@ class mainSettingScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "( 의견 제시 )",
+                  language.getText(TITLE.E_CONFIG_CONTACT_WHY),
                   style: TextStyle(
                     color: getThemeColor(1, 0),
                     fontWeight: FontWeight.bold,
@@ -61,33 +60,10 @@ class mainSettingScreen extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             Text(
-              "이메일    -    iam0817jun@gmail.com",
+              "${language.getText(TITLE.E_CONFIG_CONTACT_INFO)}    -    iam0817jun@gmail.com",
               style: TextStyle(
                 color: getThemeColor(1, 0),
                 fontSize: sizeMng.defaultFontSize - 2,
-              ),
-            ),
-
-            Padding(padding: EdgeInsets.only(bottom: 35 * sizeMng.defaultScale,)),
-            Material(
-              color: getThemeColor(1, 0),
-              borderRadius: BorderRadius.circular(20),
-              child: InkWell(
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 50 * sizeMng.defaultScale,
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: FittedBox(
-                    child: Text(
-                      "데이터 초기화",
-                      style: TextStyle(
-                        color: getThemeColor(1, 1),
-                        fontWeight: FontWeight.bold,
-                        fontSize: sizeMng.defaultFontSize - 2,
-                      ),
-                    ),
-                  )
-                )
               ),
             ),
             const Padding(padding: EdgeInsets.only(bottom: 20)),

@@ -1,3 +1,5 @@
+import 'package:isma/config/define.dart';
+
 enum FAT_TYPE { Lauric, Myristic, Palmitic, Stearic, Palmitoleic,
   Ricinoleic, Oleic, Linoleic, Linolenic, LENGTH }
 
@@ -7,6 +9,9 @@ class Oil {
   double NaOH = 0.0;
   double KOH = 0.0;
   List<double> fat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
+
+  String get title => language.isEng ? english : korean;
+  String get subTitle => language.isEng ? korean : english;
 
   Oil({
     required this.korean,
@@ -26,6 +31,6 @@ class Oil {
   }
 
   String getName() {
-    return "$korean ( $english )";
+    return language.isEng ? english : "$korean ( $english )";
   }
 }

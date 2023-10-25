@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:isma/config/colors.dart';
+import 'package:isma/mng/LanMng.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
@@ -15,9 +16,98 @@ enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_ESSENCE, E_LOTION, E_CREAM, E_ETC 
 
 enum SKINTYPE { E_MINGAM, E_GUN, E_ATOPI, E_JOONG, E_JI, E_YEO }
 
+
+enum TITLE {
+  E_SOAPTITLE,
+  E_MAKEUPTITLE,
+  E_OILTITLE,
+  E_CONFIGTITLE,
+
+  E_CONFIG_COLOR_TITLE,
+  E_CONFIG_CONTACT_TITLE,
+  E_CONFIG_CONTACT_WHY,
+  E_CONFIG_CONTACT_INFO,
+
+  E_TYPE_CP,
+  E_TYPE_HP,
+  E_TYPE_PASTE,
+  E_TYPE_SKIN,
+  E_TYPE_ESSENCE,
+  E_TYPE_LOTION,
+  E_TYPE_CREAM,
+
+  E_SKINTYPE_SENSITIVE,
+  E_SKINTYPE_DRY,
+  E_SKINTYPE_ATOPIC,
+  E_SKINTYPE_COMBINATION,
+  E_SKINTYPE_OILY,
+  E_SKINTYPE_ACNE,
+  E_SKINTYPE_TITLE,
+
+  E_OIL_OIL,
+  E_OIL_SUPERFAT,
+  E_OIL_ADDITIVE,
+  E_OIL_FAT,
+  E_OIL_UNFAT,
+  E_OIL_LYE,
+  E_OIL_WATER,
+  E_OIL_WATER2,
+  E_OIL_NEEDWATER,
+  E_OIL_SOAPHWA,
+  E_OIL_NORMAL,
+  E_OIL_PURESOAP,
+  E_OIL_SOLVENT,
+  E_OIL_ETHANOL,
+  E_OIL_GLYCERINE,
+  E_OIL_SUGAR,
+  E_OIL_SUGARWATER,
+  E_OIL_AMOUNT,
+
+  E_SOAP_RECIPENAME,
+  E_SOAP_TYPETITLE,
+  E_SOAP_CALCULATE,
+  E_SOAP_ENTERVALUE,
+  E_SOAP_LYEPURITY,
+  E_SOAP_LYECOUNT,
+  E_SOAP_ADDOIL,
+
+  E_BEAUTY_TITLE,
+  E_BEAUTY_TYPE,
+  E_BEAUTY_SKINTYPE,
+  E_BEAUTY_TOTAL,
+  E_BEAUTY_SUSANG,
+  E_BEAUTY_USANG,
+  E_BEAUTY_UHWA,
+  E_BEAUTY_EO,
+  E_BEAUTY_WATER,
+  E_BEAUTY_SETTING,
+  E_BEAUTY_ADDUHWA,
+
+  E_OIL_TITLE,
+  E_OIL_ENTERVALUE,
+  E_OIL_NONAME,
+
+  E_RESULT_TOTAL,
+  E_RESULT_CLOSE,
+  E_RESULT_TOUCHSIGN,
+  E_NONAME,
+  E_SHORTADD,
+
+  E_MEMO,
+  E_LOADING,
+
+  E_NEXT,
+  E_EXIT,
+  E_PREV,
+  E_SAVE,
+
+
+}
+
 const int aniTime = 240;
 
 final SizeMng sizeMng = SizeMng();
+final LanguageMng language = LanguageMng();
 
 ///0 - COLD
 ///1  - HOT
@@ -75,43 +165,43 @@ SKINTYPE parseSKINTYPE(String str) {
   }
 }
 
-String typeToString(TYPE t) {
+TITLE typeToTitleEnum(TYPE t) {
   switch(t) {
     case TYPE.E_COLD:
-      return "C.P";
+      return TITLE.E_TYPE_CP;
     case TYPE.E_HOT:
-      return "H.P";
+      return TITLE.E_TYPE_HP;
     case TYPE.E_PASTE:
-      return "Paste";
+      return TITLE.E_TYPE_PASTE;
     case TYPE.E_SKIN:
-      return "Skin";
+      return TITLE.E_TYPE_SKIN;
     case TYPE.E_ESSENCE:
-      return "Essence";
+      return TITLE.E_TYPE_ESSENCE;
     case TYPE.E_LOTION:
-      return "Lotion";
+      return TITLE.E_TYPE_LOTION;
     case TYPE.E_CREAM:
-      return "Cream";
+      return TITLE.E_TYPE_CREAM;
     default:
-      return "ETC";
+      return TITLE.E_TYPE_CP;
   }
 }
 
-String skinTypeToString(SKINTYPE t) {
+TITLE skinTypeToTitleEnum(SKINTYPE t) {
   switch(t) {
     case SKINTYPE.E_MINGAM:
-      return "민감성";
+      return TITLE.E_SKINTYPE_SENSITIVE;
     case SKINTYPE.E_GUN:
-      return "건성";
+      return TITLE.E_SKINTYPE_DRY;
     case SKINTYPE.E_ATOPI:
-      return "아토피";
+      return TITLE.E_SKINTYPE_ATOPIC;
     case SKINTYPE.E_JOONG:
-      return "중복합성";
+      return TITLE.E_SKINTYPE_COMBINATION;
     case SKINTYPE.E_JI:
-      return "지성";
+      return TITLE.E_SKINTYPE_OILY;
     case SKINTYPE.E_YEO:
-      return "여드름";
+      return TITLE.E_SKINTYPE_ACNE;
     default:
-      return "ETC";
+      return TITLE.E_SKINTYPE_SENSITIVE;
   }
 }
 

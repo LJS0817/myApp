@@ -39,7 +39,7 @@ class EditableOilContainer extends StatelessWidget {
 
     List<String> list = dataMngProvider.data.data[_page - 1][index].toString().split('`');
     data = list[0] == "0" || list[0] == 'null' ? "" : list[0];
-    name = index > -1 ? oilMng.oils(index)!.korean : (list.length > 1 ? list[1] : "");
+    name = index > -1 ? oilMng.oils(index)!.title : (list.length > 1 ? list[1] : "");
 
     return Container(
       height: 75 * sizeMng.defaultScale,
@@ -212,7 +212,7 @@ class EditableOilContainer extends StatelessWidget {
                         isDense: true,
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
-                        hintText: "${pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page)}명",
+                        hintText: "${pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page)}${language.isEng ? " Name" : "명"}",
                         hintStyle: TextStyle(
                           color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                           fontWeight: FontWeight.bold,
@@ -228,7 +228,7 @@ class EditableOilContainer extends StatelessWidget {
                   )
                 ),
                 Text(
-                  index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : oilMng.oils(index)!.english,
+                  index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : language.isEng ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : oilMng.oils(index)!.english,
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.6),
                     fontSize: sizeMng.defaultFontSize - 2,

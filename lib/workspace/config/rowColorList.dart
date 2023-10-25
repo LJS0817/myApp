@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/workspace/config/colorPicker.dart';
 
 class RowColorList extends StatelessWidget {
@@ -17,9 +18,9 @@ class RowColorList extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
-          ColorPick(leftColor, themeTitle[leftColor]),
+          ColorPick(leftColor, language.themeTitle[leftColor]),
           const Padding(padding: EdgeInsets.only(right: 15)),
-          ColorPick(rightColor, themeTitle[rightColor]),
+          ColorPick(rightColor, language.themeTitle[rightColor]),
         ],
       ),
     );

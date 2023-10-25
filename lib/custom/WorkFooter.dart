@@ -57,7 +57,7 @@ class Footer extends StatelessWidget {
                       ),
                       Padding(padding: EdgeInsets.symmetric(horizontal: pageMngProvider.index > 0 ? 2 : 5)),
                       Text(
-                        pageMngProvider.index > 0 ? "이전" : "나가기",
+                        pageMngProvider.index > 0 ? language.getText(TITLE.E_PREV) : language.getText(TITLE.E_EXIT),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                             fontSize: sizeMng.defaultFontSize,
@@ -139,6 +139,7 @@ class Footer extends StatelessWidget {
                         mngProvider.calculateData(dataMngProvider.data, context);
                         if(dataMngProvider.getTypeIndex() == 1) {
                           dataMngProvider.data.weight[0] = mngProvider.resultHot[0] + mngProvider.resultHot[1] + mngProvider.resultHot[4];
+                          dataMngProvider.data.isReturn = false;
                         } else if(dataMngProvider.data.isReturn) {
                           dataMngProvider.data.weight[0] = dataMngProvider.data.weight[1] + dataMngProvider.data.weight[2] +
                               (mngProvider.resultWater.round() - (mngProvider.resultLye * 0.5).round()) + mngProvider.resultLye.round();
@@ -175,7 +176,7 @@ class Footer extends StatelessWidget {
                         children: [
                           const Padding(padding: EdgeInsets.symmetric(horizontal: 7)),
                           Text(
-                           pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? "다음" : "저장",
+                           pageMngProvider.index < pageMngProvider.MAX_INDEX(dataMngProvider.getTypeIndex()) ? language.getText(TITLE.E_NEXT) : language.getText(TITLE.E_SAVE),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: sizeMng.defaultFontSize,

@@ -61,7 +61,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    oilMng.oils(data.selectData.data[menuMng.showOilDetails - 1].keys.elementAt(index)).korean,
+                    oilMng.oils(data.selectData.data[menuMng.showOilDetails - 1].keys.elementAt(index)).title,
                     style: TextStyle(
                       color: getThemeColor(themeIndex, 0),
                       fontWeight: FontWeight.bold,
@@ -104,7 +104,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            oilMng.oils(data.selectData.data[menuMng.showOilDetails - (data.selectData.type.index > 2 ? 0 : 1)].keys.elementAt(index)).korean,
+            oilMng.oils(data.selectData.data[menuMng.showOilDetails - (data.selectData.type.index > 2 ? 0 : 1)].keys.elementAt(index)).title,
             style: TextStyle(
               color: getThemeColor(themeIndex, 0),
               fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class ResultOilDetailsContainer extends StatelessWidget {
       dataList = data.selectData.data[menuMng.showOilDetails - 1].values.elementAt(index).split('`');
     }
 
-    String name = dataList.length > 1 && dataList[1].isNotEmpty ? dataList[1] : "${data.selectData.type.index > 2 && menuMng.showOilDetails == 1 && index >= data.selectData.data[0].values.length ? "[첨] " : ""}[이름없음]";
+    String name = "${data.selectData.type.index > 2 && menuMng.showOilDetails == 1 && index >= data.selectData.data[0].values.length ? "${language.getText(TITLE.E_SHORTADD)} " : ""} ${dataList.length > 1 && dataList[1].isNotEmpty ? dataList[1] : language.getText(TITLE.E_NONAME)}";
     String gram = dataList[0].isEmpty || dataList[0] == "null" ? "0" : dataList[0];
 
     return SizedBox(

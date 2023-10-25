@@ -132,7 +132,7 @@ class DataMng with ChangeNotifier {
       data.weight.add(0);
       data.weight.add(0);
     } else if(idx == 2) {
-      _oil = oil ?? Oil(korean: "", english: "사용자 오일", NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
+      _oil = oil ?? Oil(korean: "", english: language.getText(TITLE.E_OIL_NONAME), NaOH: 0, KOH: 0, fat: List.generate(FAT_TYPE.LENGTH.index, (index) => 0));
     }
   }
 
@@ -382,7 +382,7 @@ Data parseData(String str) {
     result.name = strList[0];
     result.date = strList[2];
     result.type = parseTYPE(strList[1].replaceAll('-', ''));
-    result.isReturn = strList[1].contains('-');
+    result.isReturn = result.type == TYPE.E_HOT ? false : strList[1].contains('-');
 
     result.skinType = parseSKINTYPE(strList[7]);
     result.weight = json.decode(strList[3]).cast<int>().toList();

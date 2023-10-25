@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:isma/config/define.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/PageMng.dart';
@@ -39,7 +40,7 @@ class FourthView extends StatelessWidget {
                 height: 120,
                 radius: 20,
                 defaultValue: dataMngProvider.data.memo,
-                hintStr: "메모 입력",
+                hintStr: language.getText(TITLE.E_MEMO),
               ),
             )
           )

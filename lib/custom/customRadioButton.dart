@@ -36,6 +36,7 @@ class customRadioButton extends StatelessWidget {
           highlightColor: getThemeColor(colorIndex, 0).withOpacity(0.4),
           borderRadius: BorderRadius.circular(15),
           onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
             onSelected();
             Provider.of<PageMng>(context, listen: false).UpdateText(dataMngProvider.data);
           },
@@ -58,7 +59,7 @@ class customRadioButton extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Text(
-                  typeToString(data),
+                  language.getText(typeToTitleEnum(data)),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: sizeMng.defaultFontSize,

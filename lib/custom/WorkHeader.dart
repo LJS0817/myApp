@@ -78,7 +78,7 @@ class _HeaderState extends State<Header> {
                           ),
                           const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
                           Text(
-                            "${typeToString(dataMngProvider.data.type)} ${dataMngProvider.data.isReturn ? "[ 비누화수 ]" : (dataMngProvider.getTypeIndex() < 3 ? "[ 일반비누 ]" : "")}",
+                            "${language.getText(typeToTitleEnum(dataMngProvider.data.type))} ${(dataMngProvider.getTypeIndex() < 3 ? dataMngProvider.data.isReturn && dataMngProvider.getTypeIndex() != 1 ? "[ ${language.getText(TITLE.E_OIL_SOAPHWA)} ]" :  "[ ${language.getText(TITLE.E_OIL_NORMAL)} ]" : "")}",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
@@ -90,7 +90,7 @@ class _HeaderState extends State<Header> {
                           Visibility(
                             visible: dataMngProvider.getTypeIndex() > 2,
                             child: Text(
-                              "[ ${skinTypeToString(dataMngProvider.data.skinType)} 피부 ]",
+                              "[ ${language.getText(skinTypeToTitleEnum(dataMngProvider.data.skinType))} ${language.getText(TITLE.E_SKINTYPE_TITLE)} ]",
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: TextStyle(

@@ -54,7 +54,7 @@ class OilDialog extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            "오일 추가",
+                            language.getText(TITLE.E_SOAP_ADDOIL),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class OilDialog extends StatelessWidget {
                                         itemCount: dataMngProvider.data.data[pageMngProvider.getIndexSub1()].length,
                                         itemBuilder: (BuildContext con, int idx) {
                                           int i = dataMngProvider.data.data[pageMngProvider.getIndexSub1()].keys.elementAt(idx);
-                                          return OilShortContainer(i, oilMng.oils(i).korean);
+                                          return OilShortContainer(i, oilMng.oils(i).title);
                                         },
                                       ),
                                     ),
@@ -118,7 +118,7 @@ class OilDialog extends StatelessWidget {
                                           color: Colors.transparent,
                                           alignment: Alignment.center,
                                           child: Text(
-                                            "확인",
+                                            language.getText(TITLE.E_RESULT_CLOSE),
                                             style: TextStyle(
                                               color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
                                               fontWeight: FontWeight.bold,

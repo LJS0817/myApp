@@ -85,7 +85,7 @@ class bResultView extends StatelessWidget {
                                     alignment: Alignment.topLeft,
                                     margin: const EdgeInsets.only(left: 20, top: 12),
                                     child: Text(
-                                      "${typeToString(parseTYPE(themeIndex.toString()))} [ ${skinTypeToString(data.selectData.skinType)} 피부 ]",
+                                      "${language.getText(typeToTitleEnum(parseTYPE(themeIndex.toString())))} [ ${language.getText(skinTypeToTitleEnum(data.selectData.skinType))} ${language.getText(TITLE.E_SKINTYPE_TITLE)} ]",
                                       style: TextStyle(
                                         color: getThemeColor(themeIndex, 2),
                                         fontWeight: FontWeight.bold,
@@ -137,10 +137,10 @@ class bResultView extends StatelessWidget {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              ResultOilBox("수상층\n${data.selectData.data[0].length + data.selectData.data[1].length}", themeIndex, 1, w: 70, h: 70,),
-                                              ResultOilBox("유상층\n${data.selectData.data[3].length}", themeIndex, 3, w: 70, h: 70,),
-                                              ResultOilBox("유화제\n${data.selectData.data[2].length}", themeIndex, 2, w: 70, h: 70,),
-                                              ResultOilBox("EO\n${data.selectData.data[4].length}", themeIndex, 4, w: 70, h: 70,),
+                                              ResultOilBox("${language.getText(TITLE.E_BEAUTY_SUSANG)}\n${data.selectData.data[0].length + data.selectData.data[1].length}", themeIndex, 1, w: 70, h: 70,),
+                                              ResultOilBox("${language.getText(TITLE.E_BEAUTY_USANG)}\n${data.selectData.data[3].length}", themeIndex, 3, w: 70, h: 70,),
+                                              ResultOilBox("${language.getText(TITLE.E_BEAUTY_UHWA)}\n${data.selectData.data[2].length}", themeIndex, 2, w: 70, h: 70,),
+                                              ResultOilBox("${language.getText(TITLE.E_BEAUTY_EO)}\n${data.selectData.data[4].length}", themeIndex, 4, w: 70, h: 70,),
                                             ],
                                           ),
                                           Visibility(
@@ -174,7 +174,7 @@ class bResultView extends StatelessWidget {
                                                         alignment: Alignment.centerRight,
                                                         padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
                                                         child: Text(
-                                                          "총합    -    ${(data.selectData.type.index > 2 && menuMng.showOilDetails == 1 ? data.selectData.weight[1] + data.selectData.weight[2] : data.selectData.weight[1 + menuMng.showOilDetails])}${menuMng.showOilDetails == 4 ? "dr" : "g"}",
+                                                          "${language.getText(TITLE.E_RESULT_TOTAL)}    -    ${(data.selectData.type.index > 2 && menuMng.showOilDetails == 1 ? data.selectData.weight[1] + data.selectData.weight[2] : data.selectData.weight[1 + menuMng.showOilDetails])}${menuMng.showOilDetails == 4 ? "dr" : "g"}",
                                                           style: TextStyle(
                                                             color: getThemeColor(themeIndex, 0),
                                                             fontWeight: FontWeight.bold,
@@ -199,7 +199,7 @@ class bResultView extends StatelessWidget {
                                                             alignment: Alignment.center,
                                                             height: 35 * sizeMng.defaultScale,
                                                             child: Text(
-                                                              "닫기        X",
+                                                              "${language.getText(TITLE.E_RESULT_CLOSE)}        X",
                                                               style: TextStyle(
                                                                 color: getThemeColor(themeIndex, 0),
                                                                 fontWeight: FontWeight.bold,
@@ -225,7 +225,7 @@ class bResultView extends StatelessWidget {
                                 margin: const EdgeInsets.only(bottom: 5, left: 30, right: 30),
                                 child: FittedBox(
                                   child: Text(
-                                    "각 항목을 터치하면 사용한 목록이 나옵니다.",
+                                    language.getText(TITLE.E_RESULT_TOUCHSIGN),
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1).withOpacity(0.5),
                                       fontWeight: FontWeight.bold,

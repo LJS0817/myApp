@@ -24,7 +24,7 @@ class bFirstView extends StatelessWidget {
             shrinkWrap: true,
             children: [
               Text(
-                "화장품 이름",
+                language.getText(TITLE.E_BEAUTY_TITLE),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
@@ -37,7 +37,7 @@ class bFirstView extends StatelessWidget {
 
               const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
               Text(
-                "화장품 유형",
+                language.getText(TITLE.E_BEAUTY_TYPE),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
@@ -61,7 +61,7 @@ class bFirstView extends StatelessWidget {
               
               const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
               Text(
-                "피부 유형",
+                language.getText(TITLE.E_BEAUTY_SKINTYPE),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
@@ -95,7 +95,7 @@ class bFirstView extends StatelessWidget {
 
               const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
               Text(
-                "값 입력 [기본 단위 %]",
+                language.getText(TITLE.E_SOAP_ENTERVALUE),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
@@ -107,11 +107,11 @@ class bFirstView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(8)!, needLb: true, labelTxt: "수상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 8); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(8)!, needLb: true, labelTxt: language.getText(TITLE.E_BEAUTY_SUSANG), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 9); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(9)!, needLb: true, labelTxt: "유상층", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 9); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(9)!, needLb: true, labelTxt: language.getText(TITLE.E_BEAUTY_USANG), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 10); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(10)!, needLb: true, labelTxt: "유화제", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                  Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 10); pageMngProvider.UpdateText(dataMngProvider.data); }, defaultValue: dataMngProvider.getValue(10)!, needLb: true, labelTxt: language.getText(TITLE.E_BEAUTY_UHWA), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 ],
               ),
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
@@ -122,7 +122,7 @@ class bFirstView extends StatelessWidget {
                 },
                 defaultValue: dataMngProvider.data.weight[0].toString(),
                 needLb: true,
-                labelTxt: "총용량 [ G ]",
+                labelTxt: language.getText(TITLE.E_BEAUTY_TOTAL),
                 active: true,
                 needBg: false,
                 radius: 15,

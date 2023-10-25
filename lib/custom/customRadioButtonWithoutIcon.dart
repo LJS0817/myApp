@@ -21,6 +21,7 @@ class customRadioButtonWithoutIcon extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 240),
       height: 55 * sizeMng.defaultScale,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
         color: getThemeColor(colorIndex, dataMngProvider.data.skinType == skinType ? 0 : 3),
@@ -33,17 +34,20 @@ class customRadioButtonWithoutIcon extends StatelessWidget {
           highlightColor: getThemeColor(colorIndex, 0).withOpacity(0.4),
           borderRadius: BorderRadius.circular(15 * sizeMng.defaultScale),
           onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
             onSelected();
           },
           child: Center(
-            child: Text(
-              skinTypeToString(skinType),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: sizeMng.defaultFontSize,
-                color: getThemeColor(colorIndex, dataMngProvider.data.skinType == skinType ? 1 : 0),
+            child: FittedBox(
+              child: Text(
+                language.getText(skinTypeToTitleEnum(skinType)),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: sizeMng.defaultFontSize,
+                  color: getThemeColor(colorIndex, dataMngProvider.data.skinType == skinType ? 1 : 0),
+                ),
               ),
-            ),
+            )
           ),
         ),
       ),

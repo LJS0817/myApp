@@ -40,19 +40,6 @@ class PageMng with ChangeNotifier {
   int enableDialog = 0;
 
   List<Widget> headerText = [];
-  
-  final List<List<String>> headerTextTitles = [
-    ["오일", "슈퍼팻", "첨가물", "총량"],
-    ["오일"],
-    ["슈퍼팻"],
-    ["첨가물"],
-    
-    ["수상층", "유상층", "유화제", "총량"],
-    ["워터", "첨가물", "총량", "설정값"],
-    ["유화제", "", "설정값"],
-    ["유상층", "", "설정값"],
-    ["EO"],
-  ];
 
   ///0 : 비누, 1 : 화장품, 2 : 오일, 3 : 설정
   void changeScene(BuildContext context, int idx) {
@@ -61,15 +48,15 @@ class PageMng with ChangeNotifier {
 
   String addButtonText(int type, int idx) {
     if(idx == 1) {
-      return type > 2 ? "워터" : "오일";
+      return type > 2 ? language.getText(TITLE.E_BEAUTY_WATER) :language.getText(TITLE.E_OIL_OIL);
     } else if(idx == 2 && type != 1) {
-      return type > 2 ? "첨가물" : "슈퍼팻";
+      return type > 2 ? language.getText(TITLE.E_OIL_ADDITIVE) : language.getText(TITLE.E_OIL_SUPERFAT);
     } else if(idx == 3) {
-      return type > 2 ? "유화제" : "첨가물";
+      return type > 2 ? language.getText(TITLE.E_BEAUTY_UHWA) : language.getText(TITLE.E_OIL_ADDITIVE);
     } else if(idx == 4) {
-      return type > 2 ? "유상층" : "첨가물";
+      return type > 2 ? language.getText(TITLE.E_BEAUTY_USANG) : language.getText(TITLE.E_OIL_ADDITIVE);
     }  else {
-      return type > 2 ? "EO" : "첨가물";
+      return type > 2 ? language.getText(TITLE.E_BEAUTY_EO) : language.getText(TITLE.E_OIL_ADDITIVE);
     }
   }
 
@@ -101,9 +88,9 @@ class PageMng with ChangeNotifier {
     headerText = [];
     int idx = colorIndex < 3 ? index : 4 + (index == 0 ? 0 : index < 3 ? 1 : index - 1);
 
-    log(headerTextTitles[idx].toString());
-    for(int i = 0; i < headerTextTitles[idx].length; i++) {
-      headerText.add(rowTextWidget(headerTextTitles[idx][i], detail[i], getThemeColor(colorIndex, 1)));
+    // log(headerTextTitles[idx].toString());
+    for(int i = 0; i < language.headerText[idx].length; i++) {
+      headerText.add(rowTextWidget(language.headerText[idx][i], detail[i], getThemeColor(colorIndex, 1)));
     }
   }
 

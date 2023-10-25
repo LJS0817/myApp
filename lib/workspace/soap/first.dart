@@ -23,7 +23,7 @@ class FirstView extends StatelessWidget {
           shrinkWrap: true,
           children: [
             Text(
-              "레시피 이름",
+              language.getText(TITLE.E_SOAP_RECIPENAME),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
@@ -36,7 +36,7 @@ class FirstView extends StatelessWidget {
 
             Padding(padding: EdgeInsets.symmetric(vertical: 20 + sizeMng.defaultPadding,)),
             Text(
-              "비누 유형",
+              language.getText(TITLE.E_SOAP_TYPETITLE),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
@@ -72,6 +72,7 @@ class FirstView extends StatelessWidget {
                   highlightColor: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1).withOpacity(0.5),
                   splashColor: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1).withOpacity(0.5),
                   onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     dataMngProvider.setSoapType();
                   },
                   child: Container(
@@ -100,7 +101,8 @@ class FirstView extends StatelessWidget {
                             ),
                             const Padding(padding: EdgeInsets.symmetric(horizontal: 5)),
                             Text(
-                              "${dataMngProvider.data.isReturn ? "일반비누용" : "비누화수용"}으로 계산하기",
+                              language.isEng ?  "${language.getText(TITLE.E_SOAP_CALCULATE)}${dataMngProvider.data.isReturn ? language.getText(TITLE.E_OIL_NORMAL) : language.getText(TITLE.E_OIL_SOAPHWA)}"
+                               : "${dataMngProvider.data.isReturn ? language.getText(TITLE.E_OIL_NORMAL) : language.getText(TITLE.E_OIL_SOAPHWA)}${language.getText(TITLE.E_SOAP_CALCULATE)}",
                               style: TextStyle(
                                 color: getThemeColor(dataMngProvider.getTypeIndex(), dataMngProvider.data.isReturn ? 0 : 1),
                                 fontWeight: FontWeight.bold,
@@ -124,7 +126,7 @@ class FirstView extends StatelessWidget {
 
             Padding(padding: EdgeInsets.symmetric(vertical: 20 * sizeMng.defaultScale)),
             Text(
-              "값 입력 [기본 단위 %]",
+              language.getText(TITLE.E_SOAP_ENTERVALUE),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: getThemeColor(dataMngProvider.getTypeIndex(), 0),
@@ -137,9 +139,9 @@ class FirstView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 0); }, defaultValue: dataMngProvider.getValue(0)!, needLb: true, labelTxt: "Lye Purity", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 0); }, defaultValue: dataMngProvider.getValue(0)!, needLb: true, labelTxt: language.getText(TITLE.E_SOAP_LYEPURITY), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 1); }, defaultValue: dataMngProvider.getValue(1)!, needLb: true, labelTxt: "Lye Count", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 1); }, defaultValue: dataMngProvider.getValue(1)!, needLb: true, labelTxt: language.getText(TITLE.E_SOAP_LYECOUNT), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                 Visibility(
                   visible: dataMngProvider.data.type == TYPE.E_COLD,
                   child: const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
@@ -150,7 +152,7 @@ class FirstView extends StatelessWidget {
                   child: Expanded(
                     child: Row(
                       children: [
-                        Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 2); }, defaultValue: dataMngProvider.getValue(2)!, needLb: true, labelTxt: "Water", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                        Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 2); }, defaultValue: dataMngProvider.getValue(2)!, needLb: true, labelTxt: language.getText(TITLE.E_OIL_WATER), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       ],
                     ),
                   )
@@ -166,20 +168,20 @@ class FirstView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 3); }, defaultValue:dataMngProvider.getValue(3)!, needLb: true, labelTxt: "Pure Soap", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 3); }, defaultValue:dataMngProvider.getValue(3)!, needLb: true, labelTxt: language.getText(TITLE.E_OIL_PURESOAP), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 4); }, defaultValue:dataMngProvider.getValue(4)!, needLb: true, labelTxt: "Glycerine", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 4); }, defaultValue:dataMngProvider.getValue(4)!, needLb: true, labelTxt: language.getText(TITLE.E_OIL_GLYCERINE), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                     ],
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 5); }, defaultValue:dataMngProvider.getValue(5)!, needLb: true, labelTxt: "Sugar", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 5); }, defaultValue:dataMngProvider.getValue(5)!, needLb: true, labelTxt: language.getText(TITLE.E_OIL_SUGAR), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 6); }, defaultValue:dataMngProvider.getValue(6)!, needLb: true, labelTxt: "Solvent", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 6); }, defaultValue:dataMngProvider.getValue(6)!, needLb: true, labelTxt: language.getText(TITLE.E_OIL_SOLVENT), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 7); }, defaultValue:dataMngProvider.getValue(7)!, needLb: true, labelTxt: "Ethanol", active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
+                      Expanded(child: CustomTextField((String str) { dataMngProvider.setValue(str, 7); }, defaultValue:dataMngProvider.getValue(7)!, needLb: true, labelTxt: language.getText(TITLE.E_OIL_ETHANOL), active: true, needBg: false, radius: 15, index: dataMngProvider.getTypeIndex(),)),
                     ],
                   ),
                 ],

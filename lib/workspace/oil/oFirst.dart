@@ -87,7 +87,7 @@ class oFirstView extends StatelessWidget {
           padding: EdgeInsets.only(left: 20 * sizeMng.defaultScale, right: 20 * sizeMng.defaultScale, top: 15 * sizeMng.defaultScale, bottom: 10),
           children: [
             Text(
-              "오일명",
+              language.getText(TITLE.E_OIL_TITLE),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: sizeMng.defaultFontSize + 2,
@@ -179,7 +179,7 @@ class oFirstView extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 15, top: 10),
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "Enter Fat Values",
+                      language.getText(TITLE.E_OIL_ENTERVALUE),
                       style: TextStyle(
                         color: getThemeColor(1, 1),
                         fontWeight: FontWeight.bold,
@@ -188,16 +188,16 @@ class oFirstView extends StatelessWidget {
                     ),
                   ),
 
-                  oilTextFiled((_) { dataMng.setOilData(2, _.toString().isEmpty ? dataMng.getOilData()!.fat[0].toString() : _); },"Lauric", dataMng.getOilData()!.fat[0].toString(), isFirst: true),
-                  oilTextFiled((_) { dataMng.setOilData(3, _.toString().isEmpty ? dataMng.getOilData()!.fat[1].toString() : _); }, "Myristic", dataMng.getOilData()!.fat[1].toString()),
-                  oilTextFiled((_) { dataMng.setOilData(4, _.toString().isEmpty ? dataMng.getOilData()!.fat[2].toString() : _); }, "Palmitic", dataMng.getOilData()!.fat[2].toString()),
-                  oilTextFiled((_) { dataMng.setOilData(5, _.toString().isEmpty ? dataMng.getOilData()!.fat[3].toString() : _); }, "Stearic", dataMng.getOilData()!.fat[3].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(2, _.toString().isEmpty ? dataMng.getOilData()!.fat[0].toString() : _); }, "[ C12:0 ]  Lauric", dataMng.getOilData()!.fat[0].toString(), isFirst: true),
+                  oilTextFiled((_) { dataMng.setOilData(3, _.toString().isEmpty ? dataMng.getOilData()!.fat[1].toString() : _); }, "[ C14:0 ]   Myristic", dataMng.getOilData()!.fat[1].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(4, _.toString().isEmpty ? dataMng.getOilData()!.fat[2].toString() : _); }, "[ C16:0 ]   Palmitic", dataMng.getOilData()!.fat[2].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(5, _.toString().isEmpty ? dataMng.getOilData()!.fat[3].toString() : _); }, "[ C18:0 ]   Stearic", dataMng.getOilData()!.fat[3].toString()),
 
-                  oilTextFiled((_) { dataMng.setOilData(6, _.toString().isEmpty ? dataMng.getOilData()!.fat[4].toString() : _); }, "Palmitoleic", dataMng.getOilData()!.fat[4].toString()),
-                  oilTextFiled((_) { dataMng.setOilData(7, _.toString().isEmpty ? dataMng.getOilData()!.fat[5].toString() : _); }, "Ricinoleic", dataMng.getOilData()!.fat[5].toString()),
-                  oilTextFiled((_) { dataMng.setOilData(8, _.toString().isEmpty ? dataMng.getOilData()!.fat[6].toString() : _); }, "Oleic", dataMng.getOilData()!.fat[6].toString()),
-                  oilTextFiled((_) { dataMng.setOilData(9, _.toString().isEmpty ? dataMng.getOilData()!.fat[7].toString() : _); }, "Linoleic", dataMng.getOilData()!.fat[7].toString()),
-                  oilTextFiled((_) { dataMng.setOilData(10, _.toString().isEmpty ? dataMng.getOilData()!.fat[8].toString() : _); }, "Linolenic", dataMng.getOilData()!.fat[8].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(6, _.toString().isEmpty ? dataMng.getOilData()!.fat[4].toString() : _); }, "[ C16:1 ]   Palmitoleic", dataMng.getOilData()!.fat[4].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(7, _.toString().isEmpty ? dataMng.getOilData()!.fat[5].toString() : _); }, "[ C18:1 ]   Ricinoleic*", dataMng.getOilData()!.fat[5].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(8, _.toString().isEmpty ? dataMng.getOilData()!.fat[6].toString() : _); }, "[ C18:1 ]   Oleic", dataMng.getOilData()!.fat[6].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(9, _.toString().isEmpty ? dataMng.getOilData()!.fat[7].toString() : _); }, "[ C18:2 ]   Linoleic", dataMng.getOilData()!.fat[7].toString()),
+                  oilTextFiled((_) { dataMng.setOilData(10, _.toString().isEmpty ? dataMng.getOilData()!.fat[8].toString() : _); }, "[ C18:3 ]   Linolenic", dataMng.getOilData()!.fat[8].toString()),
                 ],
               ),
             )

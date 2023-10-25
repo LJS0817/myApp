@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:isma/mng/LanMng.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
 import 'package:isma/mng/FileMng.dart';
@@ -376,7 +377,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                   ),
                   const Padding(padding: EdgeInsets.only(bottom: 40)),
                   Text(
-                    "데이터를 불러오고 있습니다...",
+                    language.getText(TITLE.E_LOADING),
                   ),
                 ],
               ),
@@ -397,7 +398,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                       alignment: Alignment.bottomCenter,
                       padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
                       child: Text(
-                        "테스트",
+                        language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
                         style: TextStyle(
                           color: getThemeColor(1, 1),
                           fontSize: sizeMng.defaultFontSize + 4,

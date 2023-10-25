@@ -1,24 +1,5 @@
 import 'dart:ui';
 
-const List<String> themeTitle = [
-  "차가운 얼음",
-  "숲속의 나무",
-
-  "보라빛 달",
-  "진흙",
-
-  "벽돌",
-  "홍학",
-
-  "모래성",
-  "얕은 바다",
-
-  "진흙",
-  "깊은 바다",
-
-  "올리브",
-  "초콜릿",
-];
 
 const List<Color> themeBackgrounds = [
   Color(0xFFEFF8FF),

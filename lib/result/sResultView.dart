@@ -88,7 +88,7 @@ class sResultView extends StatelessWidget {
                                     alignment: Alignment.topLeft,
                                     margin: const EdgeInsets.only(left: 20, top: 12),
                                     child: Text(
-                                      "${typeToString(parseTYPE(themeIndex.toString()))}  ${data.selectData.isReturn ? "[ 비누화수 ]" : "[ 일반비누 ]"}",
+                                      "${language.getText(typeToTitleEnum(parseTYPE(themeIndex.toString())))}  ${data.selectData.isReturn ? "[ ${language.getText(TITLE.E_OIL_SOAPHWA)} ]" : "[ ${language.getText(TITLE.E_OIL_NORMAL)} ]"}",
                                       style: TextStyle(
                                         color: getThemeColor(themeIndex, 2),
                                         fontWeight: FontWeight.bold,
@@ -140,9 +140,9 @@ class sResultView extends StatelessWidget {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              ResultOilBox("오일\n${data.selectData.data[0].length}", themeIndex, 1, function: () { menuMng.sizeChanged(false); },),
-                                              ResultOilBox("슈퍼팻\n${data.selectData.data[1].length}", themeIndex, 2, function: () { menuMng.sizeChanged(true); },),
-                                              ResultOilBox("첨가물\n${data.selectData.data[2].length}", themeIndex, 3, function: () { menuMng.sizeChanged(true); },),
+                                              ResultOilBox("${language.getText(TITLE.E_OIL_OIL)}\n${data.selectData.data[0].length}", themeIndex, 1, function: () { menuMng.sizeChanged(false); },),
+                                              ResultOilBox("${language.getText(TITLE.E_OIL_SUPERFAT)}\n${data.selectData.data[1].length}", themeIndex, 2, function: () { menuMng.sizeChanged(true); },),
+                                              ResultOilBox("${language.getText(TITLE.E_OIL_ADDITIVE)}\n${data.selectData.data[2].length}", themeIndex, 3, function: () { menuMng.sizeChanged(true); },),
                                             ],
                                           ),
                                           Visibility(
@@ -176,7 +176,7 @@ class sResultView extends StatelessWidget {
                                                         alignment: Alignment.centerRight,
                                                         padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
                                                         child: Text(
-                                                          "총합    -    ${data.selectData.weight[menuMng.showOilDetails]}g",
+                                                          "${language.getText(TITLE.E_RESULT_TOTAL)}    -    ${data.selectData.weight[menuMng.showOilDetails]}g",
                                                           style: TextStyle(
                                                             color: getThemeColor(themeIndex, 0),
                                                             fontWeight: FontWeight.bold,
@@ -201,7 +201,7 @@ class sResultView extends StatelessWidget {
                                                             alignment: Alignment.center,
                                                             height: 35 * sizeMng.defaultScale,
                                                             child: Text(
-                                                              "닫기        X",
+                                                              "${language.getText(TITLE.E_RESULT_CLOSE)}        X",
                                                               style: TextStyle(
                                                                 color: getThemeColor(themeIndex, 0),
                                                                 fontWeight: FontWeight.bold,
@@ -226,7 +226,7 @@ class sResultView extends StatelessWidget {
                                 alignment: Alignment.bottomCenter,
                                 margin: const EdgeInsets.only(bottom: 7),
                                 child: Text(
-                                  "각 항목을 터치하면 사용한 목록이 나옵니다.",
+                                  language.getText(TITLE.E_RESULT_TOUCHSIGN),
                                   style: TextStyle(
                                     color: getThemeColor(themeIndex, 1).withOpacity(0.5),
                                     fontWeight: FontWeight.bold,
@@ -287,7 +287,7 @@ class sResultView extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
                                             Text(
-                                              "포화",
+                                              language.getText(TITLE.E_OIL_FAT),
                                               style: TextStyle(
                                                 color: getThemeColor(themeIndex, 0),
                                                 fontWeight: FontWeight.bold,
@@ -295,7 +295,7 @@ class sResultView extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              "불포화",
+                                              language.getText(TITLE.E_OIL_UNFAT),
                                               style: TextStyle(
                                                 color: getThemeColor(themeIndex, 1),
                                                 fontWeight: FontWeight.bold,
@@ -319,10 +319,11 @@ class sResultView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ResultValueBox(themeIndex, "오일양", "${data.selectData.weight[1] + data.selectData.weight[2]}g"),
-                            ResultValueBox(themeIndex, !data.selectData.isReturn ? "Lye 양" : "비누화수양", "${data.resultLye.round()}g"),
+                            ResultValueBox(themeIndex, language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)} ${language.getText(TITLE.E_OIL_OIL)}" : "${language.getText(TITLE.E_OIL_OIL)}${language.getText(TITLE.E_OIL_AMOUNT)}", "${data.selectData.weight[1] + data.selectData.weight[2]}g"),
+                            ResultValueBox(themeIndex, !data.selectData.isReturn ? language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)} ${language.getText(TITLE.E_OIL_LYE)}" : "${language.getText(TITLE.E_OIL_LYE)} ${language.getText(TITLE.E_OIL_AMOUNT)}" :
+                            language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)}\n${language.getText(TITLE.E_OIL_SOAPHWA)}" : "${language.getText(TITLE.E_OIL_SOAPHWA)}${language.getText(TITLE.E_OIL_AMOUNT)}", "${data.resultLye.round()}g"),
                             ResultValueBox(themeIndex,
-                                !data.selectData.isReturn ? "정제수 양" : "필요 물 양\n(식초 등)",
+                                !data.selectData.isReturn ? language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)} ${language.getText(TITLE.E_OIL_WATER)}" : "${language.getText(TITLE.E_OIL_WATER)} ${language.getText(TITLE.E_OIL_AMOUNT)}" : language.getText(TITLE.E_OIL_NEEDWATER),
                                 !data.selectData.isReturn ? "${data.getValue(2)}%\n(${data.resultWater.round()}g)" : "${(data.resultWater - data.resultLye * 0.5).round()}"),
                           ],
                         ),
@@ -346,7 +347,7 @@ class sResultView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "비누화수 물의 양",
+                                    "[ ${language.getText(TITLE.E_OIL_SOAPHWA)} ] ${language.getText(TITLE.E_OIL_WATER2)}",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
                                       fontSize: sizeMng.defaultFontSize - 1,
@@ -366,7 +367,7 @@ class sResultView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "비누화수 Lye 양",
+                                    "[ ${language.getText(TITLE.E_OIL_SOAPHWA)} ] ${language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)} ${language.getText(TITLE.E_OIL_LYE)}" : "${language.getText(TITLE.E_OIL_LYE)} ${language.getText(TITLE.E_OIL_AMOUNT)}"}",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
                                       fontSize: sizeMng.defaultFontSize - 1,
@@ -386,7 +387,7 @@ class sResultView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "정제수 양  [ ${data.getValue(2)}% ]",
+                                    "${language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)} ${language.getText(TITLE.E_OIL_WATER)}" : "${language.getText(TITLE.E_OIL_WATER)} ${language.getText(TITLE.E_OIL_AMOUNT)}"}  [ ${data.getValue(2)}% ]",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
                                       fontSize: sizeMng.defaultFontSize - 1,
@@ -432,7 +433,7 @@ class sResultView extends StatelessWidget {
                                               color: getThemeColor(themeIndex, 0),
                                             ),
                                             child: Text(
-                                              "Pure Soap\n${data.selectData.values[3]}%  -  ${data.resultHot[0]}g",
+                                              "${language.getText(TITLE.E_OIL_PURESOAP)}\n${data.selectData.values[3]}%  -  ${data.resultHot[0]}g",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: getThemeColor(themeIndex, 1),
@@ -450,7 +451,7 @@ class sResultView extends StatelessWidget {
                                           height: 50 * sizeMng.defaultScale,
                                           alignment: Alignment.center,
                                           child: Text(
-                                            "Solvent\n${data.selectData.values[6]}%  -  ${data.resultHot[1]}g",
+                                            "${language.getText(TITLE.E_OIL_SOLVENT)}\n${data.selectData.values[6]}%  -  ${data.resultHot[1]}g",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: getThemeColor(themeIndex, 0),
@@ -470,14 +471,14 @@ class sResultView extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
-                                          CircleChart("Ethanol", "${data.selectData.values[7]}", data.resultHot[2]),
-                                          CircleChart("Glycerine", "${data.selectData.values[4]}", data.resultHot[3]),
+                                          CircleChart(language.getText(TITLE.E_OIL_ETHANOL), "${data.selectData.values[7]}", data.resultHot[2]),
+                                          CircleChart(language.getText(TITLE.E_OIL_GLYCERINE), "${data.selectData.values[4]}", data.resultHot[3]),
                                         ],
                                       ),
                                       Row(
                                         children: [
-                                          CircleChart("Sugar", "${data.selectData.values[5]}", data.resultHot[4]),
-                                          CircleChart("Water of sugar", "", data.resultHot[5]),
+                                          CircleChart(language.getText(TITLE.E_OIL_SUGAR), "${data.selectData.values[5]}", data.resultHot[4]),
+                                          CircleChart(language.getText(TITLE.E_OIL_SUGARWATER), "", data.resultHot[5]),
                                         ],
                                       ),
                                     ],
