@@ -300,133 +300,137 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: FutureBuilder(
-        future: _fetch1(),
-        builder: (BuildContext contxt, AsyncSnapshot snapshot) {
-          if(!snapshot.hasData) {
-            return Scaffold(
-              backgroundColor: Colors.white,
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: AnimationController(
-                        vsync: this,
-                        duration: const Duration(milliseconds: 1500),
-                      )..forward(),
-                      curve: Curves.decelerate,
-                    ),
-                    child: Image.asset(
-                      "assets/icon/icon.png",
-                      width: 130,
-                      height: 130,
-                    ),
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 30)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ScaleTransition(
-                        scale: CurvedAnimation(
-                          parent: AnimationController(
-                            vsync: this,
-                            duration: const Duration(milliseconds: 2000),
-                          )..repeat(reverse: true),
-                          curve: Curves.fastOutSlowIn,
-                        ),
-                        child: SvgPicture.asset(
-                          "assets/icon/phone.svg",
-                          width: 40,
-                          height: 40,
-                        ),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 240),
+      color: getThemeColor(1, 0),
+      child: SafeArea(
+        top: true,
+        child: FutureBuilder(
+          future: _fetch1(),
+          builder: (BuildContext contxt, AsyncSnapshot snapshot) {
+            if(!snapshot.hasData) {
+              return Scaffold(
+                backgroundColor: Colors.white,
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FadeTransition(
+                      opacity: CurvedAnimation(
+                        parent: AnimationController(
+                          vsync: this,
+                          duration: const Duration(milliseconds: 1500),
+                        )..forward(),
+                        curve: Curves.decelerate,
                       ),
-                      const Padding(padding: EdgeInsets.only(right: 20)),
-                      ScaleTransition(
-                        scale: CurvedAnimation(
-                          parent: AnimationController(
-                            vsync: this,
-                            duration: const Duration(milliseconds: 1800),
-                          )..repeat(reverse: true),
-                          curve: Curves.elasticInOut,
-                        ),
-                        child: SvgPicture.asset(
-                          "assets/icon/save.svg",
-                          width: 40,
-                          height: 40,
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(right: 20)),
-                      ScaleTransition(
-                        scale: CurvedAnimation(
-                          parent: AnimationController(
-                            vsync: this,
-                            duration: const Duration(milliseconds: 2000),
-                          )..repeat(reverse: true),
-                          curve: Curves.easeInOutBack,
-                        ),
-                        child: SvgPicture.asset(
-                          "assets/icon/calculator.svg",
-                          width: 40,
-                          height: 40,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.only(bottom: 40)),
-                  Text(
-                    language.getText(TITLE.E_LOADING),
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Scaffold(
-              backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
-              body: Stack(
-                children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 240),
-                      height: 80 * sizeMng.defaultScale,
-                      color: getThemeColor(1, 0),
-                      alignment: Alignment.bottomCenter,
-                      padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
-                      child: Text(
-                        language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
-                        style: TextStyle(
-                          color: getThemeColor(1, 1),
-                          fontSize: sizeMng.defaultFontSize + 4,
-                          decoration: TextDecoration.none,
-                        ),
+                      child: Image.asset(
+                        "assets/icon/icon.png",
+                        width: 130,
+                        height: 130,
                       ),
                     ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: 80 * sizeMng.defaultScale,
-                    bottom: 80 * sizeMng.defaultScale,
-                    child: getIndex(context),
-                  ),
-                  BottomBar(context),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    child: ResultView(Provider.of<Mng>(context).selectData.type.index),
-                  ),
-                ],
-              ),
-            );
-          }
-        },
+                    const Padding(padding: EdgeInsets.only(bottom: 30)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ScaleTransition(
+                          scale: CurvedAnimation(
+                            parent: AnimationController(
+                              vsync: this,
+                              duration: const Duration(milliseconds: 2000),
+                            )..repeat(reverse: true),
+                            curve: Curves.fastOutSlowIn,
+                          ),
+                          child: SvgPicture.asset(
+                            "assets/icon/phone.svg",
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.only(right: 20)),
+                        ScaleTransition(
+                          scale: CurvedAnimation(
+                            parent: AnimationController(
+                              vsync: this,
+                              duration: const Duration(milliseconds: 1800),
+                            )..repeat(reverse: true),
+                            curve: Curves.elasticInOut,
+                          ),
+                          child: SvgPicture.asset(
+                            "assets/icon/save.svg",
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.only(right: 20)),
+                        ScaleTransition(
+                          scale: CurvedAnimation(
+                            parent: AnimationController(
+                              vsync: this,
+                              duration: const Duration(milliseconds: 2000),
+                            )..repeat(reverse: true),
+                            curve: Curves.easeInOutBack,
+                          ),
+                          child: SvgPicture.asset(
+                            "assets/icon/calculator.svg",
+                            width: 40,
+                            height: 40,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 40)),
+                    Text(
+                      language.getText(TITLE.E_LOADING),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Scaffold(
+                backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
+                body: Stack(
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 240),
+                        height: 50 * sizeMng.defaultScale,
+                        color: getThemeColor(1, 0),
+                        alignment: Alignment.bottomCenter,
+                        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
+                        child: Text(
+                          language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
+                          style: TextStyle(
+                            color: getThemeColor(1, 1),
+                            fontSize: sizeMng.defaultFontSize + 4,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 50 * sizeMng.defaultScale,
+                      bottom: 80 * sizeMng.defaultScale,
+                      child: getIndex(context),
+                    ),
+                    BottomBar(context),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: ResultView(Provider.of<Mng>(context).selectData.type.index),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -110,7 +110,7 @@ class _HeaderState extends State<Header> {
                   bottom: 20,
                   child: Container(
                       alignment: Alignment.topRight,
-                      width: MediaQuery.of(context).size.width * 0.25,
+                      width: MediaQuery.of(context).size.width * 0.25 + (dataMngProvider.getTypeIndex() > 2 && language.isEng ? 50 : 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: pageMng.headerText,

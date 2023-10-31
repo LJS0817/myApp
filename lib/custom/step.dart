@@ -8,7 +8,6 @@ import '../mng/PageMng.dart';
 
 class StepView extends StatelessWidget {
   StepView(int idx, int page, {super.key}) {
-    log(idx.toString());
     colorIndex = idx;
     pageIndex = page;
   }

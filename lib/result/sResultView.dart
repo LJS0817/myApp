@@ -387,7 +387,7 @@ class sResultView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "${language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)} ${language.getText(TITLE.E_OIL_WATER)}" : "${language.getText(TITLE.E_OIL_WATER)} ${language.getText(TITLE.E_OIL_AMOUNT)}"}  [ ${data.getValue(2)}% ]",
+                                    "[ ${data.getValue(2)}% ] ${language.isEng ? "${language.getText(TITLE.E_OIL_AMOUNT)} ${language.getText(TITLE.E_OIL_WATER)}" : "${language.getText(TITLE.E_OIL_WATER)} ${language.getText(TITLE.E_OIL_AMOUNT)}"}",
                                     style: TextStyle(
                                       color: getThemeColor(themeIndex, 1),
                                       fontSize: sizeMng.defaultFontSize - 1,

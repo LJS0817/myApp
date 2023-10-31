@@ -127,7 +127,7 @@ class oFirstView extends StatelessWidget {
                             ),
                           ),
                           const Padding(padding: EdgeInsets.only(bottom: 3)),
-                          CustomTextField((_) { log(_.toString()); dataMng.setOilData(0, _); }, onlyNum: true, index: 1, active: true, radius: 11 * sizeMng.defaultScale, needBor: false, height: 45 + (sizeMng.defaultPadding * sizeMng.defaultScale), defaultValue: dataMng.getOilData()!.NaOH.toString(),),
+                          CustomTextField((_) { dataMng.setOilData(0, _); }, onlyNum: true, index: 1, active: true, radius: 11 * sizeMng.defaultScale, needBor: false, height: 45 + (sizeMng.defaultPadding * sizeMng.defaultScale), defaultValue: dataMng.getOilData()!.NaOH.toString(),),
                         ],
                       ),
                     )

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class SizeMng {
   static double _fontSize = 16;
   static double _scale = 1;
@@ -7,35 +9,32 @@ class SizeMng {
   double get defaultScale => _scale;
   double get defaultPadding => _padding;
 
-  static double _dpi = 0;
+  static int _dpi = 0;
 
   void init(double ratio) {
-    _dpi = ratio.toInt() * 160;
+    // log(ratio.toString());
+    _dpi = (ratio * 10).toInt();
     setSize();
   }
 
   void setSize() {
-    switch(_dpi) {
-      case 320:
-        _fontSize = 16;
-        _scale = 1;
-        _padding = 0;
-        break;
-      case 480:
-        _fontSize = 13;
-        _scale = 0.75;
-        _padding = -12;
-        break;
-      case 640:
-        _fontSize = 12;
-        _scale = 0.5;
-        _padding = -25;
-        break;
-      default:
-        _fontSize = 16;
-        _scale = 1;
-        _padding = 0;
-        break;
+    log(_dpi.toString());
+    if(_dpi <= 26) {
+      _fontSize = 16;
+      _scale = 1;
+      _padding = 0;
+    } else if(_dpi <= 28) {
+      _fontSize = 15;
+      _scale = 0.9;
+      _padding = -4;
+    }else if(_dpi <= 30) {
+      _fontSize = 14;
+      _scale = 0.825;
+      _padding = -8;
+    } else {
+      _fontSize = 12;
+      _scale = 0.8;
+      _padding = -12;
     }
   }
 }

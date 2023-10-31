@@ -56,6 +56,9 @@ class Data {
     8 : "0",
     9 : "0",
     10 : "0",
+
+
+    11 : "49",
   };
 
   ///index
@@ -108,7 +111,7 @@ class Data {
   ///9 - 유상층
   ///10 - 유화제
   String? getValue(int idx) {
-    return (values[idx] == null || values[idx] == ""|| values[idx] == "null") ? default_values[idx] : values[idx];
+    return (values[idx] == null || values[idx] == ""|| values[idx] == "null") ? (idx == 0 && isReturn && type != TYPE.E_HOT ? default_values[11] : (idx == 2 && isReturn && type != TYPE.E_HOT ? default_values[7] : default_values[idx])) : values[idx];
   }
 
   @override

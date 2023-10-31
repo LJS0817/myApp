@@ -44,7 +44,7 @@ class LanguageMng {
     "물의 양",
     "필요 물 양\n(식초 등)",
     "비누화수",
-    "일반비누",
+    "가성소다",
     "순비누",
     "용제",
     "에탄올",
@@ -58,7 +58,7 @@ class LanguageMng {
     "용으로 계산하기",
     "값 입력 [기본 단위 %]",
     "Lye 순도",
-    "Lye Count",
+    "Lye 카운트",
     "오일 추가",
 
     "화장품 이름",
@@ -94,9 +94,9 @@ class LanguageMng {
   ];
   final List<String> _eng = [
     "Soap",
-    "MakeUp",
-    "Oils",
-    "Config",
+    "Cosmetic",
+    "Oil",
+    "Setting",
 
     "Change Theme",
     "Contact Us",
@@ -104,31 +104,31 @@ class LanguageMng {
     "E-mail",
 
 
-    "C.P",
-    "H.P",
-    "Paste",
-    "Skin",
-    "Essence",
+    "C.P.",
+    "H.P.",
+    "Soap paste",
+    "Toner",
+    "Serum",
     "Lotion",
     "Cream",
 
     "Sensitive",
     "Dry",
-    "Atopic",
+    "Atopy",
     "Combination",
     "Oily",
-    "Acne-prone",
+    "Acne",
     "Skin",
 
     "Oil",
     "SuperFat",
-    "Additive",
-    "Fat",
-    "Unfat",
+    "Additives",
+    "Saturated Fat",
+    "Unsaturated Fat",
     "Lye",
     "Purified water",
-    "Total water",
-    "Need water\n(Vinegar, etc.)",
+    "Water Volume",
+    "Needed\nAdditional water",
     "50% lye water",
     "Normal",
     "Pure soap",
@@ -136,37 +136,37 @@ class LanguageMng {
     "Ethanol",
     "Glycerine",
     "Sugar",
-    "Water of Sugar",
+    "Water for Sugar",
     "Total",
 
     "Recipe Name",
     "Type of Soap",
-    "Calculate to ",
-    "Enter the values [default unit %]",
+    "Apply ",
+    "Insert values [ Standard % ]",
     "Lye Purity",
     "Lye Count",
-    "Choose Oil",
+    "Select Oil",
 
 
     "Cosmetic name",
-    "Cosmetic Type",
+    "Type of Cosmetic",
     "Skin Type",
     "Total Weight [ G ]",
-    "수상층",
-    "유상층",
-    "유화제",
-    "EO",
     "Water",
-    "Setting value",
-    "Choose 유화제",
+    "Oil",
+    "Emulsifying",
+    "E.O.",
+    "Water",
+    "Set value",
+    "Select Emulsifying",
 
     "Oil Name",
-    "Enter Fat Values",
-    "Custom Oil",
+    "Add values",
+    "User's Oil",
 
     "Total",
     "Close",
-    "Touch each item to see the list you used",
+    "Touch each item for detail",
     "n/a",
     "[A]",
 
@@ -175,7 +175,7 @@ class LanguageMng {
 
     "Next",
     "Exit",
-    "Back",
+    "Previous",
     "Save"
   ];
 
@@ -267,6 +267,7 @@ class LanguageMng {
 
   void setLanguage() {
     isEng = Platform.localeName.contains("ko") ? false : true;
+    // isEng = true;
     setHeaderText();
   }
 

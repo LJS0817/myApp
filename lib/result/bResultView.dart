@@ -301,9 +301,7 @@ class bResultView extends StatelessWidget {
                           pageMng.index = 0;
                           dataMng.initData(menuMng.index);
                           dataMng.data = data.selectData;
-                          log(data.selectData.toString());
                           data.init();
-                          log(dataMng.data.toString());
                           pageMng.UpdateText(dataMng.data);
                           pageMng.changeScene(context, menuMng.index);
                         },
