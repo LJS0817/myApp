@@ -17,6 +17,7 @@ dependencies:
   flutter_svg:
   path:
   permission_handler:
+  flutter_animate:
 
 dev_dependencies:
   flutter_test:

@@ -61,7 +61,7 @@ class oResultView extends StatelessWidget {
                     //이름
                     Container(
                       alignment: Alignment.topLeft,
-                      padding: EdgeInsets.only(left: leftPadding + 5, right: leftPadding),
+                      padding: EdgeInsets.only(left: leftPadding + 5, right: leftPadding, top: 20),
                       child: Text(
                         data.selectOil!.english,
                         textAlign: TextAlign.left,

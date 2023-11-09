@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:isma/main/mainScreen.dart';
 import 'package:isma/mng/LanMng.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
@@ -68,13 +70,14 @@ void loadUAsset(BuildContext context) async {
   }
 }
 
-Widget getIndex(BuildContext context) {
-  int idx = Provider.of<MenuMng>(context).getIndex();
-  if(idx == 0) { return mainSoapScreen(); }
-  if(idx == 1) { return mainBeautyScreen(); }
-  if(idx == 2) { return mainOilScreen(); }
-  else { return mainSettingScreen(); }
-}
+// Widget getIndex(BuildContext context) {
+//   int idx = Provider.of<MenuMng>(context).getIndex();
+//   int prevIdx = Provider.of<MenuMng>(context).getIndex();
+//   if(idx == 0 || prevIdx == 0) { return mainSoapScreen(); }
+//   if(idx == 1 || prevIdx == 1) { return mainBeautyScreen(); }
+//   if(idx == 2 || prevIdx == 2) { return mainOilScreen(); }
+//   else { return mainSettingScreen(); }
+// }
 
 // Color getMainColor(BuildContext context) {
 //   MenuMng menu = Provider.of<MenuMng>(context);
@@ -126,7 +129,7 @@ Widget BottomBar(BuildContext context) {
                     ),
                   ),
 
-                  Padding(padding: EdgeInsets.symmetric(horizontal: 31 + sizeMng.defaultPadding,)),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 30 + sizeMng.defaultPadding,)),
                   Expanded(
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: aniTime),
@@ -273,7 +276,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
   }
 
   Future<String> _fetch1() async {
-    if(!Mng.isLoad) {
+    if(Mng.isLoad == RESULT_STATE.E_ANIMATED_BEFORE_SHOW) {
       log("실패");
       sizeMng.init(MediaQuery.of(context).devicePixelRatio);
       loadAsset(context);
@@ -287,14 +290,18 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
               {
                 oilMng.syncUserData(fileMng.data[2].values.toList()),
                 fileMng.readDirectory('config', 3).then((value) =>
-                  Mng.curThemeColorIndex = Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
+                Mng.curThemeColorIndex = Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
                 )
               })
           )
       );
-      Mng.isLoad = true;
+      Mng.isLoad = RESULT_STATE.E_SHOW;
     }
     await Future.delayed(const Duration(seconds: 4));
+    if(Mng.isLoad == RESULT_STATE.E_SHOW) {
+      Mng.isLoad = RESULT_STATE.E_ANIMATED_BEFORE_HIDE;
+      log(Mng.isLoad.toString());
+    }
     return 'Call Data';
   }
 
@@ -308,127 +315,283 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
         child: FutureBuilder(
           future: _fetch1(),
           builder: (BuildContext contxt, AsyncSnapshot snapshot) {
-            if(!snapshot.hasData) {
-              return Scaffold(
-                backgroundColor: Colors.white,
-                body: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FadeTransition(
-                      opacity: CurvedAnimation(
-                        parent: AnimationController(
-                          vsync: this,
-                          duration: const Duration(milliseconds: 1500),
-                        )..forward(),
-                        curve: Curves.decelerate,
-                      ),
-                      child: Image.asset(
-                        "assets/icon/icon.png",
-                        width: 130,
-                        height: 130,
-                      ),
-                    ),
-                    const Padding(padding: EdgeInsets.only(bottom: 30)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ScaleTransition(
-                          scale: CurvedAnimation(
-                            parent: AnimationController(
-                              vsync: this,
-                              duration: const Duration(milliseconds: 2000),
-                            )..repeat(reverse: true),
-                            curve: Curves.fastOutSlowIn,
-                          ),
-                          child: SvgPicture.asset(
-                            "assets/icon/phone.svg",
-                            width: 40,
-                            height: 40,
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.only(right: 20)),
-                        ScaleTransition(
-                          scale: CurvedAnimation(
-                            parent: AnimationController(
-                              vsync: this,
-                              duration: const Duration(milliseconds: 1800),
-                            )..repeat(reverse: true),
-                            curve: Curves.elasticInOut,
-                          ),
-                          child: SvgPicture.asset(
-                            "assets/icon/save.svg",
-                            width: 40,
-                            height: 40,
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.only(right: 20)),
-                        ScaleTransition(
-                          scale: CurvedAnimation(
-                            parent: AnimationController(
-                              vsync: this,
-                              duration: const Duration(milliseconds: 2000),
-                            )..repeat(reverse: true),
-                            curve: Curves.easeInOutBack,
-                          ),
-                          child: SvgPicture.asset(
-                            "assets/icon/calculator.svg",
-                            width: 40,
-                            height: 40,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Padding(padding: EdgeInsets.only(bottom: 40)),
-                    Text(
-                      language.getText(TITLE.E_LOADING),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              return Scaffold(
-                backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
-                body: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 240),
-                        height: 50 * sizeMng.defaultScale,
-                        color: getThemeColor(1, 0),
-                        alignment: Alignment.bottomCenter,
-                        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
-                        child: Text(
-                          language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
-                          style: TextStyle(
-                            color: getThemeColor(1, 1),
-                            fontSize: sizeMng.defaultFontSize + 4,
-                            decoration: TextDecoration.none,
-                          ),
+            // log(snapshot.hasData.toString());
+            // log(Mng.isLoad.toString());
+            return Scaffold(
+                body: AnimatedContainer(
+                  duration: const Duration(milliseconds: 240),
+                  color: snapshot.hasData ? themeBackgrounds[Mng.curThemeColorIndex] : Colors.white,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 240),
+                                height: 50 * sizeMng.defaultScale,
+                                color: getThemeColor(1, 0),
+                                alignment: Alignment.bottomCenter,
+                                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
+                                child: Text(
+                                  language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
+                                  style: TextStyle(
+                                    color: getThemeColor(1, 1),
+                                    fontSize: sizeMng.defaultFontSize + 4,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // Positioned(
+                            //   left: 0,
+                            //   right: 0,
+                            //   top: 50 * sizeMng.defaultScale,
+                            //   bottom: 80 * sizeMng.defaultScale,
+                            //   child: Container(
+                            //     child: getIndex(context),
+                            //   ),
+                            // ),
+                            Positioned(
+                              left: 0,
+                              right: 0,
+                              top: 50 * sizeMng.defaultScale,
+                              bottom: 80 * sizeMng.defaultScale,
+                              child: mainScreen(),
+                            ),
+                            BottomBar(context),
+                            Positioned(
+                              left: 0,
+                              right: 0,
+                              top: 0,
+                              bottom: 0,
+                              child: ResultView(Provider.of<Mng>(context).selectData.type.index),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: 50 * sizeMng.defaultScale,
-                      bottom: 80 * sizeMng.defaultScale,
-                      child: getIndex(context),
-                    ),
-                    BottomBar(context),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      bottom: 0,
-                      child: ResultView(Provider.of<Mng>(context).selectData.type.index),
-                    ),
-                  ],
-                ),
-              );
-            }
+                      Visibility(
+                        replacement: IgnorePointer(ignoring: true, child: Container(color: Colors.transparent, ),),
+                        visible: Mng.isLoad != RESULT_STATE.E_HIDE || !snapshot.hasData,
+                        child: Positioned(
+                            top: 0,
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Container(
+                              color: Colors.white,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FadeTransition(
+                                    opacity: CurvedAnimation(
+                                      parent: AnimationController(
+                                        vsync: this,
+                                        duration: const Duration(milliseconds: 1500),
+                                      )..forward(),
+                                      curve: Curves.decelerate,
+                                    ),
+                                    child: Image.asset(
+                                      "assets/icon/icon.png",
+                                      width: 130,
+                                      height: 130,
+                                    ),
+                                  ),
+                                  const Padding(padding: EdgeInsets.only(bottom: 30)),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ScaleTransition(
+                                        scale: CurvedAnimation(
+                                          parent: AnimationController(
+                                            vsync: this,
+                                            duration: const Duration(milliseconds: 2000),
+                                          )..repeat(reverse: true),
+                                          curve: Curves.fastOutSlowIn,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          "assets/icon/phone.svg",
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                      ),
+                                      const Padding(padding: EdgeInsets.only(right: 20)),
+                                      ScaleTransition(
+                                        scale: CurvedAnimation(
+                                          parent: AnimationController(
+                                            vsync: this,
+                                            duration: const Duration(milliseconds: 1800),
+                                          )..repeat(reverse: true),
+                                          curve: Curves.elasticInOut,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          "assets/icon/save.svg",
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                      ),
+                                      const Padding(padding: EdgeInsets.only(right: 20)),
+                                      ScaleTransition(
+                                        scale: CurvedAnimation(
+                                          parent: AnimationController(
+                                            vsync: this,
+                                            duration: const Duration(milliseconds: 2000),
+                                          )..repeat(reverse: true),
+                                          curve: Curves.easeInOutBack,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          "assets/icon/calculator.svg",
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Padding(padding: EdgeInsets.only(bottom: 40)),
+                                  Text(
+                                    language.getText(TITLE.E_LOADING),
+                                  ),
+                                ],
+                              ),
+                            ).animate(target: Mng.isLoad == RESULT_STATE.E_ANIMATED_BEFORE_HIDE ? 1.0 : 0, onComplete: (controller) => setState(() {
+                              if(Mng.isLoad == RESULT_STATE.E_ANIMATED_BEFORE_HIDE) {
+                                Mng.isLoad = RESULT_STATE.E_HIDE;
+                              }
+                            })).fadeOut(duration: const Duration(milliseconds: 240)).slideY(begin: 0, end: 0.1, duration: 240.milliseconds)
+                        ),
+                      )
+                    ],
+                  ),
+                )
+            );
+            // if(!snapshot.hasData) {
+            //   return Scaffold(
+            //     backgroundColor: Colors.white,
+            //     body: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         FadeTransition(
+            //           opacity: CurvedAnimation(
+            //             parent: AnimationController(
+            //               vsync: this,
+            //               duration: const Duration(milliseconds: 1500),
+            //             )..forward(),
+            //             curve: Curves.decelerate,
+            //           ),
+            //           child: Image.asset(
+            //             "assets/icon/icon.png",
+            //             width: 130,
+            //             height: 130,
+            //           ),
+            //         ),
+            //         const Padding(padding: EdgeInsets.only(bottom: 30)),
+            //         Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             ScaleTransition(
+            //               scale: CurvedAnimation(
+            //                 parent: AnimationController(
+            //                   vsync: this,
+            //                   duration: const Duration(milliseconds: 2000),
+            //                 )..repeat(reverse: true),
+            //                 curve: Curves.fastOutSlowIn,
+            //               ),
+            //               child: SvgPicture.asset(
+            //                 "assets/icon/phone.svg",
+            //                 width: 40,
+            //                 height: 40,
+            //               ),
+            //             ),
+            //             const Padding(padding: EdgeInsets.only(right: 20)),
+            //             ScaleTransition(
+            //               scale: CurvedAnimation(
+            //                 parent: AnimationController(
+            //                   vsync: this,
+            //                   duration: const Duration(milliseconds: 1800),
+            //                 )..repeat(reverse: true),
+            //                 curve: Curves.elasticInOut,
+            //               ),
+            //               child: SvgPicture.asset(
+            //                 "assets/icon/save.svg",
+            //                 width: 40,
+            //                 height: 40,
+            //               ),
+            //             ),
+            //             const Padding(padding: EdgeInsets.only(right: 20)),
+            //             ScaleTransition(
+            //               scale: CurvedAnimation(
+            //                 parent: AnimationController(
+            //                   vsync: this,
+            //                   duration: const Duration(milliseconds: 2000),
+            //                 )..repeat(reverse: true),
+            //                 curve: Curves.easeInOutBack,
+            //               ),
+            //               child: SvgPicture.asset(
+            //                 "assets/icon/calculator.svg",
+            //                 width: 40,
+            //                 height: 40,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //         const Padding(padding: EdgeInsets.only(bottom: 40)),
+            //         Text(
+            //           language.getText(TITLE.E_LOADING),
+            //         ),
+            //       ],
+            //     ),
+            //   );
+            // } else {
+            //   return Scaffold(
+            //     backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
+            //     body: Stack(
+            //       children: [
+            //         Positioned(
+            //           top: 0,
+            //           left: 0,
+            //           right: 0,
+            //           child: AnimatedContainer(
+            //             duration: const Duration(milliseconds: 240),
+            //             height: 50 * sizeMng.defaultScale,
+            //             color: getThemeColor(1, 0),
+            //             alignment: Alignment.bottomCenter,
+            //             padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
+            //             child: Text(
+            //               language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
+            //               style: TextStyle(
+            //                 color: getThemeColor(1, 1),
+            //                 fontSize: sizeMng.defaultFontSize + 4,
+            //                 decoration: TextDecoration.none,
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //         Positioned(
+            //           left: 0,
+            //           right: 0,
+            //           top: 50 * sizeMng.defaultScale,
+            //           bottom: 80 * sizeMng.defaultScale,
+            //           child: getIndex(context),
+            //         ),
+            //         BottomBar(context),
+            //         Positioned(
+            //           left: 0,
+            //           right: 0,
+            //           top: 0,
+            //           bottom: 0,
+            //           child: ResultView(Provider.of<Mng>(context).selectData.type.index),
+            //         ),
+            //       ],
+            //     ),
+            //   );
+            // }
           },
         ),
       ),

@@ -8,8 +8,10 @@ import 'package:provider/provider.dart';
 
 import 'DataMng.dart';
 
+enum RESULT_STATE { E_HIDE, E_ANIMATED_BEFORE_SHOW, E_SHOW, E_ANIMATED_BEFORE_HIDE }
+
 class Mng with ChangeNotifier {
-  bool popUpActive = false;
+  RESULT_STATE popUpActive = RESULT_STATE.E_HIDE;
   bool showChart = false;
   Data selectData = Data();
   late Oil? selectOil;
@@ -31,7 +33,7 @@ class Mng with ChangeNotifier {
   ///5 - SUGAR Water
   List<int> resultHot = List.generate(6, (index) => 0);
 
-  static bool isLoad = false;
+  static RESULT_STATE isLoad = RESULT_STATE.E_ANIMATED_BEFORE_SHOW;
 
   void setData(Data data) {
     selectData = data;
@@ -219,13 +221,13 @@ class Mng with ChangeNotifier {
   }
 
   void init() {
-    popUpActive = false;
+    popUpActive = RESULT_STATE.E_HIDE;
     showChart = false;
     selectData = Data();
   }
 
   void showResultView(Data? data, BuildContext context, {Oil? oil, int idx=-1}) {
-    popUpActive = true;
+    popUpActive = RESULT_STATE.E_ANIMATED_BEFORE_SHOW;
     selectData = data ?? Data();
     // log(selectData.toString());
     // log(data.toString());
@@ -241,9 +243,21 @@ class Mng with ChangeNotifier {
   }
 
   void hideResultView() {
-    popUpActive = false;
+    popUpActive = RESULT_STATE.E_ANIMATED_BEFORE_HIDE;
     showChart = false;
     notifyListeners();
+  }
+
+  void hideLoadingView() {
+    isLoad = RESULT_STATE.E_HIDE;
+    notifyListeners();
+  }
+
+  void changeResultViewAfterAnimate() {
+    popUpActive = popUpActive == RESULT_STATE.E_ANIMATED_BEFORE_SHOW ? RESULT_STATE.E_SHOW : RESULT_STATE.E_HIDE;
+    if(popUpActive == RESULT_STATE.E_HIDE) {
+      notifyListeners();
+    }
   }
 
   void clickChartResult() {
