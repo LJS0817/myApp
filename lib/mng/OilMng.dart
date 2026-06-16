@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/Oil.dart';
@@ -65,7 +64,12 @@ class OilMng extends ChangeNotifier {
   }
 
   void addOil(Oil oil, {int idx=-1}) {
-    userOils[idx == -1 ? default_oils.length + userOils.length : idx] = oil;
+    int newIdx = idx;
+    if (idx == -1) {
+      newIdx = userOils.isEmpty ? default_oils.length : userOils.lastKey()! + 1;
+      if (newIdx < default_oils.length) newIdx = default_oils.length;
+    }
+    userOils[newIdx] = oil;
     notifyListeners();
   }
 

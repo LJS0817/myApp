@@ -1,15 +1,8 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:isma/config/colors.dart';
 import 'package:isma/custom/circleBorderBox.dart';
 import 'package:isma/custom/circleRoundBox.dart';
-import 'package:isma/custom/circleChart.dart';
-import 'package:isma/custom/customTextField.dart';
-import 'package:isma/custom/resultOilBox.dart';
-import 'package:isma/custom/resultOilDetails.dart';
-import 'package:isma/custom/resultValueBox.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
@@ -17,7 +10,6 @@ import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
-import 'package:isma/custom/graph.dart';
 
 import '../config/Oil.dart';
 import '../mng/DataMng.dart';
@@ -41,7 +33,7 @@ class oResultView extends StatelessWidget {
     FileMng fileMng = Provider.of<FileMng>(context);
     OilMng oilMng = Provider.of<OilMng>(context);
 
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.7 + 100,
       child: Column(

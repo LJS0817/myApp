@@ -25,12 +25,14 @@ import 'package:isma/config/define.dart';
 
 
 class IndexScreen extends StatefulWidget {
+  const IndexScreen({super.key});
   @override
   _IndexScreenState createState() => _IndexScreenState();
 }
 
 void loadAsset(BuildContext context) async {
   String s = await DefaultAssetBundle.of(context).loadString(Provider.of<FileMng>(context).dataPath);
+  if (!context.mounted) return;
   List<String> list = s.split('\n');
   List<String> data = [];
   late Oil oil;
@@ -54,6 +56,7 @@ void loadAsset(BuildContext context) async {
 
 void loadUAsset(BuildContext context) async {
   String s = await DefaultAssetBundle.of(context).loadString(Provider.of<FileMng>(context).UdataPath);
+  if (!context.mounted) return;
   List<String> list = s.split('\n');
   late Oil oil;
   for(int i = 0; i < list.length; i++) {
@@ -263,6 +266,7 @@ Future<bool> requestPermission() async {
 }
 
 class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin {
+  Future<String>? _loadFuture;
 
   @override
   void initState() {
@@ -273,6 +277,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _loadFuture ??= _fetch1();
   }
 
   Future<String> _fetch1() async {
@@ -283,18 +288,13 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
       loadUAsset(context);
       FileMng fileMng =  Provider.of<FileMng>(context, listen: false);
       OilMng oilMng =  Provider.of<OilMng>(context, listen: false);
-      fileMng.load();
-      fileMng.readDirectory('soap', 0).then((value) =>
-          fileMng.readDirectory('beauty', 1).then((value) =>
-              fileMng.readDirectory('oil', 2).then((value) =>
-              {
-                oilMng.syncUserData(fileMng.data[2].values.toList()),
-                fileMng.readDirectory('config', 3).then((value) =>
-                Mng.curThemeColorIndex = Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0])
-                )
-              })
-          )
-      );
+      await fileMng.load();
+      await fileMng.readDirectory('soap', 0);
+      await fileMng.readDirectory('beauty', 1);
+      await fileMng.readDirectory('oil', 2);
+      oilMng.syncUserData(fileMng.data[2].values.toList());
+      await fileMng.readDirectory('config', 3);
+      Mng.curThemeColorIndex = Provider.of<Mng>(context, listen: false).setThemeColor(fileMng.data[3]['config.txt'].toString().split('\n')[0]);
       Mng.isLoad = RESULT_STATE.E_SHOW;
     }
     await Future.delayed(const Duration(seconds: 4));
@@ -313,7 +313,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
       child: SafeArea(
         top: true,
         child: FutureBuilder(
-          future: _fetch1(),
+          future: _loadFuture,
           builder: (BuildContext contxt, AsyncSnapshot snapshot) {
             // log(snapshot.hasData.toString());
             // log(Mng.isLoad.toString());
@@ -341,7 +341,7 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                                 alignment: Alignment.bottomCenter,
                                 padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
                                 child: Text(
-                                  language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
+                                  language.getText(TITLE.values[Provider.of<MenuMng>(context).index]),
                                   style: TextStyle(
                                     color: getThemeColor(1, 1),
                                     fontSize: sizeMng.defaultFontSize + 4,
@@ -471,127 +471,6 @@ class _IndexScreenState extends State<IndexScreen> with TickerProviderStateMixin
                   ),
                 )
             );
-            // if(!snapshot.hasData) {
-            //   return Scaffold(
-            //     backgroundColor: Colors.white,
-            //     body: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: [
-            //         FadeTransition(
-            //           opacity: CurvedAnimation(
-            //             parent: AnimationController(
-            //               vsync: this,
-            //               duration: const Duration(milliseconds: 1500),
-            //             )..forward(),
-            //             curve: Curves.decelerate,
-            //           ),
-            //           child: Image.asset(
-            //             "assets/icon/icon.png",
-            //             width: 130,
-            //             height: 130,
-            //           ),
-            //         ),
-            //         const Padding(padding: EdgeInsets.only(bottom: 30)),
-            //         Row(
-            //           mainAxisAlignment: MainAxisAlignment.center,
-            //           children: [
-            //             ScaleTransition(
-            //               scale: CurvedAnimation(
-            //                 parent: AnimationController(
-            //                   vsync: this,
-            //                   duration: const Duration(milliseconds: 2000),
-            //                 )..repeat(reverse: true),
-            //                 curve: Curves.fastOutSlowIn,
-            //               ),
-            //               child: SvgPicture.asset(
-            //                 "assets/icon/phone.svg",
-            //                 width: 40,
-            //                 height: 40,
-            //               ),
-            //             ),
-            //             const Padding(padding: EdgeInsets.only(right: 20)),
-            //             ScaleTransition(
-            //               scale: CurvedAnimation(
-            //                 parent: AnimationController(
-            //                   vsync: this,
-            //                   duration: const Duration(milliseconds: 1800),
-            //                 )..repeat(reverse: true),
-            //                 curve: Curves.elasticInOut,
-            //               ),
-            //               child: SvgPicture.asset(
-            //                 "assets/icon/save.svg",
-            //                 width: 40,
-            //                 height: 40,
-            //               ),
-            //             ),
-            //             const Padding(padding: EdgeInsets.only(right: 20)),
-            //             ScaleTransition(
-            //               scale: CurvedAnimation(
-            //                 parent: AnimationController(
-            //                   vsync: this,
-            //                   duration: const Duration(milliseconds: 2000),
-            //                 )..repeat(reverse: true),
-            //                 curve: Curves.easeInOutBack,
-            //               ),
-            //               child: SvgPicture.asset(
-            //                 "assets/icon/calculator.svg",
-            //                 width: 40,
-            //                 height: 40,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         const Padding(padding: EdgeInsets.only(bottom: 40)),
-            //         Text(
-            //           language.getText(TITLE.E_LOADING),
-            //         ),
-            //       ],
-            //     ),
-            //   );
-            // } else {
-            //   return Scaffold(
-            //     backgroundColor: themeBackgrounds[Mng.curThemeColorIndex],
-            //     body: Stack(
-            //       children: [
-            //         Positioned(
-            //           top: 0,
-            //           left: 0,
-            //           right: 0,
-            //           child: AnimatedContainer(
-            //             duration: const Duration(milliseconds: 240),
-            //             height: 50 * sizeMng.defaultScale,
-            //             color: getThemeColor(1, 0),
-            //             alignment: Alignment.bottomCenter,
-            //             padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
-            //             child: Text(
-            //               language.getText(TITLE.values[Provider.of<MenuMng>(context, listen: false).index]),
-            //               style: TextStyle(
-            //                 color: getThemeColor(1, 1),
-            //                 fontSize: sizeMng.defaultFontSize + 4,
-            //                 decoration: TextDecoration.none,
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //         Positioned(
-            //           left: 0,
-            //           right: 0,
-            //           top: 50 * sizeMng.defaultScale,
-            //           bottom: 80 * sizeMng.defaultScale,
-            //           child: getIndex(context),
-            //         ),
-            //         BottomBar(context),
-            //         Positioned(
-            //           left: 0,
-            //           right: 0,
-            //           top: 0,
-            //           bottom: 0,
-            //           child: ResultView(Provider.of<Mng>(context).selectData.type.index),
-            //         ),
-            //       ],
-            //     ),
-            //   );
-            // }
           },
         ),
       ),

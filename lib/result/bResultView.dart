@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:isma/config/colors.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/custom/resultOilBox.dart';
 import 'package:isma/custom/resultOilDetails.dart';
@@ -36,7 +34,7 @@ class bResultView extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     FileMng fileMng = Provider.of<FileMng>(context);
 
-    return Container(
+    return SizedBox(
         height: MediaQuery.of(context).size.height * 0.6 + 100,
         child: Column(
           children: [

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
-import 'package:isma/mng/Mng.dart';
 import 'package:isma/workspace/config/rowColorList.dart';
-import 'package:provider/provider.dart';
 
 class ThemeChanger extends StatelessWidget {
   const ThemeChanger({super.key});

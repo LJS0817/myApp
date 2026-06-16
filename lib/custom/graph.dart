@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/define.dart';
@@ -20,13 +19,13 @@ class CustomChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 24 * sizeMng.defaultScale,
-      height: 175 * sizeMng.defaultScale,
+      height: 165 * sizeMng.defaultScale,
       padding: EdgeInsets.only(bottom: 10 * sizeMng.defaultScale),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            height: value * 0.01 * MediaQuery.of(context).size.height * 0.120 + 40,
+            height: value * 0.01 * MediaQuery.of(context).size.height * 0.10 + 40,
             padding: const EdgeInsets.only(top: 8),
             alignment: Alignment.topCenter,
             decoration: BoxDecoration(

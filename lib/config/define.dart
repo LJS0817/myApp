@@ -1,16 +1,10 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:isma/config/colors.dart';
 import 'package:isma/mng/LanMng.dart';
-import 'package:isma/mng/OilMng.dart';
-import 'package:isma/mng/FileMng.dart';
-import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
-import 'package:isma/mng/PageMng.dart';
 import 'package:isma/mng/SizeMng.dart';
 
-import '../mng/DataMng.dart';
 
 enum TYPE { E_COLD, E_HOT, E_PASTE, E_SKIN, E_ESSENCE, E_LOTION, E_CREAM, E_ETC }
 

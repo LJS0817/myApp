@@ -1,10 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:isma/config/colors.dart';
 import 'package:isma/config/define.dart';
-import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/MenuMng.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +11,7 @@ class iconButton extends StatelessWidget {
   late int _index;
   late double scale = 15;
 
-  iconButton(String s, int idx, Function f, {double size = 15}) {
+  iconButton(String s, int idx, Function f, {super.key, double size = 15}) {
     _src = s;
     _index = idx;
     _func = f;

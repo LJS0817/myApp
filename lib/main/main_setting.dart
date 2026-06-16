@@ -3,6 +3,8 @@ import 'package:isma/config/define.dart';
 import 'package:isma/workspace/config/themeConfig.dart';
 
 class mainSettingScreen extends StatelessWidget {
+  const mainSettingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +25,7 @@ class mainSettingScreen extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
-            ThemeChanger(),
+            const ThemeChanger(),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             Text(
               "1 - ${language.getText(TITLE.E_SOAPTITLE)}, 2 - ${language.getText(TITLE.E_MAKEUPTITLE)}, 3 - ${language.getText(TITLE.E_OILTITLE)}, 4 - ${language.getText(TITLE.E_CONFIGTITLE)}",

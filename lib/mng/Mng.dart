@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:isma/config/Oil.dart';
@@ -42,10 +41,11 @@ class Mng with ChangeNotifier {
   int setThemeColor(String data) {
     List<String> s = data.replaceAll(' ', '').split(',');
     if(s.length > 3) {
-      themeColorIndex[0] = int.parse(s[0]);
-      themeColorIndex[1] = int.parse(s[1]);
-      themeColorIndex[2] = int.parse(s[2]);
-      themeColorIndex[3] = int.parse(s[3]);
+      themeColorIndex[0] = int.parse(s[0].trim());
+      themeColorIndex[1] = int.parse(s[1].trim());
+      themeColorIndex[2] = int.parse(s[2].trim());
+      themeColorIndex[3] = int.parse(s[3].trim());
+      notifyListeners();
     }
     return themeColorIndex[0];
   }
@@ -70,10 +70,11 @@ class Mng with ChangeNotifier {
     }
     if(themeColorIndex[0].toString() != sList[0] || themeColorIndex[1].toString() != sList[1] ||
         themeColorIndex[2].toString() != sList[2] || themeColorIndex[3].toString() != sList[3]) {
-      themeColorIndex[0] = int.parse(sList[0]);
-      themeColorIndex[1] = int.parse(sList[1]);
-      themeColorIndex[2] = int.parse(sList[2]);
-      themeColorIndex[3] = int.parse(sList[3]);
+      themeColorIndex[0] = int.parse(sList[0].trim());
+      themeColorIndex[1] = int.parse(sList[1].trim());
+      themeColorIndex[2] = int.parse(sList[2].trim());
+      themeColorIndex[3] = int.parse(sList[3].trim());
+      notifyListeners();
     }
   }
 
@@ -135,34 +136,53 @@ class Mng with ChangeNotifier {
     int lye = 0;
     for(int i = 0; i < data.data[0].length; i++) {
       int index = data.data[0].keys.elementAt(i);
-      lye = (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? Provider.of<OilMng>(context!, listen: false).oils(index)!.KOH : Provider.of<OilMng>(context!, listen: false).oils(index)!.NaOH)).round();
-      if(context != null) {
-        String str = Provider.of<DataMng>(context, listen: false).data.data[0][index].toString();
-        if(str.split('`').length > 2) {
-          str = str.replaceAll(str.split('`')[2], lye.toString());
-        }
-        Provider.of<DataMng>(context, listen: false).data.data[0][index] = "$str`$lye";
+      Oil? oil;
+      try {
+        oil = Provider.of<OilMng>(context, listen: false).oils(index);
+      } catch(e) {
+        continue;
       }
+      lye = (int.parse(data.data[0][index]!.split('`')[0]) * (data.type == TYPE.E_PASTE ? oil.KOH : oil.NaOH)).round();
+      String str = Provider.of<DataMng>(context, listen: false).data.data[0][index].toString();
+      if(str.split('`').length > 2) {
+        str = str.replaceAll(str.split('`')[2], lye.toString());
+      }
+      Provider.of<DataMng>(context, listen: false).data.data[0][index] = "$str`$lye";
       resultLye += lye;
     }
-    resultLye = (resultLye * int.parse(data.values[1]!.replaceAll(' ', ''))) / int.parse(data.values[0]!.replaceAll(' ', ''));
+    int purity = int.parse(data.values[0]!.replaceAll(' ', ''));
+    if (purity != 0) {
+      resultLye = (resultLye * int.parse(data.values[1]!.replaceAll(' ', ''))) / purity;
+    } else {
+      resultLye = 0;
+    }
   }
 
   void calculateFat(Data data, BuildContext context) {
     List<double> start = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
     for(int i = 0; i < data.data[0].length; i++) {
       int index = data.data[0].keys.elementAt(i);
-      start = addDoubleList(start, mulDoubleList(Provider.of<OilMng>(context!, listen: false).oils(index)!.fat, double.parse(data.data[0][index]!.split('`')[0]) * 0.01));
+      try {
+        var oil = Provider.of<OilMng>(context, listen: false).oils(index);
+        start = addDoubleList(start, mulDoubleList(oil.fat, double.parse(data.data[0][index]!.split('`')[0]) * 0.01));
+      } catch(e) {}
     }
     for(int i = 0; i < data.data[1].length; i++) {
       int index = data.data[1].keys.elementAt(i);
-      start = addDoubleList(start, mulDoubleList(Provider.of<OilMng>(context!, listen: false).oils(index)!.fat, double.parse(data.data[1][index]!.split('`')[0]) * 0.01));
+      try {
+        var oil = Provider.of<OilMng>(context, listen: false).oils(index);
+        start = addDoubleList(start, mulDoubleList(oil.fat, double.parse(data.data[1][index]!.split('`')[0]) * 0.01));
+      } catch(e) {}
     }
     resultFat = List.generate(FAT_TYPE.LENGTH.index, (index) => 0);
     int weight = data.weight[1] + data.weight[2];
     for(int i = 0; i < resultFat.length; i++) {
-      resultFat[i] = ((start[i] / weight) * 100).roundToDouble();
-      resultFat[i] = resultFat[i].toString() == "NaN" ? 0 : resultFat[i];
+      if (weight == 0) {
+        resultFat[i] = 0;
+      } else {
+        resultFat[i] = ((start[i] / weight) * 100).roundToDouble();
+        resultFat[i] = (resultFat[i].isNaN || resultFat[i].isInfinite) ? 0 : resultFat[i];
+      }
     }
   }
 
@@ -187,7 +207,7 @@ class Mng with ChangeNotifier {
   void calculateWater(Data data) {
     String? str = (data.values[2] == null || data.values[2] == "") ? data.default_values[2] : data.values[2];
     if(data.type == TYPE.E_COLD) {
-      resultWater = ((double.parse(str!) * 0.01) * double.parse(data.weight[1].toString())).roundToDouble();
+      resultWater = ((double.parse(str!) * 0.01) * data.weight[1].toDouble()).roundToDouble();
     } else if(data.type == TYPE.E_PASTE) {
       resultWater = (resultLye * 3).roundToDouble();
     } else {

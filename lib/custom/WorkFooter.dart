@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,7 +11,7 @@ import 'package:provider/provider.dart';
 import '../mng/DataMng.dart';
 
 class Footer extends StatelessWidget {
-  Footer({super.key});
+  const Footer({super.key});
 
   @override
   Widget build(BuildContext context) {

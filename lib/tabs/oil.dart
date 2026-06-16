@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
-import 'package:isma/config/define.dart';
 import 'package:isma/custom/WorkFooter.dart';
 import 'package:isma/custom/oilHeader.dart';
 import 'package:isma/custom/step.dart';
 import 'package:isma/mng/DataMng.dart';
-import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:isma/workspace/oil/oFirst.dart';
@@ -29,10 +27,10 @@ class OilWorkspace extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  OilHeader(),
-                  oFirstView(),
+                  const OilHeader(),
+                  const oFirstView(),
                   StepView(dataMng.getTypeIndex(), pageMng.index + 1),
-                  Footer(),
+                  const Footer(),
                 ],
               ),
             ],

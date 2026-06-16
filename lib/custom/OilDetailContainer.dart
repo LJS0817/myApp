@@ -1,15 +1,12 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:isma/config/Oil.dart';
-import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:provider/provider.dart';
 
 import '../config/define.dart';
 import '../mng/DataMng.dart';
-import '../mng/PageMng.dart';
 
 class OilDetailContainer extends StatelessWidget {
   String title = "";

@@ -1,13 +1,10 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
-import 'package:isma/config/define.dart';
 import 'package:isma/custom/OilDialog.dart';
 import 'package:isma/custom/WorkFooter.dart';
 import 'package:isma/custom/WorkHeader.dart';
 import 'package:isma/custom/uOilDialog.dart';
-import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
@@ -41,14 +38,14 @@ class BeautyWorkspace extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Header(),
+                  const Header(),
                   pageMng.getCurPage(false),
                   StepView(dataMng.getTypeIndex(), pageMng.index + 1),
-                  Footer(),
+                  const Footer(),
                 ],
               ),
-              OilDialog(),
-              uOilDialog(),
+              const OilDialog(),
+              const uOilDialog(),
             ],
           ),
         ),

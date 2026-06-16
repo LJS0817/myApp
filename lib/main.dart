@@ -1,7 +1,5 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:isma/config/define.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:isma/mng/DataMng.dart';
@@ -41,10 +39,10 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(fontFamily: 'text'),
         routes: {
-          '/index': (context) => IndexScreen(),
-          '/tabs/soap': (context) => SoapWorkspace(),
-          '/tabs/beauty': (context) => BeautyWorkspace(),
-          '/tabs/oil': (context) => OilWorkspace(),
+          '/index': (context) => const IndexScreen(),
+          '/tabs/soap': (context) => const SoapWorkspace(),
+          '/tabs/beauty': (context) => const BeautyWorkspace(),
+          '/tabs/oil': (context) => const OilWorkspace(),
         },
         initialRoute: '/index',
       ),

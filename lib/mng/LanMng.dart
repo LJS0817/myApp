@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:isma/config/define.dart';
@@ -180,7 +179,7 @@ class LanguageMng {
   ];
 
 
-  List<List<String>> _headerTextTitles = [];
+  final List<List<String>> _headerTextTitles = [];
   get headerText => _headerTextTitles;
 
 

@@ -95,9 +95,9 @@ class FileMng with ChangeNotifier {
           await file.delete();
           List<String> str = contents.split('\n');
           for(int j = 0; j < str.length - 1; j++) {
-            String title = DateTime.now().toString();
+            String title = "${DateTime.now().millisecondsSinceEpoch}_$j";
             setData(idx, title, str[j]);
-            writeFile(title, 'UserData_Oil', str[j]);
+            await writeFile(title, 'UserData_Oil', str[j]);
           }
         } else {
           // Read the file

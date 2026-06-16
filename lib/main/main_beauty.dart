@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/custom/dataContainer.dart';
@@ -7,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../mng/FileMng.dart';
 
 class mainBeautyScreen extends StatelessWidget {
+  const mainBeautyScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     FileMng fileMng = Provider.of<FileMng>(context);

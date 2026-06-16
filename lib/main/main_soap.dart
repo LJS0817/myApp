@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/custom/dataContainer.dart';
@@ -6,6 +5,8 @@ import 'package:isma/mng/FileMng.dart';
 import 'package:provider/provider.dart';
 
 class mainSoapScreen extends StatelessWidget {
+  const mainSoapScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     FileMng fileMng = Provider.of<FileMng>(context);

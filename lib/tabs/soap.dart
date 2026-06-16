@@ -1,12 +1,9 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:isma/config/colors.dart';
-import 'package:isma/config/define.dart';
 import 'package:isma/custom/OilDialog.dart';
 import 'package:isma/custom/WorkFooter.dart';
 import 'package:isma/custom/WorkHeader.dart';
-import 'package:isma/mng/MenuMng.dart';
 import 'package:isma/mng/Mng.dart';
 import 'package:isma/mng/PageMng.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +12,7 @@ import '../custom/step.dart';
 import '../mng/DataMng.dart';
 
 class SoapWorkspace extends StatelessWidget {
-  SoapWorkspace({super.key});
+  const SoapWorkspace({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +36,13 @@ class SoapWorkspace extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Header(),
+                  const Header(),
                   pageMng.getCurPage(true),
                   StepView(dataMng.getTypeIndex(), pageMng.index + 1),
-                  Footer(),
+                  const Footer(),
                 ],
               ),
-              OilDialog(),
+              const OilDialog(),
             ],
           ),
         )

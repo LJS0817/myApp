@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:isma/config/colors.dart';
 import 'package:isma/custom/circleChart.dart';
 import 'package:isma/custom/customTextField.dart';
 import 'package:isma/custom/resultOilBox.dart';
@@ -39,7 +37,7 @@ class sResultView extends StatelessWidget {
     MenuMng menuMng = Provider.of<MenuMng>(context);
     FileMng fileMng = Provider.of<FileMng>(context);
 
-    return Container(
+    return SizedBox(
         height: MediaQuery.of(context).size.height * 0.6 + 100,
         child: Column(
           children: [
@@ -159,7 +157,7 @@ class sResultView extends StatelessWidget {
                                                   ),
                                                   child: Column(
                                                     children: [
-                                                      Container(
+                                                      SizedBox(
                                                           height: (menuMng.showOilDetails > 0 ? data.selectData.data[menuMng.showOilDetails - 1].length : 0) * oilBoxSize + 5,
                                                           child: ListView.builder(
                                                             shrinkWrap: true,
@@ -267,20 +265,23 @@ class sResultView extends StatelessWidget {
                                     ),
                                     Column(
                                       children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            CustomChartBar(themeIndex, data.resultFat[0], 0, false),
-                                            CustomChartBar(themeIndex, data.resultFat[1], 1, false),
-                                            CustomChartBar(themeIndex, data.resultFat[2], 2, false),
-                                            CustomChartBar(themeIndex, data.resultFat[3], 3, false),
+                                        Container(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              CustomChartBar(themeIndex, data.resultFat[0], 0, false),
+                                              CustomChartBar(themeIndex, data.resultFat[1], 1, false),
+                                              CustomChartBar(themeIndex, data.resultFat[2], 2, false),
+                                              CustomChartBar(themeIndex, data.resultFat[3], 3, false),
 
-                                            CustomChartBar(themeIndex, data.resultFat[6], 4, true),
-                                            CustomChartBar(themeIndex, data.resultFat[7], 5, true),
-                                            CustomChartBar(themeIndex, data.resultFat[4], 6, true),
-                                            CustomChartBar(themeIndex, data.resultFat[5], 7, true),
-                                            CustomChartBar(themeIndex, data.resultFat[8], 8, true),
-                                          ],
+                                              CustomChartBar(themeIndex, data.resultFat[6], 4, true),
+                                              CustomChartBar(themeIndex, data.resultFat[7], 5, true),
+                                              CustomChartBar(themeIndex, data.resultFat[4], 6, true),
+                                              CustomChartBar(themeIndex, data.resultFat[5], 7, true),
+                                              CustomChartBar(themeIndex, data.resultFat[8], 8, true),
+                                            ],
+                                          ),
                                         ),
                                         const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                                         Row(

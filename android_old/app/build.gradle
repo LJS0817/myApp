@@ -47,8 +47,8 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 225
-        versionName "225.0"
+        versionCode 226
+        versionName "226.0"
     }
 
     signingConfigs {

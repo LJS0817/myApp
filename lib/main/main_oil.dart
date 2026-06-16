@@ -1,13 +1,13 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:isma/config/define.dart';
 import 'package:isma/custom/OilDetailContainer.dart';
 import 'package:isma/mng/FileMng.dart';
 import 'package:isma/mng/OilMng.dart';
 import 'package:provider/provider.dart';
 
 class mainOilScreen extends StatelessWidget {
+  const mainOilScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     OilMng oilMng = Provider.of<OilMng>(context);

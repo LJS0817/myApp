@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +38,7 @@ class EditableOilContainer extends StatelessWidget {
 
     List<String> list = dataMngProvider.data.data[_page - 1][index].toString().split('`');
     data = list[0] == "0" || list[0] == 'null' ? "" : list[0];
-    name = index > -1 ? oilMng.oils(index)!.title : (list.length > 1 ? list[1] : "");
+    name = index > -1 ? oilMng.oils(index).title : (list.length > 1 ? list[1] : "");
 
     return Container(
       height: 75 * sizeMng.defaultScale,
@@ -66,7 +65,7 @@ class EditableOilContainer extends StatelessWidget {
                 onTap: () {
                   String str = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0];
                   int weight = str == 'null' ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
-                  dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+                  dataMngProvider.setWeight(_page, -weight, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
                   dataMngProvider.setData(getIndexSub1(), index, '-1', needRefresh: true);
                   pageMngProvider.UpdateText(dataMngProvider.data);
                   FocusManager.instance.primaryFocus?.unfocus();
@@ -105,13 +104,13 @@ class EditableOilContainer extends StatelessWidget {
                         if(data.isNotEmpty) {
                           int weight = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0] == "null" ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
-                          dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+                          dataMngProvider.setWeight(_page, -weight, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
 
                           dataMngProvider.setData(getIndexSub1(), index, '$data`$name');
 
                           weight = int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
-                          dataMngProvider.setWeight(_page, weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+                          dataMngProvider.setWeight(_page, weight, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
 
                           pageMngProvider.UpdateText(dataMngProvider.data);
                         }
@@ -121,13 +120,13 @@ class EditableOilContainer extends StatelessWidget {
                             if(data.isNotEmpty) {
                               int weight = dataMngProvider.data.data[_page - 1][index].toString().split('`')[0] == "null" ? 0 : int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
-                              dataMngProvider.setWeight(_page, -weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+                              dataMngProvider.setWeight(_page, -weight, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
 
                               dataMngProvider.setData(getIndexSub1(), index, '$data`$name');
 
                               weight = int.parse(dataMngProvider.data.data[_page - 1][index].toString().split('`')[0]);
 
-                              dataMngProvider.setWeight(_page, weight!, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
+                              dataMngProvider.setWeight(_page, weight, needCal: _page < 3 && dataMngProvider.getTypeIndex() < 3);
 
                               pageMngProvider.UpdateText(dataMngProvider.data);
                             }
@@ -228,7 +227,7 @@ class EditableOilContainer extends StatelessWidget {
                   )
                 ),
                 Text(
-                  index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : language.isEng ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : oilMng.oils(index)!.english,
+                  index < -1 ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : language.isEng ? pageMngProvider.addButtonText(dataMngProvider.getTypeIndex(), _page) : oilMng.oils(index).english,
                   style: TextStyle(
                     color: getThemeColor(dataMngProvider.getTypeIndex(), 0).withOpacity(0.6),
                     fontSize: sizeMng.defaultFontSize - 2,
